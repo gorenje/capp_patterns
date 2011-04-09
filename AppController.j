@@ -7,7 +7,7 @@
  */
 
 @import <Foundation/CPObject.j>
-
+@import <GRKit/RotateView.j>
 
 @implementation AppController : CPObject
 {
@@ -33,7 +33,7 @@
     [theWindow orderFront:self];
 
     // Uncomment the following line to turn on the standard menu bar.
-    //[CPMenu setMenuBarVisible:YES];
+    // [CPMenu setMenuBarVisible:YES];
 }
 
 @end

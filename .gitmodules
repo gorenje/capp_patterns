@@ -1,3 +1,6 @@
 [submodule "Libraries/Cappuccino"]
 	path = Libraries/Cappuccino
 	url = git://github.com/280north/cappuccino.git
+[submodule "Libraries/GRKit"]
+	path = Libraries/GRKit
+	url = git://github.com/gorenje/GRKit.git
