@@ -91,3 +91,29 @@ function printResults(configuration)
     print(configuration+" app built at path: "+FILE.join("Build", configuration, "patterns"));
     print("----------------------------");
 }
+
+function obtainXibs()
+{
+  var xibs = FILE.glob("Xibs/*.xib");
+  for ( var idx = 0 ; idx < xibs.length; idx++ ) {
+    xibs[idx] = xibs[idx].substring(0, xibs[idx].length - 4).substring(5);
+  }
+  return xibs;
+}
+
+task( "nibs", function()
+{
+  // Tried using JAKE.file but that didn't not want to work with subdirectories, 
+  // i.e. Resources/
+  var xibsToConvert = obtainXibs();
+  for ( var idx = 0; idx < xibsToConvert.length; idx++ ) {
+    var filenameXib = "Resources/../Xibs/" + xibsToConvert[idx] + ".xib";
+    var filenameCib = "Resources/" + xibsToConvert[idx] + ".cib";
+    if ( !FILE.exists(filenameCib) || FILE.mtime(filenameXib) > FILE.mtime(filenameCib) ) {
+      print("Converting to cib: " + filenameXib);
+      OS.system(["nib2cib", filenameXib, filenameCib]);
+    } else {
+      print("Ignoring " + filenameXib + " -> has been converted");
+    }
+  }
+});
