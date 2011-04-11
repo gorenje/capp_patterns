@@ -1,35 +1,13 @@
+// ----------------------------------------------------------------------------------------
 @implementation PatternMaker : CPObject
-
-
-@end
-
-@implementation LinkedCircle : GRCircle
 {
-  GRCircle m_prev_circle @accessors(property=prevCircle);
-  GRCircle m_next_circle @accessors(property=nextCircle);
-}
+  int      m_number_of_points @accessors(property=numPoints);
+  float    m_factor_larger    @accessors(property=factorLarger);
+  GRCircle m_circle           @accessors(property=circle,readonly);
+  BOOL     m_show_shapes      @accessors(property=showShapes);
 
-+ (id) circleWithCenter:(GRPoint)cpt radius:(float)aRadiusValue
-{
-  return [[LinkedCircle alloc] initWithCenter:cpt radius:aRadiusValue];
-}
-
-+ (id) circleWithCenter:(GRPoint)cpt 
-                 radius:(float)aRadiusValue 
-             prevCircle:(GRCircle)aPrevCircle
-{
-  var tmp = [[LinkedCircle alloc] initWithCenter:cpt radius:aRadiusValue];
-  [tmp setPrevCircle:aPrevCircle];
-  return tmp;
-}
-
-@end
-
-@implementation PatternTwo : PatternMaker
-{
-  int m_number_of_points @accessors(property=numPoints);
-  float m_factor_larger @accessors(property=factorLarger);
-  GRCircle m_circle @accessors(property=circle,readonly);
+  CPArray m_stroke_colors @accessors(property=strokeColors,readonly);
+  CPArray m_fill_colors @accessors(property=fillColors,readonly);
 }
 
 - (id)initWithConfig:(CPDict)config
@@ -38,10 +16,48 @@
   if ( self ) {
     m_number_of_points = [config objectForKey:"number_of_points"];
     m_factor_larger = [config objectForKey:"factor_larger"];
-    m_circle = [LinkedCircle circleWithCenter:[config objectForKey:"center_point"]
-                                       radius:[config objectForKey:"radius"]];
+    m_circle = [GRLinkedCircle circleWithCenter:[config objectForKey:"center_point"]
+                                         radius:[config objectForKey:"radius"]];
+    m_show_shapes = [config objectForKey:"show_shapes"];
+
+    m_stroke_colors = [ [CPColor colorWith8BitRed:0 green:255 blue:100 alpha:1],
+                        [CPColor colorWith8BitRed:23 green:255 blue:10 alpha:1],
+                        [CPColor colorWith8BitRed:255 green:23 blue:10 alpha:1]];
+    m_fill_colors = [ [CPColor transparent],
+                      [CPColor colorWith8BitRed:23 green:200 blue:10 alpha:1],
+                      [CPColor colorWith8BitRed:200 green:23 blue:10 alpha:1]];
   }
   return self;
+}
+
+- (float)radius
+{
+  return [[self circle] radius];
+}
+
+- (void)setRadius:(float)aRadiusValue
+{
+  m_circle = [GRCircle circleWithCenter:[m_circle cpt] radius:aRadiusValue];
+}
+
+- (void)setFillColorAt:(int)aIndex color:(CPColor)aColor
+{
+  m_fill_colors[ aIndex % 3 ] = aColor;
+}
+
+- (void)setStrokeColorAt:(int)aIndex color:(CPColor)aColor
+{
+  m_stroke_colors[ aIndex % 3 ] = aColor;
+}
+
+- (CPColor)fillColorAt:(int)aIndex
+{
+  return m_fill_colors[aIndex % 3];
+}
+
+- (CPColor)strokeColorAt:(int)aIndex
+{
+  return m_stroke_colors[aIndex % 3];
 }
 
 - (CPArray)sub_circles
@@ -53,9 +69,9 @@
 
   for ( var idx = 0; idx < [pts count]; idx++ ) {
     var center_pt = [[[self circle] cpt] point_on_segment:pts[idx] ratio:[self factorLarger]];
-    sub_circles[idx] = [LinkedCircle circleWithCenter:center_pt 
-                                               radius:[[self circle] radius] 
-                                           prevCircle:p_circle];
+    sub_circles[idx] = [GRLinkedCircle circleWithCenter:center_pt 
+                                                 radius:[[self circle] radius] 
+                                             prevCircle:p_circle];
     p_circle = sub_circles[idx];
   }
 
@@ -68,33 +84,127 @@
   return sub_circles;
 }
 
+- (void)setupColor:(CGContext)aContext
+{
+  [self setupColorWithIndex:0 context:aContext];
+}
+
+- (void)setupColorWithIndex:(int)aIndex context:(CGContext)aContext
+{
+  CGContextSetStrokeColor(aContext, m_stroke_colors[aIndex % 3]);
+  CGContextSetFillColor(aContext, m_fill_colors[aIndex % 3]);
+}
+
+- (void)fillAndStroke:(CGContext)aContext
+{
+  CGContextStrokePath(aContext);
+  CGContextFillPath(aContext);
+}
+
+- (void)draw:(CGContext)aContext
+{
+}
+
+@end
+
+// ----------------------------------------------------------------------------------------
+@implementation PatternOne : PatternMaker
+
+- (void)draw:(CGContext)aContext
+{
+  if ( [self showShapes] ) {
+    [self draw_frame_1:aContext];
+    [self draw_frame_2:aContext];
+  } else {
+    [self draw_frame_1:aContext];
+  }
+}
 
 - (void)draw_frame_1:(CGContext)aContext
 {
-  CGContextSetStrokeColor(aContext, [CPColor colorWith8BitRed:0 green:255 blue:100 alpha:1]);
-  CGContextSetFillColor(aContext, [CPColor transparent]);
+  [self setupColor:aContext];
+
   [[self circle] draw:aContext];
-  CGContextStrokePath(aContext);
+  [self fillAndStroke:aContext];
+
+  var subs = [self sub_circles], idx = [subs count];
+  while ( idx-- ) {
+    [subs[idx] draw:aContext];
+    [self setupColorWithIndex:idx % 2 context:aContext];
+    [self fillAndStroke:aContext];
+  }
 }
 
 - (void)draw_frame_2:(CGContext)aContext
 {
-  CGContextSetStrokeColor(aContext, [CPColor colorWith8BitRed:0 green:255 blue:100 alpha:1]);
-  CGContextSetFillColor(aContext, [CPColor transparent]);
+  [self setupColor:aContext];
+
+  var subs = [self sub_circles];
+  for ( var idx = 0; idx < [self numPoints]; idx++ ) {
+    var cc = subs[idx];
+
+    var pts1_2 = [[self circle] intersection: cc];
+
+    var pt3 = [cc closest:[[self circle] intersection:[cc nextCircle]]];
+    var pt4 = [[self circle] closest:[cc intersection:[cc nextCircle]]];
+    var pt5 = [[self circle] closest:[cc intersection:[cc prevCircle]]];
+    var pt6 = [cc closest:[[self circle] intersection:[cc prevCircle]]];
+      
+    var pt2 = [pt3 closest:pts1_2];
+    var pt1 = [pt6 closest:pts1_2];
+
+    [self setupColorWithIndex:1 context:aContext];
+    [[GRTriangle triangleWithPoints:[pt1, pt6, pt5]] draw:aContext];
+    [self fillAndStroke:aContext];
+
+    [[GRTriangle triangleWithPoints:[pt2, pt4, pt3]] draw:aContext];
+    [self fillAndStroke:aContext];
+
+    [self setupColorWithIndex:2 context:aContext];
+    [[GRRect rectWithPoints:[pt4, pt3, pt6, pt5]] draw:aContext];
+    [self fillAndStroke:aContext];
+  }
+}
+
+@end
+
+// ----------------------------------------------------------------------------------------
+@implementation PatternTwo : PatternMaker
+
+- (void)draw:(CGContext)aContext
+{
+  if ( [self showShapes] ) {
+    [self draw_frame_1:aContext];
+    [self draw_frame_2:aContext];
+    [self draw_frame_3:aContext];
+    [self draw_frame_4:aContext];
+  } else {
+    [self draw_frame_1:aContext];
+    [self draw_frame_2:aContext];
+  }
+}
+
+- (void)draw_frame_1:(CGContext)aContext
+{
+  [self setupColor:aContext];
+  [[self circle] draw:aContext];
+  [self fillAndStroke:aContext];
+}
+
+- (void)draw_frame_2:(CGContext)aContext
+{
+  [self setupColor:aContext];
   var subs = [self sub_circles], idx = [subs count];
   while ( idx-- ) {
     [subs[idx] draw:aContext];
-    CGContextSetStrokeColor(aContext, [CPColor colorWith8BitRed:(200*(idx%2))
-                                                          green:255 
-                                                           blue:0 alpha:1]);
-    CGContextStrokePath(aContext);
+    [self setupColorWithIndex:idx % 2 context:aContext];
+    [self fillAndStroke:aContext];
   }
 }
 
 - (void)draw_frame_3:(CGContext)aContext
 {
-  CGContextSetStrokeColor(aContext, [CPColor colorWith8BitRed:0 green:255 blue:100 alpha:1]);
-  CGContextSetFillColor(aContext, [CPColor colorWith8BitRed:0 green:255 blue:100 alpha:1]);
+  [self setupColorWithIndex:1 context:aContext];
   
   var subs = [self sub_circles];
   for ( var idx = 0; idx < [self numPoints]; idx++ ) {
@@ -105,14 +215,13 @@
     var pt3 = [pt2 closest:[[cc prevCircle] intersection:[cc nextCircle]]];
     var pt4 = [pt3 closest:[[[cc nextCircle] nextCircle] intersection:[cc prevCircle]]];
     [[GRRect rectWithPoints:[pt1, pt2, pt3, pt4]] draw:aContext];
-    CGContextFillPath(aContext);
+    [self fillAndStroke:aContext];
   }
 }
 
 - (void)draw_frame_4:(CGContext)aContext
 {
-  CGContextSetStrokeColor(aContext, [CPColor colorWith8BitRed:0 green:255 blue:100 alpha:1]);
-  CGContextSetFillColor(aContext, [CPColor colorWith8BitRed:230 green:200 blue:10 alpha:1]);
+  [self setupColorWithIndex:1 context:aContext];
 
   var subs = [self sub_circles];
   for ( var idx = 0; idx < [self numPoints]; idx++ ) {
@@ -122,7 +231,7 @@
     var pts = [newCircle intersection:[GRCircle circleWithCenter:[[cc nextCircle] cpt]
                                                           radius:distance]];
     [[GRRect rectWithPoints:[[cc cpt], pts[0], [[cc nextCircle] cpt], pts[1]]] draw:aContext];
-    CGContextFillPath(aContext);
+    [self fillAndStroke:aContext];
   }
 }
 
