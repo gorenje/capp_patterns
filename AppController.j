@@ -21,6 +21,7 @@
 {
   CPView contentView;
   PatternView patternView;
+  PatternSettingsController propertiesController;
 }
 
 - (void)applicationDidFinishLaunching:(CPNotification)aNotification
@@ -29,25 +30,23 @@
                                                 styleMask:CPBorderlessBridgeWindowMask];
     contentView = [theWindow contentView];
 
-    var pattern = [[PatternOne alloc] 
-                    initWithConfig:[CPDictionary 
-                                     dictionaryWithObjectsAndKeys:6, "number_of_points", 
-                                     1.4, "factor_larger", 
-                                     [GRPoint pointWithX:250 Y:250], "center_point", 
-                                     100, "radius",
-                                     NO, "show_shapes"]];
+    var pattern = [[PatternOne alloc] initWithConfig:[PatternOne defaultConfig]];
+    CPLogConsole( "L: " + [pattern toString]);
 
-    var rect = CGRectMake(150,150,500,500);
+    var rect = CGRectMake(175,120,700,700);
     patternView = [[PatternView alloc] initWithFrame:rect];
-    [patternView setFrameOrigin:CGPointMake( 150,150 )];
+    //    [patternView setFrameOrigin:CGPointMake( 150,150 )];
     [patternView setNeedsDisplay:YES];
     [patternView setPattern:pattern];
     [contentView addSubview:patternView];
 
-
     [self addButton:"Properties"
            position:CGPointMake( 20, 20 ) 
            selector:@selector(showProperties:)];
+
+    [self addButton:"Dump Config"
+           position:CGPointMake( 20, 60 ) 
+           selector:@selector(dumpConfig:)];
 
     [self addButton:"Pattern 1"
            position:CGPointMake( 150, 20 ) 
@@ -87,13 +86,18 @@
   return button;
 }
 
+- (CPAction)dumpConfig:(id)sender
+{
+  CPLogConsole( "Config: " + [[patternView pattern] toString] );
+}
+
 - (CPAction)showProperties:(id)sender
 {
-  var controller = [PatternSettingsController alloc];
-  [controller initWithWindowCibName:"PatternSettings"
+  propertiesController = [PatternSettingsController alloc];
+  [propertiesController initWithWindowCibName:"PatternSettings"
                         patternView:patternView
                             pattern:[patternView pattern]];
-  [controller showWindow:self];
+  [propertiesController showWindow:self];
 }
 
 - (CPAction)showPattern:(id)sender
@@ -101,26 +105,15 @@
   var pattern;
   switch ( [sender tag] ) {
   case 2:
-    pattern = [[PatternTwo alloc] 
-                    initWithConfig:[CPDictionary 
-                                     dictionaryWithObjectsAndKeys:12, "number_of_points", 
-                                     1, "factor_larger", 
-                                     [GRPoint pointWithX:250 Y:250], "center_point", 
-                                     100, "radius",
-                                     YES, "show_shapes"]];
+    pattern = [[PatternTwo alloc] initWithConfig:[PatternTwo defaultConfig]];
     break;
   case 1:
-    pattern = [[PatternOne alloc] 
-                    initWithConfig:[CPDictionary 
-                                     dictionaryWithObjectsAndKeys:6, "number_of_points", 
-                                     1.4, "factor_larger", 
-                                     [GRPoint pointWithX:250 Y:250], "center_point", 
-                                     100, "radius",
-                                     NO, "show_shapes"]];
+    pattern = [[PatternOne alloc] initWithConfig:[PatternOne defaultConfig]];
     break;
   }
   [patternView setPattern:pattern];
   [patternView redisplay];
+  if ( propertiesController ) [propertiesController close];
 }
 
 @end

@@ -20,15 +20,18 @@
   @outlet CPView      m_circleCountView;
   @outlet CPView      m_factorView;
   @outlet CPView      m_rotationView;
+  @outlet CPView      m_sizeView;
+  @outlet CPView      m_framePosView;
   @outlet CPSlider    m_rotationSlider;
   @outlet CPSlider    m_circleCountSlider;
   @outlet CPSlider    m_factorSlider;
+  @outlet CPSlider    m_sizeSlider;
+  @outlet CPSlider    m_framePosSlider;
   @outlet CPTextField m_rotationValue;
   @outlet CPTextField m_circleCountValue;
   @outlet CPTextField m_factorValue;
-
-  PatternMaker m_pattern;
-  PatternView m_pattern_view;
+  @outlet CPTextField m_sizeValue;
+  @outlet CPTextField m_framePosValue;
 
   @outlet CPButton m_showShapesButton;
   @outlet CPSlider m_radiusSlider;
@@ -37,7 +40,8 @@
   @outlet CPView m_strokeColorView;
   @outlet CPView m_fillColorView;
 
-
+  PatternMaker m_pattern;
+  PatternView m_pattern_view;
 }
 
 //
@@ -65,6 +69,8 @@
   [CPBox makeBorder:m_radiusView];
   [CPBox makeBorder:m_fillColorView];
   [CPBox makeBorder:m_strokeColorView];
+  [CPBox makeBorder:m_sizeView];
+  [CPBox makeBorder:m_framePosView];
 
   [m_rotationSlider setObjectValue:[m_pattern_view rotation] * (180 / Math.PI)];
   [self updateSlider:m_rotationSlider textField:m_rotationValue sender:m_rotationSlider];
@@ -82,13 +88,15 @@
   [m_radiusSlider setObjectValue:[m_pattern radius]];
   [self updateSlider:m_radiusSlider textField:m_radiusValue sender:m_radiusSlider];
 
-  var colorWells = [self findColorWellsWithTags:[0,1,2] inViews:[m_strokeColorView subviews]];
+  var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5] 
+                                        inViews:[m_strokeColorView subviews]];
   for ( var idx = 0; idx < [colorWells count]; idx++ ) {
     [colorWells[idx] setColor:[m_pattern strokeColorAt:idx]];
     [CPBox makeBorder:colorWells[idx]];
   }
 
-  var colorWells = [self findColorWellsWithTags:[0,1,2] inViews:[m_fillColorView subviews]];
+  var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5] 
+                                        inViews:[m_fillColorView subviews]];
   for ( var idx = 0; idx < [colorWells count]; idx++ ) {
     [colorWells[idx] setColor:[m_pattern fillColorAt:idx]];
     [CPBox makeBorder:colorWells[idx]];
@@ -147,6 +155,16 @@
   [self updateSlider:m_circleCountSlider textField:m_circleCountValue sender:sender];
   [m_pattern setNumPoints:[m_circleCountValue intValue]];
   [m_pattern_view redisplay];
+}
+
+- (CPAction)updateSizeValue:(id)sender
+{
+  [self updateSlider:m_sizeSlider textField:m_sizeValue sender:sender];
+}
+
+- (CPAction)updateFramePos:(id)sender
+{
+  [self updateSlider:m_framePosSlider textField:m_framePosValue sender:sender];
 }
 
 //
