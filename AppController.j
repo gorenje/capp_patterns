@@ -3,22 +3,10 @@
 @import <GRKit/GRKit.j>
 @import "app/app.j"
 
-@implementation PatternView : GRRotateView
-{
-  PatternMaker m_pattern @accessors(property=pattern);
-}
-
-- (void)drawLayer:(CALayer)aLayer inContext:(CGContext)aContext
-{
-  [[self pattern] draw:aContext];
-}
-
-@end
-
 @implementation AppController : CPObject
 {
-  CPView contentView;
-  PatternView patternView;
+  CPView                    contentView;
+  PatternView               patternView;
   PatternSettingsController propertiesController;
 }
 
@@ -61,30 +49,9 @@
     [theWindow orderFront:self];
 }
 
+@end
 
-- (void)addButton:(CPString)aTitle 
-         position:(Point)aPoint 
-         selector:(SEL)actionToTake
-{
-  [self addButton:aTitle
-         position:aPoint
-              tag:0
-         selector:actionToTake];
-}
-
-- (void)addButton:(CPString)aTitle 
-         position:(Point)aPoint 
-              tag:(int)aTagValue
-         selector:(SEL)actionToTake
-{
-  var button = [CPButton buttonWithTitle:aTitle];
-  [button setTarget:self];
-  [button setAction:actionToTake];
-  [button setFrameOrigin:aPoint];
-  [button setTag:aTagValue];
-  [contentView addSubview:button];
-  return button;
-}
+@implementation AppController (Actions)
 
 - (CPAction)dumpConfig:(id)sender
 {
@@ -120,3 +87,30 @@
 
 @end
 
+@implementation AppController (Helpers)
+
+- (void)addButton:(CPString)aTitle 
+         position:(Point)aPoint 
+         selector:(SEL)actionToTake
+{
+  [self addButton:aTitle
+         position:aPoint
+              tag:0
+         selector:actionToTake];
+}
+
+- (void)addButton:(CPString)aTitle
+         position:(Point)aPoint 
+              tag:(int)aTagValue
+         selector:(SEL)actionToTake
+{
+  var button = [CPButton buttonWithTitle:aTitle];
+  [button setTarget:self];
+  [button setAction:actionToTake];
+  [button setFrameOrigin:aPoint];
+  [button setTag:aTagValue];
+  [contentView addSubview:button];
+  return button;
+}
+
+@end
