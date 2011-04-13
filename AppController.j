@@ -31,21 +31,12 @@
            position:CGPointMake( 20, 60 ) 
            selector:@selector(dumpConfig:)];
 
-    [self addButton:"Pattern 1"
-           position:CGPointMake( 150, 20 ) 
-                tag:1
-           selector:@selector(showPattern:)];
-
-    [self addButton:"Pattern 2"
-           position:CGPointMake( 230, 20 )
-                tag:2
-           selector:@selector(showPattern:)];
-
-    [self addButton:"Pattern 3"
-           position:CGPointMake( 310, 20 )
-                tag:3
-           selector:@selector(showPattern:)];
-
+    for ( var idx = 1; idx < 6; idx++ ) {
+      [self addButton:("Pattern "+idx)
+             position:CGPointMake( 70 + (80*idx), 20 ) 
+                  tag:idx
+             selector:@selector(showPattern:)];
+    }
     [theWindow orderFront:self];
 }
 
@@ -70,6 +61,12 @@
 {
   var pattern;
   switch ( [sender tag] ) {
+  case 5:
+    pattern = [[PatternFive alloc] initWithConfig:[PatternFive defaultConfig]];
+    break;
+  case 4:
+    pattern = [[PatternFour alloc] initWithConfig:[PatternFour defaultConfig]];
+    break;
   case 3:
     pattern = [[PatternThree alloc] initWithConfig:[PatternThree defaultConfig]];
     break;

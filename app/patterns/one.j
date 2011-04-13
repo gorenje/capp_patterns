@@ -37,7 +37,6 @@
 - (void)draw_frame_1:(CGContext)aContext
 {
   [self setupColorWithIndex:0 context:aContext];
-
   [[self circle] draw:aContext];
   [self fillAndStroke:aContext];
 

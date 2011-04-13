@@ -74,6 +74,8 @@
   [CPBox makeBorder:m_sizeView];
   [CPBox makeBorder:m_framePosView];
 
+  [m_framePosView setHidden:YES];
+
   [m_rotationSlider setObjectValue:[m_pattern_view rotation] * (180 / Math.PI)];
   [self updateSlider:m_rotationSlider textField:m_rotationValue sender:m_rotationSlider];
 
@@ -117,6 +119,13 @@
 //
 // Actions
 ////
+
+// TODO needs implementing.
+- (CPAction)updateFramePos:(id)sender
+{
+  [self updateSlider:m_framePosSlider textField:m_framePosValue sender:sender];
+}
+
 - (CPAction)updateFillColor:(id)sender
 {
   [[self pattern] setFillColorAt:[sender tag] color:[sender color]];
@@ -141,31 +150,26 @@
   [m_pattern_view redisplay];
 }
 
-- (CPAction)updateFramePos:(id)sender
+// The following require recreation of the entire pattern with a new configuration.
+- (CPAction)circleCountUpdate:(id)sender
 {
-  [self updateSlider:m_framePosSlider textField:m_framePosValue sender:sender];
+  [self updateSlider:m_circleCountSlider textField:m_circleCountValue sender:sender];
+  [self compareOld:[self pattern]
+           withNew:[[self pattern] setNumPoints:[m_circleCountValue intValue]]];
 }
 
-// The following require recreation of the entire pattern with a new configuration.
 - (CPAction)updateRadiusValue:(id)sender
 {
   [self updateSlider:m_radiusSlider textField:m_radiusValue sender:sender];
-  [[self pattern] setRadius:[m_radiusSlider intValue]];
-  [m_pattern_view redisplay];
+  [self compareOld:[self pattern]
+           withNew:[[self pattern] setRadius:[m_radiusSlider intValue]]];
 }
 
 - (CPAction)updateFactorValue:(id)sender
 {
   [self updateSlider:m_factorSlider textField:m_factorValue sender:sender];
-  [[self pattern] setFactorLarger:(2 * ([m_factorSlider intValue]/100))];
-  [m_pattern_view redisplay];
-}
-
-- (CPAction)circleCountUpdate:(id)sender
-{
-  [self updateSlider:m_circleCountSlider textField:m_circleCountValue sender:sender];
-  [[self pattern] setNumPoints:[m_circleCountValue intValue]];
-  [m_pattern_view redisplay];
+  [self compareOld:[self pattern]
+           withNew:[[self pattern] setFactorLarger:(2 * ([m_factorSlider intValue]/100))]];
 }
 
 - (CPAction)updateSizeValue:(id)sender
@@ -191,7 +195,7 @@
 - (void)updateSlider:(id)sliderObj textField:(id)textField sender:(id)sender
 {
   if ( [sender isKindOfClass:CPTextField] ) {
-    [sliderObj setValue:[[sender stringValue] intValue]];
+    [sliderObj setObjectValue:[[sender stringValue] intValue]];
   } else {
     [textField setStringValue:(""+[sender intValue])];
   }

@@ -35,22 +35,8 @@
         m_sub_patterns.push([[[self class] alloc] initWithConfig:tmpConfig]);
       }
     }
-
   }
   return self;
-}
-
-- (float)radius
-{
-  return [[self circle] radius];
-}
-
-- (void)setRadius:(float)aRadiusValue
-{
-  m_circle = [GRCircle circleWithCenter:[m_circle cpt] radius:aRadiusValue];
-  for ( var idx = 0; idx < [m_sub_patterns count]; idx++ ) {
-    [m_sub_patterns[idx] setRadius:aRadiusValue];
-  }
 }
 
 - (void)setFillColorAt:(int)aIndex color:(CPColor)aColor
@@ -77,22 +63,32 @@
   }
 }
 
-- (void)setFactorLarger:(float)aValue
+- (PatternConfig)setNumPoints:(int)aValue
 {
-  m_factor_larger = aValue;
-  for ( var idx = 0; idx < [m_sub_patterns count]; idx++ ) {
-    [m_sub_patterns[idx] setFactorLarger:aValue];
-  }
+  return [self compareValue:aValue forConfig:"number_of_points"];
+}
+
+- (PatternConfig)setRadius:(float)aValue
+{
+  return [self compareValue:aValue forConfig:"radius"];
+}
+
+- (PatternConfig)setFactorLarger:(float)aValue
+{
+  return [self compareValue:aValue forConfig:"factor_larger"];
 }
 
 - (PatternConfig)setRecurseDepth:(int)aValue
 {
-  var config = [self config];
-  if ( [[config objectForKey:"recurse_depth"] intValue] != aValue ) {
-    [config setObject:aValue forKey:"recurse_depth"];
-    return [[[self class] alloc] initWithConfig:config];
-  }
-  return self;
+  return [self compareValue:aValue forConfig:"recurse_depth"];
+}
+
+//
+// Getters
+////
+- (float)radius
+{
+  return [[self circle] radius];
 }
 
 - (CPColor)fillColorAt:(int)aIndex
@@ -137,6 +133,19 @@
 - (CPDict)config
 {
   return objj_eval([self dumpConfig]);
+}
+
+//
+// Helpers
+////
+- (PatternConfig)compareValue:(id)aValue forConfig:(CPString)aConfigName
+{
+  var config = [self config];
+  if ( [config objectForKey:aConfigName] !== aValue ) {
+    [config setObject:aValue forKey:aConfigName];
+    return [[[self class] alloc] initWithConfig:config];
+  }
+  return self;
 }
 
 @end

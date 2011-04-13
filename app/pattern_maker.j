@@ -1,4 +1,7 @@
 @implementation PatternMaker : PatternConfig
+{
+  CGPath m_path;
+}
 
 - (CPArray)sub_circles
 {
@@ -34,6 +37,36 @@
 {
   CGContextStrokePath(aContext);
   CGContextFillPath(aContext);
+}
+
+- (void)fill:(CGContext)aContext
+{
+  CGContextFillPath(aContext);
+}
+
+
+
+- (void)setupPath:(CGContext)aContext
+{
+  CGContextBeginPath(aContext);
+  m_path = CGPathCreateMutable();
+}
+
+- (void)moveTo:(GRPoint)aPoint
+{
+  CGPathMoveToPoint(m_path, nil, [aPoint x], [aPoint y]);
+}
+
+- (void)lineTo:(CGPoint)aPoint
+{
+  CGPathAddLineToPoint(m_path, nil, [aPoint x], [aPoint y]);
+}
+
+- (void)closePath:(CGContext)aContext
+{
+  CGPathCloseSubpath(m_path);
+  CGContextAddPath(aContext, m_path);
+  CGContextClosePath(aContext);
 }
 
 - (void)draw:(CGContext)aContext
