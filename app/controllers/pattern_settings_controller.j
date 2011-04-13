@@ -40,7 +40,6 @@
   @outlet CPView m_strokeColorView;
   @outlet CPView m_fillColorView;
 
-  PatternMaker m_pattern;
   PatternView m_pattern_view;
 }
 
@@ -50,14 +49,17 @@
 
 - (id)initWithWindowCibName:(CPString)cibName 
                 patternView:(PatternView)aPatternView
-                    pattern:(Pattern)aPattern
 {
   self = [super initWithWindowCibName:cibName];
   if ( self ) {
     m_pattern_view = aPatternView;
-    m_pattern = aPattern;
   }
   return self;
+}
+
+- (PatternConfig)pattern
+{
+  return [m_pattern_view pattern];
 }
 
 - (void)awakeFromCib
@@ -75,30 +77,33 @@
   [m_rotationSlider setObjectValue:[m_pattern_view rotation] * (180 / Math.PI)];
   [self updateSlider:m_rotationSlider textField:m_rotationValue sender:m_rotationSlider];
 
-  [m_circleCountSlider setObjectValue:[m_pattern numPoints]];
+  [m_circleCountSlider setObjectValue:[[self pattern] numPoints]];
   [self updateSlider:m_circleCountSlider 
            textField:m_circleCountValue 
               sender:m_circleCountSlider];
 
-  [m_factorSlider setObjectValue:100 * ([m_pattern factorLarger] / 2)];
+  [m_factorSlider setObjectValue:100 * ([[self pattern] factorLarger] / 2)];
   [self updateSlider:m_factorSlider textField:m_factorValue sender:m_factorSlider];
 
-  [m_showShapesButton setState:[m_pattern showShapes] ? CPOnState : CPOffState];
+  [m_showShapesButton setState:[[self pattern] showShapes] ? CPOnState : CPOffState];
 
-  [m_radiusSlider setObjectValue:[m_pattern radius]];
+  [m_radiusSlider setObjectValue:[[self pattern] radius]];
   [self updateSlider:m_radiusSlider textField:m_radiusValue sender:m_radiusSlider];
+
+  [m_sizeSlider setObjectValue:[[self pattern] recurseDepth]];
+  [self updateSlider:m_sizeSlider textField:m_sizeValue sender:m_sizeSlider];
 
   var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5] 
                                         inViews:[m_strokeColorView subviews]];
   for ( var idx = 0; idx < [colorWells count]; idx++ ) {
-    [colorWells[idx] setColor:[m_pattern strokeColorAt:idx]];
+    [colorWells[idx] setColor:[[self pattern] strokeColorAt:idx]];
     [CPBox makeBorder:colorWells[idx]];
   }
 
   var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5] 
                                         inViews:[m_fillColorView subviews]];
   for ( var idx = 0; idx < [colorWells count]; idx++ ) {
-    [colorWells[idx] setColor:[m_pattern fillColorAt:idx]];
+    [colorWells[idx] setColor:[[self pattern] fillColorAt:idx]];
     [CPBox makeBorder:colorWells[idx]];
   }
 
@@ -114,33 +119,13 @@
 ////
 - (CPAction)updateFillColor:(id)sender
 {
-  [m_pattern setFillColorAt:[sender tag] color:[sender color]];
+  [[self pattern] setFillColorAt:[sender tag] color:[sender color]];
   [m_pattern_view redisplay];
 }
 
 - (CPAction)updateStrokeColor:(id)sender
 {
-  [m_pattern setStrokeColorAt:[sender tag] color:[sender color]];
-  [m_pattern_view redisplay];
-}
-
-- (CPAction)updateRadiusValue:(id)sender
-{
-  [self updateSlider:m_radiusSlider textField:m_radiusValue sender:sender];
-  [m_pattern setRadius:[m_radiusSlider intValue]];
-  [m_pattern_view redisplay];
-}
-
-- (CPAction)updateShowShapes:(id)sender
-{
-  [m_pattern setShowShapes:[sender state] == CPOnState];
-  [m_pattern_view redisplay];
-}
-
-- (CPAction)updateFactorValue:(id)sender
-{
-  [self updateSlider:m_factorSlider textField:m_factorValue sender:sender];
-  [m_pattern setFactorLarger:(2 * ([m_factorSlider intValue]/100))];
+  [[self pattern] setStrokeColorAt:[sender tag] color:[sender color]];
   [m_pattern_view redisplay];
 }
 
@@ -150,21 +135,44 @@
   [m_pattern_view setRotation:( [m_rotationSlider intValue] * ( Math.PI / 180 ) )];
 }
 
+- (CPAction)updateShowShapes:(id)sender
+{
+  [[self pattern] setShowShapes:[sender state] == CPOnState];
+  [m_pattern_view redisplay];
+}
+
+- (CPAction)updateFramePos:(id)sender
+{
+  [self updateSlider:m_framePosSlider textField:m_framePosValue sender:sender];
+}
+
+// The following require recreation of the entire pattern with a new configuration.
+- (CPAction)updateRadiusValue:(id)sender
+{
+  [self updateSlider:m_radiusSlider textField:m_radiusValue sender:sender];
+  [[self pattern] setRadius:[m_radiusSlider intValue]];
+  [m_pattern_view redisplay];
+}
+
+- (CPAction)updateFactorValue:(id)sender
+{
+  [self updateSlider:m_factorSlider textField:m_factorValue sender:sender];
+  [[self pattern] setFactorLarger:(2 * ([m_factorSlider intValue]/100))];
+  [m_pattern_view redisplay];
+}
+
 - (CPAction)circleCountUpdate:(id)sender
 {
   [self updateSlider:m_circleCountSlider textField:m_circleCountValue sender:sender];
-  [m_pattern setNumPoints:[m_circleCountValue intValue]];
+  [[self pattern] setNumPoints:[m_circleCountValue intValue]];
   [m_pattern_view redisplay];
 }
 
 - (CPAction)updateSizeValue:(id)sender
 {
   [self updateSlider:m_sizeSlider textField:m_sizeValue sender:sender];
-}
-
-- (CPAction)updateFramePos:(id)sender
-{
-  [self updateSlider:m_framePosSlider textField:m_framePosValue sender:sender];
+  [self compareOld:[self pattern]
+           withNew:[[self pattern] setRecurseDepth:[m_sizeSlider intValue]]];
 }
 
 //
@@ -202,6 +210,14 @@
     }
   }
   return ary;
+}
+
+- (void) compareOld:(PatternMaker)oldPattern withNew:(PatternMaker)newPattern
+{
+  if ( oldPattern != newPattern ) {
+    [m_pattern_view setPattern:newPattern];
+    [m_pattern_view redisplay];
+  }
 }
 
 @end

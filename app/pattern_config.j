@@ -1,0 +1,143 @@
+// ----------------------------------------------------------------------------------------
+@implementation PatternConfig : CPObject
+{
+  int      m_number_of_points @accessors(property=numPoints);
+  float    m_factor_larger    @accessors(property=factorLarger);
+  GRCircle m_circle           @accessors(property=circle,readonly);
+  BOOL     m_show_shapes      @accessors(property=showShapes);
+
+  CPArray m_stroke_colors @accessors(property=strokeColors,readonly);
+  CPArray m_fill_colors @accessors(property=fillColors,readonly);
+
+  int m_recurse_depth @accessors(property=recurseDepth);
+  CPArray m_sub_patterns;
+}
+
+- (id)initWithConfig:(CPDict)config
+{
+  self = [super init];
+  if ( self ) {
+    m_number_of_points = [config objectForKey:"number_of_points"];
+    m_factor_larger    = [config objectForKey:"factor_larger"];
+    m_show_shapes      = [config objectForKey:"show_shapes"];
+    m_stroke_colors    = [config objectForKey:"stroke_colors"];
+    m_fill_colors      = [config objectForKey:"fill_colors"];
+    m_recurse_depth    = [config objectForKey:"recurse_depth"];
+    m_circle = [GRLinkedCircle circleWithCenter:[config objectForKey:"center_point"]
+                                         radius:[config objectForKey:"radius"]];
+    m_sub_patterns = [];
+    if ( m_recurse_depth > 0 ) {
+      var subs = [self sub_circles];
+      for ( var idx = 0; idx < [self numPoints]; idx++ ) {
+        var tmpConfig = [config copy];
+        [tmpConfig setObject:[subs[idx] cpt] forKey:"center_point"];
+        [tmpConfig setObject:(m_recurse_depth-1) forKey:"recurse_depth"];
+        m_sub_patterns.push([[[self class] alloc] initWithConfig:tmpConfig]);
+      }
+    }
+
+  }
+  return self;
+}
+
+- (float)radius
+{
+  return [[self circle] radius];
+}
+
+- (void)setRadius:(float)aRadiusValue
+{
+  m_circle = [GRCircle circleWithCenter:[m_circle cpt] radius:aRadiusValue];
+  for ( var idx = 0; idx < [m_sub_patterns count]; idx++ ) {
+    [m_sub_patterns[idx] setRadius:aRadiusValue];
+  }
+}
+
+- (void)setFillColorAt:(int)aIndex color:(CPColor)aColor
+{
+  m_fill_colors[ aIndex % NumberOfColors ] = aColor;
+  for ( var idx = 0; idx < [m_sub_patterns count]; idx++ ) {
+    [m_sub_patterns[idx] setFillColorAt:aIndex color:aColor];
+  }
+}
+
+- (void)setStrokeColorAt:(int)aIndex color:(CPColor)aColor
+{
+  m_stroke_colors[ aIndex % NumberOfColors ] = aColor;
+  for ( var idx = 0; idx < [m_sub_patterns count]; idx++ ) {
+    [m_sub_patterns[idx] setStrokeColorAt:aIndex color:aColor];
+  }
+}
+
+- (void)setShowShapes:(BOOL)aValue
+{
+  m_show_shapes = aValue;
+  for ( var idx = 0; idx < [m_sub_patterns count]; idx++ ) {
+    [m_sub_patterns[idx] setShowShapes:aValue];
+  }
+}
+
+- (void)setFactorLarger:(float)aValue
+{
+  m_factor_larger = aValue;
+  for ( var idx = 0; idx < [m_sub_patterns count]; idx++ ) {
+    [m_sub_patterns[idx] setFactorLarger:aValue];
+  }
+}
+
+- (PatternConfig)setRecurseDepth:(int)aValue
+{
+  var config = [self config];
+  if ( [[config objectForKey:"recurse_depth"] intValue] != aValue ) {
+    [config setObject:aValue forKey:"recurse_depth"];
+    return [[[self class] alloc] initWithConfig:config];
+  }
+  return self;
+}
+
+- (CPColor)fillColorAt:(int)aIndex
+{
+  return m_fill_colors[aIndex % NumberOfColors];
+}
+
+- (CPColor)strokeColorAt:(int)aIndex
+{
+  return m_stroke_colors[aIndex % NumberOfColors];
+}
+
+- (CPString)dumpConfig
+{
+  var sCols = [], fCols = [];
+  for ( var idx = 0; idx < [m_stroke_colors count]; idx++ ) {
+    var clr = m_stroke_colors[idx];
+    sCols[idx] = [CPString 
+                   stringWithFormat:"[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",
+                   [clr redComponent]*255, [clr greenComponent]*255, [clr blueComponent]*255,
+                   [clr alphaComponent]];
+  }
+  for ( var idx = 0; idx < [m_fill_colors count]; idx++ ) {
+    var clr = m_fill_colors[idx];
+    fCols[idx] = [CPString 
+                   stringWithFormat:"[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",
+                   [clr redComponent]*255, [clr greenComponent]*255, [clr blueComponent]*255,
+                   [clr alphaComponent]];
+  }
+
+  return "[CPDictionary dictionaryWithObjectsAndKeys:"+
+    [self numPoints]+", \"number_of_points\", "+
+    [self recurseDepth]+", \"recurse_depth\", "+
+    [self factorLarger]+", \"factor_larger\", [GRPoint pointWithX:"+
+    [[[self circle] cpt] x]+" Y:"+
+    [[[self circle] cpt] y]+"], \"center_point\", " + [self radius]+", \"radius\", " + 
+    ([self showShapes] ? "YES" : "NO") + ", \"show_shapes\", [" +
+    [sCols componentsJoinedByString:","] +"], \"stroke_colors\", [" +
+    [fCols componentsJoinedByString:","] +"], \"fill_colors\"];";
+}
+
+- (CPDict)config
+{
+  return objj_eval([self dumpConfig]);
+}
+
+@end
+

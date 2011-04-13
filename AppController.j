@@ -1,9 +1,7 @@
 
 @import <Foundation/CPObject.j>
 @import <GRKit/GRKit.j>
-@import "monkeypatch.j"
-@import "patterns.j"
-@import "pattern_settings_controller.j"
+@import "app/app.j"
 
 @implementation PatternView : GRRotateView
 {
@@ -31,11 +29,8 @@
     contentView = [theWindow contentView];
 
     var pattern = [[PatternOne alloc] initWithConfig:[PatternOne defaultConfig]];
-    CPLogConsole( "L: " + [pattern toString]);
-
     var rect = CGRectMake(175,120,700,700);
     patternView = [[PatternView alloc] initWithFrame:rect];
-    //    [patternView setFrameOrigin:CGPointMake( 150,150 )];
     [patternView setNeedsDisplay:YES];
     [patternView setPattern:pattern];
     [contentView addSubview:patternView];
@@ -56,6 +51,11 @@
     [self addButton:"Pattern 2"
            position:CGPointMake( 230, 20 )
                 tag:2
+           selector:@selector(showPattern:)];
+
+    [self addButton:"Pattern 3"
+           position:CGPointMake( 310, 20 )
+                tag:3
            selector:@selector(showPattern:)];
 
     [theWindow orderFront:self];
@@ -88,15 +88,14 @@
 
 - (CPAction)dumpConfig:(id)sender
 {
-  CPLogConsole( "Config: " + [[patternView pattern] toString] );
+  CPLogConsole("Config: " + [[patternView pattern] dumpConfig]);
 }
 
 - (CPAction)showProperties:(id)sender
 {
   propertiesController = [PatternSettingsController alloc];
   [propertiesController initWithWindowCibName:"PatternSettings"
-                        patternView:patternView
-                            pattern:[patternView pattern]];
+                                  patternView:patternView];
   [propertiesController showWindow:self];
 }
 
@@ -104,6 +103,9 @@
 {
   var pattern;
   switch ( [sender tag] ) {
+  case 3:
+    pattern = [[PatternThree alloc] initWithConfig:[PatternThree defaultConfig]];
+    break;
   case 2:
     pattern = [[PatternTwo alloc] initWithConfig:[PatternTwo defaultConfig]];
     break;
