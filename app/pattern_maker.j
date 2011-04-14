@@ -44,8 +44,6 @@
   CGContextFillPath(aContext);
 }
 
-
-
 - (void)setupPath:(CGContext)aContext
 {
   CGContextBeginPath(aContext);

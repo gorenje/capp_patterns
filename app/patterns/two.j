@@ -64,11 +64,13 @@
 
     var pt1 = [cc cpt];
     var pt2 = [pt1 closest:[[[cc prevCircle] prevCircle] intersection:[cc nextCircle]]];
-    var pt3 = [pt2 closest:[[cc prevCircle] intersection:[cc nextCircle]]];
+    var pt3 = [[[self circle] cpt] furthest:[[cc prevCircle] intersection:[cc nextCircle]]];
     var pt4 = [pt3 closest:[[[cc nextCircle] nextCircle] intersection:[cc prevCircle]]];
 
-    [[GRRect rectWithPoints:[pt1, pt2, pt3, pt4]] draw:aContext];
-    [self fillAndStroke:aContext];
+    if ( pt4 != null && pt2 != null ) {
+      [[GRRect rectWithPoints:[pt1, pt2, pt3, pt4]] draw:aContext];
+      [self fillAndStroke:aContext];
+    }
   }
 }
 
@@ -83,6 +85,11 @@
     var newCircle = [GRCircle circleWithCenter:[cc cpt] radius:distance];
     var pts = [newCircle intersection:[GRCircle circleWithCenter:[[cc nextCircle] cpt]
                                                           radius:distance]];
+    [self setupColorWithIndex:1 context:aContext]
+    [newCircle draw:aContext];
+    [self fillAndStroke:aContext];
+
+    [self setupColorWithIndex:4 context:aContext];
     [[GRRect rectWithPoints:[[cc cpt], pts[0], [[cc nextCircle] cpt], pts[1]]] draw:aContext];
     [self fillAndStroke:aContext];
   }

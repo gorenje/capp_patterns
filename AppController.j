@@ -31,7 +31,7 @@
            position:CGPointMake( 20, 60 ) 
            selector:@selector(dumpConfig:)];
 
-    for ( var idx = 1; idx < 6; idx++ ) {
+    for ( var idx = 1; idx < 9; idx++ ) {
       [self addButton:("Pattern "+idx)
              position:CGPointMake( 70 + (80*idx), 20 ) 
                   tag:idx
@@ -61,6 +61,15 @@
 {
   var pattern;
   switch ( [sender tag] ) {
+  case 8:
+    pattern = [[PatternEight alloc] initWithConfig:[PatternEight defaultConfig]];
+    break;
+  case 7:
+    pattern = [[PatternSeven alloc] initWithConfig:[PatternSeven defaultConfig]];
+    break;
+  case 6:
+    pattern = [[PatternSix alloc] initWithConfig:[PatternSix defaultConfig]];
+    break;
   case 5:
     pattern = [[PatternFive alloc] initWithConfig:[PatternFive defaultConfig]];
     break;

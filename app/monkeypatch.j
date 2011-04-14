@@ -14,6 +14,14 @@
   return [CPColor colorWithWhite:0 alpha:0];
 }
 
+- (CPColor) addToBlue:(int)aValue
+{
+  return [CPColor colorWithRed:[self redComponent] 
+                         green:[self greenComponent] 
+                          blue:[self blueComponent] + aValue/255
+                         alpha:[self alphaComponent]];
+}
+
 @end
 
 @implementation CPBox (BorderedBox)
