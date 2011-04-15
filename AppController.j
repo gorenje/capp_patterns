@@ -1,7 +1,9 @@
 
 @import <Foundation/CPObject.j>
+@import <AppKit/CPColor.j>
 @import <GRKit/GRKit.j>
 @import "app/app.j"
+@import "app/monkeypatch.j" // categories only, ignored by press if not included.
 
 @implementation AppController : CPObject
 {
@@ -31,7 +33,7 @@
            position:CGPointMake( 20, 60 ) 
            selector:@selector(dumpConfig:)];
 
-    for ( var idx = 1; idx < 9; idx++ ) {
+    for ( var idx = 1; idx < 10; idx++ ) {
       [self addButton:("Pattern "+idx)
              position:CGPointMake( 70 + (80*idx), 20 ) 
                   tag:idx
@@ -61,6 +63,9 @@
 {
   var pattern;
   switch ( [sender tag] ) {
+  case 9:
+    pattern = [[PatternNine alloc] initWithConfig:[PatternNine defaultConfig]];
+    break;
   case 8:
     pattern = [[PatternEight alloc] initWithConfig:[PatternEight defaultConfig]];
     break;

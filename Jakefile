@@ -1,11 +1,3 @@
-/*
- * Jakefile
- * patterns
- *
- * Created by You on April 9, 2011.
- * Copyright 2011, Your Company All rights reserved.
- */
-
 var ENV = require("system").env,
     FILE = require("file"),
     JAKE = require("jake"),
@@ -26,10 +18,11 @@ app ("patterns", function(task)
     task.setAuthor("Your Company");
     task.setEmail("feedback @nospam@ yourcompany.com");
     task.setSummary("patterns");
-    task.setSources((new FileList("**/*.j")).exclude(FILE.join("Build", "**")));
-    task.setResources(new FileList("Resources/**"));
+    task.setSources(new FileList("app/**/*.j", "AppController.j", "main.j"));
+    task.setResources(new FileList("Resources/**/**"));
     task.setIndexFilePath("index.html");
     task.setInfoPlistPath("Info.plist");
+    task.setNib2CibFlags("-R Resources/");
 
     if (configuration === "Debug")
         task.setCompilerFlags("-DDEBUG -g");
@@ -71,6 +64,33 @@ task ("deploy", ["release"], function()
     FILE.mkdirs(FILE.join("Build", "Deployment", "patterns"));
     OS.system(["press", "-f", FILE.join("Build", "Release", "patterns"), FILE.join("Build", "Deployment", "patterns")]);
     printResults("Deployment")
+});
+
+task ("press", ["release"], function()
+{
+  FILE.mkdirs(FILE.join("Build", "Press", "patterns"));
+  OS.system(["press", "-f", FILE.join("Build", "Release", "patterns"), 
+             FILE.join("Build", "Press", "patterns")]);
+});
+
+task( "clean-all", function()
+{
+    OS.system(["rm", "-fr", "Build"]);
+});
+
+task ("flatten", ["press"], function()
+{
+  var xibsToConvert = obtainXibs();
+  FILE.mkdirs(FILE.join("Build", "Flatten", "patterns"));
+  var args = ["flatten", "-f", "--verbose", "--split", "4", 
+              "-c", "closure-compiler"];
+  for ( var idx = 0; idx < xibsToConvert.length; idx++ ) {
+    args.push("-P");
+    args.push(FILE.join("Resources", xibsToConvert[idx] + ".cib"));
+  }
+  args.push(FILE.join("Build", "Press", "patterns"));
+  args.push(FILE.join("Build", "Flatten", "patterns"));
+  OS.system(args);
 });
 
 task ("desktop", ["release"], function()
