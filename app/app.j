@@ -16,6 +16,9 @@ NumberOfColors = 6;
 @import "patterns/seven.j"
 @import "patterns/eight.j"
 @import "patterns/nine.j"
+@import "patterns/ten.j"
 
 @import "views/pattern_view.j"
+@import "views/pattern_list_cell.j"
+
 @import "controllers/pattern_settings_controller.j"

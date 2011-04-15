@@ -118,8 +118,9 @@
                    [clr redComponent]*255, [clr greenComponent]*255, [clr blueComponent]*255,
                    [clr alphaComponent]];
   }
-
-  return "[CPDictionary dictionaryWithObjectsAndKeys:"+
+  
+  return ("\n@implementation NewPattern : " + [self class] + "\n+ (CPDict) defaultConfig" +
+          "\n{\nreturn [CPDictionary dictionaryWithObjectsAndKeys:"+
     [self numPoints]+", \"number_of_points\", "+
     [self recurseDepth]+", \"recurse_depth\", "+
     [self factorLarger]+", \"factor_larger\", [GRPoint pointWithX:"+
@@ -127,7 +128,7 @@
     [[[self circle] cpt] y]+"], \"center_point\", " + [self radius]+", \"radius\", " + 
     ([self showShapes] ? "YES" : "NO") + ", \"show_shapes\", [" +
     [sCols componentsJoinedByString:","] +"], \"stroke_colors\", [" +
-    [fCols componentsJoinedByString:","] +"], \"fill_colors\"];";
+          [fCols componentsJoinedByString:","] +"], \"fill_colors\"];" + "\n}\n@end\n");
 }
 
 - (CPDict)config
