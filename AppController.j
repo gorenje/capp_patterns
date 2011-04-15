@@ -48,9 +48,9 @@
   [patternListView setVerticalMargin:0.0];
   [patternListView setAutoresizingMask:CPViewWidthSizable];
   [listScrollView setDocumentView:patternListView];
-  [patternListView setContent:[ PatternOne, PatternTwo, PatternThree, PatternFour,
+  [patternListView setContent:[ PatternOne, PatternTen, PatternTwo, PatternThree, PatternFour,
                                           PatternFive, PatternSix, PatternSeven,
-                                          PatternEight, PatternNine, PatternTen]];
+                                          PatternEight, PatternNine ]];
   [patternListView setSelectionIndexes:[CPIndexSet indexSetWithIndex:0]];
 
   [contentView addSubview:listScrollView];    
@@ -69,7 +69,7 @@
 
 - (CPAction)dumpConfig:(id)sender
 {
-  CPLogConsole("Config: " + [[patternView pattern] dumpConfig]);
+  CPLogConsole("Config: " + [[patternView pattern] newPattern]);
 }
 
 - (CPAction)showProperties:(id)sender

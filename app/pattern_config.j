@@ -101,6 +101,12 @@
   return m_stroke_colors[aIndex % NumberOfColors];
 }
 
+- (CPString)newPattern
+{
+  return ("\n@implementation NewPattern : " + [self class] + "\n+ (CPDict) defaultConfig" +
+          "\n{\n"+ [self dumpConfig] + "\n}\n@end\n");
+}
+
 - (CPString)dumpConfig
 {
   var sCols = [], fCols = [];
@@ -119,8 +125,7 @@
                    [clr alphaComponent]];
   }
   
-  return ("\n@implementation NewPattern : " + [self class] + "\n+ (CPDict) defaultConfig" +
-          "\n{\nreturn [CPDictionary dictionaryWithObjectsAndKeys:"+
+  return ("[CPDictionary dictionaryWithObjectsAndKeys:"+
     [self numPoints]+", \"number_of_points\", "+
     [self recurseDepth]+", \"recurse_depth\", "+
     [self factorLarger]+", \"factor_larger\", [GRPoint pointWithX:"+
@@ -128,7 +133,7 @@
     [[[self circle] cpt] y]+"], \"center_point\", " + [self radius]+", \"radius\", " + 
     ([self showShapes] ? "YES" : "NO") + ", \"show_shapes\", [" +
     [sCols componentsJoinedByString:","] +"], \"stroke_colors\", [" +
-          [fCols componentsJoinedByString:","] +"], \"fill_colors\"];" + "\n}\n@end\n");
+    [fCols componentsJoinedByString:","] +"], \"fill_colors\"];");
 }
 
 - (CPDict)config
