@@ -25,14 +25,13 @@
   @outlet CPSlider    m_rotationSlider;
   @outlet CPSlider    m_circleCountSlider;
   @outlet CPSlider    m_factorSlider;
-  @outlet CPSlider    m_sizeSlider;
   @outlet CPSlider    m_framePosSlider;
   @outlet CPTextField m_rotationValue;
   @outlet CPTextField m_circleCountValue;
   @outlet CPTextField m_factorValue;
-  @outlet CPTextField m_sizeValue;
   @outlet CPTextField m_framePosValue;
 
+  @outlet CPSegmentedControl m_sizeSegment;
   @outlet CPButton m_showShapesButton;
   @outlet CPSlider m_radiusSlider;
   @outlet CPView m_radiusView;
@@ -92,8 +91,7 @@
   [m_radiusSlider setObjectValue:[[self pattern] radius]];
   [self updateSlider:m_radiusSlider textField:m_radiusValue sender:m_radiusSlider];
 
-  [m_sizeSlider setObjectValue:[[self pattern] recurseDepth]];
-  [self updateSlider:m_sizeSlider textField:m_sizeValue sender:m_sizeSlider];
+  [m_sizeSegment selectSegmentWithTag:[[[self pattern] recurseDepth] intValue] + 1];
 
   var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5] 
                                         inViews:[m_strokeColorView subviews]];
@@ -174,9 +172,8 @@
 
 - (CPAction)updateSizeValue:(id)sender
 {
-  [self updateSlider:m_sizeSlider textField:m_sizeValue sender:sender];
   [self compareOld:[self pattern]
-           withNew:[[self pattern] setRecurseDepth:[m_sizeSlider intValue]]];
+           withNew:[[self pattern] setRecurseDepth:[[sender selectedTag] intValue] - 1]];
 }
 
 //

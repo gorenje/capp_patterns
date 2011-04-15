@@ -104,7 +104,7 @@
 - (CPString)newPattern
 {
   return ("\n@implementation NewPattern : " + [self class] + "\n+ (CPDict) defaultConfig" +
-          "\n{\n"+ [self dumpConfig] + "\n}\n@end\n");
+          "\n{\n return "+ [self dumpConfig] + "\n}\n@end\n");
 }
 
 - (CPString)dumpConfig

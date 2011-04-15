@@ -21,7 +21,6 @@
   contentView = [theWindow contentView];
 
   var bounds = [contentView bounds];
-  var pattern = [[PatternOne alloc] initWithConfig:[PatternOne defaultConfig]];
 
   m_toolBar = [[CPToolbar alloc] initWithIdentifier:"PubEditor"];
   [m_toolBar setDelegate:self];
@@ -48,17 +47,21 @@
   [patternListView setVerticalMargin:0.0];
   [patternListView setAutoresizingMask:CPViewWidthSizable];
   [listScrollView setDocumentView:patternListView];
-  [patternListView setContent:[ PatternOne, PatternTen, PatternTwo, PatternThree, PatternFour,
-                                          PatternFive, PatternSix, PatternSeven,
-                                          PatternEight, PatternNine ]];
-  [patternListView setSelectionIndexes:[CPIndexSet indexSetWithIndex:0]];
+  [patternListView setContent:[ PatternOne, PatternEight, PatternTen, PatternFive,
+                                PatternTwo, PatternSix, PatternFour, PatternThree,
+                                PatternTwelve, PatternSeven,PatternEleven, PatternNine ]];
 
-  [contentView addSubview:listScrollView];    
+  var showPatternIdx = 6;
+  var patternClass = [patternListView content][showPatternIdx];
+  var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
+  [patternListView setSelectionIndexes:[CPIndexSet indexSetWithIndex:showPatternIdx]];
     
   var rect = CGRectMake(200,0,700,700);
   patternView = [[PatternView alloc] initWithFrame:rect];
   [patternView setNeedsDisplay:YES];
   [patternView setPattern:pattern];
+
+  [contentView addSubview:listScrollView];    
   [contentView addSubview:patternView];
   [theWindow orderFront:self];
 }
@@ -108,7 +111,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   case "Properties":
     image = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32.png" size:CPSizeMake(32, 32)];
     highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32_high.png" size:CPSizeMake(32, 32)];
-    [toolbarItem setLabel:"Properties"];
+    [toolbarItem setLabel:"Pattern Property"];
 
     [toolbarItem setTarget:self];
     [toolbarItem setAction:@selector(showProperties:)];
@@ -120,7 +123,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
     image = [[CPImage alloc] initWithContentsOfFile:"Resources/add.png" size:CPSizeMake(30, 25)];
     highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/addHigh.png" size:CPSizeMake(30, 25)];
 
-    [toolbarItem setLabel:"Properties to Console"];
+    [toolbarItem setLabel:"Property to Console"];
 
     [toolbarItem setTarget:self];
     [toolbarItem setAction:@selector(dumpConfig:)];
