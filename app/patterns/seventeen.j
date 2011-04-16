@@ -1,7 +1,7 @@
 @implementation PatternSeventeen : PatternEleven
 + (CPDict) defaultConfig
 {
- return [CPDictionary dictionaryWithObjectsAndKeys:[CPColor colorWith8BitRed:31 green:255 blue:7 alpha:1], "background_color", 40, "number_of_points", 220, "rotation", 0, "recurse_depth", 1.26, "factor_larger", [GRPoint pointWithX:350 Y:350], "center_point", 184, "radius", YES, "show_shapes", 
+ return [CPDictionary dictionaryWithObjectsAndKeys:[CPColor colorWith8BitRed:31 green:255 blue:7 alpha:1], "background_color", 40, "number_of_points", 220, "rotation", 0, "recurse_depth", 1.26, "factor_larger", [GRPoint pointWithX:350 Y:350], "center_point", 149, "radius", YES, "show_shapes", 
 [[CPColor colorWith8BitRed:0 green:255 blue:100 alpha:1],
 [CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.33636363636363636],
 [CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.3],

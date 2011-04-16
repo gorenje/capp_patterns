@@ -68,7 +68,7 @@
   [contentView addSubview:listScrollView];    
   [contentView addSubview:patternView];
   [theWindow orderFront:self];
-  [AboutPatternsDelegate popupAlert];
+  [AboutPatternsDelegate popupAlertAndHideAfter:12];
 }
 
 @end
@@ -180,7 +180,28 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
 
 @implementation AboutPatternsDelegate : CPObject
 
-+ (void)popupAlert
++ (void)closeWindow:(id)alertWindow
+{
+  [CPApp stopModal];
+  [[alertWindow window] close];
+}
+
++ (void)popupAlertAndHideAfter:(int)anInterval
+{
+  var alertObj = [AboutPatternsDelegate popupAlert];
+
+  var loadPageInvoker = [[CPInvocation alloc] initWithMethodSignature:nil];
+  [loadPageInvoker setTarget:self];
+  [loadPageInvoker setSelector:@selector(closeWindow:)];
+  [loadPageInvoker setArgument:alertObj atIndex:2];
+
+  [CPTimer scheduledTimerWithTimeInterval:anInterval
+                               invocation:loadPageInvoker
+                                  repeats:NO];
+
+}
+
++ (CPAlert)popupAlert
 {
   var delegate = [[AboutPatternsDelegate alloc] init],
     alert = [[CPAlert alloc] init];
@@ -194,6 +215,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   [alert addButtonWithTitle:@"Book"];
   [alert addButtonWithTitle:@"Cappuccino"];
   [alert runModal];
+  return alert;
 }
 
 -(void)alertDidEnd:(CPAlert)theAlert returnCode:(int)returnCode
