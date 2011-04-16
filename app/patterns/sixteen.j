@@ -6,14 +6,11 @@
   [self draw_frame_2:aContext];
   [self draw_frame_3:aContext];
   [self draw_frame_4:aContext];
-//   if ( [self showShapes] ) {
-//     [self draw_frame_2:aContext];
-//   }
 }
 
 + (CPDict)defaultConfig
 {
-  return [CPDictionary dictionaryWithObjectsAndKeys:6, "number_of_points", 0, "recurse_depth", 1.54, "factor_larger", [GRPoint pointWithX:350 Y:350], "center_point", 110, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.33636363636363636],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.3],[CPColor colorWith8BitRed:85 green:85 blue:85 alpha:0.5909090909090909],[CPColor colorWith8BitRed:0 green:255 blue:0 alpha:1],[CPColor colorWith8BitRed:4 green:19 blue:255 alpha:0.8],[CPColor colorWith8BitRed:255 green:23 blue:10 alpha:1]], "stroke_colors", [[CPColor colorWith8BitRed:0 green:0 blue:255 alpha:0],[CPColor colorWith8BitRed:28 green:248 blue:12 alpha:0.01818181818181818],[CPColor colorWith8BitRed:29 green:44 blue:255 alpha:0.01818181818181818],[CPColor colorWith8BitRed:240 green:31 blue:50 alpha:0.24545454545454545],[CPColor colorWith8BitRed:191 green:188 blue:30 alpha:0.2818181818181818],[CPColor colorWith8BitRed:200 green:23 blue:10 alpha:0]], "fill_colors"];
+  return [CPDictionary dictionaryWithObjectsAndKeys:[CPColor colorWith8BitRed:2 green:2 blue:2 alpha:1], "background_color", 8, "number_of_points", 0, "rotation", 1, "recurse_depth", 0.5, "factor_larger", [GRPoint pointWithX:350 Y:350], "center_point", 160, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.33636363636363636],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.3],[CPColor colorWith8BitRed:85 green:85 blue:85 alpha:0.5909090909090909],[CPColor colorWith8BitRed:0 green:148 blue:0 alpha:1],[CPColor colorWith8BitRed:153 green:18 blue:88 alpha:1],[CPColor colorWith8BitRed:205 green:25 blue:118 alpha:1]], "stroke_colors", [[CPColor colorWith8BitRed:255 green:36 blue:49 alpha:0.13636363636363635],[CPColor colorWith8BitRed:42 green:38 blue:247 alpha:0.16363636363636364],[CPColor colorWith8BitRed:255 green:25 blue:49 alpha:0.18181818181818182],[CPColor colorWith8BitRed:240 green:31 blue:50 alpha:0],[CPColor colorWith8BitRed:35 green:39 blue:191 alpha:0],[CPColor colorWith8BitRed:200 green:23 blue:10 alpha:0]], "fill_colors"];
 }
 
 - (void)draw_frame_1:(CGContext)aContext
@@ -64,63 +61,47 @@
 
 - (void)draw_frame_4:(CGContext)aContext
 {
-  /*
-    var subs = this.sub_circles();
-    for ( var idx = 0; idx < this.num_of_points; idx++ ) {
-      var cc = subs[idx];
-      context.noFill();
-      context.stroke( 23,78, 102);
+  var subs = [self sub_circles];
+  for ( var idx = 0; idx < [self numPoints]; idx++ ) {
+    var cc = subs[idx];
+    [self setupColorWithIndex:4 context:aContext];
       
-      var pt1 = this.circle.cpt.point_on_segment(cc.cpt, 1/4);
-      var pt2 = this.circle.cpt.point_on_segment(cc.next_circle.cpt, 1/4);
-      var pt3 = cc.cpt.point_on_segment(cc.next_circle.cpt, 3/4);
-      var pt4 = cc.cpt.point_on_segment(cc.next_circle.cpt, 1/4);
+    var pt1 = [[[self circle] cpt] point_on_segment:[cc cpt] ratio:1/4];
+    var pt2 = [[[self circle] cpt] point_on_segment:[[cc nextCircle] cpt] ratio:1/4];
+    var pt3 = [[cc cpt] point_on_segment:[[cc nextCircle] cpt] ratio:3/4];
+    var pt4 = [[cc cpt] point_on_segment:[[cc nextCircle] cpt] ratio:1/4];
 
-      (l1 = new ProLine(pt1, pt3)).draw(context);
-      (l2 = new ProLine(pt4, pt2)).draw(context);
-      var topTr = l1.intersection(l2);
-      (new ProCircle(topTr, 5)).draw(context);
+    var l1 = [GRLine lineWithPoint:pt1 andPoint:pt3];
+    var l2 = [GRLine lineWithPoint:pt4 andPoint:pt2];
+    var topTr = [l1 intersection:l2];
 
-      pt1 = this.circle.cpt.point_on_segment(cc.cpt, 3/4);
-      pt2 = this.circle.cpt.point_on_segment(cc.next_circle.cpt, 3/4);
-      (l3 = new ProLine(pt1, pt2)).draw(context);
+    pt1 = [[[self circle] cpt] point_on_segment:[cc cpt] ratio:3/4];
+    pt2 = [[[self circle] cpt] point_on_segment:[[cc nextCircle] cpt] ratio:3/4];
+    var l3 = [GRLine lineWithPoint:pt1 andPoint:pt2];
 
-      var botL = l1.intersection(l3);
-      (new ProCircle(botL, 5)).draw(context);
+    var botL = [l1 intersection:l3];
 
-      var botR = l2.intersection(l3);
-      (new ProCircle(botR, 5)).draw(context);
-      
-      context.stroke( 255,255,255 );
-      (new ProTriangle(topTr, botL, botR)).draw(context);
+    var botR = [l2 intersection:l3];
+    [[GRTriangle triangleWithPoints:[ topTr, botL, botR ]] draw:aContext];
+    if ( [self showShapes] ) [self fillAndStroke:aContext];
 
-      var lines = [
-        new ProLine( botR, cc.cpt.point_on_segment(botR,2.0)),
-        new ProLine( botL, cc.next_circle.cpt.point_on_segment(botL,2.0)),
-        new ProLine( topTr, this.circle.cpt.point_on_segment(topTr,2.0))
-      ];
+    l1 = [GRLine lineWithPoint:botL
+                      andPoint:[[[cc nextCircle] cpt] point_on_segment:botL ratio:1.8]];
+    l2 = [GRLine lineWithPoint:botR 
+                      andPoint:[[cc cpt] point_on_segment:botR ratio:2]];
+    var interPt = [l1 intersection:l2];
 
-      // strange computation but not all intersections are the same. A few are
-      // off so in order to get the "correct" intersection, we take a vote
-      stroke( 255, 0,0);
-      lines[0].draw(context);
-      lines[1].draw(context);
-      lines[2].draw(context);
+    [self setupColorWithIndex:5 context:aContext];
+    [[GRLine lineWithPoint:interPt
+                  andPoint:[[cc cpt] point_on_segment:botR ratio:2]] 
+      draw:aContext];
+    [self fillAndStroke:aContext];
 
-      stroke( 255, 255,255);
-      var center = lines[2].intersection(lines[1]);
-      (new ProCircle(center, 5)).draw(context);
-
-      var pt2 = topTr.point_on_segment(center, 2);
-//      (new ProCircle(pt2, 5)).draw(context);
-
-      var pt3 = botL.point_on_segment(center, 2);
-//      (new ProCircle(pt3, 5)).draw(context);
-
-      var pt1 = botR.point_on_segment(center, 2);
-//      (new ProCircle(pt1, 5)).draw(context);
-    }
-  */
+    [[GRLine lineWithPoint:interPt
+                  andPoint:[[[cc nextCircle] cpt] point_on_segment:botL ratio:2]] 
+      draw:aContext];
+    [self fillAndStroke:aContext];
+  }
 }
 
 @end

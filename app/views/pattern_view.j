@@ -22,7 +22,12 @@
 {
   CGContextSetFillColor(aContext, [[self pattern] bgColor]);
   CGContextFillRect(aContext, [self bounds]);
-  [[self pattern] draw:aContext];
+  try {
+    [[self pattern] draw:aContext];
+  } catch ( e ) {
+    // some configuration lead to SamePointErrors --> ignore these.
+    CPLogConsole( "Exception: happend, configuration broke everything" );
+  }
 }
 
 @end

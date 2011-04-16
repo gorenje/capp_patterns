@@ -51,9 +51,10 @@
                                 PatternTen, PatternFive, PatternTwo, PatternSix, 
                                 PatternFour, PatternThree, PatternTwelve, PatternSeven,
                                 PatternThirteen, PatternFourteen, PatternEleven, 
-                                          PatternNine, PatternSixteen, PatternSeventeen ]];
+                                PatternNine, PatternSixteen, PatternSeventeen,
+                                PatternEighteen]];
 
-  var showPatternIdx = 6;
+  var showPatternIdx = 15;
   var patternClass = [patternListView content][showPatternIdx];
   var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
   [patternListView setSelectionIndexes:[CPIndexSet indexSetWithIndex:showPatternIdx]];
