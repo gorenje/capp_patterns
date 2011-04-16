@@ -20,6 +20,7 @@
 
 - (void)drawLayer:(CALayer)aLayer inContext:(CGContext)aContext
 {
+  [[self superview] setBackgroundColor:[[self pattern] bgColor]];
   CGContextSetFillColor(aContext, [[self pattern] bgColor]);
   CGContextFillRect(aContext, [self bounds]);
   try {

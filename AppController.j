@@ -49,12 +49,13 @@
   [listScrollView setDocumentView:patternListView];
   [patternListView setContent:[ PatternOne, PatternEight, PatternFifteen,
                                 PatternTen, PatternFive, PatternTwo, PatternSix, 
-                                PatternFour, PatternThree, PatternTwelve, PatternSeven,
+                                PatternTwentyTwo, PatternFour, PatternThree, PatternNineteen,
+                                PatternTwelve, PatternSeven,
                                 PatternThirteen, PatternFourteen, PatternEleven, 
-                                PatternNine, PatternSixteen, PatternSeventeen,
-                                PatternEighteen]];
-
-  var showPatternIdx = 15;
+                                PatternTwenty,PatternTwentyOne,
+                                PatternNine, PatternSeventeen, PatternTwentyThree,
+                                PatternSixteen, PatternEighteen ]];
+  var showPatternIdx = 21;
   var patternClass = [patternListView content][showPatternIdx];
   var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
   [patternListView setSelectionIndexes:[CPIndexSet indexSetWithIndex:showPatternIdx]];
@@ -67,6 +68,7 @@
   [contentView addSubview:listScrollView];    
   [contentView addSubview:patternView];
   [theWindow orderFront:self];
+  [AboutPatternsDelegate popupAlert];
 }
 
 @end
@@ -183,7 +185,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   var delegate = [[AboutPatternsDelegate alloc] init],
     alert = [[CPAlert alloc] init];
 
-  [alert setMessageText:("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code hosting provided by Github.\n\nCopyright (C) 2011 Gerrit Riessen")];
+  [alert setMessageText:("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011 Gerrit Riessen")];
   [alert setTitle:@"About Capp-Patterns"];
   [alert setAlertStyle:CPInformationalAlertStyle];
   [alert setDelegate:delegate];
