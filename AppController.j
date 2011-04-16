@@ -49,7 +49,9 @@
   [listScrollView setDocumentView:patternListView];
   [patternListView setContent:[ PatternOne, PatternEight, PatternTen, PatternFive,
                                 PatternTwo, PatternSix, PatternFour, PatternThree,
-                                PatternTwelve, PatternSeven,PatternEleven, PatternNine ]];
+                                          PatternTwelve, PatternSeven, PatternThirteen,
+                                          PatternFourteen,
+                                          PatternEleven, PatternNine ]];
 
   var showPatternIdx = 6;
   var patternClass = [patternListView content][showPatternIdx];
