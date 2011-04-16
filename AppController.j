@@ -47,11 +47,11 @@
   [patternListView setVerticalMargin:0.0];
   [patternListView setAutoresizingMask:CPViewWidthSizable];
   [listScrollView setDocumentView:patternListView];
-  [patternListView setContent:[ PatternOne, PatternEight, PatternTen, PatternFive,
-                                PatternTwo, PatternSix, PatternFour, PatternThree,
-                                          PatternTwelve, PatternSeven, PatternThirteen,
-                                          PatternFourteen,
-                                          PatternEleven, PatternNine ]];
+  [patternListView setContent:[ PatternOne, PatternEight, PatternFifteen,
+                                PatternTen, PatternFive, PatternTwo, PatternSix, 
+                                PatternFour, PatternThree, PatternTwelve, PatternSeven,
+                                PatternThirteen, PatternFourteen, PatternEleven, 
+                                PatternNine ]];
 
   var showPatternIdx = 6;
   var patternClass = [patternListView content][showPatternIdx];

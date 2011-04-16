@@ -2,11 +2,9 @@
 
 - (void)_draw:(CGContext)aContext
 {
+  [self draw_frame_1:aContext];
   if ( [self showShapes] ) {
-    [self draw_frame_1:aContext];
     [self draw_frame_2:aContext];
-  } else {
-    [self draw_frame_1:aContext];
   }
 }
 
