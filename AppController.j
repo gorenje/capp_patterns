@@ -77,6 +77,11 @@
   CPLogConsole("Config: " + [[patternView pattern] newPattern]);
 }
 
+- (CPAction)aboutPatterns:(id)sender
+{
+  [AboutPatternsDelegate popupAlert];
+}
+
 - (CPAction)showProperties:(id)sender
 {
   propertiesController = [PatternSettingsController alloc];
@@ -96,7 +101,8 @@
 
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
-  return ["Properties", "StoreConfig"];
+  return ["Properties", "StoreConfig", 
+          CPToolbarFlexibleSpaceItemIdentifier, "AboutPatterns"];
 }
 
 - (CPToolbarItem)toolbar:(CPToolbar)aToolbar 
@@ -109,6 +115,18 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
     highlighted = nil;
 
   switch ( anItemIdentifier ) {
+
+  case "AboutPatterns":
+    image = [[CPImage alloc] initWithContentsOfFile:"" size:CPSizeMake(32, 32)];
+    highlighted = [[CPImage alloc] initWithContentsOfFile:"" size:CPSizeMake(32, 32)];
+    [toolbarItem setLabel:"About This"];
+
+    [toolbarItem setTarget:self];
+    [toolbarItem setAction:@selector(aboutPatterns:)];
+
+    [toolbarItem setMinSize:CGSizeMake(32, 32)];
+    [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+    break;
 
   case "Properties":
     image = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32.png" size:CPSizeMake(32, 32)];
@@ -153,6 +171,42 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   [patternView setPattern:pattern];
   [patternView redisplay];
   if ( propertiesController ) [propertiesController close];
+}
+
+@end
+
+@implementation AboutPatternsDelegate : CPObject
+
++ (void)popupAlert
+{
+  var delegate = [[AboutPatternsDelegate alloc] init],
+    alert = [[CPAlert alloc] init];
+
+  [alert setMessageText:("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code hosting provided by Github.\n\nCopyright (C) 2011 Gerrit Riessen")];
+  [alert setTitle:@"About Capp-Patterns"];
+  [alert setAlertStyle:CPInformationalAlertStyle];
+  [alert setDelegate:delegate];
+  [alert addButtonWithTitle:@"OK"];
+  [alert addButtonWithTitle:@"Github"];
+  [alert addButtonWithTitle:@"Book"];
+  [alert addButtonWithTitle:@"Cappuccino"];
+  [alert runModal];
+}
+
+-(void)alertDidEnd:(CPAlert)theAlert returnCode:(int)returnCode
+{
+  CPLogConsole( "Return Code was : " + returnCode );
+  switch ( returnCode ) {
+  case 1: // Clone me on github
+    window.open("https://github.com/gorenje/capp_patterns", "newwindow", '');
+    break;
+  case 2: // readme
+    window.open("http://www.ribabookshops.com/item/islamic-patterns-an-analytical-and-cosmological-approach/929/",'book','');
+    break;
+  case 3: // readme
+    window.open("http://cappuccino.org",'capp','');
+    break;
+  }
 }
 
 @end
