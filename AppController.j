@@ -41,8 +41,8 @@
   patternListView = [[CPCollectionView alloc] initWithFrame:CGRectMake(0, 0, 200, 0)];
   [patternListView setDelegate:self];
   [patternListView setItemPrototype:photosListItem];
-  [patternListView setMinItemSize:CGSizeMake(20.0, 45.0)];
-  [patternListView setMaxItemSize:CGSizeMake(1000.0, 45.0)];
+  [patternListView setMinItemSize:CGSizeMake(15.0, 32.0)];
+  [patternListView setMaxItemSize:CGSizeMake(1000.0, 32.0)];
   [patternListView setMaxNumberOfColumns:1];
   [patternListView setVerticalMargin:0.0];
   [patternListView setAutoresizingMask:CPViewWidthSizable];
@@ -51,7 +51,7 @@
                                 PatternTen, PatternFive, PatternTwo, PatternSix, 
                                 PatternFour, PatternThree, PatternTwelve, PatternSeven,
                                 PatternThirteen, PatternFourteen, PatternEleven, 
-                                PatternNine ]];
+                                          PatternNine, PatternSixteen, PatternSeventeen ]];
 
   var showPatternIdx = 6;
   var patternClass = [patternListView content][showPatternIdx];

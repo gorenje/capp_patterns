@@ -39,6 +39,8 @@
   @outlet CPView m_strokeColorView;
   @outlet CPView m_fillColorView;
 
+  @outlet CPColorWell m_bgColorWell;
+
   PatternView m_pattern_view;
 }
 
@@ -72,6 +74,7 @@
   [CPBox makeBorder:m_strokeColorView];
   [CPBox makeBorder:m_sizeView];
   [CPBox makeBorder:m_framePosView];
+  [CPBox makeBorder:m_bgColorWell];
 
   [m_framePosView setHidden:YES];
 
@@ -92,7 +95,11 @@
   [self updateSlider:m_radiusSlider textField:m_radiusValue sender:m_radiusSlider];
 
   [m_sizeSegment selectSegmentWithTag:[[[self pattern] recurseDepth] intValue] + 1];
+  [m_bgColorWell setColor:[[self pattern] bgColor]];
 
+  [m_rotationSlider setObjectValue:[[self pattern] rotation]];
+  [self updateSlider:m_rotationSlider textField:m_rotationValue sender:m_rotationSlider];
+  
   var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5] 
                                         inViews:[m_strokeColorView subviews]];
   for ( var idx = 0; idx < [colorWells count]; idx++ ) {
@@ -140,11 +147,18 @@
 {
   [self updateSlider:m_rotationSlider textField:m_rotationValue sender:sender];
   [m_pattern_view setRotation:( [m_rotationSlider intValue] * ( Math.PI / 180 ) )];
+  [[self pattern] setRotation:[m_rotationSlider intValue]];
 }
 
 - (CPAction)updateShowShapes:(id)sender
 {
   [[self pattern] setShowShapes:[sender state] == CPOnState];
+  [m_pattern_view redisplay];
+}
+
+- (CPAction)updateBackgroundColor:(id)sender
+{
+  [[self pattern] setBgColor:[sender color]];
   [m_pattern_view redisplay];
 }
 

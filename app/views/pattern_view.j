@@ -12,8 +12,16 @@
   return self;
 }
 
+- (void)setPattern:(PatternMaker)aPattern
+{
+  m_pattern = aPattern;
+  [self setRotation:( [m_pattern rotation] * ( Math.PI / 180 ) )];
+}
+
 - (void)drawLayer:(CALayer)aLayer inContext:(CGContext)aContext
 {
+  CGContextSetFillColor(aContext, [[self pattern] bgColor]);
+  CGContextFillRect(aContext, [self bounds]);
   [[self pattern] draw:aContext];
 }
 

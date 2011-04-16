@@ -6,11 +6,14 @@
   GRCircle m_circle           @accessors(property=circle,readonly);
   BOOL     m_show_shapes      @accessors(property=showShapes);
 
-  CPArray m_stroke_colors @accessors(property=strokeColors,readonly);
-  CPArray m_fill_colors @accessors(property=fillColors,readonly);
+  CPArray m_stroke_colors     @accessors(property=strokeColors,readonly);
+  CPArray m_fill_colors       @accessors(property=fillColors,readonly);
 
-  int m_recurse_depth @accessors(property=recurseDepth);
+  int     m_recurse_depth     @accessors(property=recurseDepth);
   CPArray m_sub_patterns;
+
+  CPColor m_bg_color          @accessors(property=bgColor);
+  int     m_rotation          @accessors(property=rotation);
 }
 
 - (id)initWithConfig:(CPDict)config
@@ -23,6 +26,8 @@
     m_stroke_colors    = [config objectForKey:"stroke_colors"];
     m_fill_colors      = [config objectForKey:"fill_colors"];
     m_recurse_depth    = [config objectForKey:"recurse_depth"];
+    m_rotation         = [config objectForKey:"rotation"] || 0;
+    m_bg_color         = [config objectForKey:"background_color"] || [CPColor whiteColor];
     m_circle = [GRLinkedCircle circleWithCenter:[config objectForKey:"center_point"]
                                          radius:[config objectForKey:"radius"]];
     m_sub_patterns = [];
@@ -124,9 +129,17 @@
                    [clr redComponent]*255, [clr greenComponent]*255, [clr blueComponent]*255,
                    [clr alphaComponent]];
   }
+
+  var clr = [self bgColor];
+  var bg_clr_str = [CPString 
+                    stringWithFormat:"[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",
+                    [clr redComponent]*255, [clr greenComponent]*255, [clr blueComponent]*255,
+                    [clr alphaComponent]];
   
   return ("[CPDictionary dictionaryWithObjectsAndKeys:"+
+    bg_clr_str +", \"background_color\", " +
     [self numPoints]+", \"number_of_points\", "+
+    [self rotation]+", \"rotation\", "+
     [self recurseDepth]+", \"recurse_depth\", "+
     [self factorLarger]+", \"factor_larger\", [GRPoint pointWithX:"+
     [[[self circle] cpt] x]+" Y:"+

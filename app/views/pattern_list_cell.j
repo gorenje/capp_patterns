@@ -10,7 +10,7 @@
   {
     label = [[CPTextField alloc] initWithFrame:CGRectInset([self bounds], 4, 4)];
         
-    [label setFont:[CPFont systemFontOfSize:14.0]];
+    [label setFont:[CPFont systemFontOfSize:12.0]];
     [label setTextShadowColor:[CPColor whiteColor]];
     [label setTextShadowOffset:CGSizeMake(0, 1)];
 
