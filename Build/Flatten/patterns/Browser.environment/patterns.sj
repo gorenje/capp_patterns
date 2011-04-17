@@ -5,7 +5,7 @@ objj_executeFile("AppController.j",YES);
 main=function(_1,_2){
 CPApplicationMain(_1,_2);
 };
-p;15;AppController.jt;9568;@STATIC;1.0;I;21;Foundation/CPObject.jI;16;AppKit/CPColor.jI;13;GRKit/GRKit.ji;9;app/app.ji;17;app/monkeypatch.jt;9449;
+p;15;AppController.jt;9585;@STATIC;1.0;I;21;Foundation/CPObject.jI;16;AppKit/CPColor.jI;13;GRKit/GRKit.ji;9;app/app.ji;17;app/monkeypatch.jt;9466;
 objj_executeFile("Foundation/CPObject.j",NO);
 objj_executeFile("AppKit/CPColor.j",NO);
 objj_executeFile("GRKit/GRKit.j",NO);
@@ -38,8 +38,8 @@ objj_msgSend(patternListView,"setMaxNumberOfColumns:",1);
 objj_msgSend(patternListView,"setVerticalMargin:",0);
 objj_msgSend(patternListView,"setAutoresizingMask:",CPViewWidthSizable);
 objj_msgSend(_8,"setDocumentView:",patternListView);
-objj_msgSend(patternListView,"setContent:",[PatternOne,PatternEight,PatternFifteen,PatternTen,PatternFive,PatternTwo,PatternSix,PatternTwentyTwo,PatternFour,PatternThree,PatternNineteen,PatternTwelve,PatternSeven,PatternThirteen,PatternFourteen,PatternEleven,PatternTwenty,PatternTwentyOne,PatternNine,PatternSeventeen,PatternTwentyThree,PatternSixteen,PatternEighteen]);
-var _a=21;
+objj_msgSend(patternListView,"setContent:",[PatternOne,PatternEight,PatternFifteen,PatternTwentyFour,PatternTen,PatternFive,PatternTwo,PatternSix,PatternTwentyTwo,PatternFour,PatternThree,PatternNineteen,PatternTwelve,PatternSeven,PatternThirteen,PatternFourteen,PatternEleven,PatternTwenty,PatternTwentyOne,PatternNine,PatternSeventeen,PatternTwentyThree,PatternSixteen,PatternEighteen]);
+var _a=9;
 var _b=objj_msgSend(patternListView,"content")[_a];
 var _c=objj_msgSend(objj_msgSend(_b,"alloc"),"initWithConfig:",objj_msgSend(_b,"defaultConfig"));
 objj_msgSend(patternListView,"setSelectionIndexes:",objj_msgSend(CPIndexSet,"indexSetWithIndex:",_a));
@@ -186,7 +186,7 @@ objj_msgSend(_39,"runModal");
 return _39;
 }
 })]);
-p;9;app/app.jt;1985;@STATIC;1.0;i;13;monkeypatch.ji;16;pattern_config.ji;15;pattern_maker.ji;14;patterns/one.ji;14;patterns/two.ji;16;patterns/three.ji;15;patterns/four.ji;15;patterns/five.ji;14;patterns/six.ji;16;patterns/seven.ji;16;patterns/eight.ji;15;patterns/nine.ji;14;patterns/ten.ji;17;patterns/eleven.ji;17;patterns/twelve.ji;19;patterns/thirteen.ji;19;patterns/fourteen.ji;18;patterns/fifteen.ji;18;patterns/sixteen.ji;20;patterns/seventeen.ji;19;patterns/eighteen.ji;19;patterns/nineteen.ji;17;patterns/twenty.ji;20;patterns/twentyone.ji;20;patterns/twentytwo.ji;22;patterns/twentythree.ji;20;views/pattern_view.ji;25;views/pattern_list_cell.ji;41;controllers/pattern_settings_controller.jt;1297;
+p;9;app/app.jt;2058;@STATIC;1.0;i;13;monkeypatch.ji;16;pattern_config.ji;15;pattern_maker.ji;14;patterns/one.ji;14;patterns/two.ji;16;patterns/three.ji;15;patterns/four.ji;15;patterns/five.ji;14;patterns/six.ji;16;patterns/seven.ji;16;patterns/eight.ji;15;patterns/nine.ji;14;patterns/ten.ji;17;patterns/eleven.ji;17;patterns/twelve.ji;19;patterns/thirteen.ji;19;patterns/fourteen.ji;18;patterns/fifteen.ji;18;patterns/sixteen.ji;20;patterns/seventeen.ji;19;patterns/eighteen.ji;19;patterns/nineteen.ji;17;patterns/twenty.ji;20;patterns/twentyone.ji;20;patterns/twentytwo.ji;22;patterns/twentythree.ji;21;patterns/twentyfour.ji;20;views/pattern_view.ji;25;views/pattern_list_cell.ji;41;controllers/pattern_settings_controller.jt;1344;
 NumberOfColors=6;
 objj_executeFile("monkeypatch.j",YES);
 objj_executeFile("pattern_config.j",YES);
@@ -214,6 +214,7 @@ objj_executeFile("patterns/twenty.j",YES);
 objj_executeFile("patterns/twentyone.j",YES);
 objj_executeFile("patterns/twentytwo.j",YES);
 objj_executeFile("patterns/twentythree.j",YES);
+objj_executeFile("patterns/twentyfour.j",YES);
 objj_executeFile("views/pattern_view.j",YES);
 objj_executeFile("views/pattern_list_cell.j",YES);
 objj_executeFile("controllers/pattern_settings_controller.j",YES);
@@ -567,12 +568,12 @@ return objj_msgSend(objj_msgSend(objj_msgSend(_54,"class"),"alloc"),"initWithCon
 return _54;
 }
 })]);
-p;20;app/patterns/eight.jt;1361;@STATIC;1.0;t;1342;
+p;20;app/patterns/eight.jt;1411;@STATIC;1.0;t;1392;
 var _1=objj_allocateClassPair(PatternOne,"PatternEight"),_2=_1.isa;
 objj_registerClassPair(_1);
 class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_3,_4){
 with(_3){
-return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",6,"number_of_points",2,"recurse_depth",1.54,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",81,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.09545454545454546),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.07727272727272727),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",4,19,255,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,225,58,0.39090909090909093),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,198,63,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",2,8,198,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",240,31,50,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",198,195,31,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,1)],"fill_colors");
+return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",174,174,174,1),"background_color",6,"number_of_points",0,"rotation",2,"recurse_depth",1.54,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",107,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",4,19,255,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,0)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,225,58,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,198,63,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",2,8,198,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",240,31,50,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",198,195,31,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
 p;22;app/patterns/fifteen.jt;1335;@STATIC;1.0;t;1316;
@@ -581,6 +582,14 @@ objj_registerClassPair(_1);
 class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_3,_4){
 with(_3){
 return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",6,"number_of_points",2,"recurse_depth",1.18,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",84,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,41,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,15,12,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",225,255,221,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",28,248,12,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",29,44,255,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",239,198,151,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",202,132,78,0.9545454545454546),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
+}
+})]);
+p;25;app/patterns/twentyfour.jt;1580;@STATIC;1.0;t;1561;
+var _1=objj_allocateClassPair(PatternOne,"PatternTwentyFour"),_2=_1.isa;
+objj_registerClassPair(_1);
+class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_3,_4){
+with(_3){
+return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1),"background_color",6,"number_of_points",20,"rotation",1,"recurse_depth",1.98,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",76,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.09090909090909091),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,0.20909090909090908),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,0,0,0.22727272727272727),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,0)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",48,26,255,0.3090909090909091),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",247,52,76,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,235,52,0.06818181818181818),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",60,36,239,0.5545454545454546),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",191,188,30,0.10909090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
 p;18;app/patterns/ten.jt;1456;@STATIC;1.0;t;1437;
