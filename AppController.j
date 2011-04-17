@@ -65,6 +65,7 @@
   [patternListView setAutoresizingMask:CPViewWidthSizable];
   [listScrollView setDocumentView:patternListView];
   [patternListView setContent:[ PatternOne, PatternEight, PatternFifteen,
+                                PatternTwentyFour,
                                 PatternTen, PatternFive, PatternTwo, PatternSix, 
                                 PatternTwentyTwo, PatternFour, PatternThree, PatternNineteen,
                                 PatternTwelve, PatternSeven,
@@ -72,7 +73,7 @@
                                 PatternTwenty,PatternTwentyOne,
                                 PatternNine, PatternSeventeen, PatternTwentyThree,
                                 PatternSixteen, PatternEighteen ]];
-  var showPatternIdx = 21;
+  var showPatternIdx = 9;
   var patternClass = [patternListView content][showPatternIdx];
   var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
   [patternListView setSelectionIndexes:[CPIndexSet indexSetWithIndex:showPatternIdx]];
