@@ -37,9 +37,18 @@
 
 - (void)drawLayer:(CALayer)aLayer inContext:(CGContext)aContext
 {
-  [[self superview] setBackgroundColor:[[self pattern] bgColor]];
-  CGContextSetFillColor(aContext, [[self pattern] bgColor]);
-  CGContextFillRect(aContext, [self bounds]);
+  var bgColor = [[[self pattern] bgColor] gradientColors][2] || [[self pattern] bgColor];
+  [[self superview] setBackgroundColor:bgColor];
+
+  var targetPt = ([[self pattern] bgColorDirection] == 0 ? 
+                  CGPointMake(CGRectGetWidth([self bounds]), 0) : 
+                  CGPointMake(0, CGRectGetHeight([self bounds])));
+
+  CGContextAddRect(aContext, [self bounds]);
+  CGContextDrawLinearGradient(aContext, [[[self pattern] bgColor] gradient], 
+                              CGPointMake(0,0), targetPt);
+  // CGContextFillRect(aContext, [self bounds]);
+
   try {
     [[self pattern] draw:aContext];
   } catch ( e ) {

@@ -49,14 +49,15 @@
   @outlet CPTextField m_framePosValue;
 
   @outlet CPSegmentedControl m_sizeSegment;
-  @outlet CPButton m_showShapesButton;
-  @outlet CPSlider m_radiusSlider;
-  @outlet CPView m_radiusView;
-  @outlet CPTextField m_radiusValue;
-  @outlet CPView m_strokeColorView;
-  @outlet CPView m_fillColorView;
+  @outlet CPButton           m_showShapesButton;
+  @outlet CPButton           m_gradientDirectionButton;
+  @outlet CPSlider           m_radiusSlider;
+  @outlet CPView             m_radiusView;
+  @outlet CPTextField        m_radiusValue;
+  @outlet CPView             m_strokeColorView;
+  @outlet CPView             m_fillColorView;
 
-  @outlet CPColorWell m_bgColorWell;
+  @outlet CPView m_bgColorView;
 
   PatternView m_pattern_view;
 }
@@ -91,9 +92,10 @@
   [CPBox makeBorder:m_strokeColorView];
   [CPBox makeBorder:m_sizeView];
   [CPBox makeBorder:m_framePosView];
-  [CPBox makeBorder:m_bgColorWell];
+  [CPBox makeBorder:m_bgColorView];
 
   [m_framePosView setHidden:YES];
+  [m_gradientDirectionButton setState:([[self pattern] bgColorDirection] == 0 ? CPOnState : CPOffState)];
 
   [m_rotationSlider setObjectValue:[m_pattern_view rotation] * (180 / Math.PI)];
   [self updateSlider:m_rotationSlider textField:m_rotationValue sender:m_rotationSlider];
@@ -112,11 +114,20 @@
   [self updateSlider:m_radiusSlider textField:m_radiusValue sender:m_radiusSlider];
 
   [m_sizeSegment selectSegmentWithTag:[[[self pattern] recurseDepth] intValue] + 1];
-  [m_bgColorWell setColor:[[self pattern] bgColor]];
 
   [m_rotationSlider setObjectValue:[[self pattern] rotation]];
   [self updateSlider:m_rotationSlider textField:m_rotationValue sender:m_rotationSlider];
   
+  // setup the background color wells for the gradient
+  var colorWells = [self findColorWellsWithTags:[1,2,3] 
+                                        inViews:[m_bgColorView subviews]];
+  for ( var idx = 0; idx < [colorWells count]; idx++ ) [CPBox makeBorder:colorWells[idx]];
+  var gColors = [[[self pattern] bgColor] gradientColors];
+  [colorWells[0] setColor:gColors[0] || [[self pattern] bgColor]];
+  [colorWells[1] setColor:gColors[1] || [CPColor transparent]];
+  [colorWells[2] setColor:gColors[2] || [CPColor transparent]];
+
+  // setup the stroke colors
   var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5] 
                                         inViews:[m_strokeColorView subviews]];
   for ( var idx = 0; idx < [colorWells count]; idx++ ) {
@@ -124,7 +135,8 @@
     [CPBox makeBorder:colorWells[idx]];
   }
 
-  var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5] 
+  // setup the fill colors.
+  var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5]
                                         inViews:[m_fillColorView subviews]];
   for ( var idx = 0; idx < [colorWells count]; idx++ ) {
     [colorWells[idx] setColor:[[self pattern] fillColorAt:idx]];
@@ -175,7 +187,14 @@
 
 - (CPAction)updateBackgroundColor:(id)sender
 {
-  [[self pattern] setBgColor:[sender color]];
+  [[[self pattern] bgColor] setGradientColor:[sender color] 
+                                     atIndex:([sender tag] - 1)];
+  [m_pattern_view redisplay];
+}
+
+- (CPAction)updateGradientDirection:(id)sender
+{
+  [[self pattern] setBgColorDirection:([sender state] == CPOnState ? 0 : 1)];
   [m_pattern_view redisplay];
 }
 

@@ -29,7 +29,8 @@
   int     m_recurse_depth     @accessors(property=recurseDepth);
   CPArray m_sub_patterns;
 
-  CPColor m_bg_color          @accessors(property=bgColor);
+  GRColor m_bg_color          @accessors(property=bgColor);
+  int     m_bg_color_dir      @accessors(property=bgColorDirection);
   int     m_rotation          @accessors(property=rotation);
 }
 
@@ -44,7 +45,13 @@
     m_fill_colors      = [config objectForKey:"fill_colors"];
     m_recurse_depth    = [config objectForKey:"recurse_depth"];
     m_rotation         = [config objectForKey:"rotation"] || 0;
+
     m_bg_color         = [config objectForKey:"background_color"] || [CPColor whiteColor];
+    if ( ![m_bg_color isKindOfClass:GRColor] ){
+      m_bg_color       = [GRColor gradientWithBaseColor:m_bg_color];
+    }
+    m_bg_color_dir     = [config objectForKey:"background_color_direction"] || 0;
+
     m_circle = [GRLinkedCircle circleWithCenter:[config objectForKey:"center_point"]
                                          radius:[config objectForKey:"radius"]];
     m_sub_patterns = [];
@@ -123,38 +130,18 @@
   return m_stroke_colors[aIndex % NumberOfColors];
 }
 
-- (CPString)newPattern
-{
-  return ("\n@implementation NewPattern : " + [self class] + "\n+ (CPDict) defaultConfig" +
-          "\n{\n return "+ [self dumpConfig] + "\n}\n@end\n");
-}
-
 - (CPString)dumpConfig
 {
-  var sCols = [], fCols = [];
-  for ( var idx = 0; idx < [m_stroke_colors count]; idx++ ) {
-    var clr = m_stroke_colors[idx];
-    sCols[idx] = [CPString 
-                   stringWithFormat:"[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",
-                   [clr redComponent]*255, [clr greenComponent]*255, [clr blueComponent]*255,
-                   [clr alphaComponent]];
-  }
-  for ( var idx = 0; idx < [m_fill_colors count]; idx++ ) {
-    var clr = m_fill_colors[idx];
-    fCols[idx] = [CPString 
-                   stringWithFormat:"[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",
-                   [clr redComponent]*255, [clr greenComponent]*255, [clr blueComponent]*255,
-                   [clr alphaComponent]];
-  }
-
-  var clr = [self bgColor];
+  var sclr_str = [self colorArrayToString:m_stroke_colors];
+  var fclr_str = [self colorArrayToString:m_fill_colors];
   var bg_clr_str = [CPString 
-                    stringWithFormat:"[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",
-                    [clr redComponent]*255, [clr greenComponent]*255, [clr blueComponent]*255,
-                    [clr alphaComponent]];
+                     stringWithFormat:"[[GRColor alloc] initWithGradientColors:[%s] baseColor:%s]",
+                     [self colorArrayToString:[[self bgColor] gradientColors]],
+                     [[self bgColor] asInitString]];
   
   return ("[CPDictionary dictionaryWithObjectsAndKeys:"+
     bg_clr_str +", \"background_color\", " +
+    [self bgColorDirection] +", \"background_color_direction\", " +
     [self numPoints]+", \"number_of_points\", "+
     [self rotation]+", \"rotation\", "+
     [self recurseDepth]+", \"recurse_depth\", "+
@@ -162,13 +149,19 @@
     [[[self circle] cpt] x]+" Y:"+
     [[[self circle] cpt] y]+"], \"center_point\", " + [self radius]+", \"radius\", " + 
     ([self showShapes] ? "YES" : "NO") + ", \"show_shapes\", [" +
-    [sCols componentsJoinedByString:","] +"], \"stroke_colors\", [" +
-    [fCols componentsJoinedByString:","] +"], \"fill_colors\"];");
+    sclr_str +"], \"stroke_colors\", [" +
+    fclr_str +"], \"fill_colors\"];");
 }
 
 - (CPDict)config
 {
   return objj_eval([self dumpConfig]);
+}
+
+- (CPString)newPattern
+{
+  return ("\n@implementation NewPattern : " + [self class] + "\n+ (CPDict) defaultConfig" +
+          "\n{\n return "+ [self dumpConfig] + "\n}\n@end\n");
 }
 
 //
@@ -182,6 +175,13 @@
     return [[[self class] alloc] initWithConfig:config];
   }
   return self;
+}
+
+- (CPString)colorArrayToString:(CPArray)allColors
+{
+  var sCols = [];
+  for (var idx = 0; idx < [allColors count]; idx++) sCols[idx] = [allColors[idx] asInitString];
+  return [sCols componentsJoinedByString:","]
 }
 
 @end

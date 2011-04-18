@@ -45,8 +45,8 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[CPColor colorWith8BitRed:255 
 {
   var subs = [self sub_circles], idx = [subs count];
   while ( idx-- ) {
-    [subs[idx] draw:aContext];
     [self setupColorWithIndex:(idx % 2)+1 context:aContext];
+    [subs[idx] draw:aContext];
     [self fillAndStroke:aContext];
   }
 }

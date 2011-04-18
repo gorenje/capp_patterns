@@ -39,6 +39,14 @@
                          alpha:[self alphaComponent]];
 }
 
+- (CPString) asInitString
+{
+  return [CPString 
+           stringWithFormat:"[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",
+           [self redComponent]*255,  [self greenComponent]*255, 
+           [self blueComponent]*255, [self alphaComponent]];
+}
+
 @end
 
 @implementation CPBox (BorderedBox)

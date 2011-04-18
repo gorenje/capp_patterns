@@ -15,15 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-@implementation PatternThirteen : PatternTwelve
+@implementation PatternThirteen : PatternSeven
 + (CPDict) defaultConfig
 {
- return [CPDictionary dictionaryWithObjectsAndKeys:46, "number_of_points", 0, "recurse_depth", 0.46, "factor_larger", [GRPoint pointWithX:350 Y:350], "center_point", 200, "radius", YES, "show_shapes", 
-[[CPColor colorWith8BitRed:174 green:174 blue:174 alpha:1],
-[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.6181818181818182],
-[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.39090909090909093],
-[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.39090909090909093],
-[CPColor colorWith8BitRed:255 green:2 blue:10 alpha:1],
-[CPColor colorWith8BitRed:255 green:23 blue:10 alpha:1]], "stroke_colors", [[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],[CPColor colorWith8BitRed:200 green:96 blue:175 alpha:0],[CPColor colorWith8BitRed:23 green:200 blue:10 alpha:0],[CPColor colorWith8BitRed:200 green:23 blue:10 alpha:0]], "fill_colors"];
+return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:1],[CPColor colorWith8BitRed:39 green:19 blue:35 alpha:0.6454545454545455],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.16363636363636364]] baseColor:[CPColor colorWith8BitRed:255 green:255 blue:255 alpha:1]], "background_color", 1, "background_color_direction", 50, "number_of_points", 0, "rotation", 0, "recurse_depth", 0.98, "factor_larger", [GRPoint pointWithX:350 Y:350], "center_point", 152, "radius", NO, "show_shapes", [[CPColor colorWith8BitRed:174 green:174 blue:174 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.6181818181818182],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.39090909090909093],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.39090909090909093],[CPColor colorWith8BitRed:255 green:2 blue:10 alpha:1],[CPColor colorWith8BitRed:255 green:23 blue:10 alpha:1]], "stroke_colors", [[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],[CPColor colorWith8BitRed:200 green:96 blue:175 alpha:0],[CPColor colorWith8BitRed:23 green:200 blue:10 alpha:0],[CPColor colorWith8BitRed:200 green:23 blue:10 alpha:0]], "fill_colors"];
 }
 @end

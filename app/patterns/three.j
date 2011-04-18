@@ -81,14 +81,13 @@
 - (void)draw_frame_2:(CGContext)aContext
 {
   [self setupColorWithIndex:0 context:aContext];
-
   [[self circle] draw:aContext];
   [self fillAndStroke:aContext];
 
   var subs = [self sub_circles], idx = [subs count];
   while ( idx-- ) {
-    [subs[idx] draw:aContext];
     [self setupColorWithIndex:0 context:aContext];
+    [subs[idx] draw:aContext];
     [self fillAndStroke:aContext];
   }
 }
