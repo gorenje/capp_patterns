@@ -29304,16 +29304,16 @@ CGInsetFromCPString=CGInsetFromString;
 CPStringFromCGInset=function(_4c){
 return "{"+_4c.top+", "+_4c.left+", "+_4c.bottom+", "+_4c.right+"}";
 };
-p;12;CGGradient.jt;672;@STATIC;1.0;i;9;CGColor.ji;14;CGColorSpace.jt;622;
+p;12;CGGradient.jt;656;@STATIC;1.0;i;9;CGColor.ji;14;CGColorSpace.jt;606;
 objj_executeFile("CGColor.j",YES);
 objj_executeFile("CGColorSpace.j",YES);
 kCGGradientDrawsBeforeStartLocation=1<<0;
 kCGGradientDrawsAfterEndLocation=1<<1;
 CGGradientCreateWithColorComponents=function(_1,_2,_3,_4){
-if(arguments["locations"]==NULL){
+if(arguments[2]==NULL){
 var _3=[0,1];
 }
-if(arguments["count"]==NULL){
+if(arguments[3]==NULL){
 var _4=_3.length;
 }
 var _5=[];

@@ -218,7 +218,7 @@ objj_executeFile("patterns/twentyfour.j",YES);
 objj_executeFile("views/pattern_view.j",YES);
 objj_executeFile("views/pattern_list_cell.j",YES);
 objj_executeFile("controllers/pattern_settings_controller.j",YES);
-p;17;app/monkeypatch.jt;1320;@STATIC;1.0;t;1301;
+p;17;app/monkeypatch.jt;1652;@STATIC;1.0;t;1633;
 var _1=objj_getClass("CPColor");
 if(!_1){
 throw new SyntaxError("*** Could not find definition for class \"CPColor\"");
@@ -228,13 +228,17 @@ class_addMethods(_1,[new objj_method(sel_getUid("addToBlue:"),function(_3,_4,_5)
 with(_3){
 return objj_msgSend(CPColor,"colorWithRed:green:blue:alpha:",objj_msgSend(_3,"redComponent"),objj_msgSend(_3,"greenComponent"),objj_msgSend(_3,"blueComponent")+_5/255,objj_msgSend(_3,"alphaComponent"));
 }
-})]);
-class_addMethods(_2,[new objj_method(sel_getUid("colorWith8BitRed:green:blue:alpha:"),function(_6,_7,_8,_9,_a,_b){
+}),new objj_method(sel_getUid("asInitString"),function(_6,_7){
 with(_6){
-return objj_msgSend(CPColor,"colorWithRed:green:blue:alpha:",_8/255,_9/255,_a/255,_b);
+return objj_msgSend(CPString,"stringWithFormat:","[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",objj_msgSend(_6,"redComponent")*255,objj_msgSend(_6,"greenComponent")*255,objj_msgSend(_6,"blueComponent")*255,objj_msgSend(_6,"alphaComponent"));
 }
-}),new objj_method(sel_getUid("transparent"),function(_c,_d){
-with(_c){
+})]);
+class_addMethods(_2,[new objj_method(sel_getUid("colorWith8BitRed:green:blue:alpha:"),function(_8,_9,_a,_b,_c,_d){
+with(_8){
+return objj_msgSend(CPColor,"colorWithRed:green:blue:alpha:",_a/255,_b/255,_c/255,_d);
+}
+}),new objj_method(sel_getUid("transparent"),function(_e,_f){
+with(_e){
 return objj_msgSend(CPColor,"colorWithWhite:alpha:",0,0);
 }
 })]);
@@ -243,9 +247,9 @@ if(!_1){
 throw new SyntaxError("*** Could not find definition for class \"CPBox\"");
 }
 var _2=_1.isa;
-class_addMethods(_2,[new objj_method(sel_getUid("makeBorder:"),function(_e,_f,_10){
-with(_e){
-var box=objj_msgSend(CPBox,"boxEnclosingView:",_10);
+class_addMethods(_2,[new objj_method(sel_getUid("makeBorder:"),function(_10,_11,_12){
+with(_10){
+var box=objj_msgSend(CPBox,"boxEnclosingView:",_12);
 objj_msgSend(box,"setAutoresizingMask:",CPViewWidthSizable|CPViewHeightSizable);
 objj_msgSend(box,"setBorderColor:",objj_msgSend(CPColor,"colorWithHexString:","a9aaae"));
 objj_msgSend(box,"setBorderType:",CPLineBorder);
@@ -396,9 +400,9 @@ objj_msgSend(m_sub_patterns[idx],"draw:",_23);
 objj_msgSend(_21,"_draw:",_23);
 }
 })]);
-p;20;app/pattern_config.jt;7618;@STATIC;1.0;t;7599;
+p;20;app/pattern_config.jt;7692;@STATIC;1.0;t;7673;
 var _1=objj_allocateClassPair(CPObject,"PatternConfig"),_2=_1.isa;
-class_addIvars(_1,[new objj_ivar("m_number_of_points"),new objj_ivar("m_factor_larger"),new objj_ivar("m_circle"),new objj_ivar("m_show_shapes"),new objj_ivar("m_stroke_colors"),new objj_ivar("m_fill_colors"),new objj_ivar("m_recurse_depth"),new objj_ivar("m_sub_patterns"),new objj_ivar("m_bg_color"),new objj_ivar("m_rotation")]);
+class_addIvars(_1,[new objj_ivar("m_number_of_points"),new objj_ivar("m_factor_larger"),new objj_ivar("m_circle"),new objj_ivar("m_show_shapes"),new objj_ivar("m_stroke_colors"),new objj_ivar("m_fill_colors"),new objj_ivar("m_recurse_depth"),new objj_ivar("m_sub_patterns"),new objj_ivar("m_bg_color"),new objj_ivar("m_bg_color_dir"),new objj_ivar("m_rotation")]);
 objj_registerClassPair(_1);
 class_addMethods(_1,[new objj_method(sel_getUid("numPoints"),function(_3,_4){
 with(_3){
@@ -452,120 +456,132 @@ return m_bg_color;
 with(_1f){
 m_bg_color=_21;
 }
-}),new objj_method(sel_getUid("rotation"),function(_22,_23){
+}),new objj_method(sel_getUid("bgColorDirection"),function(_22,_23){
 with(_22){
+return m_bg_color_dir;
+}
+}),new objj_method(sel_getUid("setBgColorDirection:"),function(_24,_25,_26){
+with(_24){
+m_bg_color_dir=_26;
+}
+}),new objj_method(sel_getUid("rotation"),function(_27,_28){
+with(_27){
 return m_rotation;
 }
-}),new objj_method(sel_getUid("setRotation:"),function(_24,_25,_26){
-with(_24){
-m_rotation=_26;
+}),new objj_method(sel_getUid("setRotation:"),function(_29,_2a,_2b){
+with(_29){
+m_rotation=_2b;
 }
-}),new objj_method(sel_getUid("initWithConfig:"),function(_27,_28,_29){
-with(_27){
-_27=objj_msgSendSuper({receiver:_27,super_class:objj_getClass("PatternConfig").super_class},"init");
-if(_27){
-m_number_of_points=objj_msgSend(_29,"objectForKey:","number_of_points");
-m_factor_larger=objj_msgSend(_29,"objectForKey:","factor_larger");
-m_show_shapes=objj_msgSend(_29,"objectForKey:","show_shapes");
-m_stroke_colors=objj_msgSend(_29,"objectForKey:","stroke_colors");
-m_fill_colors=objj_msgSend(_29,"objectForKey:","fill_colors");
-m_recurse_depth=objj_msgSend(_29,"objectForKey:","recurse_depth");
-m_rotation=objj_msgSend(_29,"objectForKey:","rotation")||0;
-m_bg_color=objj_msgSend(_29,"objectForKey:","background_color")||objj_msgSend(CPColor,"whiteColor");
-m_circle=objj_msgSend(GRLinkedCircle,"circleWithCenter:radius:",objj_msgSend(_29,"objectForKey:","center_point"),objj_msgSend(_29,"objectForKey:","radius"));
+}),new objj_method(sel_getUid("initWithConfig:"),function(_2c,_2d,_2e){
+with(_2c){
+_2c=objj_msgSendSuper({receiver:_2c,super_class:objj_getClass("PatternConfig").super_class},"init");
+if(_2c){
+m_number_of_points=objj_msgSend(_2e,"objectForKey:","number_of_points");
+m_factor_larger=objj_msgSend(_2e,"objectForKey:","factor_larger");
+m_show_shapes=objj_msgSend(_2e,"objectForKey:","show_shapes");
+m_stroke_colors=objj_msgSend(_2e,"objectForKey:","stroke_colors");
+m_fill_colors=objj_msgSend(_2e,"objectForKey:","fill_colors");
+m_recurse_depth=objj_msgSend(_2e,"objectForKey:","recurse_depth");
+m_rotation=objj_msgSend(_2e,"objectForKey:","rotation")||0;
+m_bg_color=objj_msgSend(_2e,"objectForKey:","background_color")||objj_msgSend(CPColor,"whiteColor");
+if(!objj_msgSend(m_bg_color,"isKindOfClass:",GRColor)){
+m_bg_color=objj_msgSend(GRColor,"gradientWithBaseColor:",m_bg_color);
+}
+m_bg_color_dir=objj_msgSend(_2e,"objectForKey:","background_color_direction")||0;
+m_circle=objj_msgSend(GRLinkedCircle,"circleWithCenter:radius:",objj_msgSend(_2e,"objectForKey:","center_point"),objj_msgSend(_2e,"objectForKey:","radius"));
 m_sub_patterns=[];
 if(m_recurse_depth>0){
-var _2a=objj_msgSend(_27,"sub_circles");
-for(var idx=0;idx<objj_msgSend(_27,"numPoints");idx++){
-var _2b=objj_msgSend(_29,"copy");
-objj_msgSend(_2b,"setObject:forKey:",objj_msgSend(_2a[idx],"cpt"),"center_point");
-objj_msgSend(_2b,"setObject:forKey:",(m_recurse_depth-1),"recurse_depth");
-m_sub_patterns.push(objj_msgSend(objj_msgSend(objj_msgSend(_27,"class"),"alloc"),"initWithConfig:",_2b));
+var _2f=objj_msgSend(_2c,"sub_circles");
+for(var idx=0;idx<objj_msgSend(_2c,"numPoints");idx++){
+var _30=objj_msgSend(_2e,"copy");
+objj_msgSend(_30,"setObject:forKey:",objj_msgSend(_2f[idx],"cpt"),"center_point");
+objj_msgSend(_30,"setObject:forKey:",(m_recurse_depth-1),"recurse_depth");
+m_sub_patterns.push(objj_msgSend(objj_msgSend(objj_msgSend(_2c,"class"),"alloc"),"initWithConfig:",_30));
 }
 }
 }
-return _27;
+return _2c;
 }
-}),new objj_method(sel_getUid("setFillColorAt:color:"),function(_2c,_2d,_2e,_2f){
-with(_2c){
-m_fill_colors[_2e%NumberOfColors]=_2f;
+}),new objj_method(sel_getUid("setFillColorAt:color:"),function(_31,_32,_33,_34){
+with(_31){
+m_fill_colors[_33%NumberOfColors]=_34;
 for(var idx=0;idx<objj_msgSend(m_sub_patterns,"count");idx++){
-objj_msgSend(m_sub_patterns[idx],"setFillColorAt:color:",_2e,_2f);
+objj_msgSend(m_sub_patterns[idx],"setFillColorAt:color:",_33,_34);
 }
 }
-}),new objj_method(sel_getUid("setStrokeColorAt:color:"),function(_30,_31,_32,_33){
-with(_30){
-m_stroke_colors[_32%NumberOfColors]=_33;
+}),new objj_method(sel_getUid("setStrokeColorAt:color:"),function(_35,_36,_37,_38){
+with(_35){
+m_stroke_colors[_37%NumberOfColors]=_38;
 for(var idx=0;idx<objj_msgSend(m_sub_patterns,"count");idx++){
-objj_msgSend(m_sub_patterns[idx],"setStrokeColorAt:color:",_32,_33);
+objj_msgSend(m_sub_patterns[idx],"setStrokeColorAt:color:",_37,_38);
 }
 }
-}),new objj_method(sel_getUid("setShowShapes:"),function(_34,_35,_36){
-with(_34){
-m_show_shapes=_36;
+}),new objj_method(sel_getUid("setShowShapes:"),function(_39,_3a,_3b){
+with(_39){
+m_show_shapes=_3b;
 for(var idx=0;idx<objj_msgSend(m_sub_patterns,"count");idx++){
-objj_msgSend(m_sub_patterns[idx],"setShowShapes:",_36);
+objj_msgSend(m_sub_patterns[idx],"setShowShapes:",_3b);
 }
 }
-}),new objj_method(sel_getUid("setNumPoints:"),function(_37,_38,_39){
-with(_37){
-return objj_msgSend(_37,"compareValue:forConfig:",_39,"number_of_points");
+}),new objj_method(sel_getUid("setNumPoints:"),function(_3c,_3d,_3e){
+with(_3c){
+return objj_msgSend(_3c,"compareValue:forConfig:",_3e,"number_of_points");
 }
-}),new objj_method(sel_getUid("setRadius:"),function(_3a,_3b,_3c){
-with(_3a){
-return objj_msgSend(_3a,"compareValue:forConfig:",_3c,"radius");
+}),new objj_method(sel_getUid("setRadius:"),function(_3f,_40,_41){
+with(_3f){
+return objj_msgSend(_3f,"compareValue:forConfig:",_41,"radius");
 }
-}),new objj_method(sel_getUid("setFactorLarger:"),function(_3d,_3e,_3f){
-with(_3d){
-return objj_msgSend(_3d,"compareValue:forConfig:",_3f,"factor_larger");
+}),new objj_method(sel_getUid("setFactorLarger:"),function(_42,_43,_44){
+with(_42){
+return objj_msgSend(_42,"compareValue:forConfig:",_44,"factor_larger");
 }
-}),new objj_method(sel_getUid("setRecurseDepth:"),function(_40,_41,_42){
-with(_40){
-return objj_msgSend(_40,"compareValue:forConfig:",_42,"recurse_depth");
-}
-}),new objj_method(sel_getUid("radius"),function(_43,_44){
-with(_43){
-return objj_msgSend(objj_msgSend(_43,"circle"),"radius");
-}
-}),new objj_method(sel_getUid("fillColorAt:"),function(_45,_46,_47){
+}),new objj_method(sel_getUid("setRecurseDepth:"),function(_45,_46,_47){
 with(_45){
-return m_fill_colors[_47%NumberOfColors];
+return objj_msgSend(_45,"compareValue:forConfig:",_47,"recurse_depth");
 }
-}),new objj_method(sel_getUid("strokeColorAt:"),function(_48,_49,_4a){
+}),new objj_method(sel_getUid("radius"),function(_48,_49){
 with(_48){
-return m_stroke_colors[_4a%NumberOfColors];
+return objj_msgSend(objj_msgSend(_48,"circle"),"radius");
 }
-}),new objj_method(sel_getUid("newPattern"),function(_4b,_4c){
-with(_4b){
-return ("\n@implementation NewPattern : "+objj_msgSend(_4b,"class")+"\n+ (CPDict) defaultConfig"+"\n{\n return "+objj_msgSend(_4b,"dumpConfig")+"\n}\n@end\n");
+}),new objj_method(sel_getUid("fillColorAt:"),function(_4a,_4b,_4c){
+with(_4a){
+return m_fill_colors[_4c%NumberOfColors];
 }
-}),new objj_method(sel_getUid("dumpConfig"),function(_4d,_4e){
+}),new objj_method(sel_getUid("strokeColorAt:"),function(_4d,_4e,_4f){
 with(_4d){
-var _4f=[],_50=[];
-for(var idx=0;idx<objj_msgSend(m_stroke_colors,"count");idx++){
-var clr=m_stroke_colors[idx];
-_4f[idx]=objj_msgSend(CPString,"stringWithFormat:","[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",objj_msgSend(clr,"redComponent")*255,objj_msgSend(clr,"greenComponent")*255,objj_msgSend(clr,"blueComponent")*255,objj_msgSend(clr,"alphaComponent"));
+return m_stroke_colors[_4f%NumberOfColors];
 }
-for(var idx=0;idx<objj_msgSend(m_fill_colors,"count");idx++){
-var clr=m_fill_colors[idx];
-_50[idx]=objj_msgSend(CPString,"stringWithFormat:","[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",objj_msgSend(clr,"redComponent")*255,objj_msgSend(clr,"greenComponent")*255,objj_msgSend(clr,"blueComponent")*255,objj_msgSend(clr,"alphaComponent"));
+}),new objj_method(sel_getUid("dumpConfig"),function(_50,_51){
+with(_50){
+var _52=objj_msgSend(_50,"colorArrayToString:",m_stroke_colors);
+var _53=objj_msgSend(_50,"colorArrayToString:",m_fill_colors);
+var _54=objj_msgSend(CPString,"stringWithFormat:","[[GRColor alloc] initWithGradientColors:[%s] baseColor:%s]",objj_msgSend(_50,"colorArrayToString:",objj_msgSend(objj_msgSend(_50,"bgColor"),"gradientColors")),objj_msgSend(objj_msgSend(_50,"bgColor"),"asInitString"));
+return ("[CPDictionary dictionaryWithObjectsAndKeys:"+_54+", \"background_color\", "+objj_msgSend(_50,"bgColorDirection")+", \"background_color_direction\", "+objj_msgSend(_50,"numPoints")+", \"number_of_points\", "+objj_msgSend(_50,"rotation")+", \"rotation\", "+objj_msgSend(_50,"recurseDepth")+", \"recurse_depth\", "+objj_msgSend(_50,"factorLarger")+", \"factor_larger\", [GRPoint pointWithX:"+objj_msgSend(objj_msgSend(objj_msgSend(_50,"circle"),"cpt"),"x")+" Y:"+objj_msgSend(objj_msgSend(objj_msgSend(_50,"circle"),"cpt"),"y")+"], \"center_point\", "+objj_msgSend(_50,"radius")+", \"radius\", "+(objj_msgSend(_50,"showShapes")?"YES":"NO")+", \"show_shapes\", ["+_52+"], \"stroke_colors\", ["+_53+"], \"fill_colors\"];");
 }
-var clr=objj_msgSend(_4d,"bgColor");
-var _51=objj_msgSend(CPString,"stringWithFormat:","[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",objj_msgSend(clr,"redComponent")*255,objj_msgSend(clr,"greenComponent")*255,objj_msgSend(clr,"blueComponent")*255,objj_msgSend(clr,"alphaComponent"));
-return ("[CPDictionary dictionaryWithObjectsAndKeys:"+_51+", \"background_color\", "+objj_msgSend(_4d,"numPoints")+", \"number_of_points\", "+objj_msgSend(_4d,"rotation")+", \"rotation\", "+objj_msgSend(_4d,"recurseDepth")+", \"recurse_depth\", "+objj_msgSend(_4d,"factorLarger")+", \"factor_larger\", [GRPoint pointWithX:"+objj_msgSend(objj_msgSend(objj_msgSend(_4d,"circle"),"cpt"),"x")+" Y:"+objj_msgSend(objj_msgSend(objj_msgSend(_4d,"circle"),"cpt"),"y")+"], \"center_point\", "+objj_msgSend(_4d,"radius")+", \"radius\", "+(objj_msgSend(_4d,"showShapes")?"YES":"NO")+", \"show_shapes\", ["+objj_msgSend(_4f,"componentsJoinedByString:",",")+"], \"stroke_colors\", ["+objj_msgSend(_50,"componentsJoinedByString:",",")+"], \"fill_colors\"];");
+}),new objj_method(sel_getUid("config"),function(_55,_56){
+with(_55){
+return objj_eval(objj_msgSend(_55,"dumpConfig"));
 }
-}),new objj_method(sel_getUid("config"),function(_52,_53){
-with(_52){
-return objj_eval(objj_msgSend(_52,"dumpConfig"));
+}),new objj_method(sel_getUid("newPattern"),function(_57,_58){
+with(_57){
+return ("\n@implementation NewPattern : "+objj_msgSend(_57,"class")+"\n+ (CPDict) defaultConfig"+"\n{\n return "+objj_msgSend(_57,"dumpConfig")+"\n}\n@end\n");
 }
-}),new objj_method(sel_getUid("compareValue:forConfig:"),function(_54,_55,_56,_57){
-with(_54){
-var _58=objj_msgSend(_54,"config");
-if(objj_msgSend(_58,"objectForKey:",_57)!==_56){
-objj_msgSend(_58,"setObject:forKey:",_56,_57);
-return objj_msgSend(objj_msgSend(objj_msgSend(_54,"class"),"alloc"),"initWithConfig:",_58);
+}),new objj_method(sel_getUid("compareValue:forConfig:"),function(_59,_5a,_5b,_5c){
+with(_59){
+var _5d=objj_msgSend(_59,"config");
+if(objj_msgSend(_5d,"objectForKey:",_5c)!==_5b){
+objj_msgSend(_5d,"setObject:forKey:",_5b,_5c);
+return objj_msgSend(objj_msgSend(objj_msgSend(_59,"class"),"alloc"),"initWithConfig:",_5d);
 }
-return _54;
+return _59;
+}
+}),new objj_method(sel_getUid("colorArrayToString:"),function(_5e,_5f,_60){
+with(_5e){
+var _61=[];
+for(var idx=0;idx<objj_msgSend(_60,"count");idx++){
+_61[idx]=objj_msgSend(_60[idx],"asInitString");
+}
+return objj_msgSend(_61,"componentsJoinedByString:",",");
 }
 })]);
 p;20;app/patterns/eight.jt;1411;@STATIC;1.0;t;1392;
@@ -693,12 +709,12 @@ with(_3){
 return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1),"background_color",6,"number_of_points",0,"rotation",0,"recurse_depth",1.22,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",118,"radius",NO,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.2545454545454545),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.34545454545454546),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,0.4909090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",130,18,120,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",76,156,180,0)],"fill_colors");
 }
 })]);
-p;19;app/patterns/four.jt;1409;@STATIC;1.0;t;1390;
+p;19;app/patterns/four.jt;1818;@STATIC;1.0;t;1799;
 var _1=objj_allocateClassPair(PatternThree,"PatternFour"),_2=_1.isa;
 objj_registerClassPair(_1);
 class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_3,_4){
 with(_3){
-return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",6,"number_of_points",0,"recurse_depth",1.22,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",118,"radius",NO,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.2727272727272727),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",31,255,211,0.7272727272727273),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,0.4909090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",190,73,12,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,0.6909090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,0.6909090909090909)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,33,50,0.2545454545454545),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",130,18,120,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",76,156,180,0)],"fill_colors");
+return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(objj_msgSend(GRColor,"alloc"),"initWithGradientColors:baseColor:",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,1)],objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1)),"background_color",0,"background_color_direction",6,"number_of_points",0,"rotation",0,"recurse_depth",1.22,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",118,"radius",NO,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",31,255,211,0.7272727272727273),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,0.4909090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",190,73,12,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,0.6909090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,0.6909090909090909)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,33,50,0.2545454545454545),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",130,18,120,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",76,156,180,0)],"fill_colors");
 }
 })]);
 p;20;app/patterns/three.jt;9322;@STATIC;1.0;t;9303;
@@ -740,8 +756,8 @@ objj_msgSend(objj_msgSend(_10,"circle"),"draw:",_12);
 objj_msgSend(_10,"fillAndStroke:",_12);
 var _13=objj_msgSend(_10,"sub_circles"),idx=objj_msgSend(_13,"count");
 while(idx--){
-objj_msgSend(_13[idx],"draw:",_12);
 objj_msgSend(_10,"setupColorWithIndex:context:",0,_12);
+objj_msgSend(_13[idx],"draw:",_12);
 objj_msgSend(_10,"fillAndStroke:",_12);
 }
 }
@@ -895,8 +911,8 @@ objj_msgSend(_6,"fillAndStroke:",_8);
 with(_9){
 var _c=objj_msgSend(_9,"sub_circles"),_d=objj_msgSend(_c,"count");
 while(_d--){
-objj_msgSend(_c[_d],"draw:",_b);
 objj_msgSend(_9,"setupColorWithIndex:context:",(_d%2)+1,_b);
+objj_msgSend(_c[_d],"draw:",_b);
 objj_msgSend(_9,"fillAndStroke:",_b);
 }
 }
@@ -950,20 +966,20 @@ with(_18){
 return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1),"background_color",12,"number_of_points",0,"rotation",0,"recurse_depth",1.14,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",150,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,100,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.33636363636363636),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,247,211,0.7),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
-p;23;app/patterns/thirteen.jt;1371;@STATIC;1.0;t;1352;
-var _1=objj_allocateClassPair(PatternTwelve,"PatternThirteen"),_2=_1.isa;
+p;23;app/patterns/thirteen.jt;1826;@STATIC;1.0;t;1807;
+var _1=objj_allocateClassPair(PatternSeven,"PatternThirteen"),_2=_1.isa;
 objj_registerClassPair(_1);
 class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_3,_4){
 with(_3){
-return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",46,"number_of_points",0,"recurse_depth",0.46,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",200,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",174,174,174,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.6181818181818182),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.39090909090909093),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.39090909090909093),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
+return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(objj_msgSend(GRColor,"alloc"),"initWithGradientColors:baseColor:",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",39,19,35,0.6454545454545455),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.16363636363636364)],objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1)),"background_color",1,"background_color_direction",50,"number_of_points",0,"rotation",0,"recurse_depth",0.98,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",152,"radius",NO,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",174,174,174,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.6181818181818182),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.39090909090909093),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.39090909090909093),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
-p;23;app/patterns/fourteen.jt;1476;@STATIC;1.0;t;1457;
+p;23;app/patterns/fourteen.jt;1801;@STATIC;1.0;t;1782;
 var _1=objj_allocateClassPair(PatternTwelve,"PatternFourteen"),_2=_1.isa;
 objj_registerClassPair(_1);
 class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_3,_4){
 with(_3){
-return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1),"background_color",24,"number_of_points",0,"rotation",0,"recurse_depth",0.44,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",200,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",174,174,174,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.6181818181818182),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.39090909090909093),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.39090909090909093),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
+return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(objj_msgSend(GRColor,"alloc"),"initWithGradientColors:baseColor:",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",17,3,93,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",158,150,255,1)],objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1)),"background_color",1,"background_color_direction",24,"number_of_points",0,"rotation",0,"recurse_depth",0.44,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",200,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",174,174,174,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.6181818181818182),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.39090909090909093),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.39090909090909093),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
 p;21;app/patterns/eleven.jt;1404;@STATIC;1.0;t;1385;
@@ -974,12 +990,12 @@ with(_3){
 return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",40,"number_of_points",0,"recurse_depth",0.48,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",184,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,100,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.33636363636363636),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",51,32,255,0.5363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,0.6454545454545455),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
-p;19;app/patterns/nine.jt;1383;@STATIC;1.0;t;1364;
+p;19;app/patterns/nine.jt;1746;@STATIC;1.0;t;1727;
 var _1=objj_allocateClassPair(PatternSeven,"PatternNine"),_2=_1.isa;
 objj_registerClassPair(_1);
 class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_3,_4){
 with(_3){
-return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",12,"number_of_points",1,"recurse_depth",2,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",115,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,100,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.33636363636363636),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",51,32,255,0.5363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
+return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(objj_msgSend(GRColor,"alloc"),"initWithGradientColors:baseColor:",[,objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,1)],objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1)),"background_color",0,"background_color_direction",12,"number_of_points",0,"rotation",1,"recurse_depth",2,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",115,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,100,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.33636363636363636),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",51,32,255,0.5363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
 p;21;app/patterns/twenty.jt;1475;@STATIC;1.0;t;1456;
@@ -1014,7 +1030,7 @@ with(_3){
 return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1),"background_color",10,"number_of_points",53,"rotation",0,"recurse_depth",1.58,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",93,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.33636363636363636),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,0.5909090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.2818181818181818),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.2818181818181818),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.2727272727272727)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,36,49,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",42,38,247,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,25,49,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",240,31,50,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",35,39,191,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
-p;22;app/patterns/sixteen.jt;5992;@STATIC;1.0;t;5973;
+p;22;app/patterns/sixteen.jt;6315;@STATIC;1.0;t;6296;
 var _1=objj_allocateClassPair(PatternMaker,"PatternSixteen"),_2=_1.isa;
 objj_registerClassPair(_1);
 class_addMethods(_1,[new objj_method(sel_getUid("_draw:"),function(_3,_4,_5){
@@ -1097,7 +1113,7 @@ objj_msgSend(_14,"fillAndStroke:",_16);
 })]);
 class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_1c,_1d){
 with(_1c){
-return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",2,2,2,1),"background_color",8,"number_of_points",0,"rotation",1,"recurse_depth",0.5,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",160,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.33636363636363636),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,0.5909090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,148,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",153,18,88,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",205,25,118,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,36,49,0.13636363636363635),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",42,38,247,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,25,49,0.18181818181818182),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",240,31,50,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",35,39,191,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
+return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(objj_msgSend(GRColor,"alloc"),"initWithGradientColors:baseColor:",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,0,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,243,15,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,0,0,1)],objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",2,2,2,1)),"background_color",0,"background_color_direction",8,"number_of_points",0,"rotation",1,"recurse_depth",0.5,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",160,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.33636363636363636),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,0.5909090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,148,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",153,18,88,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",205,25,118,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,36,49,0.13636363636363635),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",42,38,247,0.05454545454545454),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,25,49,0.18181818181818182),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",240,31,50,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",35,39,191,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
 p;23;app/patterns/eighteen.jt;1506;@STATIC;1.0;t;1487;
@@ -1108,7 +1124,7 @@ with(_3){
 return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",2,2,2,1),"background_color",3,"number_of_points",0,"rotation",0,"recurse_depth",0.5,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",160,"radius",NO,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.33636363636363636),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,0.5909090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,148,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",153,18,88,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",205,25,118,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,36,49,0.13636363636363635),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",42,38,247,0.16363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,25,49,0.18181818181818182),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",240,31,50,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",35,39,191,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
-p;24;app/views/pattern_view.jt;1275;@STATIC;1.0;t;1256;
+p;24;app/views/pattern_view.jt;1614;@STATIC;1.0;t;1595;
 var _1=objj_allocateClassPair(GRRotateView,"PatternView"),_2=_1.isa;
 class_addIvars(_1,[new objj_ivar("m_pattern")]);
 objj_registerClassPair(_1);
@@ -1135,9 +1151,11 @@ objj_msgSend(_b,"setRotation:",(objj_msgSend(m_pattern,"rotation")*(Math.PI/180)
 }
 }),new objj_method(sel_getUid("drawLayer:inContext:"),function(_e,_f,_10,_11){
 with(_e){
-objj_msgSend(objj_msgSend(_e,"superview"),"setBackgroundColor:",objj_msgSend(objj_msgSend(_e,"pattern"),"bgColor"));
-CGContextSetFillColor(_11,objj_msgSend(objj_msgSend(_e,"pattern"),"bgColor"));
-CGContextFillRect(_11,objj_msgSend(_e,"bounds"));
+var _12=objj_msgSend(objj_msgSend(objj_msgSend(_e,"pattern"),"bgColor"),"gradientColors")[2]||objj_msgSend(objj_msgSend(_e,"pattern"),"bgColor");
+objj_msgSend(objj_msgSend(_e,"superview"),"setBackgroundColor:",_12);
+var _13=(objj_msgSend(objj_msgSend(_e,"pattern"),"bgColorDirection")==0?CGPointMake(CGRectGetWidth(objj_msgSend(_e,"bounds")),0):CGPointMake(0,CGRectGetHeight(objj_msgSend(_e,"bounds"))));
+CGContextAddRect(_11,objj_msgSend(_e,"bounds"));
+CGContextDrawLinearGradient(_11,objj_msgSend(objj_msgSend(objj_msgSend(_e,"pattern"),"bgColor"),"gradient"),CGPointMake(0,0),_13);
 try{
 objj_msgSend(objj_msgSend(_e,"pattern"),"draw:",_11);
 }
@@ -1146,9 +1164,9 @@ CPLogConsole("Exception: happend, configuration broke everything");
 }
 }
 })]);
-p;45;app/controllers/pattern_settings_controller.jt;7965;@STATIC;1.0;t;7946;
+p;45;app/controllers/pattern_settings_controller.jt;8899;@STATIC;1.0;t;8880;
 var _1=objj_allocateClassPair(CPWindowController,"PatternSettingsController"),_2=_1.isa;
-class_addIvars(_1,[new objj_ivar("m_circleCountView"),new objj_ivar("m_factorView"),new objj_ivar("m_rotationView"),new objj_ivar("m_sizeView"),new objj_ivar("m_framePosView"),new objj_ivar("m_rotationSlider"),new objj_ivar("m_circleCountSlider"),new objj_ivar("m_factorSlider"),new objj_ivar("m_framePosSlider"),new objj_ivar("m_rotationValue"),new objj_ivar("m_circleCountValue"),new objj_ivar("m_factorValue"),new objj_ivar("m_framePosValue"),new objj_ivar("m_sizeSegment"),new objj_ivar("m_showShapesButton"),new objj_ivar("m_radiusSlider"),new objj_ivar("m_radiusView"),new objj_ivar("m_radiusValue"),new objj_ivar("m_strokeColorView"),new objj_ivar("m_fillColorView"),new objj_ivar("m_bgColorWell"),new objj_ivar("m_pattern_view")]);
+class_addIvars(_1,[new objj_ivar("m_circleCountView"),new objj_ivar("m_factorView"),new objj_ivar("m_rotationView"),new objj_ivar("m_sizeView"),new objj_ivar("m_framePosView"),new objj_ivar("m_rotationSlider"),new objj_ivar("m_circleCountSlider"),new objj_ivar("m_factorSlider"),new objj_ivar("m_framePosSlider"),new objj_ivar("m_rotationValue"),new objj_ivar("m_circleCountValue"),new objj_ivar("m_factorValue"),new objj_ivar("m_framePosValue"),new objj_ivar("m_sizeSegment"),new objj_ivar("m_showShapesButton"),new objj_ivar("m_gradientDirectionButton"),new objj_ivar("m_radiusSlider"),new objj_ivar("m_radiusView"),new objj_ivar("m_radiusValue"),new objj_ivar("m_strokeColorView"),new objj_ivar("m_fillColorView"),new objj_ivar("m_bgColorView"),new objj_ivar("m_pattern_view")]);
 objj_registerClassPair(_1);
 class_addMethods(_1,[new objj_method(sel_getUid("initWithWindowCibName:patternView:"),function(_3,_4,_5,_6){
 with(_3){
@@ -1172,8 +1190,9 @@ objj_msgSend(CPBox,"makeBorder:",m_fillColorView);
 objj_msgSend(CPBox,"makeBorder:",m_strokeColorView);
 objj_msgSend(CPBox,"makeBorder:",m_sizeView);
 objj_msgSend(CPBox,"makeBorder:",m_framePosView);
-objj_msgSend(CPBox,"makeBorder:",m_bgColorWell);
+objj_msgSend(CPBox,"makeBorder:",m_bgColorView);
 objj_msgSend(m_framePosView,"setHidden:",YES);
+objj_msgSend(m_gradientDirectionButton,"setState:",(objj_msgSend(objj_msgSend(_9,"pattern"),"bgColorDirection")==0?CPOnState:CPOffState));
 objj_msgSend(m_rotationSlider,"setObjectValue:",objj_msgSend(m_pattern_view,"rotation")*(180/Math.PI));
 objj_msgSend(_9,"updateSlider:textField:sender:",m_rotationSlider,m_rotationValue,m_rotationSlider);
 objj_msgSend(m_circleCountSlider,"setObjectValue:",objj_msgSend(objj_msgSend(_9,"pattern"),"numPoints"));
@@ -1184,9 +1203,16 @@ objj_msgSend(m_showShapesButton,"setState:",objj_msgSend(objj_msgSend(_9,"patter
 objj_msgSend(m_radiusSlider,"setObjectValue:",objj_msgSend(objj_msgSend(_9,"pattern"),"radius"));
 objj_msgSend(_9,"updateSlider:textField:sender:",m_radiusSlider,m_radiusValue,m_radiusSlider);
 objj_msgSend(m_sizeSegment,"selectSegmentWithTag:",objj_msgSend(objj_msgSend(objj_msgSend(_9,"pattern"),"recurseDepth"),"intValue")+1);
-objj_msgSend(m_bgColorWell,"setColor:",objj_msgSend(objj_msgSend(_9,"pattern"),"bgColor"));
 objj_msgSend(m_rotationSlider,"setObjectValue:",objj_msgSend(objj_msgSend(_9,"pattern"),"rotation"));
 objj_msgSend(_9,"updateSlider:textField:sender:",m_rotationSlider,m_rotationValue,m_rotationSlider);
+var _b=objj_msgSend(_9,"findColorWellsWithTags:inViews:",[1,2,3],objj_msgSend(m_bgColorView,"subviews"));
+for(var _c=0;_c<objj_msgSend(_b,"count");_c++){
+objj_msgSend(CPBox,"makeBorder:",_b[_c]);
+}
+var _d=objj_msgSend(objj_msgSend(objj_msgSend(_9,"pattern"),"bgColor"),"gradientColors");
+objj_msgSend(_b[0],"setColor:",_d[0]||objj_msgSend(objj_msgSend(_9,"pattern"),"bgColor"));
+objj_msgSend(_b[1],"setColor:",_d[1]||objj_msgSend(CPColor,"transparent"));
+objj_msgSend(_b[2],"setColor:",_d[2]||objj_msgSend(CPColor,"transparent"));
 var _b=objj_msgSend(_9,"findColorWellsWithTags:inViews:",[0,1,2,3,4,5],objj_msgSend(m_strokeColorView,"subviews"));
 for(var _c=0;_c<objj_msgSend(_b,"count");_c++){
 objj_msgSend(_b[_c],"setColor:",objj_msgSend(objj_msgSend(_9,"pattern"),"strokeColorAt:",_c));
@@ -1199,85 +1225,90 @@ objj_msgSend(CPBox,"makeBorder:",_b[_c]);
 }
 objj_msgSend(objj_msgSend(CPNotificationCenter,"defaultCenter"),"addObserver:selector:name:object:",_9,sel_getUid("windowWillClose:"),CPWindowWillCloseNotification,_window);
 }
-}),new objj_method(sel_getUid("updateFramePos:"),function(_d,_e,_f){
-with(_d){
-objj_msgSend(_d,"updateSlider:textField:sender:",m_framePosSlider,m_framePosValue,_f);
+}),new objj_method(sel_getUid("updateFramePos:"),function(_e,_f,_10){
+with(_e){
+objj_msgSend(_e,"updateSlider:textField:sender:",m_framePosSlider,m_framePosValue,_10);
 }
-}),new objj_method(sel_getUid("updateFillColor:"),function(_10,_11,_12){
-with(_10){
-objj_msgSend(objj_msgSend(_10,"pattern"),"setFillColorAt:color:",objj_msgSend(_12,"tag"),objj_msgSend(_12,"color"));
+}),new objj_method(sel_getUid("updateFillColor:"),function(_11,_12,_13){
+with(_11){
+objj_msgSend(objj_msgSend(_11,"pattern"),"setFillColorAt:color:",objj_msgSend(_13,"tag"),objj_msgSend(_13,"color"));
 objj_msgSend(m_pattern_view,"redisplay");
 }
-}),new objj_method(sel_getUid("updateStrokeColor:"),function(_13,_14,_15){
-with(_13){
-objj_msgSend(objj_msgSend(_13,"pattern"),"setStrokeColorAt:color:",objj_msgSend(_15,"tag"),objj_msgSend(_15,"color"));
+}),new objj_method(sel_getUid("updateStrokeColor:"),function(_14,_15,_16){
+with(_14){
+objj_msgSend(objj_msgSend(_14,"pattern"),"setStrokeColorAt:color:",objj_msgSend(_16,"tag"),objj_msgSend(_16,"color"));
 objj_msgSend(m_pattern_view,"redisplay");
 }
-}),new objj_method(sel_getUid("updateRotationValue:"),function(_16,_17,_18){
-with(_16){
-objj_msgSend(_16,"updateSlider:textField:sender:",m_rotationSlider,m_rotationValue,_18);
+}),new objj_method(sel_getUid("updateRotationValue:"),function(_17,_18,_19){
+with(_17){
+objj_msgSend(_17,"updateSlider:textField:sender:",m_rotationSlider,m_rotationValue,_19);
 objj_msgSend(m_pattern_view,"setRotation:",(objj_msgSend(m_rotationSlider,"intValue")*(Math.PI/180)));
-objj_msgSend(objj_msgSend(_16,"pattern"),"setRotation:",objj_msgSend(m_rotationSlider,"intValue"));
+objj_msgSend(objj_msgSend(_17,"pattern"),"setRotation:",objj_msgSend(m_rotationSlider,"intValue"));
 }
-}),new objj_method(sel_getUid("updateShowShapes:"),function(_19,_1a,_1b){
-with(_19){
-objj_msgSend(objj_msgSend(_19,"pattern"),"setShowShapes:",objj_msgSend(_1b,"state")==CPOnState);
+}),new objj_method(sel_getUid("updateShowShapes:"),function(_1a,_1b,_1c){
+with(_1a){
+objj_msgSend(objj_msgSend(_1a,"pattern"),"setShowShapes:",objj_msgSend(_1c,"state")==CPOnState);
 objj_msgSend(m_pattern_view,"redisplay");
 }
-}),new objj_method(sel_getUid("updateBackgroundColor:"),function(_1c,_1d,_1e){
-with(_1c){
-objj_msgSend(objj_msgSend(_1c,"pattern"),"setBgColor:",objj_msgSend(_1e,"color"));
+}),new objj_method(sel_getUid("updateBackgroundColor:"),function(_1d,_1e,_1f){
+with(_1d){
+objj_msgSend(objj_msgSend(objj_msgSend(_1d,"pattern"),"bgColor"),"setGradientColor:atIndex:",objj_msgSend(_1f,"color"),(objj_msgSend(_1f,"tag")-1));
 objj_msgSend(m_pattern_view,"redisplay");
 }
-}),new objj_method(sel_getUid("circleCountUpdate:"),function(_1f,_20,_21){
-with(_1f){
-objj_msgSend(_1f,"updateSlider:textField:sender:",m_circleCountSlider,m_circleCountValue,_21);
-objj_msgSend(_1f,"compareOld:withNew:",objj_msgSend(_1f,"pattern"),objj_msgSend(objj_msgSend(_1f,"pattern"),"setNumPoints:",objj_msgSend(m_circleCountValue,"intValue")));
+}),new objj_method(sel_getUid("updateGradientDirection:"),function(_20,_21,_22){
+with(_20){
+objj_msgSend(objj_msgSend(_20,"pattern"),"setBgColorDirection:",(objj_msgSend(_22,"state")==CPOnState?0:1));
+objj_msgSend(m_pattern_view,"redisplay");
 }
-}),new objj_method(sel_getUid("updateRadiusValue:"),function(_22,_23,_24){
-with(_22){
-objj_msgSend(_22,"updateSlider:textField:sender:",m_radiusSlider,m_radiusValue,_24);
-objj_msgSend(_22,"compareOld:withNew:",objj_msgSend(_22,"pattern"),objj_msgSend(objj_msgSend(_22,"pattern"),"setRadius:",objj_msgSend(m_radiusSlider,"intValue")));
+}),new objj_method(sel_getUid("circleCountUpdate:"),function(_23,_24,_25){
+with(_23){
+objj_msgSend(_23,"updateSlider:textField:sender:",m_circleCountSlider,m_circleCountValue,_25);
+objj_msgSend(_23,"compareOld:withNew:",objj_msgSend(_23,"pattern"),objj_msgSend(objj_msgSend(_23,"pattern"),"setNumPoints:",objj_msgSend(m_circleCountValue,"intValue")));
 }
-}),new objj_method(sel_getUid("updateFactorValue:"),function(_25,_26,_27){
-with(_25){
-objj_msgSend(_25,"updateSlider:textField:sender:",m_factorSlider,m_factorValue,_27);
-objj_msgSend(_25,"compareOld:withNew:",objj_msgSend(_25,"pattern"),objj_msgSend(objj_msgSend(_25,"pattern"),"setFactorLarger:",(2*(objj_msgSend(m_factorSlider,"intValue")/100))));
+}),new objj_method(sel_getUid("updateRadiusValue:"),function(_26,_27,_28){
+with(_26){
+objj_msgSend(_26,"updateSlider:textField:sender:",m_radiusSlider,m_radiusValue,_28);
+objj_msgSend(_26,"compareOld:withNew:",objj_msgSend(_26,"pattern"),objj_msgSend(objj_msgSend(_26,"pattern"),"setRadius:",objj_msgSend(m_radiusSlider,"intValue")));
 }
-}),new objj_method(sel_getUid("updateSizeValue:"),function(_28,_29,_2a){
-with(_28){
-objj_msgSend(_28,"compareOld:withNew:",objj_msgSend(_28,"pattern"),objj_msgSend(objj_msgSend(_28,"pattern"),"setRecurseDepth:",objj_msgSend(objj_msgSend(_2a,"selectedTag"),"intValue")-1));
+}),new objj_method(sel_getUid("updateFactorValue:"),function(_29,_2a,_2b){
+with(_29){
+objj_msgSend(_29,"updateSlider:textField:sender:",m_factorSlider,m_factorValue,_2b);
+objj_msgSend(_29,"compareOld:withNew:",objj_msgSend(_29,"pattern"),objj_msgSend(objj_msgSend(_29,"pattern"),"setFactorLarger:",(2*(objj_msgSend(m_factorSlider,"intValue")/100))));
 }
-}),new objj_method(sel_getUid("windowWillClose:"),function(_2b,_2c,_2d){
-with(_2b){
+}),new objj_method(sel_getUid("updateSizeValue:"),function(_2c,_2d,_2e){
+with(_2c){
+objj_msgSend(_2c,"compareOld:withNew:",objj_msgSend(_2c,"pattern"),objj_msgSend(objj_msgSend(_2c,"pattern"),"setRecurseDepth:",objj_msgSend(objj_msgSend(_2e,"selectedTag"),"intValue")-1));
+}
+}),new objj_method(sel_getUid("windowWillClose:"),function(_2f,_30,_31){
+with(_2f){
 objj_msgSend(objj_msgSend(CPColorPanel,"sharedColorPanel"),"close");
 }
-}),new objj_method(sel_getUid("updateSlider:textField:sender:"),function(_2e,_2f,_30,_31,_32){
-with(_2e){
-if(objj_msgSend(_32,"isKindOfClass:",CPTextField)){
-objj_msgSend(_30,"setObjectValue:",objj_msgSend(objj_msgSend(_32,"stringValue"),"intValue"));
+}),new objj_method(sel_getUid("updateSlider:textField:sender:"),function(_32,_33,_34,_35,_36){
+with(_32){
+if(objj_msgSend(_36,"isKindOfClass:",CPTextField)){
+objj_msgSend(_34,"setObjectValue:",objj_msgSend(objj_msgSend(_36,"stringValue"),"intValue"));
 }else{
-objj_msgSend(_31,"setStringValue:",(""+objj_msgSend(_32,"intValue")));
+objj_msgSend(_35,"setStringValue:",(""+objj_msgSend(_36,"intValue")));
 }
 }
-}),new objj_method(sel_getUid("findColorWellsWithTags:inViews:"),function(_33,_34,_35,_36){
-with(_33){
-var ary=objj_msgSend(CPArray,"arrayWithArray:",_35);
-var cnt=objj_msgSend(_36,"count");
+}),new objj_method(sel_getUid("findColorWellsWithTags:inViews:"),function(_37,_38,_39,_3a){
+with(_37){
+var ary=objj_msgSend(CPArray,"arrayWithArray:",_39);
+var cnt=objj_msgSend(_3a,"count");
 for(var idx=0;idx<cnt;idx++){
-if(objj_msgSend(_36[idx],"isKindOfClass:",CPColorWell)){
-var jdx=objj_msgSend(ary,"indexOfObject:",objj_msgSend(_36[idx],"tag"));
+if(objj_msgSend(_3a[idx],"isKindOfClass:",CPColorWell)){
+var jdx=objj_msgSend(ary,"indexOfObject:",objj_msgSend(_3a[idx],"tag"));
 if(jdx!=CPNotFound){
-objj_msgSend(ary,"replaceObjectAtIndex:withObject:",jdx,_36[idx]);
+objj_msgSend(ary,"replaceObjectAtIndex:withObject:",jdx,_3a[idx]);
 }
 }
 }
 return ary;
 }
-}),new objj_method(sel_getUid("compareOld:withNew:"),function(_37,_38,_39,_3a){
-with(_37){
-if(_39!=_3a){
-objj_msgSend(m_pattern_view,"setPattern:",_3a);
+}),new objj_method(sel_getUid("compareOld:withNew:"),function(_3b,_3c,_3d,_3e){
+with(_3b){
+if(_3d!=_3e){
+objj_msgSend(m_pattern_view,"setPattern:",_3e);
 objj_msgSend(m_pattern_view,"redisplay");
 }
 }

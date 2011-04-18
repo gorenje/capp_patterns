@@ -24943,6 +24943,33 @@ objj_msgSend(_d0,"encodeFloat:forKey:",_verticalMargin,_c5);
 objj_msgSend(_d0,"encodeObject:forKey:",_backgroundColors,_ca);
 }
 })]);
+p;12;CGGradient.jt;656;@STATIC;1.0;i;9;CGColor.ji;14;CGColorSpace.jt;606;
+objj_executeFile("CGColor.j",YES);
+objj_executeFile("CGColorSpace.j",YES);
+kCGGradientDrawsBeforeStartLocation=1<<0;
+kCGGradientDrawsAfterEndLocation=1<<1;
+CGGradientCreateWithColorComponents=function(_1,_2,_3,_4){
+if(arguments[2]==NULL){
+var _3=[0,1];
+}
+if(arguments[3]==NULL){
+var _4=_3.length;
+}
+var _5=[];
+while(_4--){
+var _6=_4*4;
+_5[_4]=CGColorCreate(_1,_2.slice(_6,_6+4));
+}
+return CGGradientCreateWithColors(_1,_5,_3);
+};
+CGGradientCreateWithColors=function(_7,_8,_9){
+return {colorspace:_7,colors:_8,locations:_9};
+};
+CGGradientRelease=function(){
+};
+CGGradientRetain=function(_a){
+return _a;
+};
 p;9;CALayer.jt;21785;@STATIC;1.0;I;21;Foundation/CPObject.ji;16;CABackingStore.ji;11;CGContext.ji;12;CGGeometry.jt;21685;
 objj_executeFile("Foundation/CPObject.j",NO);
 objj_executeFile("CABackingStore.j",YES);
