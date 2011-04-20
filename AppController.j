@@ -23,6 +23,68 @@
 @import "app/app.j"
 @import "app/monkeypatch.j" // categories only, ignored by press if not included.
 
+ColorStopsMax = 3;
+
+@implementation ColorStopPicker : CPColorPicker
+{
+  CPView          _pickerView;
+}
+
+- (id)initWithPickerMask:(int)mask colorPanel:(CPColorPanel)owningColorPanel
+{
+  return [super initWithPickerMask:mask colorPanel: owningColorPanel];
+}
+
+- (id)initView
+{
+  var aFrame = CPRectMake(0, 0, CPColorPickerViewWidth, CPColorPickerViewHeight);
+  _pickerView = [[CPView alloc] initWithFrame:aFrame];
+  [_pickerView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
+
+  colorWellMaxHeight = 30;
+
+  CPLogConsole( "Height = " + colorWellMaxHeight);
+  var label = [CPTextField labelWithTitle:"Color stops"];
+  [_pickerView addSubview:label];
+  [label setFrameOrigin:CGPointMake( 40, 10 )];
+
+  for ( var idx = 0; idx < ColorStopsMax; idx++ ) {
+    var rect = CGRectMake( 10, (idx*(colorWellMaxHeight+5)) + 40, 
+                           CPColorPickerViewWidth/3, colorWellMaxHeight);
+    var cpwell = [[CPColorWell alloc] initWithFrame:rect];
+    CPLogConsole( "Idx aw: " + idx + " : " + rect.origin.x + ", " + rect.origin.y + ": " + rect.size.width + ", " + rect.size.height);
+    [cpwell setColor:[CPColor transparent]];
+    [cpwell setAutoresizingMask:CPViewNotSizable];
+    [_pickerView addSubview:cpwell];
+    [cpwell setFrameOrigin:rect.origin];
+    [cpwell setFrameSize:rect.size];
+    [[CPBox makeBorder:cpwell] setAutoresizingMask:CPViewNotSizable];
+    [cpwell setTag:(idx + 1)];
+  }
+}
+
+- (CPView)provideNewView:(BOOL)initialRequest
+{
+    if (initialRequest)
+        [self initView];
+
+    return _pickerView;
+}
+
+
+- (CPImage)provideNewButtonImage
+{
+  return [[CPImage alloc] initWithContentsOfFile:[[CPBundle bundleForClass:CPColorPicker] pathForResource:"wheel_button.png"] size:CGSizeMake(32, 32)];
+}
+
+- (CPImage)provideNewAlternateButtonImage
+{
+    return [[CPImage alloc] initWithContentsOfFile:[[CPBundle bundleForClass:CPColorPicker] pathForResource:"wheel_button_h.png"] size:CGSizeMake(32, 32)];
+}
+
+@end
+[CPColorPanel provideColorPickerClass:ColorStopPicker];
+
 @implementation AppController : CPObject
 {
   CPView                    contentView;

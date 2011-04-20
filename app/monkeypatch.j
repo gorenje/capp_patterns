@@ -57,6 +57,7 @@
   [box setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
   [box setBorderColor:[CPColor colorWithHexString:@"a9aaae"]];
   [box setBorderType:CPLineBorder];
+  return box;
 }
 
 @end
