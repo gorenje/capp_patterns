@@ -95,7 +95,8 @@
   [CPBox makeBorder:m_bgColorView];
 
   [m_framePosView setHidden:YES];
-  [m_gradientDirectionButton setState:([[self pattern] bgColorDirection] == 0 ? CPOnState : CPOffState)];
+  [m_gradientDirectionButton 
+    setState:([[self pattern] bgColorDirection] == 0 ? CPOnState : CPOffState)];
 
   [m_rotationSlider setObjectValue:[m_pattern_view rotation] * (180 / Math.PI)];
   [self updateSlider:m_rotationSlider textField:m_rotationValue sender:m_rotationSlider];
@@ -118,14 +119,17 @@
   [m_rotationSlider setObjectValue:[[self pattern] rotation]];
   [self updateSlider:m_rotationSlider textField:m_rotationValue sender:m_rotationSlider];
   
-  // setup the background color wells for the gradient
-  var colorWells = [self findColorWellsWithTags:[1,2,3] 
-                                        inViews:[m_bgColorView subviews]];
-  for ( var idx = 0; idx < [colorWells count]; idx++ ) [CPBox makeBorder:colorWells[idx]];
-  var gColors = [[[self pattern] bgColor] gradientColors];
-  [colorWells[0] setColor:gColors[0] || [[self pattern] bgColor]];
-  [colorWells[1] setColor:gColors[1] || [CPColor transparent]];
-  [colorWells[2] setColor:gColors[2] || [CPColor transparent]];
+  // setup the background color well for the gradient
+  var bgColorWell = [self findColorWellsWithTags:[1] 
+                                         inViews:[m_bgColorView subviews]][0];
+  [CPBox makeBorder:bgColorWell];
+  [bgColorWell setColor:[[self pattern] bgColor]];
+  [[CPNotificationCenter defaultCenter]
+        addObserver:self
+           selector:@selector(updateBackgroundColor:)
+               name:GRColorStopWasSetNotification
+             object:[[self pattern] bgColor]];
+
 
   // setup the stroke colors
   var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5] 
@@ -185,13 +189,6 @@
   [m_pattern_view redisplay];
 }
 
-- (CPAction)updateBackgroundColor:(id)sender
-{
-  [[[self pattern] bgColor] setGradientColor:[sender color] 
-                                     atIndex:([sender tag] - 1)];
-  [m_pattern_view redisplay];
-}
-
 - (CPAction)updateGradientDirection:(id)sender
 {
   [[self pattern] setBgColorDirection:([sender state] == CPOnState ? 0 : 1)];
@@ -230,9 +227,18 @@
 // Notifications
 ////
 
+- (void)updateBackgroundColor:(CPNotification)aNotification
+{
+  [m_pattern_view redisplay];
+}
+
 - (void) windowWillClose:(CPNotification)aNotification
 {
   [[CPColorPanel sharedColorPanel] close];
+  [[CPNotificationCenter defaultCenter]
+        removeObserver:self
+                  name:GRColorStopWasSetNotification
+                object:[[self pattern] bgColor]];
 }
 
 //

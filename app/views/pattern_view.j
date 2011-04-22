@@ -47,8 +47,6 @@
   CGContextAddRect(aContext, [self bounds]);
   CGContextDrawLinearGradient(aContext, [[[self pattern] bgColor] gradient], 
                               CGPointMake(0,0), targetPt);
-  // CGContextFillRect(aContext, [self bounds]);
-
   try {
     [[self pattern] draw:aContext];
   } catch ( e ) {

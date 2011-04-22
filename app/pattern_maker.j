@@ -44,6 +44,21 @@
   return sub_circles;
 }
 
+- (void)drawCircleAndSubCircles:(CGContext)aContext
+{
+  [self setupColorWithIndex:0 context:aContext];
+  [[self circle] draw:aContext];
+  [self fillAndStroke:aContext];
+
+  var subs = [self sub_circles], idx = [subs count];
+
+  while ( idx-- ) {
+    [self setupColorWithIndex:(idx % 2)+1 context:aContext];
+    [subs[idx] draw:aContext];
+    [self fillAndStroke:aContext];
+  }
+}
+
 - (void)setupColorWithIndex:(int)aIndex context:(CGContext)aContext
 {
   CGContextSetStrokeColor(aContext, m_stroke_colors[aIndex % NumberOfColors]);

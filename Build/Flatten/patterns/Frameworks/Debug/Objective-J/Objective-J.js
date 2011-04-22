@@ -3243,7 +3243,8 @@ Preprocessor.prototype.implementation = function(tokens, aStringBuffer)
                 ivar_count = 0,
                 declaration = [],
                 attributes,
-                accessors = {};
+                accessors = {},
+                types = [];
             while((token = tokens.skip_whitespace()) && token != TOKEN_CLOSE_BRACE)
             {
                 if (token === TOKEN_PREPROCESSOR)
@@ -3253,6 +3254,8 @@ Preprocessor.prototype.implementation = function(tokens, aStringBuffer)
                         attributes = this.accessors(tokens);
                     else if (token !== TOKEN_OUTLET)
                         throw new SyntaxError(this.error_message("*** Unexpected '@' token in ivar declaration ('@"+token+"')."));
+                    else
+                        types.push("@" + token);
                 }
                 else if (token == TOKEN_SEMICOLON)
                 {
@@ -3261,9 +3264,13 @@ Preprocessor.prototype.implementation = function(tokens, aStringBuffer)
                     else
                         buffer.atoms[buffer.atoms.length] = ", ";
                     var name = declaration[declaration.length - 1];
-                    buffer.atoms[buffer.atoms.length] = "new objj_ivar(\"" + name + "\")";
+                    if (this._flags & Preprocessor.Flags.IncludeTypeSignatures)
+                        buffer.atoms[buffer.atoms.length] = "new objj_ivar(\"" + name + "\", \"" + types.slice(0, types.length - 1). join(" ") + "\")";
+                    else
+                        buffer.atoms[buffer.atoms.length] = "new objj_ivar(\"" + name + "\")";
                     ivar_names[name] = 1;
                     declaration = [];
+                    types = [];
                     if (attributes)
                     {
                         accessors[name] = attributes;
@@ -3271,7 +3278,10 @@ Preprocessor.prototype.implementation = function(tokens, aStringBuffer)
                     }
                 }
                 else
+                {
                     declaration.push(token);
+                    types.push(token);
+                }
             }
             if (declaration.length)
                 throw new SyntaxError(this.error_message("*** Expected ';' in ivar declaration, found '}'."));
