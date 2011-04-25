@@ -32,12 +32,16 @@
   GRColor m_bg_color          @accessors(property=bgColor);
   int     m_bg_color_dir      @accessors(property=bgColorDirection);
   int     m_rotation          @accessors(property=rotation);
+
+  CPDict  m_config;
 }
 
 - (id)initWithConfig:(CPDict)config
 {
   self = [super init];
   if ( self ) {
+    m_config = config;
+
     m_number_of_points = [config objectForKey:"number_of_points"];
     m_factor_larger    = [config objectForKey:"factor_larger"];
     m_show_shapes      = [config objectForKey:"show_shapes"];
@@ -54,17 +58,6 @@
 
     [self setCircleWithCpt:[config objectForKey:"center_point"]
                     radius:[config objectForKey:"radius"]];
-
-    m_sub_patterns = [];
-    if ( m_recurse_depth > 0 ) {
-      var subs = [self sub_circles];
-      for ( var idx = 0; idx < [self numPoints]; idx++ ) {
-        var tmpConfig = [config copy];
-        [tmpConfig setObject:[subs[idx] cpt] forKey:"center_point"];
-        [tmpConfig setObject:(m_recurse_depth-1) forKey:"recurse_depth"];
-        m_sub_patterns.push([[[self class] alloc] initWithConfig:tmpConfig]);
-      }
-    }
   }
   return self;
 }
@@ -116,6 +109,18 @@
 - (void)setCircleWithCpt:(GRPoint)aCenterPoint radius:(float)aRadius
 {
   m_circle = [GRLinkedCircle circleWithCenter:aCenterPoint radius:aRadius];
+
+  m_sub_patterns = [];
+  if ( m_recurse_depth > 0 ) {
+    var subs = [self sub_circles];
+    for ( var idx = 0; idx < [self numPoints]; idx++ ) {
+      var tmpConfig = [m_config copy];
+      [tmpConfig setObject:[subs[idx] cpt]     forKey:"center_point"];
+      [tmpConfig setObject:(m_recurse_depth-1) forKey:"recurse_depth"];
+      [tmpConfig setObject:aRadius             forKey:"radius"];
+      m_sub_patterns.push([[[self class] alloc] initWithConfig:tmpConfig]);
+    }
+  }
 }
 
 //

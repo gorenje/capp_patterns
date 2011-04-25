@@ -36,6 +36,18 @@ var allPatternClasses = [PatternOne, PatternEight, PatternFifteen,
                          PatternNine, PatternSeventeen, PatternTwentyThree,
                          PatternSixteen, PatternEighteen, PatternTwentyFive];
 
+/*
+  These are used on a small display --> smaller cpu --> they display quicker
+*/
+var allPatternClassesNoRecursion = [PatternOne,
+                         PatternTen, PatternFive, PatternTwo, PatternSix,
+                         PatternTwentyTwo, PatternFour,
+                         PatternTwelve, PatternSeven,
+                         PatternThirteen, PatternFourteen, PatternEleven,
+                         PatternTwenty,PatternTwentyOne,
+                         PatternSeventeen, PatternTwentyThree,
+                         PatternEighteen, PatternTwentyFive];
+
 @implementation AppController : CPObject
 {
   CPView                    contentView;
@@ -258,9 +270,9 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
 
 - (void)showNewPattern
 {
-  var curr_index = [allPatternClasses indexOfObject:[[m_pattern_view pattern] class]],
-    new_index = (curr_index + 1 ) % [allPatternClasses count],
-    pattern_class = allPatternClasses[new_index],
+  var curr_index = [allPatternClassesNoRecursion indexOfObject:[[m_pattern_view pattern] class]],
+    new_index = (curr_index + 1 ) % [allPatternClassesNoRecursion count],
+    pattern_class = allPatternClassesNoRecursion[new_index],
     new_pattern = [[pattern_class alloc] initWithConfig:[pattern_class defaultConfig]];
 
   [m_pattern_view setPattern:new_pattern];
