@@ -5,7 +5,7 @@ objj_executeFile("AppController.j",YES);
 main=function(_1,_2){
 CPApplicationMain(_1,_2);
 };
-p;15;AppController.jt;12458;@STATIC;1.0;I;21;Foundation/CPObject.jI;16;AppKit/CPColor.jI;13;GRKit/GRKit.jI;29;GRKit/g_r_color_stop_picker.ji;9;app/app.ji;17;app/monkeypatch.jt;12304;
+p;15;AppController.jt;12486;@STATIC;1.0;I;21;Foundation/CPObject.jI;16;AppKit/CPColor.jI;13;GRKit/GRKit.jI;29;GRKit/g_r_color_stop_picker.ji;9;app/app.ji;17;app/monkeypatch.jt;12332;
 objj_executeFile("Foundation/CPObject.j",NO);
 objj_executeFile("AppKit/CPColor.j",NO);
 objj_executeFile("GRKit/GRKit.j",NO);
@@ -61,7 +61,7 @@ var _10=9;
 var _11=objj_msgSend(patternListView,"content")[_10];
 var _12=objj_msgSend(objj_msgSend(_11,"alloc"),"initWithConfig:",objj_msgSend(_11,"defaultConfig"));
 objj_msgSend(patternListView,"setSelectionIndexes:",objj_msgSend(CPIndexSet,"indexSetWithIndex:",_10));
-var _13=CGRectMake(200,0,700,700);
+var _13=CGRectMake(200,0,_d.size.width-200,_d.size.height-58);
 patternView=objj_msgSend(objj_msgSend(PatternView,"alloc"),"initWithFrame:",_13);
 objj_msgSend(patternView,"setNeedsDisplay:",YES);
 objj_msgSend(patternView,"setPattern:",_12);
@@ -1269,7 +1269,7 @@ objj_msgSend(label,"setTextShadowColor:",objj_msgSend(CPColor,"whiteColor"));
 }
 }
 })]);
-p;24;app/views/pattern_view.jt;2530;@STATIC;1.0;t;2511;
+p;24;app/views/pattern_view.jt;2585;@STATIC;1.0;t;2566;
 var _1=objj_allocateClassPair(GRRotateView,"PatternView"),_2=_1.isa;
 class_addIvars(_1,[new objj_ivar("m_pattern"),new objj_ivar("m_circle_center"),new objj_ivar("m_radius_scale_factor"),new objj_ivar("m_done_draw_delegate")]);
 objj_registerClassPair(_1);
@@ -1294,9 +1294,12 @@ with(_d){
 _d=objj_msgSendSuper({receiver:_d,super_class:objj_getClass("PatternView").super_class},"initWithFrame:",_f);
 if(_d){
 objj_msgSend(_d,"setClipsToBounds:",YES);
-if(_f.size.width<700||_f.size.height<700){
+if(_f.size.width!=700||_f.size.height!=700){
 m_radius_scale_factor=MAX(_f.size.width/700,_f.size.height/700);
-m_circle_center=objj_msgSend(GRPoint,"pointWithX:Y:",CGRectGetMidX(_f),CGRectGetMidY(_f));
+m_circle_center=objj_msgSend(GRPoint,"pointWithX:Y:",_f.size.width/2,_f.size.height/2);
+if(m_radius_scale_factor>1){
+m_radius_scale_factor=1;
+}
 }else{
 m_circle_center=m_radius_scale_factor=nil;
 }
