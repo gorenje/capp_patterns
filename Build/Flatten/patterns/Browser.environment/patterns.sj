@@ -5,7 +5,7 @@ objj_executeFile("AppController.j",YES);
 main=function(_1,_2){
 CPApplicationMain(_1,_2);
 };
-p;15;AppController.jt;9709;@STATIC;1.0;I;21;Foundation/CPObject.jI;16;AppKit/CPColor.jI;13;GRKit/GRKit.jI;29;GRKit/g_r_color_stop_picker.ji;9;app/app.ji;17;app/monkeypatch.jt;9556;
+p;15;AppController.jt;12186;@STATIC;1.0;I;21;Foundation/CPObject.jI;16;AppKit/CPColor.jI;13;GRKit/GRKit.jI;29;GRKit/g_r_color_stop_picker.ji;9;app/app.ji;17;app/monkeypatch.jt;12032;
 objj_executeFile("Foundation/CPObject.j",NO);
 objj_executeFile("AppKit/CPColor.j",NO);
 objj_executeFile("GRKit/GRKit.j",NO);
@@ -13,140 +13,194 @@ objj_executeFile("GRKit/g_r_color_stop_picker.j",NO);
 objj_executeFile("app/app.j",YES);
 objj_executeFile("app/monkeypatch.j",YES);
 GRMaxColorStop=6;
-var _1=objj_allocateClassPair(CPObject,"AppController"),_2=_1.isa;
-class_addIvars(_1,[new objj_ivar("contentView"),new objj_ivar("patternView"),new objj_ivar("propertiesController"),new objj_ivar("patternListView")]);
-objj_registerClassPair(_1);
-class_addMethods(_1,[new objj_method(sel_getUid("applicationDidFinishLaunching:"),function(_3,_4,_5){
-with(_3){
-var _6=objj_msgSend(objj_msgSend(CPWindow,"alloc"),"initWithContentRect:styleMask:",CGRectMakeZero(),CPBorderlessBridgeWindowMask);
-contentView=objj_msgSend(_6,"contentView");
-var _7=objj_msgSend(contentView,"bounds");
+var _1=[PatternOne,PatternEight,PatternFifteen,PatternTwentyFour,PatternTen,PatternFive,PatternTwo,PatternSix,PatternTwentyTwo,PatternFour,PatternThree,PatternNineteen,PatternTwelve,PatternSeven,PatternThirteen,PatternFourteen,PatternEleven,PatternTwenty,PatternTwentyOne,PatternNine,PatternSeventeen,PatternTwentyThree,PatternSixteen,PatternEighteen,PatternTwentyFive];
+var _2=objj_allocateClassPair(CPObject,"AppController"),_3=_2.isa;
+class_addIvars(_2,[new objj_ivar("contentView"),new objj_ivar("patternView"),new objj_ivar("propertiesController"),new objj_ivar("patternListView")]);
+objj_registerClassPair(_2);
+class_addMethods(_2,[new objj_method(sel_getUid("applicationDidFinishLaunching:"),function(_4,_5,_6){
+with(_4){
+var _7=objj_msgSend(objj_msgSend(CPWindow,"alloc"),"initWithContentRect:styleMask:",CGRectMakeZero(),CPBorderlessBridgeWindowMask);
+contentView=objj_msgSend(_7,"contentView");
+var _8=objj_msgSend(contentView,"bounds");
+if(_8.size.width>500&&_8.size.height>500){
+objj_msgSend(_4,"largeContentView:bounds:",_7,_8);
+}else{
+objj_msgSend(_4,"smallContentView:bounds:",_7,_8);
+}
+}
+})]);
+var _2=objj_getClass("AppController");
+if(!_2){
+throw new SyntaxError("*** Could not find definition for class \"AppController\"");
+}
+var _3=_2.isa;
+class_addMethods(_2,[new objj_method(sel_getUid("largeContentView:bounds:"),function(_9,_a,_b,_c){
+with(_9){
 m_toolBar=objj_msgSend(objj_msgSend(CPToolbar,"alloc"),"initWithIdentifier:","PubEditor");
-objj_msgSend(m_toolBar,"setDelegate:",_3);
+objj_msgSend(m_toolBar,"setDelegate:",_9);
 objj_msgSend(m_toolBar,"setVisible:",true);
-objj_msgSend(_6,"setToolbar:",m_toolBar);
-var _8=objj_msgSend(objj_msgSend(CPScrollView,"alloc"),"initWithFrame:",CGRectMake(0,0,200,CGRectGetHeight(_7)-58));
-objj_msgSend(_8,"setAutohidesScrollers:",YES);
-objj_msgSend(_8,"setAutoresizingMask:",CPViewHeightSizable);
-objj_msgSend(objj_msgSend(_8,"contentView"),"setBackgroundColor:",objj_msgSend(CPColor,"colorWithRed:green:blue:alpha:",213/255,221/255,230/255,1));
-var _9=objj_msgSend(objj_msgSend(CPCollectionViewItem,"alloc"),"init");
-objj_msgSend(_9,"setView:",objj_msgSend(objj_msgSend(PatternListCell,"alloc"),"initWithFrame:",CGRectMakeZero()));
+objj_msgSend(_b,"setToolbar:",m_toolBar);
+var _d=objj_msgSend(objj_msgSend(CPScrollView,"alloc"),"initWithFrame:",CGRectMake(0,0,200,CGRectGetHeight(_c)-58));
+objj_msgSend(_d,"setAutohidesScrollers:",YES);
+objj_msgSend(_d,"setAutoresizingMask:",CPViewHeightSizable);
+objj_msgSend(objj_msgSend(_d,"contentView"),"setBackgroundColor:",objj_msgSend(CPColor,"colorWithRed:green:blue:alpha:",213/255,221/255,230/255,1));
+var _e=objj_msgSend(objj_msgSend(CPCollectionViewItem,"alloc"),"init");
+objj_msgSend(_e,"setView:",objj_msgSend(objj_msgSend(PatternListCell,"alloc"),"initWithFrame:",CGRectMakeZero()));
 patternListView=objj_msgSend(objj_msgSend(CPCollectionView,"alloc"),"initWithFrame:",CGRectMake(0,0,200,0));
-objj_msgSend(patternListView,"setDelegate:",_3);
-objj_msgSend(patternListView,"setItemPrototype:",_9);
+objj_msgSend(patternListView,"setDelegate:",_9);
+objj_msgSend(patternListView,"setItemPrototype:",_e);
 objj_msgSend(patternListView,"setMinItemSize:",CGSizeMake(15,32));
 objj_msgSend(patternListView,"setMaxItemSize:",CGSizeMake(1000,32));
 objj_msgSend(patternListView,"setMaxNumberOfColumns:",1);
 objj_msgSend(patternListView,"setVerticalMargin:",0);
 objj_msgSend(patternListView,"setAutoresizingMask:",CPViewWidthSizable);
-objj_msgSend(_8,"setDocumentView:",patternListView);
-objj_msgSend(patternListView,"setContent:",[PatternOne,PatternEight,PatternFifteen,PatternTwentyFour,PatternTen,PatternFive,PatternTwo,PatternSix,PatternTwentyTwo,PatternFour,PatternThree,PatternNineteen,PatternTwelve,PatternSeven,PatternThirteen,PatternFourteen,PatternEleven,PatternTwenty,PatternTwentyOne,PatternNine,PatternSeventeen,PatternTwentyThree,PatternSixteen,PatternEighteen,PatternTwentyFive]);
-var _a=9;
-var _b=objj_msgSend(patternListView,"content")[_a];
-var _c=objj_msgSend(objj_msgSend(_b,"alloc"),"initWithConfig:",objj_msgSend(_b,"defaultConfig"));
-objj_msgSend(patternListView,"setSelectionIndexes:",objj_msgSend(CPIndexSet,"indexSetWithIndex:",_a));
-var _d=CGRectMake(200,0,700,700);
-patternView=objj_msgSend(objj_msgSend(PatternView,"alloc"),"initWithFrame:",_d);
+objj_msgSend(_d,"setDocumentView:",patternListView);
+objj_msgSend(patternListView,"setContent:",_1);
+var _f=9;
+var _10=objj_msgSend(patternListView,"content")[_f];
+var _11=objj_msgSend(objj_msgSend(_10,"alloc"),"initWithConfig:",objj_msgSend(_10,"defaultConfig"));
+objj_msgSend(patternListView,"setSelectionIndexes:",objj_msgSend(CPIndexSet,"indexSetWithIndex:",_f));
+var _12=CGRectMake(200,0,700,700);
+patternView=objj_msgSend(objj_msgSend(PatternView,"alloc"),"initWithFrame:",_12);
 objj_msgSend(patternView,"setNeedsDisplay:",YES);
-objj_msgSend(patternView,"setPattern:",_c);
-objj_msgSend(contentView,"addSubview:",_8);
+objj_msgSend(patternView,"setPattern:",_11);
+objj_msgSend(contentView,"addSubview:",_d);
 objj_msgSend(contentView,"addSubview:",patternView);
-objj_msgSend(_6,"orderFront:",_3);
+objj_msgSend(_b,"orderFront:",_9);
 objj_msgSend(AboutPatternsDelegate,"popupAlertAndHideAfter:",12);
 }
+}),new objj_method(sel_getUid("smallContentView:bounds:"),function(_13,_14,_15,_16){
+with(_13){
+var _17=PatternFour;
+var _18=objj_msgSend(objj_msgSend(_17,"alloc"),"initWithConfig:",objj_msgSend(_17,"defaultConfig"));
+var _19=CGRectMake(0,0,_16.size.width,_16.size.height);
+patternView=objj_msgSend(objj_msgSend(PatternView,"alloc"),"initWithFrame:",_19);
+objj_msgSend(patternView,"setPattern:",_18);
+objj_msgSend(patternView,"setNeedsDisplay:",YES);
+objj_msgSend(contentView,"addSubview:",patternView);
+objj_msgSend(_15,"orderFront:",_13);
+objj_msgSend(objj_msgSend(PatternSlideShowTimer,"alloc"),"initWithPatternView:",patternView);
+}
 })]);
-var _1=objj_getClass("AppController");
-if(!_1){
+var _2=objj_getClass("AppController");
+if(!_2){
 throw new SyntaxError("*** Could not find definition for class \"AppController\"");
 }
-var _2=_1.isa;
-class_addMethods(_1,[new objj_method(sel_getUid("dumpConfig:"),function(_e,_f,_10){
-with(_e){
+var _3=_2.isa;
+class_addMethods(_2,[new objj_method(sel_getUid("dumpConfig:"),function(_1a,_1b,_1c){
+with(_1a){
 CPLogConsole("Config: "+objj_msgSend(objj_msgSend(patternView,"pattern"),"newPattern"));
 }
-}),new objj_method(sel_getUid("aboutPatterns:"),function(_11,_12,_13){
-with(_11){
+}),new objj_method(sel_getUid("aboutPatterns:"),function(_1d,_1e,_1f){
+with(_1d){
 objj_msgSend(AboutPatternsDelegate,"popupAlert");
 }
-}),new objj_method(sel_getUid("showProperties:"),function(_14,_15,_16){
-with(_14){
+}),new objj_method(sel_getUid("showProperties:"),function(_20,_21,_22){
+with(_20){
 propertiesController=objj_msgSend(PatternSettingsController,"alloc");
 objj_msgSend(propertiesController,"initWithWindowCibName:patternView:","PatternSettings",patternView);
-objj_msgSend(propertiesController,"showWindow:",_14);
+objj_msgSend(propertiesController,"showWindow:",_20);
 }
 })]);
-var _1=objj_getClass("AppController");
-if(!_1){
+var _2=objj_getClass("AppController");
+if(!_2){
 throw new SyntaxError("*** Could not find definition for class \"AppController\"");
 }
-var _2=_1.isa;
-class_addMethods(_1,[new objj_method(sel_getUid("toolbarAllowedItemIdentifiers:"),function(_17,_18,_19){
-with(_17){
-return objj_msgSend(_17,"toolbarDefaultItemIdentifiers:",_19);
+var _3=_2.isa;
+class_addMethods(_2,[new objj_method(sel_getUid("toolbarAllowedItemIdentifiers:"),function(_23,_24,_25){
+with(_23){
+return objj_msgSend(_23,"toolbarDefaultItemIdentifiers:",_25);
 }
-}),new objj_method(sel_getUid("toolbarDefaultItemIdentifiers:"),function(_1a,_1b,_1c){
-with(_1a){
+}),new objj_method(sel_getUid("toolbarDefaultItemIdentifiers:"),function(_26,_27,_28){
+with(_26){
 return ["Properties","StoreConfig",CPToolbarFlexibleSpaceItemIdentifier,"AboutPatterns"];
 }
-}),new objj_method(sel_getUid("toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:"),function(_1d,_1e,_1f,_20,_21){
-with(_1d){
-var _22=objj_msgSend(objj_msgSend(CPToolbarItem,"alloc"),"initWithItemIdentifier:",_20),_23=nil,_24=nil;
-switch(_20){
+}),new objj_method(sel_getUid("toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:"),function(_29,_2a,_2b,_2c,_2d){
+with(_29){
+var _2e=objj_msgSend(objj_msgSend(CPToolbarItem,"alloc"),"initWithItemIdentifier:",_2c),_2f=nil,_30=nil;
+switch(_2c){
 case "AboutPatterns":
-_23=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","",CPSizeMake(32,32));
-_24=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","",CPSizeMake(32,32));
-objj_msgSend(_22,"setLabel:","About This");
-objj_msgSend(_22,"setTarget:",_1d);
-objj_msgSend(_22,"setAction:",sel_getUid("aboutPatterns:"));
-objj_msgSend(_22,"setMinSize:",CGSizeMake(32,32));
-objj_msgSend(_22,"setMaxSize:",CGSizeMake(32,32));
+_2f=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","",CPSizeMake(32,32));
+_30=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","",CPSizeMake(32,32));
+objj_msgSend(_2e,"setLabel:","About This");
+objj_msgSend(_2e,"setTarget:",_29);
+objj_msgSend(_2e,"setAction:",sel_getUid("aboutPatterns:"));
+objj_msgSend(_2e,"setMinSize:",CGSizeMake(32,32));
+objj_msgSend(_2e,"setMaxSize:",CGSizeMake(32,32));
 break;
 case "Properties":
-_23=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","Resources/property_32.png",CPSizeMake(32,32));
-_24=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","Resources/property_32_high.png",CPSizeMake(32,32));
-objj_msgSend(_22,"setLabel:","Pattern Property");
-objj_msgSend(_22,"setTarget:",_1d);
-objj_msgSend(_22,"setAction:",sel_getUid("showProperties:"));
-objj_msgSend(_22,"setMinSize:",CGSizeMake(32,32));
-objj_msgSend(_22,"setMaxSize:",CGSizeMake(32,32));
+_2f=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","Resources/property_32.png",CPSizeMake(32,32));
+_30=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","Resources/property_32_high.png",CPSizeMake(32,32));
+objj_msgSend(_2e,"setLabel:","Pattern Property");
+objj_msgSend(_2e,"setTarget:",_29);
+objj_msgSend(_2e,"setAction:",sel_getUid("showProperties:"));
+objj_msgSend(_2e,"setMinSize:",CGSizeMake(32,32));
+objj_msgSend(_2e,"setMaxSize:",CGSizeMake(32,32));
 break;
 case "StoreConfig":
-_23=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","Resources/add.png",CPSizeMake(30,25));
-_24=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","Resources/addHigh.png",CPSizeMake(30,25));
-objj_msgSend(_22,"setLabel:","Property to Console");
-objj_msgSend(_22,"setTarget:",_1d);
-objj_msgSend(_22,"setAction:",sel_getUid("dumpConfig:"));
-objj_msgSend(_22,"setMinSize:",CGSizeMake(32,32));
-objj_msgSend(_22,"setMaxSize:",CGSizeMake(32,32));
+_2f=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","Resources/add.png",CPSizeMake(30,25));
+_30=objj_msgSend(objj_msgSend(CPImage,"alloc"),"initWithContentsOfFile:size:","Resources/addHigh.png",CPSizeMake(30,25));
+objj_msgSend(_2e,"setLabel:","Property to Console");
+objj_msgSend(_2e,"setTarget:",_29);
+objj_msgSend(_2e,"setAction:",sel_getUid("dumpConfig:"));
+objj_msgSend(_2e,"setMinSize:",CGSizeMake(32,32));
+objj_msgSend(_2e,"setMaxSize:",CGSizeMake(32,32));
 break;
 }
-objj_msgSend(_22,"setImage:",_23);
-objj_msgSend(_22,"setAlternateImage:",_24);
-return _22;
+objj_msgSend(_2e,"setImage:",_2f);
+objj_msgSend(_2e,"setAlternateImage:",_30);
+return _2e;
 }
 })]);
-var _1=objj_getClass("AppController");
-if(!_1){
+var _2=objj_getClass("AppController");
+if(!_2){
 throw new SyntaxError("*** Could not find definition for class \"AppController\"");
 }
-var _2=_1.isa;
-class_addMethods(_1,[new objj_method(sel_getUid("collectionViewDidChangeSelection:"),function(_25,_26,_27){
-with(_25){
-var _28=objj_msgSend(objj_msgSend(_27,"selectionIndexes"),"firstIndex"),key=objj_msgSend(_27,"content")[_28];
-var _29=objj_msgSend(objj_msgSend(key,"alloc"),"initWithConfig:",objj_msgSend(key,"defaultConfig"));
-objj_msgSend(patternView,"setPattern:",_29);
+var _3=_2.isa;
+class_addMethods(_2,[new objj_method(sel_getUid("collectionViewDidChangeSelection:"),function(_31,_32,_33){
+with(_31){
+var _34=objj_msgSend(objj_msgSend(_33,"selectionIndexes"),"firstIndex"),key=objj_msgSend(_33,"content")[_34];
+var _35=objj_msgSend(objj_msgSend(key,"alloc"),"initWithConfig:",objj_msgSend(key,"defaultConfig"));
+objj_msgSend(patternView,"setPattern:",_35);
 objj_msgSend(patternView,"redisplay");
 if(propertiesController){
 objj_msgSend(propertiesController,"close");
 }
 }
 })]);
-var _1=objj_allocateClassPair(CPObject,"AboutPatternsDelegate"),_2=_1.isa;
-objj_registerClassPair(_1);
-class_addMethods(_1,[new objj_method(sel_getUid("alertDidEnd:returnCode:"),function(_2a,_2b,_2c,_2d){
-with(_2a){
-CPLogConsole("Return Code was : "+_2d);
-switch(_2d){
+var _2=objj_allocateClassPair(CPObject,"PatternSlideShowTimer"),_3=_2.isa;
+class_addIvars(_2,[new objj_ivar("m_pattern_view"),new objj_ivar("m_loadPatternInvoker")]);
+objj_registerClassPair(_2);
+class_addMethods(_2,[new objj_method(sel_getUid("initWithPatternView:"),function(_36,_37,_38){
+with(_36){
+_36=objj_msgSendSuper({receiver:_36,super_class:objj_getClass("PatternSlideShowTimer").super_class},"init");
+if(_36){
+m_loadPatternInvoker=objj_msgSend(objj_msgSend(CPInvocation,"alloc"),"initWithMethodSignature:",nil);
+objj_msgSend(m_loadPatternInvoker,"setTarget:",_36);
+objj_msgSend(m_loadPatternInvoker,"setSelector:",sel_getUid("showNewPattern"));
+objj_msgSend(_36,"doneDrawingPattern");
+m_pattern_view=_38;
+objj_msgSend(m_pattern_view,"setDoneDrawDelegate:",_36);
+}
+return _36;
+}
+}),new objj_method(sel_getUid("doneDrawingPattern"),function(_39,_3a){
+with(_39){
+objj_msgSend(CPTimer,"scheduledTimerWithTimeInterval:invocation:repeats:",5,m_loadPatternInvoker,NO);
+}
+}),new objj_method(sel_getUid("showNewPattern"),function(_3b,_3c){
+with(_3b){
+var _3d=objj_msgSend(_1,"indexOfObject:",objj_msgSend(objj_msgSend(m_pattern_view,"pattern"),"class")),_3e=(_3d+1)%objj_msgSend(_1,"count"),_3f=_1[_3e],_40=objj_msgSend(objj_msgSend(_3f,"alloc"),"initWithConfig:",objj_msgSend(_3f,"defaultConfig"));
+objj_msgSend(m_pattern_view,"setPattern:",_40);
+objj_msgSend(m_pattern_view,"redisplay");
+}
+})]);
+var _2=objj_allocateClassPair(CPObject,"AboutPatternsDelegate"),_3=_2.isa;
+objj_registerClassPair(_2);
+class_addMethods(_2,[new objj_method(sel_getUid("alertDidEnd:returnCode:"),function(_41,_42,_43,_44){
+with(_41){
+CPLogConsole("Return Code was : "+_44);
+switch(_44){
 case 1:
 window.open("https://github.com/gorenje/capp_patterns","newwindow","");
 break;
@@ -159,33 +213,33 @@ break;
 }
 }
 })]);
-class_addMethods(_2,[new objj_method(sel_getUid("closeWindow:"),function(_2e,_2f,_30){
-with(_2e){
+class_addMethods(_3,[new objj_method(sel_getUid("closeWindow:"),function(_45,_46,_47){
+with(_45){
 objj_msgSend(CPApp,"stopModal");
-objj_msgSend(objj_msgSend(_30,"window"),"close");
+objj_msgSend(objj_msgSend(_47,"window"),"close");
 }
-}),new objj_method(sel_getUid("popupAlertAndHideAfter:"),function(_31,_32,_33){
-with(_31){
-var _34=objj_msgSend(AboutPatternsDelegate,"popupAlert");
-var _35=objj_msgSend(objj_msgSend(CPInvocation,"alloc"),"initWithMethodSignature:",nil);
-objj_msgSend(_35,"setTarget:",_31);
-objj_msgSend(_35,"setSelector:",sel_getUid("closeWindow:"));
-objj_msgSend(_35,"setArgument:atIndex:",_34,2);
-objj_msgSend(CPTimer,"scheduledTimerWithTimeInterval:invocation:repeats:",_33,_35,NO);
+}),new objj_method(sel_getUid("popupAlertAndHideAfter:"),function(_48,_49,_4a){
+with(_48){
+var _4b=objj_msgSend(AboutPatternsDelegate,"popupAlert");
+var _4c=objj_msgSend(objj_msgSend(CPInvocation,"alloc"),"initWithMethodSignature:",nil);
+objj_msgSend(_4c,"setTarget:",_48);
+objj_msgSend(_4c,"setSelector:",sel_getUid("closeWindow:"));
+objj_msgSend(_4c,"setArgument:atIndex:",_4b,2);
+objj_msgSend(CPTimer,"scheduledTimerWithTimeInterval:invocation:repeats:",_4a,_4c,NO);
 }
-}),new objj_method(sel_getUid("popupAlert"),function(_36,_37){
-with(_36){
-var _38=objj_msgSend(objj_msgSend(AboutPatternsDelegate,"alloc"),"init"),_39=objj_msgSend(objj_msgSend(CPAlert,"alloc"),"init");
-objj_msgSend(_39,"setMessageText:",("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011 Gerrit Riessen"));
-objj_msgSend(_39,"setTitle:","About Capp-Patterns");
-objj_msgSend(_39,"setAlertStyle:",CPInformationalAlertStyle);
-objj_msgSend(_39,"setDelegate:",_38);
-objj_msgSend(_39,"addButtonWithTitle:","OK");
-objj_msgSend(_39,"addButtonWithTitle:","Github");
-objj_msgSend(_39,"addButtonWithTitle:","Book");
-objj_msgSend(_39,"addButtonWithTitle:","Cappuccino");
-objj_msgSend(_39,"runModal");
-return _39;
+}),new objj_method(sel_getUid("popupAlert"),function(_4d,_4e){
+with(_4d){
+var _4f=objj_msgSend(objj_msgSend(AboutPatternsDelegate,"alloc"),"init"),_50=objj_msgSend(objj_msgSend(CPAlert,"alloc"),"init");
+objj_msgSend(_50,"setMessageText:",("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011 Gerrit Riessen"));
+objj_msgSend(_50,"setTitle:","About Capp-Patterns");
+objj_msgSend(_50,"setAlertStyle:",CPInformationalAlertStyle);
+objj_msgSend(_50,"setDelegate:",_4f);
+objj_msgSend(_50,"addButtonWithTitle:","OK");
+objj_msgSend(_50,"addButtonWithTitle:","Github");
+objj_msgSend(_50,"addButtonWithTitle:","Book");
+objj_msgSend(_50,"addButtonWithTitle:","Cappuccino");
+objj_msgSend(_50,"runModal");
+return _50;
 }
 })]);
 p;9;app/app.jt;2131;@STATIC;1.0;i;13;monkeypatch.ji;16;pattern_config.ji;15;pattern_maker.ji;14;patterns/one.ji;14;patterns/two.ji;16;patterns/three.ji;15;patterns/four.ji;15;patterns/five.ji;14;patterns/six.ji;16;patterns/seven.ji;16;patterns/eight.ji;15;patterns/nine.ji;14;patterns/ten.ji;17;patterns/eleven.ji;17;patterns/twelve.ji;19;patterns/thirteen.ji;19;patterns/fourteen.ji;18;patterns/fifteen.ji;18;patterns/sixteen.ji;20;patterns/seventeen.ji;19;patterns/eighteen.ji;19;patterns/nineteen.ji;17;patterns/twenty.ji;20;patterns/twentyone.ji;20;patterns/twentytwo.ji;22;patterns/twentythree.ji;21;patterns/twentyfour.ji;21;patterns/twentyfive.ji;20;views/pattern_view.ji;25;views/pattern_list_cell.ji;41;controllers/pattern_settings_controller.jt;1391;
@@ -257,40 +311,6 @@ objj_msgSend(box,"setAutoresizingMask:",CPViewWidthSizable|CPViewHeightSizable);
 objj_msgSend(box,"setBorderColor:",objj_msgSend(CPColor,"colorWithHexString:","a9aaae"));
 objj_msgSend(box,"setBorderType:",CPLineBorder);
 return box;
-}
-})]);
-p;29;app/views/pattern_list_cell.jt;1621;@STATIC;1.0;t;1602;
-var _1=objj_allocateClassPair(CPView,"PatternListCell"),_2=_1.isa;
-class_addIvars(_1,[new objj_ivar("label"),new objj_ivar("highlightView")]);
-objj_registerClassPair(_1);
-class_addMethods(_1,[new objj_method(sel_getUid("setRepresentedObject:"),function(_3,_4,_5){
-with(_3){
-if(!label){
-label=objj_msgSend(objj_msgSend(CPTextField,"alloc"),"initWithFrame:",CGRectInset(objj_msgSend(_3,"bounds"),4,4));
-objj_msgSend(label,"setFont:",objj_msgSend(CPFont,"systemFontOfSize:",12));
-objj_msgSend(label,"setTextShadowColor:",objj_msgSend(CPColor,"whiteColor"));
-objj_msgSend(label,"setTextShadowOffset:",CGSizeMake(0,1));
-objj_msgSend(_3,"addSubview:",label);
-}
-objj_msgSend(label,"setStringValue:",_5);
-objj_msgSend(label,"sizeToFit");
-objj_msgSend(label,"setFrameOrigin:",CGPointMake(10,CGRectGetHeight(objj_msgSend(label,"bounds"))/2));
-}
-}),new objj_method(sel_getUid("setSelected:"),function(_6,_7,_8){
-with(_6){
-if(!highlightView){
-highlightView=objj_msgSend(objj_msgSend(CPView,"alloc"),"initWithFrame:",CGRectCreateCopy(objj_msgSend(_6,"bounds")));
-objj_msgSend(highlightView,"setBackgroundColor:",objj_msgSend(CPColor,"blueColor"));
-}
-if(_8){
-objj_msgSend(_6,"addSubview:positioned:relativeTo:",highlightView,CPWindowBelow,label);
-objj_msgSend(label,"setTextColor:",objj_msgSend(CPColor,"whiteColor"));
-objj_msgSend(label,"setTextShadowColor:",objj_msgSend(CPColor,"blackColor"));
-}else{
-objj_msgSend(highlightView,"removeFromSuperview");
-objj_msgSend(label,"setTextColor:",objj_msgSend(CPColor,"blackColor"));
-objj_msgSend(label,"setTextShadowColor:",objj_msgSend(CPColor,"whiteColor"));
-}
 }
 })]);
 p;18;app/patterns/one.jt;3400;@STATIC;1.0;t;3381;
@@ -416,7 +436,7 @@ objj_msgSend(m_sub_patterns[idx],"draw:",_28);
 objj_msgSend(_26,"_draw:",_28);
 }
 })]);
-p;20;app/pattern_config.jt;7692;@STATIC;1.0;t;7673;
+p;20;app/pattern_config.jt;7844;@STATIC;1.0;t;7825;
 var _1=objj_allocateClassPair(CPObject,"PatternConfig"),_2=_1.isa;
 class_addIvars(_1,[new objj_ivar("m_number_of_points"),new objj_ivar("m_factor_larger"),new objj_ivar("m_circle"),new objj_ivar("m_show_shapes"),new objj_ivar("m_stroke_colors"),new objj_ivar("m_fill_colors"),new objj_ivar("m_recurse_depth"),new objj_ivar("m_sub_patterns"),new objj_ivar("m_bg_color"),new objj_ivar("m_bg_color_dir"),new objj_ivar("m_rotation")]);
 objj_registerClassPair(_1);
@@ -504,7 +524,7 @@ if(!objj_msgSend(m_bg_color,"isKindOfClass:",GRColor)){
 m_bg_color=objj_msgSend(GRColor,"gradientWithBaseColor:",m_bg_color);
 }
 m_bg_color_dir=objj_msgSend(_2e,"objectForKey:","background_color_direction")||0;
-m_circle=objj_msgSend(GRLinkedCircle,"circleWithCenter:radius:",objj_msgSend(_2e,"objectForKey:","center_point"),objj_msgSend(_2e,"objectForKey:","radius"));
+objj_msgSend(_2c,"setCircleWithCpt:radius:",objj_msgSend(_2e,"objectForKey:","center_point"),objj_msgSend(_2e,"objectForKey:","radius"));
 m_sub_patterns=[];
 if(m_recurse_depth>0){
 var _2f=objj_msgSend(_2c,"sub_circles");
@@ -555,49 +575,53 @@ return objj_msgSend(_42,"compareValue:forConfig:",_44,"factor_larger");
 with(_45){
 return objj_msgSend(_45,"compareValue:forConfig:",_47,"recurse_depth");
 }
-}),new objj_method(sel_getUid("radius"),function(_48,_49){
+}),new objj_method(sel_getUid("setCircleWithCpt:radius:"),function(_48,_49,_4a,_4b){
 with(_48){
-return objj_msgSend(objj_msgSend(_48,"circle"),"radius");
+m_circle=objj_msgSend(GRLinkedCircle,"circleWithCenter:radius:",_4a,_4b);
 }
-}),new objj_method(sel_getUid("fillColorAt:"),function(_4a,_4b,_4c){
-with(_4a){
-return m_fill_colors[_4c%NumberOfColors];
+}),new objj_method(sel_getUid("radius"),function(_4c,_4d){
+with(_4c){
+return objj_msgSend(objj_msgSend(_4c,"circle"),"radius");
 }
-}),new objj_method(sel_getUid("strokeColorAt:"),function(_4d,_4e,_4f){
-with(_4d){
-return m_stroke_colors[_4f%NumberOfColors];
+}),new objj_method(sel_getUid("fillColorAt:"),function(_4e,_4f,_50){
+with(_4e){
+return m_fill_colors[_50%NumberOfColors];
 }
-}),new objj_method(sel_getUid("dumpConfig"),function(_50,_51){
-with(_50){
-var _52=objj_msgSend(_50,"colorArrayToString:",m_stroke_colors);
-var _53=objj_msgSend(_50,"colorArrayToString:",m_fill_colors);
-var _54=objj_msgSend(CPString,"stringWithFormat:","[[GRColor alloc] initWithGradientColors:[%s] baseColor:%s]",objj_msgSend(_50,"colorArrayToString:",objj_msgSend(objj_msgSend(_50,"bgColor"),"gradientColors")),objj_msgSend(objj_msgSend(_50,"bgColor"),"asInitString"));
-return ("[CPDictionary dictionaryWithObjectsAndKeys:"+_54+", \"background_color\", "+objj_msgSend(_50,"bgColorDirection")+", \"background_color_direction\", "+objj_msgSend(_50,"numPoints")+", \"number_of_points\", "+objj_msgSend(_50,"rotation")+", \"rotation\", "+objj_msgSend(_50,"recurseDepth")+", \"recurse_depth\", "+objj_msgSend(_50,"factorLarger")+", \"factor_larger\", [GRPoint pointWithX:"+objj_msgSend(objj_msgSend(objj_msgSend(_50,"circle"),"cpt"),"x")+" Y:"+objj_msgSend(objj_msgSend(objj_msgSend(_50,"circle"),"cpt"),"y")+"], \"center_point\", "+objj_msgSend(_50,"radius")+", \"radius\", "+(objj_msgSend(_50,"showShapes")?"YES":"NO")+", \"show_shapes\", ["+_52+"], \"stroke_colors\", ["+_53+"], \"fill_colors\"];");
+}),new objj_method(sel_getUid("strokeColorAt:"),function(_51,_52,_53){
+with(_51){
+return m_stroke_colors[_53%NumberOfColors];
 }
-}),new objj_method(sel_getUid("config"),function(_55,_56){
-with(_55){
-return objj_eval(objj_msgSend(_55,"dumpConfig"));
+}),new objj_method(sel_getUid("dumpConfig"),function(_54,_55){
+with(_54){
+var _56=objj_msgSend(_54,"colorArrayToString:",m_stroke_colors);
+var _57=objj_msgSend(_54,"colorArrayToString:",m_fill_colors);
+var _58=objj_msgSend(CPString,"stringWithFormat:","[[GRColor alloc] initWithGradientColors:[%s] baseColor:%s]",objj_msgSend(_54,"colorArrayToString:",objj_msgSend(objj_msgSend(_54,"bgColor"),"gradientColors")),objj_msgSend(objj_msgSend(_54,"bgColor"),"asInitString"));
+return ("[CPDictionary dictionaryWithObjectsAndKeys:"+_58+", \"background_color\", "+objj_msgSend(_54,"bgColorDirection")+", \"background_color_direction\", "+objj_msgSend(_54,"numPoints")+", \"number_of_points\", "+objj_msgSend(_54,"rotation")+", \"rotation\", "+objj_msgSend(_54,"recurseDepth")+", \"recurse_depth\", "+objj_msgSend(_54,"factorLarger")+", \"factor_larger\", [GRPoint pointWithX:"+objj_msgSend(objj_msgSend(objj_msgSend(_54,"circle"),"cpt"),"x")+" Y:"+objj_msgSend(objj_msgSend(objj_msgSend(_54,"circle"),"cpt"),"y")+"], \"center_point\", "+objj_msgSend(_54,"radius")+", \"radius\", "+(objj_msgSend(_54,"showShapes")?"YES":"NO")+", \"show_shapes\", ["+_56+"], \"stroke_colors\", ["+_57+"], \"fill_colors\"];");
 }
-}),new objj_method(sel_getUid("newPattern"),function(_57,_58){
-with(_57){
-return ("\n@implementation NewPattern : "+objj_msgSend(_57,"class")+"\n+ (CPDict) defaultConfig"+"\n{\n return "+objj_msgSend(_57,"dumpConfig")+"\n}\n@end\n");
-}
-}),new objj_method(sel_getUid("compareValue:forConfig:"),function(_59,_5a,_5b,_5c){
+}),new objj_method(sel_getUid("config"),function(_59,_5a){
 with(_59){
-var _5d=objj_msgSend(_59,"config");
-if(objj_msgSend(_5d,"objectForKey:",_5c)!==_5b){
-objj_msgSend(_5d,"setObject:forKey:",_5b,_5c);
-return objj_msgSend(objj_msgSend(objj_msgSend(_59,"class"),"alloc"),"initWithConfig:",_5d);
+return objj_eval(objj_msgSend(_59,"dumpConfig"));
 }
-return _59;
+}),new objj_method(sel_getUid("newPattern"),function(_5b,_5c){
+with(_5b){
+return ("\n@implementation NewPattern : "+objj_msgSend(_5b,"class")+"\n+ (CPDict) defaultConfig"+"\n{\n return "+objj_msgSend(_5b,"dumpConfig")+"\n}\n@end\n");
 }
-}),new objj_method(sel_getUid("colorArrayToString:"),function(_5e,_5f,_60){
-with(_5e){
-var _61=[];
-for(var idx=0;idx<objj_msgSend(_60,"count");idx++){
-_61[idx]=objj_msgSend(_60[idx],"asInitString");
+}),new objj_method(sel_getUid("compareValue:forConfig:"),function(_5d,_5e,_5f,_60){
+with(_5d){
+var _61=objj_msgSend(_5d,"config");
+if(objj_msgSend(_61,"objectForKey:",_60)!==_5f){
+objj_msgSend(_61,"setObject:forKey:",_5f,_60);
+return objj_msgSend(objj_msgSend(objj_msgSend(_5d,"class"),"alloc"),"initWithConfig:",_61);
 }
-return objj_msgSend(_61,"componentsJoinedByString:",",");
+return _5d;
+}
+}),new objj_method(sel_getUid("colorArrayToString:"),function(_62,_63,_64){
+with(_62){
+var _65=[];
+for(var idx=0;idx<objj_msgSend(_64,"count");idx++){
+_65[idx]=objj_msgSend(_64[idx],"asInitString");
+}
+return objj_msgSend(_65,"componentsJoinedByString:",",");
 }
 })]);
 p;20;app/patterns/eight.jt;1411;@STATIC;1.0;t;1392;
@@ -1208,9 +1232,43 @@ with(_1b){
 return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(objj_msgSend(GRColor,"alloc"),"initWithGradientColors:baseColor:",[],objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1)),"background_color",0,"background_color_direction",7,"number_of_points",79,"rotation",0,"recurse_depth",1,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",150,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",174,174,174,0.07727272727272727),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.15454545454545454),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.2727272727272727),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",85,85,85,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,85,220,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
-p;24;app/views/pattern_view.jt;1614;@STATIC;1.0;t;1595;
+p;29;app/views/pattern_list_cell.jt;1621;@STATIC;1.0;t;1602;
+var _1=objj_allocateClassPair(CPView,"PatternListCell"),_2=_1.isa;
+class_addIvars(_1,[new objj_ivar("label"),new objj_ivar("highlightView")]);
+objj_registerClassPair(_1);
+class_addMethods(_1,[new objj_method(sel_getUid("setRepresentedObject:"),function(_3,_4,_5){
+with(_3){
+if(!label){
+label=objj_msgSend(objj_msgSend(CPTextField,"alloc"),"initWithFrame:",CGRectInset(objj_msgSend(_3,"bounds"),4,4));
+objj_msgSend(label,"setFont:",objj_msgSend(CPFont,"systemFontOfSize:",12));
+objj_msgSend(label,"setTextShadowColor:",objj_msgSend(CPColor,"whiteColor"));
+objj_msgSend(label,"setTextShadowOffset:",CGSizeMake(0,1));
+objj_msgSend(_3,"addSubview:",label);
+}
+objj_msgSend(label,"setStringValue:",_5);
+objj_msgSend(label,"sizeToFit");
+objj_msgSend(label,"setFrameOrigin:",CGPointMake(10,CGRectGetHeight(objj_msgSend(label,"bounds"))/2));
+}
+}),new objj_method(sel_getUid("setSelected:"),function(_6,_7,_8){
+with(_6){
+if(!highlightView){
+highlightView=objj_msgSend(objj_msgSend(CPView,"alloc"),"initWithFrame:",CGRectCreateCopy(objj_msgSend(_6,"bounds")));
+objj_msgSend(highlightView,"setBackgroundColor:",objj_msgSend(CPColor,"blueColor"));
+}
+if(_8){
+objj_msgSend(_6,"addSubview:positioned:relativeTo:",highlightView,CPWindowBelow,label);
+objj_msgSend(label,"setTextColor:",objj_msgSend(CPColor,"whiteColor"));
+objj_msgSend(label,"setTextShadowColor:",objj_msgSend(CPColor,"blackColor"));
+}else{
+objj_msgSend(highlightView,"removeFromSuperview");
+objj_msgSend(label,"setTextColor:",objj_msgSend(CPColor,"blackColor"));
+objj_msgSend(label,"setTextShadowColor:",objj_msgSend(CPColor,"whiteColor"));
+}
+}
+})]);
+p;24;app/views/pattern_view.jt;2530;@STATIC;1.0;t;2511;
 var _1=objj_allocateClassPair(GRRotateView,"PatternView"),_2=_1.isa;
-class_addIvars(_1,[new objj_ivar("m_pattern")]);
+class_addIvars(_1,[new objj_ivar("m_pattern"),new objj_ivar("m_circle_center"),new objj_ivar("m_radius_scale_factor"),new objj_ivar("m_done_draw_delegate")]);
 objj_registerClassPair(_1);
 class_addMethods(_1,[new objj_method(sel_getUid("pattern"),function(_3,_4){
 with(_3){
@@ -1220,31 +1278,52 @@ return m_pattern;
 with(_5){
 m_pattern=_7;
 }
-}),new objj_method(sel_getUid("initWithFrame:"),function(_8,_9,_a){
+}),new objj_method(sel_getUid("doneDrawDelegate"),function(_8,_9){
 with(_8){
-_8=objj_msgSendSuper({receiver:_8,super_class:objj_getClass("PatternView").super_class},"initWithFrame:",_a);
-if(_8){
-objj_msgSend(_8,"setClipsToBounds:",YES);
+return m_done_draw_delegate;
 }
-return _8;
+}),new objj_method(sel_getUid("setDoneDrawDelegate:"),function(_a,_b,_c){
+with(_a){
+m_done_draw_delegate=_c;
 }
-}),new objj_method(sel_getUid("setPattern:"),function(_b,_c,_d){
-with(_b){
-m_pattern=_d;
-objj_msgSend(_b,"setRotation:",(objj_msgSend(m_pattern,"rotation")*(Math.PI/180)));
+}),new objj_method(sel_getUid("initWithFrame:"),function(_d,_e,_f){
+with(_d){
+_d=objj_msgSendSuper({receiver:_d,super_class:objj_getClass("PatternView").super_class},"initWithFrame:",_f);
+if(_d){
+objj_msgSend(_d,"setClipsToBounds:",YES);
+if(_f.size.width<700||_f.size.height<700){
+m_radius_scale_factor=MAX(_f.size.width/700,_f.size.height/700);
+m_circle_center=objj_msgSend(GRPoint,"pointWithX:Y:",CGRectGetMidX(_f),CGRectGetMidY(_f));
+}else{
+m_circle_center=m_radius_scale_factor=nil;
 }
-}),new objj_method(sel_getUid("drawLayer:inContext:"),function(_e,_f,_10,_11){
-with(_e){
-var _12=objj_msgSend(objj_msgSend(objj_msgSend(_e,"pattern"),"bgColor"),"gradientColors")[2]||objj_msgSend(objj_msgSend(_e,"pattern"),"bgColor");
-objj_msgSend(objj_msgSend(_e,"superview"),"setBackgroundColor:",_12);
-var _13=(objj_msgSend(objj_msgSend(_e,"pattern"),"bgColorDirection")==0?CGPointMake(CGRectGetWidth(objj_msgSend(_e,"bounds")),0):CGPointMake(0,CGRectGetHeight(objj_msgSend(_e,"bounds"))));
-CGContextAddRect(_11,objj_msgSend(_e,"bounds"));
-CGContextDrawLinearGradient(_11,objj_msgSend(objj_msgSend(objj_msgSend(_e,"pattern"),"bgColor"),"gradient"),CGPointMake(0,0),_13);
+m_done_draw_action=m_done_draw_delegate=nil;
+}
+return _d;
+}
+}),new objj_method(sel_getUid("setPattern:"),function(_10,_11,_12){
+with(_10){
+m_pattern=_12;
+if(m_circle_center&&m_radius_scale_factor){
+objj_msgSend(m_pattern,"setCircleWithCpt:radius:",m_circle_center,objj_msgSend(m_pattern,"radius")*m_radius_scale_factor);
+}
+objj_msgSend(_10,"setRotation:",(objj_msgSend(m_pattern,"rotation")*(Math.PI/180)));
+}
+}),new objj_method(sel_getUid("drawLayer:inContext:"),function(_13,_14,_15,_16){
+with(_13){
+var _17=objj_msgSend(objj_msgSend(objj_msgSend(_13,"pattern"),"bgColor"),"gradientColors")[2]||objj_msgSend(objj_msgSend(_13,"pattern"),"bgColor");
+objj_msgSend(objj_msgSend(_13,"superview"),"setBackgroundColor:",_17);
+var _18=(objj_msgSend(objj_msgSend(_13,"pattern"),"bgColorDirection")==0?CGPointMake(CGRectGetWidth(objj_msgSend(_13,"bounds")),0):CGPointMake(0,CGRectGetHeight(objj_msgSend(_13,"bounds"))));
+CGContextAddRect(_16,objj_msgSend(_13,"bounds"));
+CGContextDrawLinearGradient(_16,objj_msgSend(objj_msgSend(objj_msgSend(_13,"pattern"),"bgColor"),"gradient"),CGPointMake(0,0),_18);
 try{
-objj_msgSend(objj_msgSend(_e,"pattern"),"draw:",_11);
+objj_msgSend(objj_msgSend(_13,"pattern"),"draw:",_16);
 }
 catch(e){
 CPLogConsole("Exception: happend, configuration broke everything");
+}
+if(m_done_draw_delegate){
+objj_msgSend(m_done_draw_delegate,"performSelector:","doneDrawingPattern");
 }
 }
 })]);
