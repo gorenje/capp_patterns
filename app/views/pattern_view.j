@@ -30,10 +30,11 @@
 
   if ( self ) {
     [self setClipsToBounds:YES];
-    if ( aFrame.size.width < 700 || aFrame.size.height < 700 ) {
+    if ( aFrame.size.width != 700 || aFrame.size.height != 700 ) {
       m_radius_scale_factor = MAX( aFrame.size.width / 700, aFrame.size.height / 700 );
-      m_circle_center = [GRPoint pointWithX:CGRectGetMidX(aFrame)
-                                          Y:CGRectGetMidY(aFrame)];
+      m_circle_center = [GRPoint pointWithX:aFrame.size.width/2
+                                          Y:aFrame.size.height/2];
+      if ( m_radius_scale_factor > 1 ) m_radius_scale_factor = 1;
     } else {
       m_circle_center = m_radius_scale_factor = nil;
     }

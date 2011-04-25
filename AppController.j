@@ -109,7 +109,7 @@ var allPatternClassesNoRecursion = [PatternOne,
   var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
   [patternListView setSelectionIndexes:[CPIndexSet indexSetWithIndex:showPatternIdx]];
 
-  var rect = CGRectMake(200,0,700,700);
+  var rect = CGRectMake(200,0,bounds.size.width - 200, bounds.size.height - 58);
   patternView = [[PatternView alloc] initWithFrame:rect];
   [patternView setNeedsDisplay:YES];
   [patternView setPattern:pattern];
