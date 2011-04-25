@@ -26,6 +26,16 @@
 
 GRMaxColorStop = 6;
 
+var allPatternClasses = [PatternOne, PatternEight, PatternFifteen,
+                         PatternTwentyFour,
+                         PatternTen, PatternFive, PatternTwo, PatternSix,
+                         PatternTwentyTwo, PatternFour, PatternThree, PatternNineteen,
+                         PatternTwelve, PatternSeven,
+                         PatternThirteen, PatternFourteen, PatternEleven,
+                         PatternTwenty,PatternTwentyOne,
+                         PatternNine, PatternSeventeen, PatternTwentyThree,
+                         PatternSixteen, PatternEighteen, PatternTwentyFive];
+
 @implementation AppController : CPObject
 {
   CPView                    contentView;
@@ -37,23 +47,35 @@ GRMaxColorStop = 6;
 
 - (void)applicationDidFinishLaunching:(CPNotification)aNotification
 {
-  var theWindow = [[CPWindow alloc] initWithContentRect:CGRectMakeZero() 
+  var theWindow = [[CPWindow alloc] initWithContentRect:CGRectMakeZero()
                                               styleMask:CPBorderlessBridgeWindowMask];
   contentView = [theWindow contentView];
-
   var bounds = [contentView bounds];
 
+  if ( bounds.size.width > 500 && bounds.size.height > 500 ) {
+    [self largeContentView:theWindow bounds:bounds];
+  } else {
+    [self smallContentView:theWindow bounds:bounds];
+  }
+}
+
+@end
+
+@implementation AppController (ContentViewSize)
+
+- (void)largeContentView:(CPWindow)theWindow bounds:(CGRect)bounds
+{
   m_toolBar = [[CPToolbar alloc] initWithIdentifier:"PubEditor"];
   [m_toolBar setDelegate:self];
   [m_toolBar setVisible:true];
   [theWindow setToolbar:m_toolBar];
 
-  var listScrollView = [[CPScrollView alloc] 
+  var listScrollView = [[CPScrollView alloc]
                            initWithFrame:CGRectMake(0, 0, 200, CGRectGetHeight(bounds) - 58)];
   [listScrollView setAutohidesScrollers:YES];
   [listScrollView setAutoresizingMask:CPViewHeightSizable];
-  [[listScrollView contentView] 
-      setBackgroundColor:[CPColor colorWithRed:213.0/255.0 
+  [[listScrollView contentView]
+      setBackgroundColor:[CPColor colorWithRed:213.0/255.0
                                          green:221.0/255.0 blue:230.0/255.0 alpha:1.0]];
 
   var photosListItem = [[CPCollectionViewItem alloc] init];
@@ -68,30 +90,38 @@ GRMaxColorStop = 6;
   [patternListView setVerticalMargin:0.0];
   [patternListView setAutoresizingMask:CPViewWidthSizable];
   [listScrollView setDocumentView:patternListView];
-  [patternListView setContent:[ PatternOne, PatternEight, PatternFifteen,
-                                PatternTwentyFour,
-                                PatternTen, PatternFive, PatternTwo, PatternSix, 
-                                PatternTwentyTwo, PatternFour, PatternThree, PatternNineteen,
-                                PatternTwelve, PatternSeven,
-                                PatternThirteen, PatternFourteen, PatternEleven, 
-                                PatternTwenty,PatternTwentyOne,
-                                PatternNine, PatternSeventeen, PatternTwentyThree,
-                                PatternSixteen, PatternEighteen, PatternTwentyFive ]];
+  [patternListView setContent:allPatternClasses];
+
   var showPatternIdx = 9;
   var patternClass = [patternListView content][showPatternIdx];
   var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
   [patternListView setSelectionIndexes:[CPIndexSet indexSetWithIndex:showPatternIdx]];
-    
+
   var rect = CGRectMake(200,0,700,700);
   patternView = [[PatternView alloc] initWithFrame:rect];
   [patternView setNeedsDisplay:YES];
   [patternView setPattern:pattern];
 
-  [contentView addSubview:listScrollView];    
+  [contentView addSubview:listScrollView];
   [contentView addSubview:patternView];
   [theWindow orderFront:self];
   [AboutPatternsDelegate popupAlertAndHideAfter:12];
 }
+
+- (void)smallContentView:(CPWindow)theWindow bounds:(CGRect)bounds
+{
+  var patternClass = PatternFour;
+  var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
+  var rect = CGRectMake(0,0,bounds.size.width,bounds.size.height);
+
+  patternView = [[PatternView alloc] initWithFrame:rect];
+  [patternView setPattern:pattern];
+  [patternView setNeedsDisplay:YES];
+  [contentView addSubview:patternView];
+  [theWindow orderFront:self];
+  [[PatternSlideShowTimer alloc] initWithPatternView:patternView];
+}
+
 @end
 
 @implementation AppController (Actions)
@@ -124,17 +154,17 @@ GRMaxColorStop = 6;
 
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
-  return ["Properties", "StoreConfig", 
+  return ["Properties", "StoreConfig",
           CPToolbarFlexibleSpaceItemIdentifier, "AboutPatterns"];
 }
 
-- (CPToolbarItem)toolbar:(CPToolbar)aToolbar 
-   itemForItemIdentifier:(CPString)anItemIdentifier 
+- (CPToolbarItem)toolbar:(CPToolbar)aToolbar
+   itemForItemIdentifier:(CPString)anItemIdentifier
 willBeInsertedIntoToolbar:(BOOL)aFlag
 {
-  var toolbarItem = [[CPToolbarItem alloc] 
-                      initWithItemIdentifier:anItemIdentifier], 
-    image = nil, 
+  var toolbarItem = [[CPToolbarItem alloc]
+                      initWithItemIdentifier:anItemIdentifier],
+    image = nil,
     highlighted = nil;
 
   switch ( anItemIdentifier ) {
@@ -194,6 +224,47 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   [patternView setPattern:pattern];
   [patternView redisplay];
   if ( propertiesController ) [propertiesController close];
+}
+
+@end
+
+@implementation PatternSlideShowTimer : CPObject
+{
+  PatternView m_pattern_view;
+  CPInvocation m_loadPatternInvoker;
+}
+
+- (id)initWithPatternView:(PatternView)aPatternView
+{
+  self = [super init];
+  if ( self ) {
+    m_loadPatternInvoker = [[CPInvocation alloc] initWithMethodSignature:nil];
+    [m_loadPatternInvoker setTarget:self];
+    [m_loadPatternInvoker setSelector:@selector(showNewPattern)];
+    [self doneDrawingPattern];
+
+    m_pattern_view = aPatternView;
+    [m_pattern_view setDoneDrawDelegate:self];
+  }
+  return self;
+}
+
+- (void)doneDrawingPattern
+{
+  [CPTimer scheduledTimerWithTimeInterval:5
+                               invocation:m_loadPatternInvoker
+                                  repeats:NO];
+}
+
+- (void)showNewPattern
+{
+  var curr_index = [allPatternClasses indexOfObject:[[m_pattern_view pattern] class]],
+    new_index = (curr_index + 1 ) % [allPatternClasses count],
+    pattern_class = allPatternClasses[new_index],
+    new_pattern = [[pattern_class alloc] initWithConfig:[pattern_class defaultConfig]];
+
+  [m_pattern_view setPattern:new_pattern];
+  [m_pattern_view redisplay];
 }
 
 @end

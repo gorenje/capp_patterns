@@ -52,8 +52,9 @@
     }
     m_bg_color_dir     = [config objectForKey:"background_color_direction"] || 0;
 
-    m_circle = [GRLinkedCircle circleWithCenter:[config objectForKey:"center_point"]
-                                         radius:[config objectForKey:"radius"]];
+    [self setCircleWithCpt:[config objectForKey:"center_point"]
+                    radius:[config objectForKey:"radius"]];
+
     m_sub_patterns = [];
     if ( m_recurse_depth > 0 ) {
       var subs = [self sub_circles];
@@ -112,6 +113,11 @@
   return [self compareValue:aValue forConfig:"recurse_depth"];
 }
 
+- (void)setCircleWithCpt:(GRPoint)aCenterPoint radius:(float)aRadius
+{
+  m_circle = [GRLinkedCircle circleWithCenter:aCenterPoint radius:aRadius];
+}
+
 //
 // Getters
 ////
@@ -134,11 +140,11 @@
 {
   var sclr_str = [self colorArrayToString:m_stroke_colors];
   var fclr_str = [self colorArrayToString:m_fill_colors];
-  var bg_clr_str = [CPString 
+  var bg_clr_str = [CPString
                      stringWithFormat:"[[GRColor alloc] initWithGradientColors:[%s] baseColor:%s]",
                      [self colorArrayToString:[[self bgColor] gradientColors]],
                      [[self bgColor] asInitString]];
-  
+
   return ("[CPDictionary dictionaryWithObjectsAndKeys:"+
     bg_clr_str +", \"background_color\", " +
     [self bgColorDirection] +", \"background_color_direction\", " +
@@ -147,7 +153,7 @@
     [self recurseDepth]+", \"recurse_depth\", "+
     [self factorLarger]+", \"factor_larger\", [GRPoint pointWithX:"+
     [[[self circle] cpt] x]+" Y:"+
-    [[[self circle] cpt] y]+"], \"center_point\", " + [self radius]+", \"radius\", " + 
+    [[[self circle] cpt] y]+"], \"center_point\", " + [self radius]+", \"radius\", " +
     ([self showShapes] ? "YES" : "NO") + ", \"show_shapes\", [" +
     sclr_str +"], \"stroke_colors\", [" +
     fclr_str +"], \"fill_colors\"];");
