@@ -36,7 +36,7 @@ var allPatternClasses = [PatternOne, PatternEight, PatternFifteen,
                          PatternNine, PatternSeventeen, PatternTwentyThree,
                          PatternSixteen, PatternEighteen, PatternTwentyFive,
                          PatternTwentySix,PatternTwentySeven,
-                                   PatternTwentyEight];
+                                   PatternTwentyEight,PatternTwentyNine,PatternThirty];
 
 /*
   These are used on a small display --> smaller cpu --> they display quicker
@@ -50,7 +50,7 @@ var allPatternClassesNoRecursion = [PatternOne,
                          PatternSeventeen, PatternTwentyThree,
                          PatternEighteen, PatternTwentyFive,
                          PatternTwentySix,PatternTwentySeven,
-                                   PatternTwentyEight];
+                                              PatternTwentyEight,PatternTwentyNine,PatternThirty];
 
 @implementation AppController : CPObject
 {
