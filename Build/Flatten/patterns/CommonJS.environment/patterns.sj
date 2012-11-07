@@ -1,4 +1,4 @@
-@STATIC;1.0;p;9;app/app.jt;2131;@STATIC;1.0;i;13;monkeypatch.ji;16;pattern_config.ji;15;pattern_maker.ji;14;patterns/one.ji;14;patterns/two.ji;16;patterns/three.ji;15;patterns/four.ji;15;patterns/five.ji;14;patterns/six.ji;16;patterns/seven.ji;16;patterns/eight.ji;15;patterns/nine.ji;14;patterns/ten.ji;17;patterns/eleven.ji;17;patterns/twelve.ji;19;patterns/thirteen.ji;19;patterns/fourteen.ji;18;patterns/fifteen.ji;18;patterns/sixteen.ji;20;patterns/seventeen.ji;19;patterns/eighteen.ji;19;patterns/nineteen.ji;17;patterns/twenty.ji;20;patterns/twentyone.ji;20;patterns/twentytwo.ji;22;patterns/twentythree.ji;21;patterns/twentyfour.ji;21;patterns/twentyfive.ji;20;views/pattern_view.ji;25;views/pattern_list_cell.ji;41;controllers/pattern_settings_controller.jt;1391;
+@STATIC;1.0;p;9;app/app.jt;2352;@STATIC;1.0;i;13;monkeypatch.ji;16;pattern_config.ji;15;pattern_maker.ji;14;patterns/one.ji;14;patterns/two.ji;16;patterns/three.ji;15;patterns/four.ji;15;patterns/five.ji;14;patterns/six.ji;16;patterns/seven.ji;16;patterns/eight.ji;15;patterns/nine.ji;14;patterns/ten.ji;17;patterns/eleven.ji;17;patterns/twelve.ji;19;patterns/thirteen.ji;19;patterns/fourteen.ji;18;patterns/fifteen.ji;18;patterns/sixteen.ji;20;patterns/seventeen.ji;19;patterns/eighteen.ji;19;patterns/nineteen.ji;17;patterns/twenty.ji;20;patterns/twentyone.ji;20;patterns/twentytwo.ji;22;patterns/twentythree.ji;21;patterns/twentyfour.ji;21;patterns/twentyfive.ji;20;patterns/twentysix.ji;22;patterns/twentyseven.ji;22;patterns/twentyeight.ji;20;views/pattern_view.ji;25;views/pattern_list_cell.ji;41;controllers/pattern_settings_controller.jt;1533;
 NumberOfColors=6;
 objj_executeFile("monkeypatch.j",YES);
 objj_executeFile("pattern_config.j",YES);
@@ -28,6 +28,9 @@ objj_executeFile("patterns/twentytwo.j",YES);
 objj_executeFile("patterns/twentythree.j",YES);
 objj_executeFile("patterns/twentyfour.j",YES);
 objj_executeFile("patterns/twentyfive.j",YES);
+objj_executeFile("patterns/twentysix.j",YES);
+objj_executeFile("patterns/twentyseven.j",YES);
+objj_executeFile("patterns/twentyeight.j",YES);
 objj_executeFile("views/pattern_view.j",YES);
 objj_executeFile("views/pattern_list_cell.j",YES);
 objj_executeFile("controllers/pattern_settings_controller.j",YES);
@@ -966,6 +969,14 @@ with(_3){
 return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",94,59,255,1),"background_color",40,"number_of_points",0,"rotation",0,"recurse_depth",0.48,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",184,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,100,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.33636363636363636),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.3),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",51,32,255,0.5363636363636364),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,0.6454545454545455),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
 }
 })]);
+p;26;app/patterns/twentyeight.jt;1963;@STATIC;1.0;t;1944;
+var _1=objj_allocateClassPair(PatternThree,"PatternTwentyEight"),_2=_1.isa;
+objj_registerClassPair(_1);
+class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_3,_4){
+with(_3){
+return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(objj_msgSend(GRColor,"alloc"),"initWithGradientColors:baseColor:",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,0,0,0.7454545454545455),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,0,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,0,1)],objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1)),"background_color",1,"background_color_direction",50,"number_of_points",180,"rotation",0,"recurse_depth",0.98,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",806,496),"center_point",152,"radius",NO,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",174,174,174,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",114,255,13,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",83,255,89,0.25),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,0.12272727272727273),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,0.42272727272727273)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,0,0.05909090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
+}
+})]);
 p;25;app/patterns/twentyfive.jt;4644;@STATIC;1.0;t;4625;
 var _1=objj_allocateClassPair(PatternMaker,"PatternTwentyFive"),_2=_1.isa;
 objj_registerClassPair(_1);
@@ -1048,6 +1059,22 @@ objj_registerClassPair(_1);
 class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_3,_4){
 with(_3){
 return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",94,59,255,1),"background_color",50,"number_of_points",0,"rotation",0,"recurse_depth",1.12,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",350,350),"center_point",158,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,100,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",51,32,255,0.8),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.08181818181818182),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.08181818181818182),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",185,181,21,0.7181818181818181),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
+}
+})]);
+p;26;app/patterns/twentyseven.jt;1822;@STATIC;1.0;t;1803;
+var _1=objj_allocateClassPair(PatternThirteen,"PatternTwentySeven"),_2=_1.isa;
+objj_registerClassPair(_1);
+class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_3,_4){
+with(_3){
+return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(objj_msgSend(GRColor,"alloc"),"initWithGradientColors:baseColor:",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",39,19,35,0.6454545454545455),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.16363636363636364)],objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,255,1)),"background_color",1,"background_color_direction",50,"number_of_points",0,"rotation",0,"recurse_depth",0.98,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",806,496),"center_point",152,"radius",NO,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",174,174,174,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,255,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",83,255,89,0.25),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,0,0.07727272727272727),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,0,0.07727272727272727),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,96,175,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,200,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0)],"fill_colors");
+}
+})]);
+p;24;app/patterns/twentysix.jt;1849;@STATIC;1.0;t;1830;
+var _1=objj_allocateClassPair(PatternTwo,"PatternTwentySix"),_2=_1.isa;
+objj_registerClassPair(_1);
+class_addMethods(_2,[new objj_method(sel_getUid("defaultConfig"),function(_3,_4){
+with(_3){
+return objj_msgSend(CPDictionary,"dictionaryWithObjectsAndKeys:",objj_msgSend(objj_msgSend(GRColor,"alloc"),"initWithGradientColors:baseColor:",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,0,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",39,19,35,0.6454545454545455),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,0,0,0.16363636363636364)],objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",3,3,3,1)),"background_color",0,"background_color_direction",14,"number_of_points",0,"rotation",1,"recurse_depth",0.44,"factor_larger",objj_msgSend(GRPoint,"pointWithX:Y:",820.5,486),"center_point",140,"radius",YES,"show_shapes",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,255,0,0.5409090909090909),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",23,255,10,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,0,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",14,10,255,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,10,1),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,23,10,1)],"stroke_colors",[objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",252,255,13,0.33636363636363636),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",198,157,165,0),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,0.02727272727272727),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",255,2,8,0.5),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",0,255,0,0.7772727272727272),objj_msgSend(CPColor,"colorWith8BitRed:green:blue:alpha:",200,23,10,1)],"fill_colors");
 }
 })]);
 p;26;app/patterns/twentythree.jt;1504;@STATIC;1.0;t;1485;
@@ -1233,7 +1260,7 @@ objj_msgSend(m_done_draw_delegate,"performSelector:","doneDrawingPattern");
 }
 }
 })]);
-p;15;AppController.jt;12486;@STATIC;1.0;I;21;Foundation/CPObject.jI;16;AppKit/CPColor.jI;13;GRKit/GRKit.jI;29;GRKit/g_r_color_stop_picker.ji;9;app/app.ji;17;app/monkeypatch.jt;12332;
+p;15;AppController.jt;12610;@STATIC;1.0;I;21;Foundation/CPObject.jI;16;AppKit/CPColor.jI;13;GRKit/GRKit.jI;29;GRKit/g_r_color_stop_picker.ji;9;app/app.ji;17;app/monkeypatch.jt;12456;
 objj_executeFile("Foundation/CPObject.j",NO);
 objj_executeFile("AppKit/CPColor.j",NO);
 objj_executeFile("GRKit/GRKit.j",NO);
@@ -1241,8 +1268,8 @@ objj_executeFile("GRKit/g_r_color_stop_picker.j",NO);
 objj_executeFile("app/app.j",YES);
 objj_executeFile("app/monkeypatch.j",YES);
 GRMaxColorStop=6;
-var _1=[PatternOne,PatternEight,PatternFifteen,PatternTwentyFour,PatternTen,PatternFive,PatternTwo,PatternSix,PatternTwentyTwo,PatternFour,PatternThree,PatternNineteen,PatternTwelve,PatternSeven,PatternThirteen,PatternFourteen,PatternEleven,PatternTwenty,PatternTwentyOne,PatternNine,PatternSeventeen,PatternTwentyThree,PatternSixteen,PatternEighteen,PatternTwentyFive];
-var _2=[PatternOne,PatternTen,PatternFive,PatternTwo,PatternSix,PatternTwentyTwo,PatternFour,PatternTwelve,PatternSeven,PatternThirteen,PatternFourteen,PatternEleven,PatternTwenty,PatternTwentyOne,PatternSeventeen,PatternTwentyThree,PatternEighteen,PatternTwentyFive];
+var _1=[PatternOne,PatternEight,PatternFifteen,PatternTwentyFour,PatternTen,PatternFive,PatternTwo,PatternSix,PatternTwentyTwo,PatternFour,PatternThree,PatternNineteen,PatternTwelve,PatternSeven,PatternThirteen,PatternFourteen,PatternEleven,PatternTwenty,PatternTwentyOne,PatternNine,PatternSeventeen,PatternTwentyThree,PatternSixteen,PatternEighteen,PatternTwentyFive,PatternTwentySix,PatternTwentySeven,PatternTwentyEight];
+var _2=[PatternOne,PatternTen,PatternFive,PatternTwo,PatternSix,PatternTwentyTwo,PatternFour,PatternTwelve,PatternSeven,PatternThirteen,PatternFourteen,PatternEleven,PatternTwenty,PatternTwentyOne,PatternSeventeen,PatternTwentyThree,PatternEighteen,PatternTwentyFive,PatternTwentySix,PatternTwentySeven,PatternTwentyEight];
 var _3=objj_allocateClassPair(CPObject,"AppController"),_4=_3.isa;
 class_addIvars(_3,[new objj_ivar("contentView"),new objj_ivar("patternView"),new objj_ivar("propertiesController"),new objj_ivar("patternListView")]);
 objj_registerClassPair(_3);
@@ -1285,7 +1312,7 @@ objj_msgSend(patternListView,"setVerticalMargin:",0);
 objj_msgSend(patternListView,"setAutoresizingMask:",CPViewWidthSizable);
 objj_msgSend(_e,"setDocumentView:",patternListView);
 objj_msgSend(patternListView,"setContent:",_1);
-var _10=9;
+var _10=27;
 var _11=objj_msgSend(patternListView,"content")[_10];
 var _12=objj_msgSend(objj_msgSend(_11,"alloc"),"initWithConfig:",objj_msgSend(_11,"defaultConfig"));
 objj_msgSend(patternListView,"setSelectionIndexes:",objj_msgSend(CPIndexSet,"indexSetWithIndex:",_10));
@@ -1300,7 +1327,7 @@ objj_msgSend(AboutPatternsDelegate,"popupAlertAndHideAfter:",12);
 }
 }),new objj_method(sel_getUid("smallContentView:bounds:"),function(_14,_15,_16,_17){
 with(_14){
-var _18=PatternFour;
+var _18=PatternTwentyEight;
 var _19=objj_msgSend(objj_msgSend(_18,"alloc"),"initWithConfig:",objj_msgSend(_18,"defaultConfig"));
 var _1a=CGRectMake(0,0,_17.size.width,_17.size.height);
 patternView=objj_msgSend(objj_msgSend(PatternView,"alloc"),"initWithFrame:",_1a);
@@ -1459,7 +1486,7 @@ objj_msgSend(CPTimer,"scheduledTimerWithTimeInterval:invocation:repeats:",_4b,_4
 }),new objj_method(sel_getUid("popupAlert"),function(_4e,_4f){
 with(_4e){
 var _50=objj_msgSend(objj_msgSend(AboutPatternsDelegate,"alloc"),"init"),_51=objj_msgSend(objj_msgSend(CPAlert,"alloc"),"init");
-objj_msgSend(_51,"setMessageText:",("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011 Gerrit Riessen"));
+objj_msgSend(_51,"setMessageText:",("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011, 2012 Gerrit Riessen"));
 objj_msgSend(_51,"setTitle:","About Capp-Patterns");
 objj_msgSend(_51,"setAlertStyle:",CPInformationalAlertStyle);
 objj_msgSend(_51,"setDelegate:",_50);

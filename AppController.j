@@ -34,7 +34,9 @@ var allPatternClasses = [PatternOne, PatternEight, PatternFifteen,
                          PatternThirteen, PatternFourteen, PatternEleven,
                          PatternTwenty,PatternTwentyOne,
                          PatternNine, PatternSeventeen, PatternTwentyThree,
-                         PatternSixteen, PatternEighteen, PatternTwentyFive];
+                         PatternSixteen, PatternEighteen, PatternTwentyFive,
+                         PatternTwentySix,PatternTwentySeven,
+                                   PatternTwentyEight];
 
 /*
   These are used on a small display --> smaller cpu --> they display quicker
@@ -46,7 +48,9 @@ var allPatternClassesNoRecursion = [PatternOne,
                          PatternThirteen, PatternFourteen, PatternEleven,
                          PatternTwenty,PatternTwentyOne,
                          PatternSeventeen, PatternTwentyThree,
-                         PatternEighteen, PatternTwentyFive];
+                         PatternEighteen, PatternTwentyFive,
+                         PatternTwentySix,PatternTwentySeven,
+                                   PatternTwentyEight];
 
 @implementation AppController : CPObject
 {
@@ -104,7 +108,7 @@ var allPatternClassesNoRecursion = [PatternOne,
   [listScrollView setDocumentView:patternListView];
   [patternListView setContent:allPatternClasses];
 
-  var showPatternIdx = 9;
+  var showPatternIdx = 27;
   var patternClass = [patternListView content][showPatternIdx];
   var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
   [patternListView setSelectionIndexes:[CPIndexSet indexSetWithIndex:showPatternIdx]];
@@ -122,7 +126,7 @@ var allPatternClassesNoRecursion = [PatternOne,
 
 - (void)smallContentView:(CPWindow)theWindow bounds:(CGRect)bounds
 {
-  var patternClass = PatternFour;
+  var patternClass = PatternTwentyEight;
   var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
   var rect = CGRectMake(0,0,bounds.size.width,bounds.size.height);
 
@@ -309,7 +313,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   var delegate = [[AboutPatternsDelegate alloc] init],
     alert = [[CPAlert alloc] init];
 
-  [alert setMessageText:("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011 Gerrit Riessen")];
+  [alert setMessageText:("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011, 2012 Gerrit Riessen")];
   [alert setTitle:@"About Capp-Patterns"];
   [alert setAlertStyle:CPInformationalAlertStyle];
   [alert setDelegate:delegate];
