@@ -30,18 +30,18 @@
 
 + (CPDict)defaultConfig
 {
-  return [CPDictionary dictionaryWithObjectsAndKeys:6, "number_of_points", 
-                       2, "recurse_depth", 
-                       1.22, "factor_larger", 
-                                [GRPoint pointWithX:350 Y:350], "center_point", 
-                       88, "radius", 
-                       YES, "show_shapes", 
+  return [CPDictionary dictionaryWithObjectsAndKeys:6, "number_of_points",
+                       2, "recurse_depth",
+                       1.22, "factor_larger",
+                                [GRPoint pointWithX:350 Y:350], "center_point",
+                       88, "radius",
+                       YES, "show_shapes",
                          [[CPColor colorWith8BitRed:62 green:255 blue:45 alpha:0],
                            [CPColor colorWith8BitRed:255 green:33 blue:44 alpha:0],
                            [CPColor colorWith8BitRed:85 green:85 blue:85 alpha:0],
                            [CPColor colorWith8BitRed:255 green:254 blue:244 alpha:1],
                            [CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],
-                           [CPColor colorWith8BitRed:0 green:0 blue:255 alpha:0]], "stroke_colors", 
+                           [CPColor colorWith8BitRed:0 green:0 blue:255 alpha:0]], "stroke_colors",
                          [[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],
                           [CPColor colorWith8BitRed:255 green:0 blue:0 alpha:1],
                            [CPColor colorWith8BitRed:0 green:0 blue:255 alpha:1],
@@ -68,12 +68,12 @@
 
   var botL = [l1 intersection:l3];
   var botR = [l2 intersection:l3];
-  
-  l1 = [GRLine lineWithPoint:botL andPoint:[[[cc nextCircle] cpt] 
+
+  l1 = [GRLine lineWithPoint:botL andPoint:[[[cc nextCircle] cpt]
                                              point_on_segment:botL ratio:2.0]];
-  l2 = [GRLine lineWithPoint:topTr andPoint:[[[self circle] cpt] 
+  l2 = [GRLine lineWithPoint:topTr andPoint:[[[self circle] cpt]
                                               point_on_segment:topTr ratio:2.0]];
-    
+
   var center_of_triangle = [l1 intersection:l2];
   return [botL, botR, topTr, center_of_triangle];
 }
@@ -102,7 +102,7 @@
     var pt2 = [[[self circle] cpt] point_on_segment:[[cc nextCircle] cpt] ratio:1/4];
     var pt3 = [[cc cpt] point_on_segment:[[cc nextCircle] cpt] ratio:3/4];
     var pt4 = [[cc cpt] point_on_segment:[[cc nextCircle] cpt] ratio:1/4];
-    
+
     var pt5 = [[[self circle] cpt] point_on_segment:[[cc nextCircle] cpt] ratio:3/4];
     var pt6 = [[[self circle] cpt] point_on_segment:[cc cpt] ratio:3/4];
 
@@ -122,7 +122,7 @@
   for ( var idx = 0; idx < [self numPoints]; idx++ ) {
     var cc = subs[idx];
     [self setupColorWithIndex:(idx % 2)+4 context:aContext];
-    [[GRTriangle triangleWithPoints:[[[self circle] cpt], [cc cpt], [[cc nextCircle] cpt]]] 
+    [[GRTriangle triangleWithPoints:[[[self circle] cpt], [cc cpt], [[cc nextCircle] cpt]]]
       draw:aContext];
     [self fillAndStroke:aContext];
   }
@@ -181,7 +181,7 @@
   var subs = [self sub_circles];
   for ( var idx = 0; idx < [self numPoints]; idx++ ) {
     var cc = subs[idx];
-      
+
     var a = [self obtain_triangle_sides:cc];
     var botL = a[0];
     var botR = a[1];

@@ -29,14 +29,16 @@ GRMaxColorStop = 6;
 var allPatternClasses = [PatternOne, PatternEight, PatternFifteen,
                          PatternTwentyFour,
                          PatternTen, PatternFive, PatternTwo, PatternSix,
-                         PatternTwentyTwo, PatternFour, PatternThree, PatternNineteen,
+                         PatternTwentyTwo, PatternFour, PatternThree,
+                         PatternNineteen,
                          PatternTwelve, PatternSeven,
                          PatternThirteen, PatternFourteen, PatternEleven,
                          PatternTwenty,PatternTwentyOne,
                          PatternNine, PatternSeventeen, PatternTwentyThree,
                          PatternSixteen, PatternEighteen, PatternTwentyFive,
                          PatternTwentySix,PatternTwentySeven,
-                                   PatternTwentyEight,PatternTwentyNine,PatternThirty];
+                         PatternTwentyEight,PatternTwentyNine,PatternThirty,
+                         PatternThirtyOne,PatternThirtyTwo];
 
 /*
   These are used on a small display --> smaller cpu --> they display quicker
@@ -50,7 +52,8 @@ var allPatternClassesNoRecursion = [PatternOne,
                          PatternSeventeen, PatternTwentyThree,
                          PatternEighteen, PatternTwentyFive,
                          PatternTwentySix,PatternTwentySeven,
-                                              PatternTwentyEight,PatternTwentyNine,PatternThirty];
+                         PatternTwentyEight,PatternTwentyNine,
+                         PatternThirty,PatternThirtyOne,PatternThirtyTwo];
 
 @implementation AppController : CPObject
 {
