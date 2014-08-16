@@ -56,7 +56,13 @@
 
 - (void)drawLayer:(CALayer)aLayer inContext:(CGContext)aContext
 {
-  var bgColor = [[[self pattern] bgColor] gradientColors][2] || [[self pattern] bgColor];
+  var bgColor = nil;
+  if ( [[[self pattern] bgColor] isKindOfClass:GRColor] ) {
+    bgColor = [[[self pattern] bgColor] gradientColors][2] || [[self pattern] bgColor];
+  } else {
+    bgColor = [[self pattern] bgColor];
+  }
+
   [[self superview] setBackgroundColor:bgColor];
 
   var targetPt = ([[self pattern] bgColorDirection] == 0 ?
@@ -64,8 +70,10 @@
                   CGPointMake(0, CGRectGetHeight([self bounds])));
 
   CGContextAddRect(aContext, [self bounds]);
-  CGContextDrawLinearGradient(aContext, [[[self pattern] bgColor] gradient],
-                              CGPointMake(0,0), targetPt);
+  if ( [[[self pattern] bgColor] isKindOfClass:GRColor] ) {
+    CGContextDrawLinearGradient(aContext, [[[self pattern] bgColor] gradient],
+                                CGPointMake(0,0), targetPt);
+  }
   try {
     [[self pattern] draw:aContext];
   } catch ( e ) {

@@ -66,7 +66,7 @@
 // Initialisation
 ////
 
-- (id)initWithWindowCibName:(CPString)cibName 
+- (id)initWithWindowCibName:(CPString)cibName
                 patternView:(PatternView)aPatternView
 {
   self = [super initWithWindowCibName:cibName];
@@ -95,15 +95,15 @@
   [CPBox makeBorder:m_bgColorView];
 
   [m_framePosView setHidden:YES];
-  [m_gradientDirectionButton 
+  [m_gradientDirectionButton
     setState:([[self pattern] bgColorDirection] == 0 ? CPOnState : CPOffState)];
 
   [m_rotationSlider setObjectValue:[m_pattern_view rotation] * (180 / Math.PI)];
   [self updateSlider:m_rotationSlider textField:m_rotationValue sender:m_rotationSlider];
 
   [m_circleCountSlider setObjectValue:[[self pattern] numPoints]];
-  [self updateSlider:m_circleCountSlider 
-           textField:m_circleCountValue 
+  [self updateSlider:m_circleCountSlider
+           textField:m_circleCountValue
               sender:m_circleCountSlider];
 
   [m_factorSlider setObjectValue:100 * ([[self pattern] factorLarger] / 2)];
@@ -118,21 +118,21 @@
 
   [m_rotationSlider setObjectValue:[[self pattern] rotation]];
   [self updateSlider:m_rotationSlider textField:m_rotationValue sender:m_rotationSlider];
-  
+
   // setup the background color well for the gradient
-  var bgColorWell = [self findColorWellsWithTags:[1] 
+  var bgColorWell = [self findColorWellsWithTags:[1]
                                          inViews:[m_bgColorView subviews]][0];
   [CPBox makeBorder:bgColorWell];
   [bgColorWell setColor:[[self pattern] bgColor]];
   [[CPNotificationCenter defaultCenter]
         addObserver:self
-           selector:@selector(updateBackgroundColor:)
+           selector:@selector(updateBackgroundColorNotification:)
                name:GRColorStopWasSetNotification
              object:[[self pattern] bgColor]];
 
 
   // setup the stroke colors
-  var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5] 
+  var colorWells = [self findColorWellsWithTags:[0,1,2,3,4,5]
                                         inViews:[m_strokeColorView subviews]];
   for ( var idx = 0; idx < [colorWells count]; idx++ ) {
     [colorWells[idx] setColor:[[self pattern] strokeColorAt:idx]];
@@ -173,6 +173,12 @@
 - (CPAction)updateStrokeColor:(id)sender
 {
   [[self pattern] setStrokeColorAt:[sender tag] color:[sender color]];
+  [m_pattern_view redisplay];
+}
+
+- (CPAction)updateBackgroundColor:(id)sender
+{
+  [[self pattern] setBgColor:[sender color]];
   [m_pattern_view redisplay];
 }
 
@@ -227,8 +233,9 @@
 // Notifications
 ////
 
-- (void)updateBackgroundColor:(CPNotification)aNotification
+- (void)updateBackgroundColorNotification:(CPNotification)aNotification
 {
+  [[self pattern] setBgColor:[aNotification object]];
   [m_pattern_view redisplay];
 }
 
