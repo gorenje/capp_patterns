@@ -29,8 +29,8 @@
 
   for ( var idx = 0; idx < [pts count]; idx++ ) {
     var center_pt = [[[self circle] cpt] point_on_segment:pts[idx] ratio:[self factorLarger]];
-    sub_circles[idx] = [GRLinkedCircle circleWithCenter:center_pt 
-                                                 radius:[[self circle] radius] 
+    sub_circles[idx] = [GRLinkedCircle circleWithCenter:center_pt
+                                                 radius:[[self circle] radius]
                                              prevCircle:p_circle];
     p_circle = sub_circles[idx];
   }
@@ -44,18 +44,21 @@
   return sub_circles;
 }
 
+- (void) drawShape:(GRShape)shp inContext:(CGContext)aContext index:(int)idx
+{
+  [self setupColorWithIndex:idx context:aContext];
+  [shp draw:aContext];
+  [self fillAndStroke:aContext];
+}
+
 - (void)drawCircleAndSubCircles:(CGContext)aContext
 {
-  [self setupColorWithIndex:0 context:aContext];
-  [[self circle] draw:aContext];
-  [self fillAndStroke:aContext];
+  [self drawShape:[self circle] inContext:aContext index:0];
 
   var subs = [self sub_circles], idx = [subs count];
 
   while ( idx-- ) {
-    [self setupColorWithIndex:(idx % 2)+1 context:aContext];
-    [subs[idx] draw:aContext];
-    [self fillAndStroke:aContext];
+    [self drawShape:subs[idx] inContext:aContext index:(idx % 2)+1];
   }
 }
 

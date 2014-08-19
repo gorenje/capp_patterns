@@ -27,33 +27,37 @@
 GRMaxColorStop = 6;
 
 var allPatternClasses = [PatternOne, PatternEight, PatternFifteen,
-                         PatternTwentyFour,
-                         PatternTen, PatternFive, PatternTwo, PatternSix,
-                         PatternTwentyTwo, PatternFour, PatternThree,
-                         PatternNineteen,
-                         PatternTwelve, PatternSeven,
-                         PatternThirteen, PatternFourteen, PatternEleven,
-                         PatternTwenty,PatternTwentyOne,
-                         PatternNine, PatternSeventeen, PatternTwentyThree,
-                         PatternSixteen, PatternEighteen, PatternTwentyFive,
-                         PatternTwentySix,PatternTwentySeven,
-                         PatternTwentyEight,PatternTwentyNine,PatternThirty,
-                         PatternThirtyOne,PatternThirtyTwo];
+                                   PatternTwentyFour,PatternTen, PatternFive,
+                                   PatternTwo, PatternSix, PatternTwentyTwo,
+                                   PatternFour, PatternThree, PatternNineteen,
+                                   PatternTwelve, PatternSeven,
+                                   PatternThirteen, PatternFourteen, PatternEleven,
+                                   PatternTwenty,PatternTwentyOne,
+                                   PatternNine, PatternSeventeen,
+                                   PatternTwentyThree,PatternSixteen,
+                                   PatternEighteen, PatternTwentyFive,
+                                   PatternTwentySix,PatternTwentySeven,
+                                   PatternTwentyEight,PatternTwentyNine,
+                                   PatternThirty,PatternThirtyOne,
+                                   PatternThirtyTwo,PatternThirtyThree,
+                                   PatternThirtyFour];
 
 /*
   These are used on a small display --> smaller cpu --> they display quicker
 */
-var allPatternClassesNoRecursion = [PatternOne,
-                         PatternTen, PatternFive, PatternTwo, PatternSix,
-                         PatternTwentyTwo, PatternFour,
-                         PatternTwelve, PatternSeven,
-                         PatternThirteen, PatternFourteen, PatternEleven,
-                         PatternTwenty,PatternTwentyOne,
-                         PatternSeventeen, PatternTwentyThree,
-                         PatternEighteen, PatternTwentyFive,
-                         PatternTwentySix,PatternTwentySeven,
-                         PatternTwentyEight,PatternTwentyNine,
-                         PatternThirty,PatternThirtyOne,PatternThirtyTwo];
+var allPatternClassesNoRecursion = [PatternOne,PatternTen, PatternFive, PatternTwo,
+                                              PatternSix,PatternTwentyTwo,
+                                              PatternFour,PatternTwelve,
+                                              PatternSeven,PatternThirteen,
+                                              PatternFourteen,PatternEleven,
+                                              PatternTwenty,PatternTwentyOne,
+                                              PatternSeventeen, PatternTwentyThree,
+                                              PatternEighteen, PatternTwentyFive,
+                                              PatternTwentySix,PatternTwentySeven,
+                                              PatternTwentyEight,PatternTwentyNine,
+                                              PatternThirty,PatternThirtyOne,
+                                              PatternThirtyTwo,PatternThirtyThree,
+                                              PatternThirtyFour];
 
 @implementation AppController : CPObject
 {
