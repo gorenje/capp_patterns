@@ -42,12 +42,9 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
 
   while ( idx-- ) {
     var cc = subs[idx];
-    [self setupColorWithIndex:3 context:aContext];
-    [[GRTriangle triangleWithPoints:[ [[self circle] cpt],
-                                      [cc cpt], 
-                                      [[cc nextCircle] cpt] ]] draw:aContext];
-
-    [self fillAndStroke:aContext];
+    [self drawShape:[GRTriangle triangleWithPoints:[ [[self circle] cpt],
+                                      [cc cpt], [[cc nextCircle] cpt]]]
+          inContext:aContext index:3];
   }
 }
 
@@ -57,13 +54,11 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
 
   while ( idx-- ) {
     var cc = subs[idx];
-    [self setupColorWithIndex:4 context:aContext];
-
     var pt1 = [[[self circle] cpt] furthest:[cc intersection:[cc nextCircle]]];
-    [[GRTriangle triangleWithPoints:[ [cc cpt], 
-                                             pt1,
-                                      [[cc nextCircle] cpt] ]] draw:aContext];
-    [self fillAndStroke:aContext];
+
+    [self drawShape:[GRTriangle triangleWithPoints:[ [cc cpt], pt1,
+                                                         [[cc nextCircle] cpt] ]]
+          inContext:aContext index:4];
   }
 }
 
@@ -73,17 +68,15 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
 
   while ( idx-- ) {
     var cc = subs[idx];
-    [self setupColorWithIndex:5 context:aContext];
 
     var pt1 = [[[self circle] cpt] furthest:[cc intersection:[cc nextCircle]]];
     var pt2 = [[[self circle] cpt] furthest:[cc intersection:[cc prevCircle]]];
 
-    var dist = [cc radius]  / [[[self circle] cpt] distance:[cc cpt]];
+    var dist = [cc radius] / [[[self circle] cpt] distance:[cc cpt]];
     var pt3 = [[[self circle] cpt] point_on_segment:[cc cpt] ratio:dist+1];
 
-    [[GRRect rectWithPoints:[ [cc cpt], pt1, pt3, pt2] ] draw:aContext];
-
-    [self fillAndStroke:aContext];
+    [self drawShape:[GRRect rectWithPoints:[ [cc cpt], pt1, pt3, pt2] ]
+          inContext:aContext index:5];
   }
 }
 
@@ -93,13 +86,12 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
 
   while ( idx-- ) {
     var cc = subs[idx];
-    [self setupColorWithIndex:3 context:aContext];
 
     var pt1 = [[[self circle] cpt] furthest:[cc intersection:[cc nextCircle]]];
     var pt2 = [[[self circle] cpt] furthest:[cc intersection:[cc prevCircle]]];
 
-    [[GRTriangle triangleWithPoints:[[cc cpt],pt1,pt2]] draw:aContext];
-    [self fillAndStroke:aContext];
+    [self drawShape:[GRTriangle triangleWithPoints:[[cc cpt],pt1,pt2]]
+          inContext:aContext index:3];
   }
 }
 
