@@ -37,25 +37,19 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[CPColor colorWith8BitRed:3 gr
 
 - (void)draw_frame_1:(CGContext)aContext
 {
-  [self setupColorWithIndex:0 context:aContext];
-  [[self circle] draw:aContext];
-  [self fillAndStroke:aContext];
+  [self drawShape:[self circle] inContext:aContext index:0];
 }
 
 - (void)draw_frame_2:(CGContext)aContext
 {
   var subs = [self sub_circles], idx = [subs count];
   while ( idx-- ) {
-    [subs[idx] draw:aContext];
-    [self setupColorWithIndex:(idx % 2)+1 context:aContext];
-    [self fillAndStroke:aContext];
+    [self drawShape:subs[idx] inContext:aContext index:(idx % 2)+1];
   }
 }
 
 - (void)draw_frame_3:(CGContext)aContext
 {
-  [self setupColorWithIndex:3 context:aContext];
-  
   var subs = [self sub_circles];
   for ( var idx = 0; idx < [self numPoints]; idx++ ) {
     var cc = subs[idx];
@@ -66,16 +60,14 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[CPColor colorWith8BitRed:3 gr
     var pt4 = [pt3 closest:[[[cc nextCircle] nextCircle] intersection:[cc prevCircle]]];
 
     if ( pt4 != null && pt2 != null ) {
-      [[GRRect rectWithPoints:[pt1, pt2, pt3, pt4]] draw:aContext];
-      [self fillAndStroke:aContext];
+      [self drawShape:[GRRect rectWithPoints:[pt1, pt2, pt3, pt4]]
+            inContext:aContext index:3];
     }
   }
 }
 
 - (void)draw_frame_4:(CGContext)aContext
 {
-  [self setupColorWithIndex:4 context:aContext];
-
   var subs = [self sub_circles];
   for ( var idx = 0; idx < [self numPoints]; idx++ ) {
     var cc = subs[idx];
@@ -83,13 +75,11 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[CPColor colorWith8BitRed:3 gr
     var newCircle = [GRCircle circleWithCenter:[cc cpt] radius:distance];
     var pts = [newCircle intersection:[GRCircle circleWithCenter:[[cc nextCircle] cpt]
                                                           radius:distance]];
-    [self setupColorWithIndex:1 context:aContext]
-    [newCircle draw:aContext];
-    [self fillAndStroke:aContext];
+    [self drawShape:newCircle inContext:aContext index:1];
 
-    [self setupColorWithIndex:4 context:aContext];
-    [[GRRect rectWithPoints:[[cc cpt], pts[0], [[cc nextCircle] cpt], pts[1]]] draw:aContext];
-    [self fillAndStroke:aContext];
+    [self drawShape:[GRRect rectWithPoints:[[cc cpt], pts[0],
+                                                    [[cc nextCircle] cpt], pts[1]]]
+          inContext:aContext index:4];
   }
 }
 
