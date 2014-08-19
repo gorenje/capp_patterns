@@ -32,16 +32,7 @@
 
 - (void)draw_frame_1:(CGContext)aContext
 {
-  [self setupColorWithIndex:0 context:aContext];
-  [[self circle] draw:aContext];
-  [self fillAndStroke:aContext];
-
-  var subs = [self sub_circles], idx = [subs count];
-  while ( idx-- ) {
-    [subs[idx] draw:aContext];
-    [self setupColorWithIndex:(idx % 2)+1 context:aContext];
-    [self fillAndStroke:aContext];
-  }
+  [self drawCircleAndSubCircles:aContext];
 }
 
 - (void)draw_frame_2:(CGContext)aContext
@@ -56,20 +47,18 @@
     var pt4 = [[self circle] closest:[cc intersection:[cc nextCircle]]];
     var pt5 = [[self circle] closest:[cc intersection:[cc prevCircle]]];
     var pt6 = [cc closest:[[self circle] intersection:[cc prevCircle]]];
-      
+
     var pt2 = [pt3 closest:pts1_2];
     var pt1 = [pt6 closest:pts1_2];
 
-    [self setupColorWithIndex:3 context:aContext];
-    [[GRTriangle triangleWithPoints:[pt1, pt6, pt5]] draw:aContext];
-    [self fillAndStroke:aContext];
+    [self drawShape:[GRTriangle triangleWithPoints:[pt1, pt6, pt5]]
+          inContext:aContext index:3];
 
-    [[GRTriangle triangleWithPoints:[pt2, pt4, pt3]] draw:aContext];
-    [self fillAndStroke:aContext];
+    [self drawShape:[GRTriangle triangleWithPoints:[pt2, pt4, pt3]]
+          inContext:aContext index:3];
 
-    [self setupColorWithIndex:4 context:aContext];
-    [[GRRect rectWithPoints:[pt4, pt3, pt6, pt5]] draw:aContext];
-    [self fillAndStroke:aContext];
+    [self drawShape:[GRRect rectWithPoints:[pt4, pt3, pt6, pt5]]
+          inContext:aContext index:4];
   }
 }
 
