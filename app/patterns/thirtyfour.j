@@ -46,8 +46,10 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
 
 - (GRPoint)intersection_furthest_from_cpt:(CPArray)pts
 {
-  var c1 = [GRCircle circleWithCenter:pts[0] radius:[[[self circle] cpt] distance:pts[0]]];
-  var c2 = [GRCircle circleWithCenter:pts[1] radius:[[[self circle] cpt] distance:pts[1]]];
+  var c1 = [GRCircle circleWithCenter:pts[0]
+                               radius:[[[self circle] cpt] distance:pts[0]]];
+  var c2 = [GRCircle circleWithCenter:pts[1]
+                               radius:[[[self circle] cpt] distance:pts[1]]];
 
   return [[[self circle] cpt] furthest:[c1 intersection:c2]];
 }
@@ -65,15 +67,11 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
 
 - (void)draw_base_circles:(CGContext)aContext
 {
-  [self setupColorWithIndex:0 context:aContext];
-  [[self circle] draw:aContext];
-  [self fillAndStroke:aContext];
+  [self drawShape:[self circle] inContext:aContext index:0];
 
   var subs = [self sub_circles], idx = [subs count];
   while ( idx-- ) {
-    [self setupColorWithIndex:0 context:aContext];
-    [subs[idx] draw:aContext];
-    [self fillAndStroke:aContext];
+    [self drawShape:subs[idx] inContext:aContext index:0];
   }
 
   var pts = [self obtain_intersections_of_subcircles],
@@ -81,9 +79,8 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
 
   if ( [self showShapes] ) {
     while ( idx-- ) {
-      [self setupColorWithIndex:1 context:aContext];
-      [[GRLine lineWithPoint:[[self circle] cpt] andPoint:pts[idx]] draw:aContext];
-      [self fillAndStroke:aContext];
+      [self drawShape:[GRLine lineWithPoint:[[self circle] cpt] andPoint:pts[idx]]
+            inContext:aContext index:1];
     }
   }
 }
@@ -94,22 +91,19 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
     idx = [pts count];
 
   while( idx-- ) {
-    [self setupColorWithIndex:2 context:aContext];
-    [[GRCircle circleWithCenter:pts[idx] radius:[[self circle] radius]] draw:aContext];
-    [self fillAndStroke:aContext];
+    [self drawShape:[GRCircle circleWithCenter:pts[idx]
+                                        radius:[[self circle] radius]]
+          inContext:aContext index:2];
   }
 
   var triPts = [[self obtain_inner_triangle] points];
 
   for (var idx = 0; idx < 3; idx++) {
-    [self setupColorWithIndex:2 context:aContext];
-    [[GRCircle circleWithCenter:triPts[idx] radius:[[self circle] radius]]
-      draw:aContext];
-    [self fillAndStroke:aContext];
+    [self drawShape:[GRCircle circleWithCenter:triPts[idx]
+                                        radius:[[self circle] radius]]
+          inContext:aContext index:2];
   }
-  [self setupColorWithIndex:3 context:aContext];
-  [[self obtain_inner_triangle] draw:aContext];
-  [self fillAndStroke:aContext];
+  [self drawShape:[self obtain_inner_triangle] inContext:aContext index:3];
 }
 
 @end

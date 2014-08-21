@@ -88,21 +88,19 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
     var cc = subs[idx];
     var pts = [self sub_points:cc];
 
-    var l1 = [GRLine lineWithPoint:pts[0] andPoint:pts[2]];
-    var l2 = [GRLine lineWithPoint:pts[3] andPoint:pts[1]];
-    var l3 = [GRLine lineWithPoint:pts[4] andPoint:pts[5]];
-
-    var botL = [l1 intersection:l3];
-    var botR = [l2 intersection:l3];
-
+    var botL = [self intersectionOfLines:[pts[0],pts[2]]
+                              ptsOfLine2:[pts[4],pts[5]]];
+    var botR = [self intersectionOfLines:[pts[3],pts[1]]
+                              ptsOfLine2:[pts[4],pts[5]]];
     if ( [self showShapes] ) {
-      var topTr = [l1 intersection:l2];
+      var topTr = [self intersectionOfLines:[pts[0],pts[2]]
+                                 ptsOfLine2:[pts[3],pts[1]]];
       [self drawShape:[GRTriangle triangleWithPoints:[ topTr, botL, botR ]]
             inContext:aContext index:4];
     }
 
-    l1 = [GRLine lineWithRatio:2 point:[[cc nextCircle] cpt] andPoint:botL];
-    l2 = [GRLine lineWithRatio:2 point:[cc cpt] andPoint:botR];
+    var l1 = [GRLine lineWithRatio:2 point:[[cc nextCircle] cpt] andPoint:botL];
+    var l2 = [GRLine lineWithRatio:2 point:[cc cpt] andPoint:botR];
     var interPt = [l1 intersection:l2];
 
     [self drawShape:[GRLine lineWithPoint:interPt

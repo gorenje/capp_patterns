@@ -44,6 +44,13 @@
   return sub_circles;
 }
 
+- (GRPoint)intersectionOfLines:(CPArray)pts1 ptsOfLine2:(CPArray)pts2
+{
+  var l1 = [GRLine lineWithPoint:pts1[0] andPoint:pts1[1]];
+  var l2 = [GRLine lineWithPoint:pts2[0] andPoint:pts2[1]];
+  return [l1 intersection:l2];
+}
+
 - (void) drawShape:(GRShape)shp inContext:(CGContext)aContext index:(int)idx
 {
   [self setupColorWithIndex:idx context:aContext];

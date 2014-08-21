@@ -40,13 +40,6 @@
  * Helpers.
  */
 
-- (GRPoint)intersection_of_lines:(CPArray)pts1 ptsOfLine2:(CPArray)pts2
-{
-  var l1 = [GRLine lineWithPoint:pts1[0] andPoint:pts1[1]];
-  var l2 = [GRLine lineWithPoint:pts2[0] andPoint:pts2[1]];
-  return [l1 intersection:l2];
-}
-
 - (CPArray)obtain_intersections_of_subcircles
 {
   var subs = [self sub_circles],
@@ -63,8 +56,23 @@
   return intersection_points;
 }
 
+- (GRTriangle)obtain_inner_triangle
+{
+  var pts = [self obtain_intersections_of_subcircles];
+
+  var pt1 = [self intersection_furthest_from_cpt:[pts[0], pts[1]]];
+  var pt2 = [self intersection_furthest_from_cpt:[pts[2], pts[3]]];
+  var pt3 = [self intersection_furthest_from_cpt:[pts[4], pts[5]]];
+
+  return [GRTriangle triangleWithPoints:[pt1, pt2, pt3]];
+}
+
 - (GRTriangle)obtain_mid_triangle:(GRTriangle)aTriangle
 {
+  /*
+     this is the triangle made by joining the midpoints of each side of the
+     original triangle
+  */
   var triPts = [aTriangle points];
   return [GRTriangle
            triangleWithPoints:[ [triPts[0] point_on_segment:triPts[1] ratio:0.5],
@@ -99,16 +107,6 @@
                                 radius:[[[self circle] cpt] distance:pts[1]]];
 }
 
-- (GRTriangle)obtain_inner_triangle
-{
-  var pts = [self obtain_intersections_of_subcircles];
-
-  var pt1 = [self intersection_furthest_from_cpt:[pts[0], pts[1]]];
-  var pt2 = [self intersection_furthest_from_cpt:[pts[2], pts[3]]];
-  var pt3 = [self intersection_furthest_from_cpt:[pts[4], pts[5]]];
-
-  return [GRTriangle triangleWithPoints:[pt1, pt2, pt3]];
-}
 
 /* ++++++++++++++++++++++++++++++++++++++++++
  * Drawers
@@ -165,11 +163,11 @@
   var cpt = [[self circle] cpt];
   var midpts = [midtriangle points];
 
-  var pt1 = [self intersection_of_lines:[midpts[2], midpts[0]]
+  var pt1 = [self intersectionOfLines:[midpts[2], midpts[0]]
                              ptsOfLine2:[cpt, pts[1]]];
-  var pt2 = [self intersection_of_lines:[midpts[0], midpts[1]]
+  var pt2 = [self intersectionOfLines:[midpts[0], midpts[1]]
                              ptsOfLine2:[cpt, pts[3]]];
-  var pt3 = [self intersection_of_lines:[midpts[1], midpts[2]]
+  var pt3 = [self intersectionOfLines:[midpts[1], midpts[2]]
                              ptsOfLine2:[cpt, pts[5]]];
 
   [self drawShape:[GRLine lineWithPoint:cpt andPoint:pt1]
@@ -179,11 +177,11 @@
   [self drawShape:[GRLine lineWithPoint:cpt andPoint:pt3]
         inContext:aContext index:5];
 
-  var pt4 = [self intersection_of_lines:[midpts[2], midpts[0]]
+  var pt4 = [self intersectionOfLines:[midpts[2], midpts[0]]
                              ptsOfLine2:[cpt, pts[0]]];
-  var pt5 = [self intersection_of_lines:[midpts[0], midpts[1]]
+  var pt5 = [self intersectionOfLines:[midpts[0], midpts[1]]
                              ptsOfLine2:[cpt, pts[2]]];
-  var pt6 = [self intersection_of_lines:[midpts[1], midpts[2]]
+  var pt6 = [self intersectionOfLines:[midpts[1], midpts[2]]
                              ptsOfLine2:[cpt, pts[4]]];
 
   var inTriPts = [[self obtain_inner_triangle] points];
