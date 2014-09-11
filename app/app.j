@@ -59,6 +59,9 @@ NumberOfColors = 6;
 @import "patterns/thirtythree.j"
 @import "patterns/thirtyfour.j"
 @import "patterns/thirtyfive.j"
+@import "patterns/thirtysix.j"
+@import "patterns/thirtyseven.j"
+@import "patterns/thirtyeight.j"
 
 @import "views/pattern_view.j"
 @import "views/pattern_list_cell.j"

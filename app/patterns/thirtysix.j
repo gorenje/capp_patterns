@@ -1,0 +1,6 @@
+@implementation PatternThirtySix : PatternThirtyFive
++ (CPDict) defaultConfig
+{
+ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[] baseColor:[CPColor colorWith8BitRed:255 green:255 blue:255 alpha:1]], "background_color", 0, "background_color_direction", 20, "number_of_points", 53, "rotation", 1, "recurse_depth", 1.62, "factor_larger", [GRPoint pointWithX:400 Y:729.5], "center_point", 93, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],[CPColor colorWith8BitRed:67 green:144 blue:255 alpha:0],[CPColor colorWith8BitRed:85 green:85 blue:85 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.38636363636363635]], "stroke_colors", [[CPColor colorWith8BitRed:0 green:255 blue:0 alpha:0.05],[CPColor colorWith8BitRed:42 green:38 blue:247 alpha:0.01818181818181818],[CPColor colorWith8BitRed:255 green:25 blue:49 alpha:0.18636363636363637],[CPColor colorWith8BitRed:240 green:31 blue:50 alpha:0.6863636363636364],[CPColor colorWith8BitRed:98 green:21 blue:191 alpha:0.5727272727272728],[CPColor colorWith8BitRed:200 green:23 blue:10 alpha:0]], "fill_colors"];
+}
+@end
