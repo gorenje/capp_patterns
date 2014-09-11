@@ -145,10 +145,16 @@
 {
   var sclr_str = [self colorArrayToString:m_stroke_colors];
   var fclr_str = [self colorArrayToString:m_fill_colors];
-  var bg_clr_str = [CPString
+  var bg_clr_str = nil;
+
+  if ( [[self bgColor] isKindOfClass:GRColor] ) {
+    bg_clr_str = [CPString
                      stringWithFormat:"[[GRColor alloc] initWithGradientColors:[%s] baseColor:%s]",
-                     [self colorArrayToString:[[self bgColor] gradientColors]],
-                     [[self bgColor] asInitString]];
+                   [self colorArrayToString:[[self bgColor] gradientColors]],
+                   [[self bgColor] asInitString]];
+  } else {
+    bg_clr_str = [[self bgColor] asInitString];
+  }
 
   return ("[CPDictionary dictionaryWithObjectsAndKeys:"+
     bg_clr_str +", \"background_color\", " +
