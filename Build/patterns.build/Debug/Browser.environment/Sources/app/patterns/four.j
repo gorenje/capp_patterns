@@ -1,0 +1,10 @@
+@STATIC;1.0;t;2007;{var the_class = objj_allocateClassPair(PatternThree, "PatternFour"),
+meta_class = the_class.isa;objj_registerClassPair(the_class);
+class_addMethods(meta_class, [new objj_method(sel_getUid("defaultConfig"), function $PatternFour__defaultConfig(self, _cmd)
+{ with(self)
+{
+ return objj_msgSend(CPDictionary, "dictionaryWithObjectsAndKeys:", objj_msgSend(objj_msgSend(GRColor, "alloc"), "initWithGradientColors:baseColor:", [objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 85, 85, 85, 1),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 0, 0, 0, 1),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 0, 0, 255, 1)], objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 255, 255, 255, 1)), "background_color", 0, "background_color_direction", 6, "number_of_points", 0, "rotation", 0, "recurse_depth", 1.22, "factor_larger", objj_msgSend(GRPoint, "pointWithX:Y:", 400, 729.5), "center_point", 118, "radius", NO, "show_shapes", [objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 0, 0, 255, 0.2636363636363636),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 31, 255, 211, 0),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 85, 85, 85, 0.4909090909090909),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 190, 73, 12, 1),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 0, 0, 255, 0.6909090909090909),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 0, 0, 255, 0.6909090909090909)], "stroke_colors", [objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 0, 0, 0, 0),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 255, 0, 0, 0),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 0, 0, 255, 0),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 255, 33, 50, 0.2545454545454545),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 130, 18, 120, 0),objj_msgSend(CPColor, "colorWith8BitRed:green:blue:alpha:", 76, 156, 180, 0)], "fill_colors");
+}
+},["CPDict"])]);
+}
+
