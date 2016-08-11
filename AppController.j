@@ -27,15 +27,17 @@
 GRMaxColorStop = 6;
 
 var allPatternClasses = [PatternOne, PatternEight, PatternFifteen,
-                                   PatternTwentyFour,PatternTen, PatternFive,
+                                   PatternTwentyFour,PatternTwentyFive,
+                                   PatternTen, PatternFive,
                                    PatternTwo, PatternSix, PatternTwentyTwo,
                                    PatternFour, PatternThree, PatternNineteen,
                                    PatternTwelve, PatternSeven,
-                                   PatternThirteen, PatternFourteen, PatternEleven,
+                                   PatternThirteen, PatternFourteen,
+                                   PatternEleven,
                                    PatternTwenty,PatternTwentyOne,
                                    PatternNine, PatternSeventeen,
                                    PatternTwentyThree,PatternSixteen,
-                                   PatternEighteen, PatternTwentyFive,
+                                   PatternEighteen,
                                    PatternTwentySix,PatternTwentySeven,
                                    PatternTwentyEight,PatternTwentyNine,
                                    PatternThirty,PatternThirtyOne,
@@ -43,27 +45,29 @@ var allPatternClasses = [PatternOne, PatternEight, PatternFifteen,
                                    PatternThirtyFour,PatternThirtyFive,
                                    PatternThirtySix,PatternThirtySeven,
                                    PatternThirtyEight,PatternThirtyNine,
-                                   PatternFourty,PatternFourtyOne];
+                                   PatternFourty,PatternFourtyOne,
+                                   PatternFourtyTwo,PatternFourtyThree];
 
 /*
   These are used on a small display --> smaller cpu --> they display quicker
 */
-var allPatternClassesNoRecursion = [PatternOne,PatternTen, PatternFive, PatternTwo,
-                                              PatternSix,PatternTwentyTwo,
-                                              PatternFour,PatternTwelve,
-                                              PatternSeven,PatternThirteen,
-                                              PatternFourteen,PatternEleven,
-                                              PatternTwenty,PatternTwentyOne,
-                                              PatternSeventeen, PatternTwentyThree,
-                                              PatternEighteen, PatternTwentyFive,
-                                              PatternTwentySix,PatternTwentySeven,
-                                              PatternTwentyEight,PatternTwentyNine,
-                                              PatternThirty,PatternThirtyOne,
-                                              PatternThirtyTwo,PatternThirtyThree,
-                                              PatternThirtyFour,PatternThirtyFive,
-                                              PatternThirtySix,PatternThirtySeven,
-                                              PatternThirtyEight,PatternThirtyNine,
-                                              PatternFourty,PatternFourtyOne];
+var allPatternClassesNoRecursion = [PatternOne,PatternTen, PatternFive,
+                                    PatternTwo,
+                                    PatternSix,PatternTwentyTwo,
+                                    PatternFour,PatternTwelve,
+                                    PatternSeven,PatternThirteen,
+                                    PatternFourteen,PatternEleven,
+                                    PatternTwenty,PatternTwentyOne,
+                                    PatternSeventeen, PatternTwentyThree,
+                                    PatternEighteen, PatternTwentyFive,
+                                    PatternTwentySix,PatternTwentySeven,
+                                    PatternTwentyEight,PatternTwentyNine,
+                                    PatternThirty,PatternThirtyOne,
+                                    PatternThirtyTwo,PatternThirtyThree,
+                                    PatternThirtyFour,PatternThirtyFive,
+                                    PatternThirtySix,PatternThirtySeven,
+                                    PatternThirtyEight,PatternThirtyNine,
+                                    PatternFourty,PatternFourtyOne];
 
 @implementation AppController : CPObject
 {
@@ -342,13 +346,13 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
 {
   CPLogConsole( "Return Code was : " + returnCode );
   switch ( returnCode ) {
-  case 1: // Clone me on github
+  case 1:
     window.open("https://github.com/gorenje/capp_patterns", "newwindow", '');
     break;
-  case 2: // readme
+  case 2:
     window.open("http://www.ribabookshops.com/item/islamic-patterns-an-analytical-and-cosmological-approach/929/",'book','');
     break;
-  case 3: // readme
+  case 3:
     window.open("http://cappuccino.org",'capp','');
     break;
   }
