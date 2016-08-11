@@ -46,7 +46,8 @@ var allPatternClasses = [PatternOne, PatternEight, PatternFifteen,
                                    PatternThirtySix,PatternThirtySeven,
                                    PatternThirtyEight,PatternThirtyNine,
                                    PatternFourty,PatternFourtyOne,
-                                   PatternFourtyTwo,PatternFourtyThree];
+                                   PatternFourtyTwo,PatternFourtyThree,
+                                   PatternFourtyFour];
 
 /*
   These are used on a small display --> smaller cpu --> they display quicker
