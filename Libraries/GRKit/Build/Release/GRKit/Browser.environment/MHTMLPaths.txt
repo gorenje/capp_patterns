@@ -1,0 +1,1 @@
+@STATIC;1.0;u;30;Resources/colorstep_button.png70;mhtml:Browser.environment/MHTMLData.txt!Resources/colorstep_button.pngu;32;Resources/colorstep_button_h.png72;mhtml:Browser.environment/MHTMLData.txt!Resources/colorstep_button_h.png

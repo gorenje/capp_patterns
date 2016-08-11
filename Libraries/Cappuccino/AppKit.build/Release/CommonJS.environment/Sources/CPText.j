@@ -1,0 +1,9 @@
+@STATIC;1.0;t;201;
+CPEnterCharacter="";
+CPBackspaceCharacter="\b";
+CPTabCharacter="\t";
+CPNewlineCharacter="\n";
+CPFormFeedCharacter="\f";
+CPCarriageReturnCharacter="\r";
+CPBackTabCharacter="";
+CPDeleteCharacter="";
