@@ -33,17 +33,17 @@
 
 - (CPColor) addToBlue:(int)aValue
 {
-  return [CPColor colorWithRed:[self redComponent] 
-                         green:[self greenComponent] 
+  return [CPColor colorWithRed:[self redComponent]
+                         green:[self greenComponent]
                           blue:[self blueComponent] + aValue/255
                          alpha:[self alphaComponent]];
 }
 
 - (CPString) asInitString
 {
-  return [CPString 
+  return [CPString
            stringWithFormat:"[CPColor colorWith8BitRed:%d green:%d blue:%d alpha:%f]",
-           [self redComponent]*255,  [self greenComponent]*255, 
+           [self redComponent]*255,  [self greenComponent]*255,
            [self blueComponent]*255, [self alphaComponent]];
 }
 

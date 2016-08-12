@@ -26,34 +26,57 @@
 
 GRMaxColorStop = 6;
 
-var allPatternClasses = [PatternOne, PatternEight, PatternFifteen,
-                                   PatternTwentyFour,PatternTwentyFive,
-                                   PatternTen, PatternFive,
-                                   PatternTwo, PatternSix, PatternTwentyTwo,
-                                   PatternFour, PatternThree, PatternNineteen,
-                                   PatternTwelve, PatternSeven,
-                                   PatternThirteen, PatternFourteen,
-                                   PatternEleven,
-                                   PatternTwenty,PatternTwentyOne,
-                                   PatternNine, PatternSeventeen,
-                                   PatternTwentyThree,PatternSixteen,
-                                   PatternEighteen,
-                                   PatternTwentySix,PatternTwentySeven,
-                                   PatternTwentyEight,PatternTwentyNine,
-                                   PatternThirty,PatternThirtyOne,
-                                   PatternThirtyTwo,PatternThirtyThree,
-                                   PatternThirtyFour,PatternThirtyFive,
-                                   PatternThirtySix,PatternThirtySeven,
-                                   PatternThirtyEight,PatternThirtyNine,
-                                   PatternFourty,PatternFourtyOne,
-                                   PatternFourtyTwo,PatternFourtyThree,
-                                   PatternFourtyFour];
+var allPatternClasses = [PatternOne,
+                         PatternEight,
+                         PatternFifteen,
+                         PatternTwentyFour,
+                         PatternTwo,
+                         PatternFive,
+                         PatternTen,
+                         PatternSix,
+                         PatternTwentySix,
+                         PatternThirtyOne,
+                         PatternFourtyFive,
+                         PatternThree,
+                         PatternFour,
+                         PatternTwentyTwo,
+                         PatternNineteen,
+                         PatternTwentyEight,
+                         PatternSeven,
+                         PatternNine,
+                         PatternEleven,
+                         PatternTwenty,
+                         PatternTwentyOne,
+                         PatternSeventeen,
+                         PatternFourty,
+                         PatternTwelve,
+                         PatternFourteen,
+                         PatternThirteen,
+                         PatternTwentySeven,
+                         PatternFourtyOne,
+                         PatternSixteen,
+                         PatternEighteen,
+                         PatternThirtyNine,
+                         PatternFourtyTwo,
+                         PatternTwentyThree,
+                         PatternThirtyFive,
+                         PatternThirtySix,
+                         PatternThirtySeven,
+                         PatternThirty,
+                         PatternThirtyEight,
+                         PatternThirtyTwo,
+                         PatternFourtyThree,
+                         PatternTwentyFive,
+                         PatternTwentyNine,
+                         PatternThirtyThree,
+                         PatternThirtyFour,
+                         PatternFourtyFour];
 
 /*
   These are used on a small display --> smaller cpu --> they display quicker
 */
 var allPatternClassesNoRecursion = [PatternOne,PatternTen, PatternFive,
-                                    PatternTwo,
+                                    PatternTwo,PatternFourtyFive,
                                     PatternSix,PatternTwentyTwo,
                                     PatternFour,PatternTwelve,
                                     PatternSeven,PatternThirteen,
@@ -126,7 +149,7 @@ var allPatternClassesNoRecursion = [PatternOne,PatternTen, PatternFive,
   [listScrollView setDocumentView:patternListView];
   [patternListView setContent:allPatternClasses];
 
-  var showPatternIdx = 27;
+  var showPatternIdx = 0;
   var patternClass = [patternListView content][showPatternIdx];
   var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
   [patternListView setSelectionIndexes:[CPIndexSet indexSetWithIndex:showPatternIdx]];
@@ -188,8 +211,8 @@ var allPatternClassesNoRecursion = [PatternOne,PatternTen, PatternFive,
 
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
-  return ["Properties", "StoreConfig",
-          CPToolbarFlexibleSpaceItemIdentifier, "AboutPatterns"];
+  return ["Properties",
+          CPToolbarFlexibleSpaceItemIdentifier, "StoreConfig", "AboutPatterns"];
 }
 
 - (CPToolbarItem)toolbar:(CPToolbar)aToolbar
@@ -206,7 +229,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   case "AboutPatterns":
     image = [[CPImage alloc] initWithContentsOfFile:"Resources/help.png" size:CPSizeMake(32, 32)];
     highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/help_highlight.png" size:CPSizeMake(32, 32)];
-    [toolbarItem setLabel:"About This"];
+    [toolbarItem setLabel:"About"];
 
     [toolbarItem setTarget:self];
     [toolbarItem setAction:@selector(aboutPatterns:)];
@@ -218,7 +241,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   case "Properties":
     image = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32.png" size:CPSizeMake(32, 32)];
     highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32_high.png" size:CPSizeMake(32, 32)];
-    [toolbarItem setLabel:"Pattern Property"];
+    [toolbarItem setLabel:"Properties"];
 
     [toolbarItem setTarget:self];
     [toolbarItem setAction:@selector(showProperties:)];
@@ -226,11 +249,12 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
     [toolbarItem setMinSize:CGSizeMake(32, 32)];
     [toolbarItem setMaxSize:CGSizeMake(32, 32)];
     break;
+
   case "StoreConfig":
     image = [[CPImage alloc] initWithContentsOfFile:"Resources/add.png" size:CPSizeMake(30, 25)];
     highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/addHigh.png" size:CPSizeMake(30, 25)];
 
-    [toolbarItem setLabel:"Property to Console"];
+    [toolbarItem setLabel:"To Console"];
 
     [toolbarItem setTarget:self];
     [toolbarItem setAction:@selector(dumpConfig:)];
