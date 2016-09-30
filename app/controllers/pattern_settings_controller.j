@@ -147,34 +147,18 @@
 
 - (CPAction)updateFramePos:(id)sender
 {
-  [self updateSlider:m_framePosSlider textField:m_framePosValue sender:sender];
-
-  var patcfg = [[self pattern] setFrameNumber:[m_framePosSlider intValue]];
-
-  [m_pattern_view setRotation:( [patcfg rotation] * ( Math.PI / 180 ) )];
-
-  [m_rotationSlider setObjectValue:[patcfg rotation]];
-  [self updateSlider:m_rotationSlider
-           textField:m_rotationValue
-              sender:m_rotationSlider];
-
-
-  [m_radiusSlider setObjectValue:[patcfg radius]];
-  [self updateSlider:m_radiusSlider
-           textField:m_radiusValue
-              sender:m_radiusSlider];
-
-  [m_circleCountSlider setObjectValue:[patcfg numPoints]];
-  [self updateSlider:m_circleCountSlider
-           textField:m_circleCountValue
-              sender:m_circleCountSlider];
-
-  [m_factorSlider setObjectValue:100 * ([patcfg factorLarger] / 2)];
-  [self updateSlider:m_factorSlider
-           textField:m_factorValue
-              sender:m_factorSlider];
-
-  [self compareOld:[self pattern] withNew:patcfg];
+  if ( [sender isKindOfClass:CPTextField] ) {
+    var val = [sender stringValue];
+    if ( val == "go" ) {
+      [self animatePatternOnce:0];
+    } else if ( val == "loop" ) {
+      [self animatePatternLoop:0 factor:1];
+    } else {
+      [self updateFrameNumber:[val intValue]];
+    }
+  } else {
+    [self updateFrameNumber:[sender intValue]];
+  }
 }
 
 - (CPAction)updateFillColor:(id)sender
@@ -259,6 +243,87 @@
         removeObserver:self
                   name:GRColorStopWasSetNotification
                 object:[[self pattern] bgColor]];
+}
+
+//
+// Animation Helpers
+////
+- (void)animatePatternLoop:(int)frameNumber factor:(int)factor
+{
+  var newFactor = factor;
+
+  if ( frameNumber == 0 ) {
+    newFactor = 1;
+  }
+  if ( frameNumber > 99 ) {
+    newFactor = -1;
+  }
+
+  [self updateFrameNumber:frameNumber];
+
+  var animatorInvoker = [[CPInvocation alloc]
+                                initWithMethodSignature:nil];
+  [animatorInvoker setTarget:self];
+  [animatorInvoker setSelector:@selector(animatePatternLoop:factor:)];
+  [animatorInvoker setArgument:(frameNumber+factor) atIndex:2];
+  [animatorInvoker setArgument:newFactor atIndex:3];
+
+  [CPTimer scheduledTimerWithTimeInterval:0
+                               invocation:animatorInvoker
+                                  repeats:NO];
+}
+
+- (void)animatePatternOnce:(int)frameNumber
+{
+  if ( frameNumber > 100 ) {
+    return;
+  }
+
+  [self updateFrameNumber:frameNumber];
+
+  var animatorInvoker = [[CPInvocation alloc]
+                                initWithMethodSignature:nil];
+  [animatorInvoker setTarget:self];
+  [animatorInvoker setSelector:@selector(animatePatternOnce:)];
+  [animatorInvoker setArgument:(frameNumber+1) atIndex:2];
+
+  [CPTimer scheduledTimerWithTimeInterval:0
+                               invocation:animatorInvoker
+                                  repeats:NO];
+}
+
+- (void)updateFrameNumber:(int)aValue
+{
+  [m_framePosSlider setObjectValue:aValue];
+  [self updateSlider:m_framePosSlider
+           textField:m_framePosValue
+              sender:m_framePosSlider];
+
+  var patcfg = [[self pattern] setFrameNumber:[m_framePosSlider intValue]];
+
+  [m_pattern_view setRotation:( [patcfg rotation] * ( Math.PI / 180 ) )];
+
+  [m_rotationSlider setObjectValue:[patcfg rotation]];
+  [self updateSlider:m_rotationSlider
+           textField:m_rotationValue
+              sender:m_rotationSlider];
+
+  [m_radiusSlider setObjectValue:[patcfg radius]];
+  [self updateSlider:m_radiusSlider
+           textField:m_radiusValue
+              sender:m_radiusSlider];
+
+  [m_circleCountSlider setObjectValue:[patcfg numPoints]];
+  [self updateSlider:m_circleCountSlider
+           textField:m_circleCountValue
+              sender:m_circleCountSlider];
+
+  [m_factorSlider setObjectValue:100 * ([patcfg factorLarger] / 2)];
+  [self updateSlider:m_factorSlider
+           textField:m_factorValue
+              sender:m_factorSlider];
+
+  [self compareOld:[self pattern] withNew:patcfg];
 }
 
 //
