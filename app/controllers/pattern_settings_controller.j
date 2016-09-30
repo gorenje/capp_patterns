@@ -43,6 +43,7 @@
   @outlet CPView m_bgColorView;
 
   PatternView m_pattern_view;
+  BOOL m_stop_animation;
 }
 
 //
@@ -56,6 +57,7 @@
   if ( self ) {
     m_pattern_view = aPatternView;
   }
+  m_stop_animation = false;
   return self;
 }
 
@@ -238,6 +240,7 @@
 
 - (void) windowWillClose:(CPNotification)aNotification
 {
+  m_stop_animation = true;
   [[CPColorPanel sharedColorPanel] close];
   [[CPNotificationCenter defaultCenter]
         removeObserver:self
@@ -259,6 +262,10 @@
     newFactor = -1;
   }
 
+  if ( m_stop_animation ) {
+    return;
+  }
+
   [self updateFrameNumber:frameNumber];
 
   var animatorInvoker = [[CPInvocation alloc]
@@ -276,6 +283,9 @@
 - (void)animatePatternOnce:(int)frameNumber
 {
   if ( frameNumber > 100 ) {
+    return;
+  }
+  if ( m_stop_animation ) {
     return;
   }
 
