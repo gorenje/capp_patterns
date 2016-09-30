@@ -74,10 +74,14 @@
   [CPBox makeBorder:m_fillColorView];
   [CPBox makeBorder:m_strokeColorView];
   [CPBox makeBorder:m_sizeView];
-  // [CPBox makeBorder:m_framePosView];
+  [CPBox makeBorder:m_framePosView];
   [CPBox makeBorder:m_bgColorView];
 
-  [m_framePosView setHidden:YES];
+  [m_framePosSlider setObjectValue:0];
+  [self updateSlider:m_framePosSlider
+           textField:m_framePosValue
+              sender:m_framePosSlider];
+
   [m_gradientDirectionButton
     setState:([[self pattern] bgColorDirection] == 0 ? CPOnState : CPOffState)];
 
@@ -141,10 +145,36 @@
 // Actions
 ////
 
-// TODO needs implementing.
 - (CPAction)updateFramePos:(id)sender
 {
   [self updateSlider:m_framePosSlider textField:m_framePosValue sender:sender];
+
+  var patcfg = [[self pattern] setFrameNumber:[m_framePosSlider intValue]];
+
+  [m_pattern_view setRotation:( [patcfg rotation] * ( Math.PI / 180 ) )];
+
+  [m_rotationSlider setObjectValue:[patcfg rotation]];
+  [self updateSlider:m_rotationSlider
+           textField:m_rotationValue
+              sender:m_rotationSlider];
+
+
+  [m_radiusSlider setObjectValue:[patcfg radius]];
+  [self updateSlider:m_radiusSlider
+           textField:m_radiusValue
+              sender:m_radiusSlider];
+
+  [m_circleCountSlider setObjectValue:[patcfg numPoints]];
+  [self updateSlider:m_circleCountSlider
+           textField:m_circleCountValue
+              sender:m_circleCountSlider];
+
+  [m_factorSlider setObjectValue:100 * ([patcfg factorLarger] / 2)];
+  [self updateSlider:m_factorSlider
+           textField:m_factorValue
+              sender:m_factorSlider];
+
+  [self compareOld:[self pattern] withNew:patcfg];
 }
 
 - (CPAction)updateFillColor:(id)sender

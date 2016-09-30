@@ -86,6 +86,15 @@
   }
 }
 
+- (PatternConfig)setFrameNumber:(int)aValue
+{
+  var pc1 = [self setFactorLarger:(2 * (aValue/100))];
+  var rd = [0,3,7,10,14,18,22,25,29,32,36];
+  var rotation = (parseInt(aValue/10)*36) + rd[aValue % 10];
+  [pc1 setRotation:rotation];
+  return pc1;
+}
+
 - (PatternConfig)setNumPoints:(int)aValue
 {
   return [self compareValue:aValue forConfig:"number_of_points"];
@@ -202,4 +211,3 @@
 }
 
 @end
-
