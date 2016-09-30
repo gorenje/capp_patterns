@@ -1,3 +1,4 @@
+<!-- Size: 1677x885, previews resized to 15% -->
 [![001](Resources/patterns/previews/001.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/001.png)
 [![002](Resources/patterns/previews/002.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/002.png)
 [![003](Resources/patterns/previews/003.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/003.png)
@@ -49,3 +50,4 @@
 [![049](Resources/patterns/previews/049.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/049.png)
 [![050](Resources/patterns/previews/050.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/050.png)
 [![051](Resources/patterns/previews/051.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/051.png)
+[![052](Resources/patterns/previews/052.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/052.png)

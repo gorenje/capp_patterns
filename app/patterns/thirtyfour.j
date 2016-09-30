@@ -20,7 +20,9 @@
 - (void)_draw:(CGContext)aContext
 {
   [self draw_base_circles:aContext];
-  [self draw_inner_triangle:aContext];
+  if ( ! [self showShapes] ) {
+    [self draw_inner_triangle:aContext];
+  }
 }
 
 + (CPDict)defaultConfig

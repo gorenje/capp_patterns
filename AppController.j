@@ -76,6 +76,7 @@ var allPatternClasses = [PatternOne,
                          PatternThirtyThree,
                          PatternFourtyEight,
                          PatternThirtyFour,
+                         PatternFiftyTwo,
                          PatternFourtyFour];
 
 /*
@@ -109,7 +110,8 @@ var allPatternClassesNoRecursion = [PatternOne,
                                     PatternFourtyOne,
                                     PatternFourtyThree,
                                     PatternFourtyFour,
-                                    PatternFourtyFive
+                                    PatternFourtyFive,
+                                    PatternFiftyTwo
                                     ];
 
 @implementation AppController : CPObject
