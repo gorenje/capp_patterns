@@ -23,7 +23,12 @@
 
 - (PatternConfig)setFrameNumber:(int)aValue
 {
-  var pc1 = [self setNumPoints:parseInt(aValue/2)];
+  var numOfPoints = aValue;
+  if ( numOfPoints > 100 ) {
+    numOfPoints = 200 - numOfPoints;
+  }
+
+  var pc1 = [self setNumPoints:parseInt(numOfPoints/2)];
   return [pc1 setRadius:200];
 }
 @end

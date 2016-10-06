@@ -258,7 +258,7 @@
   if ( frameNumber == 0 ) {
     newFactor = 1;
   }
-  if ( frameNumber > 99 ) {
+  if ( frameNumber > 199 ) {
     newFactor = -1;
   }
 
@@ -282,7 +282,7 @@
 
 - (void)animatePatternOnce:(int)frameNumber
 {
-  if ( frameNumber > 100 ) {
+  if ( frameNumber > 200 ) {
     return;
   }
   if ( m_stop_animation ) {

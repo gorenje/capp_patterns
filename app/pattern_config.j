@@ -88,9 +88,18 @@
 
 - (PatternConfig)setFrameNumber:(int)aValue
 {
-  var pc1 = [self setFactorLarger:(2 * (aValue/100))];
-  var rd = [0,3,7,10,14,18,22,25,29,32,36];
-  var rotation = (parseInt(aValue/10)*36) + rd[aValue % 10];
+  var pc1      = nil;
+  var rd       = [0,3,7,10,14,18,22,25,29,32,36];
+  var rotation = nil;
+
+  if ( aValue < 101 ) {
+    pc1 = [self setFactorLarger:(2 * (aValue/100))];
+    rotation = (parseInt(aValue/10)*36) + rd[aValue % 10];
+  } else {
+    pc1 = [self setFactorLarger:(2 * ((200-aValue)/100))];
+    rotation = (parseInt((aValue-100)/10)*36) + rd[(aValue-100) % 10];
+  }
+
   [pc1 setRotation:rotation];
   return pc1;
 }
