@@ -28,7 +28,10 @@
     p_circle = null;
 
   for ( var idx = 0; idx < [pts count]; idx++ ) {
-    var center_pt = [[[self circle] cpt] point_on_segment:pts[idx] ratio:[self factorLarger]];
+    var center_pt = [[[self circle] cpt]
+                      point_on_segment:pts[idx]
+                                 ratio:[self factorLarger]];
+
     sub_circles[idx] = [GRLinkedCircle circleWithCenter:center_pt
                                                  radius:[[self circle] radius]
                                              prevCircle:p_circle];
@@ -118,4 +121,3 @@
 }
 
 @end
-

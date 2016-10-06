@@ -60,6 +60,9 @@ var allPatternClasses = [PatternOne,
                          PatternEighteen,
                          PatternThirtyNine,
                          PatternFourtyTwo,
+                         PatternFiftyFour,
+                         PatternFiftyFive,
+                         PatternFiftySix,
                          PatternTwentyThree,
                          PatternThirtyFive,
                          PatternThirtySix,
@@ -173,9 +176,17 @@ var allPatternClassesNoRecursion = [PatternOne,
   [patternListView setContent:allPatternClasses];
 
   var showPatternIdx = 0;
-  var patternClass = [patternListView content][showPatternIdx];
-  var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
-  [patternListView setSelectionIndexes:[CPIndexSet indexSetWithIndex:showPatternIdx]];
+  var patternClass   = [patternListView content][showPatternIdx];
+
+  try {
+    patternClass   = eval("Pattern" + window.location.hash.substr(1,100));
+    showPatternIdx = allPatternClasses.indexOf(patternClass);
+  } catch ( e ) { }
+
+  var pattern = [[patternClass alloc]
+                  initWithConfig:[patternClass defaultConfig]];
+  [patternListView
+    setSelectionIndexes:[CPIndexSet indexSetWithIndex:showPatternIdx]];
 
   var rect = CGRectMake(200,0,bounds.size.width - 200, bounds.size.height - 58);
   patternView = [[PatternView alloc] initWithFrame:rect];
