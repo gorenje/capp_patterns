@@ -201,8 +201,15 @@ var allPatternClassesNoRecursion = [PatternOne,
 
 - (void)smallContentView:(CPWindow)theWindow bounds:(CGRect)bounds
 {
-  var patternClass = PatternTwentyEight;
-  var pattern = [[patternClass alloc] initWithConfig:[patternClass defaultConfig]];
+  var showSlideShow = true;
+  var patternClass  = PatternTwentyEight;
+  try {
+    patternClass  = eval("Pattern" + window.location.hash.substr(1,100));
+    showSlideShow = false;
+  } catch ( e ) { }
+
+  var pattern = [[patternClass alloc]
+                  initWithConfig:[patternClass defaultConfig]];
   var rect = CGRectMake(0,0,bounds.size.width,bounds.size.height);
 
   patternView = [[PatternView alloc] initWithFrame:rect];
@@ -210,7 +217,10 @@ var allPatternClassesNoRecursion = [PatternOne,
   [patternView setNeedsDisplay:YES];
   [contentView addSubview:patternView];
   [theWindow orderFront:self];
-  [[PatternSlideShowTimer alloc] initWithPatternView:patternView];
+
+  if ( showSlideShow ) {
+    [[PatternSlideShowTimer alloc] initWithPatternView:patternView];
+  }
 }
 
 @end
