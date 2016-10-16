@@ -405,7 +405,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   [alert setAlertStyle:CPInformationalAlertStyle];
   [alert setDelegate:delegate];
   [alert addButtonWithTitle:@"OK"];
-  [alert addButtonWithTitle:@"Github"];
+  [alert addButtonWithTitle:@"Preview"];
   [alert addButtonWithTitle:@"Book"];
   [alert addButtonWithTitle:@"Cappuccino"];
   [alert runModal];
@@ -417,7 +417,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   CPLogConsole( "Return Code was : " + returnCode );
   switch ( returnCode ) {
   case 1:
-    window.open("https://github.com/gorenje/capp_patterns", "newwindow", '');
+    window.open("https://github.com/gorenje/capp_patterns/blob/master/preview.md", "newwindow", '');
     break;
   case 2:
     window.open("http://www.ribabookshops.com/item/islamic-patterns-an-analytical-and-cosmological-approach/929/",'book','');
