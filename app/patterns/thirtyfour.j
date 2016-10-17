@@ -21,13 +21,16 @@
 {
   [self draw_base_circles:aContext];
   if ( ! [self showShapes] ) {
-    [self draw_inner_triangle:aContext];
+    var idx = [self numPoints] / 6;
+    while ( idx-- ) {
+      [self draw_inner_triangle:aContext group:idx];
+    }
   }
 }
 
 + (CPDict)defaultConfig
 {
-return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[[CPColor colorWith8BitRed:255 green:241 blue:33 alpha:0.21818181818181817],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:255 blue:0 alpha:0.43636363636363634],[CPColor colorWith8BitRed:0 green:0 blue:255 alpha:0.10909090909090909]] baseColor:[CPColor colorWith8BitRed:255 green:255 blue:255 alpha:1]], "background_color", 0, "background_color_direction", 6, "number_of_points", 90, "rotation", 1, "recurse_depth", 1, "factor_larger", [GRPoint pointWithX:400 Y:729.5], "center_point", 88, "radius", NO, "show_shapes", [[CPColor colorWith8BitRed:148 green:255 blue:81 alpha:0.8909090909090909],[CPColor colorWith8BitRed:255 green:72 blue:89 alpha:0.6090909090909091],[CPColor colorWith8BitRed:35 green:74 blue:84 alpha:1],[CPColor colorWith8BitRed:26 green:28 blue:255 alpha:1],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:255 alpha:0]], "stroke_colors", [[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:255 green:0 blue:0 alpha:0.07272727272727272],[CPColor colorWith8BitRed:0 green:0 blue:255 alpha:0.06363636363636363],[CPColor colorWith8BitRed:255 green:83 blue:44 alpha:0.17272727272727273],[CPColor colorWith8BitRed:130 green:18 blue:120 alpha:1],[CPColor colorWith8BitRed:76 green:156 blue:180 alpha:1]], "fill_colors"];
+  return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[] baseColor:[CPColor colorWith8BitRed:255 green:255 blue:255 alpha:1]], "background_color", 0, "background_color_direction", 6, "number_of_points", 90, "rotation", 0, "recurse_depth", 0.86, "factor_larger", [GRPoint pointWithX:755 Y:452.5], "center_point", 113, "radius", NO, "show_shapes", [[CPColor colorWith8BitRed:255 green:6 blue:26 alpha:0.19090909090909092],[CPColor colorWith8BitRed:255 green:72 blue:89 alpha:0],[CPColor colorWith8BitRed:255 green:18 blue:38 alpha:0],[CPColor colorWith8BitRed:255 green:174 blue:45 alpha:0.39090909090909093],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:255 alpha:0]], "stroke_colors", [[CPColor colorWith8BitRed:130 green:18 blue:120 alpha:0.21818181818181817],[CPColor colorWith8BitRed:255 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:65 green:189 blue:255 alpha:0.17272727272727273],[CPColor colorWith8BitRed:255 green:83 blue:44 alpha:0.17272727272727273],[CPColor colorWith8BitRed:130 green:18 blue:120 alpha:1],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0]], "fill_colors"];
 }
 
 - (CPArray)obtain_intersections_of_subcircles
@@ -46,27 +49,6 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
   return intersection_points;
 }
 
-- (GRPoint)intersection_furthest_from_cpt:(CPArray)pts
-{
-  var c1 = [GRCircle circleWithCenter:pts[0]
-                               radius:[[[self circle] cpt] distance:pts[0]]];
-  var c2 = [GRCircle circleWithCenter:pts[1]
-                               radius:[[[self circle] cpt] distance:pts[1]]];
-
-  return [[[self circle] cpt] furthest:[c1 intersection:c2]];
-}
-
-- (GRTriangle)obtain_inner_triangle
-{
-  var pts = [self obtain_intersections_of_subcircles];
-
-  var pt1 = [self intersection_furthest_from_cpt:[pts[0], pts[1]]];
-  var pt2 = [self intersection_furthest_from_cpt:[pts[2], pts[3]]];
-  var pt3 = [self intersection_furthest_from_cpt:[pts[4], pts[5]]];
-
-  return [GRTriangle triangleWithPoints:[pt1, pt2, pt3]];
-}
-
 - (void)draw_base_circles:(CGContext)aContext
 {
   [self drawShape:[self circle] inContext:aContext index:0];
@@ -81,31 +63,48 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
 
   if ( [self showShapes] ) {
     while ( idx-- ) {
-      [self drawShape:[GRLine lineWithPoint:[[self circle] cpt] andPoint:pts[idx]]
+      [self drawShape:[GRLine lineWithPoint:[[self circle] cpt]
+                                   andPoint:pts[idx]]
             inContext:aContext index:1];
     }
   }
 }
 
-- (void)draw_inner_triangle:(CGContext)aContext
+- (GRPoint)intersection_furthest_from_cpt:(CPArray)pts
 {
-  var pts = [self obtain_intersections_of_subcircles],
-    idx = [pts count];
+  var c1 = [GRCircle circleWithCenter:pts[0]
+                               radius:[[[self circle] cpt] distance:pts[0]]];
+  var c2 = [GRCircle circleWithCenter:pts[1]
+                               radius:[[[self circle] cpt] distance:pts[1]]];
 
-  while( idx-- ) {
-    [self drawShape:[GRCircle circleWithCenter:pts[idx]
-                                        radius:[[self circle] radius]]
-          inContext:aContext index:2];
-  }
+  return [[[self circle] cpt] furthest:[c1 intersection:c2]];
+}
 
-  var triPts = [[self obtain_inner_triangle] points];
+- (GRTriangle)obtain_inner_triangle:(CPArray)pts
+{
+  var l = [pts count];
+
+  var pt1 = [self intersection_furthest_from_cpt:[pts[l-6], pts[l-5]]];
+  var pt2 = [self intersection_furthest_from_cpt:[pts[l-4], pts[l-3]]];
+  var pt3 = [self intersection_furthest_from_cpt:[pts[l-2], pts[l-1]]];
+
+  return [GRTriangle triangleWithPoints:[pt1, pt2, pt3]];
+}
+
+- (void)draw_inner_triangle:(CGContext)aContext group:(int)gIdx
+{
+  var pts = [self obtain_intersections_of_subcircles];
+  pts = [pts subarrayWithRange:CPMakeRange(gIdx*6, 6)];
+
+  var triangle = [self obtain_inner_triangle:pts],
+    triPts = [triangle points];
 
   for (var idx = 0; idx < 3; idx++) {
     [self drawShape:[GRCircle circleWithCenter:triPts[idx]
                                         radius:[[self circle] radius]]
           inContext:aContext index:2];
   }
-  [self drawShape:[self obtain_inner_triangle] inContext:aContext index:3];
+  [self drawShape:triangle inContext:aContext index:3];
 }
 
 @end
