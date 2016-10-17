@@ -57,3 +57,5 @@
 [![056](Resources/patterns/previews/056.png)](https://gorenje.github.io/capp_patterns/#FiftySix)
 [![057](Resources/patterns/previews/057.png)](https://gorenje.github.io/capp_patterns/#FiftySeven)
 [![058](Resources/patterns/previews/058.png)](https://gorenje.github.io/capp_patterns/#FiftyEight)
+[![059](Resources/patterns/previews/059.png)](https://gorenje.github.io/capp_patterns/#FiftyNine)
+[![060](Resources/patterns/previews/060.png)](https://gorenje.github.io/capp_patterns/#Sixty)
