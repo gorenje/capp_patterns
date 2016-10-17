@@ -61,6 +61,15 @@
   [self fillAndStroke:aContext];
 }
 
+- (void) drawShapeNoClose:(GRShape)shp
+                inContext:(CGContext)aContext
+                    index:(int)idx
+{
+  [self setupColorWithIndex:idx context:aContext];
+  [shp drawNoClose:aContext];
+  [self fillAndStroke:aContext];
+}
+
 - (void)drawCircleAndSubCircles:(CGContext)aContext
 {
   [self drawShape:[self circle] inContext:aContext index:0];

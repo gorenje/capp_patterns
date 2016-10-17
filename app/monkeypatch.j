@@ -61,3 +61,19 @@
 }
 
 @end
+
+@implementation GRBezier (DontClosePath)
+
+- (void)drawNoClose:(CGContext)aContext
+{
+  [self startPath:aContext];
+  CGPathMoveToPoint(m_path, nil, [m_start x], [m_start y]);
+  CGPathAddCurveToPoint(m_path, nil, [m_ctrl_pt_1 x], [m_ctrl_pt_1 y],
+                        [m_ctrl_pt_2 x], [m_ctrl_pt_2 y], [m_end x], [m_end y]);
+
+  CGContextAddPath(m_current_context, m_path);
+  m_current_context = nil;
+  m_path = nil;
+}
+
+@end
