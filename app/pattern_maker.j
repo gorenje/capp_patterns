@@ -61,15 +61,6 @@
   [self fillAndStroke:aContext];
 }
 
-- (void) drawShapeNoClose:(GRShape)shp
-                inContext:(CGContext)aContext
-                    index:(int)idx
-{
-  [self setupColorWithIndex:idx context:aContext];
-  [shp drawNoClose:aContext];
-  [self fillAndStroke:aContext];
-}
-
 - (void)drawCircleAndSubCircles:(CGContext)aContext
 {
   [self drawShape:[self circle] inContext:aContext index:0];
@@ -112,6 +103,19 @@
 - (void)lineTo:(CGPoint)aPoint
 {
   CGPathAddLineToPoint(m_path, nil, [aPoint x], [aPoint y]);
+}
+
+- (void)bezier:(GRBezier)bezier
+{
+  var pts = [bezier points],
+    startpt = pts[0],
+    ctrlpt1 = pts[1],
+    ctrlpt2 = pts[2],
+    endpt = pts[3];
+
+  CGPathMoveToPoint(m_path, nil, [startpt x], [startpt y]);
+  CGPathAddCurveToPoint(m_path, nil, [ctrlpt1 x], [ctrlpt1 y],
+                        [ctrlpt2 x], [ctrlpt2 y], [endpt x], [endpt y]);
 }
 
 - (void)closePath:(CGContext)aContext

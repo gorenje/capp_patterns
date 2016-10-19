@@ -57,7 +57,9 @@
 
 - (void)draw_frame_5:(CGContext)aContext
 {
+  var beziers = [];
   var subs = [self sub_circles];
+
   for ( var idx = 0; idx < [self numPoints]; idx++ ) {
     var cc = subs[idx];
 
@@ -85,18 +87,34 @@
     var ctrlpt2 = [midpt2 point_on_segment:pt13 ratio:Math.PI/10];
     var ctrlpt3 = [ctrlpt2 point_on_segment:pt15 ratio:2];
 
-    [self drawShapeNoClose:[GRBezier bezierWithPoints:[ [[cc nextCircle] cpt], ctrlpt3, ctrlpt3, pt15] ]
-          inContext:aContext index:(idx%2)+4];
+    beziers.push([GRBezier bezierWithPoints:[[[self circle] cpt], ctrlpt, ctrlpt, pt13]]);
+    beziers.push([GRBezier bezierWithPoints:[pt13, pt14, pt14, [cc cpt]]]);
+    beziers.push([GRBezier bezierWithPoints:[[cc cpt], ctrlpt2, ctrlpt2, pt15 ]]);
+    beziers.push([GRBezier bezierWithPoints:[pt15, ctrlpt3, ctrlpt3, [[cc nextCircle] cpt]] ]);
+  }
 
-    [self drawShapeNoClose:[GRBezier bezierWithPoints:[[cc cpt], pt14, pt14, pt13]]
-          inContext:aContext index:(idx%2)+4];
+  beziers.push(beziers[0]);
+  beziers.push(beziers[1]);
 
-    [self drawShapeNoClose:[GRBezier bezierWithPoints:[ [[self circle] cpt], ctrlpt, ctrlpt, pt13]]
-          inContext:aContext index:((idx+1)%2)+4];
+  for ( var idx = 0; idx < [self numPoints]; idx++ ) {
+    var bzidx = idx * 4;
+    [self setupColorWithIndex:(idx%2)+4 context:aContext];
+    [self setupPath:aContext];
 
-    [self drawShapeNoClose:[GRBezier bezierWithPoints:[[cc cpt], ctrlpt2, ctrlpt2, pt15 ]]
-          inContext:aContext index:((idx+1)%2)+4];
+    [self bezier:beziers[bzidx]];
+    [self bezier:beziers[bzidx+1]];
+    [self bezier:beziers[bzidx+2]];
+    [self bezier:beziers[bzidx+3]];
 
+    var b1pts = [beziers[bzidx+4] points];
+    var b2pts = [beziers[bzidx+5] points];
+
+    [self bezier:[GRBezier bezierWithPoints:[b2pts[3], b2pts[1], b2pts[2], b2pts[0] ]]];
+    [self bezier:[GRBezier bezierWithPoints:[b1pts[3], b1pts[1], b1pts[2], b1pts[0] ]]];
+
+    [self moveTo:b1pts[0]];
+    [self closePath:aContext];
+    [self fillAndStroke:aContext];
   }
 }
 
