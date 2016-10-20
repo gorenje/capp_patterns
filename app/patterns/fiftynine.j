@@ -25,7 +25,7 @@
 
 + (CPDict)defaultConfig
 {
-  return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[] baseColor:[CPColor colorWith8BitRed:255 green:255 blue:255 alpha:1]], "background_color", 0, "background_color_direction", 6, "number_of_points", 0, "rotation", 0, "recurse_depth", 1.22, "factor_larger", [GRPoint pointWithX:711 Y:405.5], "center_point", 172, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:85 green:85 blue:85 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:1]], "stroke_colors", [[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:255 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:255 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:130 green:18 blue:120 alpha:0],[CPColor colorWith8BitRed:76 green:156 blue:180 alpha:0]], "fill_colors"];
+  return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[] baseColor:[CPColor colorWith8BitRed:130 green:18 blue:120 alpha:1]], "background_color", 0, "background_color_direction", 6, "number_of_points", 0, "rotation", 2, "recurse_depth", 1.82, "factor_larger", [GRPoint pointWithX:843 Y:513.5], "center_point", 80, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:85 green:85 blue:85 alpha:0],[CPColor colorWith8BitRed:0 green:255 blue:0 alpha:0.1],[CPColor colorWith8BitRed:0 green:0 blue:255 alpha:0.15454545454545454],[CPColor colorWith8BitRed:255 green:0 blue:0 alpha:0.12727272727272726]], "stroke_colors", [[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:255 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:255 alpha:0],[CPColor colorWith8BitRed:0 green:255 blue:0 alpha:0.22727272727272727],[CPColor colorWith8BitRed:65 green:15 blue:255 alpha:0.06363636363636363],[CPColor colorWith8BitRed:255 green:113 blue:29 alpha:0.09545454545454546]], "fill_colors"];
 }
 
 - (CPArray)obtain_triangle_sides:(GRLinkedCircle)cc
@@ -49,7 +49,7 @@
   l1 = [GRLine lineWithPoint:botL andPoint:[[[cc nextCircle] cpt]
                                              point_on_segment:botL ratio:2.0]];
   l2 = [GRLine lineWithPoint:topTr andPoint:[[[self circle] cpt]
-                                              point_on_segment:topTr ratio:2.0]];
+                                             point_on_segment:topTr ratio:2.0]];
 
   var center_of_triangle = [l1 intersection:l2];
   return [botL, botR, topTr, center_of_triangle];
@@ -64,28 +64,27 @@
     var cc = subs[idx];
 
     var a = [self obtain_triangle_sides:cc];
-    var botL = a[0];
-    var botR = a[1];
+    var botR  = a[1];
     var topTr = a[2];
     var center_of_triangle = a[3];
 
     var pt2 = [topTr point_on_segment:center_of_triangle ratio:2];
     var pt4 = [botR point_on_segment:pt2 ratio:2];
 
-    var l1 = [GRLine lineWithPoint:pt4 andPoint:[[self circle] cpt]];
+    var l1   = [GRLine lineWithPoint:pt4 andPoint:[[self circle] cpt]];
     var pt10 = [[[self circle] cpt] point_on_segment:[cc cpt] ratio:1/4];
     var pt11 = [[[self circle] cpt] point_on_segment:[[cc nextCircle] cpt] ratio:2/4];
     var pt13 = [[[self circle] cpt] point_on_segment:[cc cpt] ratio:2/4];
-    var l2 = [GRLine lineWithPoint:pt10 andPoint:pt11];
+    var l2   = [GRLine lineWithPoint:pt10 andPoint:pt11];
 
-    var pt12 = [l1 intersection:l2];
+    var pt12     = [l1 intersection:l2];
     var midpoint = [pt13 point_on_segment:[[self circle] cpt] ratio:1/2];
-    var ctrlpt = [pt12 point_on_segment:midpoint ratio:Math.PI/10];
-    var pt14 = [ctrlpt point_on_segment:pt13 ratio:2];
-    var pt15 = [[cc cpt] point_on_segment:[[cc nextCircle] cpt] ratio:2/4];
-    var midpt2 = [pt15 point_on_segment:[cc cpt] ratio:1/2];
-    var ctrlpt2 = [midpt2 point_on_segment:pt13 ratio:Math.PI/10];
-    var ctrlpt3 = [ctrlpt2 point_on_segment:pt15 ratio:2];
+    var ctrlpt   = [pt12 point_on_segment:midpoint ratio:Math.PI/10];
+    var pt14     = [ctrlpt point_on_segment:pt13 ratio:2];
+    var pt15     = [[cc cpt] point_on_segment:[[cc nextCircle] cpt] ratio:2/4];
+    var midpt2   = [pt15 point_on_segment:[cc cpt] ratio:1/2];
+    var ctrlpt2  = [midpt2 point_on_segment:pt13 ratio:Math.PI/10];
+    var ctrlpt3  = [ctrlpt2 point_on_segment:pt15 ratio:2];
 
     beziers.push([GRBezier bezierWithPoints:[[[self circle] cpt], ctrlpt, ctrlpt, pt13]]);
     beziers.push([GRBezier bezierWithPoints:[pt13, pt14, pt14, [cc cpt]]]);
@@ -100,6 +99,7 @@
     var bzidx = idx * 4;
     [self setupColorWithIndex:(idx%2)+4 context:aContext];
     [self setupPath:aContext];
+    [self moveTo:[beziers[bzidx] points][0]];
 
     [self bezier:beziers[bzidx]];
     [self bezier:beziers[bzidx+1]];
@@ -109,8 +109,8 @@
     var b1pts = [beziers[bzidx+4] points];
     var b2pts = [beziers[bzidx+5] points];
 
-    [self bezier:[GRBezier bezierWithPoints:[b2pts[3], b2pts[1], b2pts[2], b2pts[0] ]]];
-    [self bezier:[GRBezier bezierWithPoints:[b1pts[3], b1pts[1], b1pts[2], b1pts[0] ]]];
+    [self bezier:[GRBezier bezierWithPoints:b2pts.reverse()]];
+    [self bezier:[GRBezier bezierWithPoints:b1pts.reverse()]];
 
     [self moveTo:b1pts[0]];
     [self closePath:aContext];
@@ -125,8 +125,8 @@
     var cc = subs[idx];
 
     var a = [self obtain_triangle_sides:cc];
-    var botL = a[0];
-    var botR = a[1];
+    var botL  = a[0];
+    var botR  = a[1];
     var topTr = a[2];
     var center_of_triangle = a[3];
 
