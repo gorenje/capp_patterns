@@ -58,7 +58,11 @@
 {
   var bgColor = nil;
   if ( [[[self pattern] bgColor] isKindOfClass:GRColor] ) {
-    bgColor = [[[self pattern] bgColor] gradientColors][2] || [[self pattern] bgColor];
+    if ( [[[self pattern] bgColor] gradientColors] ) {
+      bgColor = [[[self pattern] bgColor] gradientColors][2] || [[self pattern] bgColor];
+    } else {
+      bgColor = [[self pattern] bgColor];
+    }
   } else {
     bgColor = [[self pattern] bgColor];
   }
