@@ -75,9 +75,12 @@
 
   CGContextAddRect(aContext, [self bounds]);
   if ( [[[self pattern] bgColor] isKindOfClass:GRColor] ) {
-    CGContextDrawLinearGradient(aContext, [[[self pattern] bgColor] gradient],
-                                CGPointMake(0,0), targetPt);
+    if ( [[[self pattern] bgColor] isGradient] ) {
+      CGContextDrawLinearGradient(aContext, [[[self pattern] bgColor] gradient],
+                                  CGPointMake(0,0), targetPt);
+    }
   }
+
   try {
     [[self pattern] draw:aContext];
   } catch ( e ) {
