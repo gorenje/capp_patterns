@@ -23,6 +23,7 @@
 @import <GRKit/g_r_color_stop_picker.j>
 @import "app/app.j"
 @import "app/monkeypatch.j"
+@import "app/svg_cg_context.j"
 
 GRMaxColorStop = 6;
 PatternDoLoopAnimationNotification = "PatternDoLoopAnimationNotification";
@@ -272,6 +273,21 @@ var allPatternClassesNoRecursion = [PatternOne,
   CPLogConsole("Config: " + [[patternView pattern] newPattern]);
 }
 
+- (CPAction)saveToSvg:(id)sender
+{
+  try {
+    var ctxt = new SvgCgContext([patternView bounds].size.width,
+                                [patternView bounds].size.height);
+    [[patternView pattern] draw:ctxt];
+
+    uriContent =
+      "data:application/octet-stream," + encodeURIComponent(ctxt.svg);
+    window.open(uriContent, 'image.svg');
+  } catch ( e ) {
+    console.log(e);
+  }
+}
+
 - (CPAction)aboutPatterns:(id)sender
 {
   [AboutPatternsDelegate popupAlert];
@@ -312,7 +328,8 @@ var allPatternClassesNoRecursion = [PatternOne,
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
   return ["Properties", "Animate",
-          CPToolbarFlexibleSpaceItemIdentifier, "StoreConfig", "AboutPatterns"];
+          CPToolbarFlexibleSpaceItemIdentifier,
+                      "SaveSvg", "StoreConfig", "AboutPatterns"];
 }
 
 - (CPToolbarItem)toolbar:(CPToolbar)aToolbar
@@ -359,6 +376,15 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
     [self setupToolbarItem:toolbarItem
                   selector:@selector(dumpConfig:)
                      label:"Show Config"];
+    break;
+
+  case "SaveSvg":
+    image = [[CPImage alloc] initWithContentsOfFile:"Resources/add.png" size:CPSizeMake(30, 25)];
+    highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/addHigh.png" size:CPSizeMake(30, 25)];
+
+    [self setupToolbarItem:toolbarItem
+                  selector:@selector(saveToSvg:)
+                     label:"SVG Export"];
     break;
   }
 
