@@ -1,4 +1,4 @@
-function SvgCgContext(width, height){
+;function SvgCgContext(width, height){
   var lineCap = null;
   var fillStyle = null;
   var strokeStyle = null;
@@ -89,6 +89,8 @@ SvgCgContext.prototype.lineTo = function(x,y){
 };
 
 SvgCgContext.prototype.bezierCurveTo = function(cp1x, cp1y, cp2x, cp2y, x, y){
+  var pts = [cp1x, cp1y, cp2x, cp2y, x, y];
+  this.pathData.push("C " + pts.join(" "));
 };
 
 SvgCgContext.prototype.stroke = function(){
@@ -98,6 +100,44 @@ SvgCgContext.prototype.fill = function(){
 };
 
 SvgCgContext.prototype.arc = function(x, y, radius, startAngle, endAngle, anticlockwise){
+  /*
+   * Following is taken from:
+   * https://github.com/gliffy/canvas2svg/blob/acd32ed95f4e74ec6b57bafa18651ccf5e603c23/canvas2svg.js#L986-L1020
+   */
+
+  // in canvas no circle is drawn if no angle is provided.
+  if (startAngle === endAngle) {
+    return;
+  }
+
+  startAngle = startAngle % (2*Math.PI);
+  endAngle = endAngle % (2*Math.PI);
+  if(startAngle === endAngle) {
+    //circle time! subtract some of the angle so svg is happy (svg elliptical arc can't draw a full circle)
+    endAngle = ((endAngle + (2*Math.PI)) - 0.001 * (anticlockwise ? -1 : 1)) % (2*Math.PI);
+  }
+
+  var endX = x+radius*Math.cos(endAngle),
+  endY = y+radius*Math.sin(endAngle),
+  startX = x+radius*Math.cos(startAngle),
+  startY = y+radius*Math.sin(startAngle),
+  sweepFlag = anticlockwise ? 0 : 1,
+  largeArcFlag = 0,
+  diff = endAngle - startAngle;
+
+  // https://github.com/gliffy/canvas2svg/issues/4
+  if(diff < 0) {
+    diff += 2*Math.PI;
+  }
+
+  if(anticlockwise) {
+    largeArcFlag = diff > Math.PI ? 0 : 1;
+  } else {
+    largeArcFlag = diff > Math.PI ? 1 : 0;
+  }
+
+  var pts = [radius, radius, 0, largeArcFlag, sweepFlag, endX, endY];
+  this.pathData.push("A " + pts.join(" "));
 };
 
 SvgCgContext.prototype.style = function() {
