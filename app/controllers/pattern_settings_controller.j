@@ -141,6 +141,18 @@
          selector:@selector(windowWillClose:)
              name:CPWindowWillCloseNotification
            object:_window];
+
+  [[CPNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(doLoopAnimation:)
+             name:PatternDoLoopAnimationNotification
+           object:nil];
+
+  [[CPNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(stopAnimation:)
+             name:PatternStopAnimationNotification
+           object:nil];
 }
 
 //
@@ -151,13 +163,7 @@
 {
   if ( [sender isKindOfClass:CPTextField] ) {
     var val = [sender stringValue];
-    if ( val == "go" ) {
-      [self animatePatternOnce:0];
-    } else if ( val == "loop" ) {
-      [self animatePatternLoop:0 factor:1];
-    } else {
-      [self updateFrameNumber:[val intValue]];
-    }
+    [self updateFrameNumber:[val intValue]];
   } else {
     [self updateFrameNumber:[sender intValue]];
   }
@@ -232,6 +238,17 @@
 // Notifications
 ////
 
+- (void)stopAnimation:(CPNotification)aNotification
+{
+  m_stop_animation = true;
+}
+
+- (void)doLoopAnimation:(CPNotification)aNotification
+{
+  m_stop_animation = false;
+  [self animatePatternLoop:0 factor:1];
+}
+
 - (void)updateBackgroundColorNotification:(CPNotification)aNotification
 {
   [[self pattern] setBgColor:[aNotification object]];
@@ -240,7 +257,6 @@
 
 - (void) windowWillClose:(CPNotification)aNotification
 {
-  m_stop_animation = true;
   [[CPColorPanel sharedColorPanel] close];
   [[CPNotificationCenter defaultCenter]
         removeObserver:self
@@ -274,28 +290,6 @@
   [animatorInvoker setSelector:@selector(animatePatternLoop:factor:)];
   [animatorInvoker setArgument:(frameNumber+factor) atIndex:2];
   [animatorInvoker setArgument:newFactor atIndex:3];
-
-  [CPTimer scheduledTimerWithTimeInterval:0
-                               invocation:animatorInvoker
-                                  repeats:NO];
-}
-
-- (void)animatePatternOnce:(int)frameNumber
-{
-  if ( frameNumber > 200 ) {
-    return;
-  }
-  if ( m_stop_animation ) {
-    return;
-  }
-
-  [self updateFrameNumber:frameNumber];
-
-  var animatorInvoker = [[CPInvocation alloc]
-                                initWithMethodSignature:nil];
-  [animatorInvoker setTarget:self];
-  [animatorInvoker setSelector:@selector(animatePatternOnce:)];
-  [animatorInvoker setArgument:(frameNumber+1) atIndex:2];
 
   [CPTimer scheduledTimerWithTimeInterval:0
                                invocation:animatorInvoker

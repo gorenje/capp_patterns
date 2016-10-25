@@ -22,9 +22,11 @@
 @import <GRKit/GRKit.j>
 @import <GRKit/g_r_color_stop_picker.j>
 @import "app/app.j"
-@import "app/monkeypatch.j" // categories only, ignored by press if not included.
+@import "app/monkeypatch.j"
 
 GRMaxColorStop = 6;
+PatternDoLoopAnimationNotification = "PatternDoLoopAnimationNotification";
+PatternStopAnimationNotification = "PatternStopAnimationNotification";
 
 var allPatternClasses = [PatternOne,
                          PatternEight,
@@ -229,6 +231,27 @@ var allPatternClassesNoRecursion = [PatternOne,
 
 @end
 
+@implementation AppController (Helpers)
+- (void) updateAnimateButton:(SEL)selector label:(CPString)label
+{
+  var animateButton = [m_toolBar items][1];
+
+  [animateButton setAction:selector];
+  [animateButton setLabel:label];
+  [m_toolBar toolbarItemDidChange:animateButton];
+}
+
+- (void)checkForPropertiesController
+{
+  if ( ! propertiesController ) {
+    propertiesController = [PatternSettingsController alloc];
+    [propertiesController initWithWindowCibName:"PatternSettings"
+                                    patternView:patternView];
+  }
+  [propertiesController showWindow:self];
+}
+@end
+
 @implementation AppController (Actions)
 
 - (CPAction)dumpConfig:(id)sender
@@ -243,11 +266,27 @@ var allPatternClassesNoRecursion = [PatternOne,
 
 - (CPAction)showProperties:(id)sender
 {
-  propertiesController = [PatternSettingsController alloc];
-  [propertiesController initWithWindowCibName:"PatternSettings"
-                                  patternView:patternView];
-  [propertiesController showWindow:self];
+  [self checkForPropertiesController];
 }
+
+- (CPAction)stopAnimation:(id)sender
+{
+  [self updateAnimateButton:@selector(doAnimation:) label:"Animate"];
+  [[CPNotificationCenter defaultCenter]
+        postNotificationName:PatternStopAnimationNotification
+                      object:nil];
+}
+
+- (CPAction)doAnimation:(id)sender
+{
+  [self checkForPropertiesController];
+  [self updateAnimateButton:@selector(stopAnimation:) label:"Stop Animation"];
+
+  [[CPNotificationCenter defaultCenter]
+         postNotificationName:PatternDoLoopAnimationNotification
+                      object:nil];
+}
+
 @end
 
 @implementation AppController (ToolbarDelegate)
@@ -259,7 +298,7 @@ var allPatternClassesNoRecursion = [PatternOne,
 
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
-  return ["Properties",
+  return ["Properties", "Animate",
           CPToolbarFlexibleSpaceItemIdentifier, "StoreConfig", "AboutPatterns"];
 }
 
@@ -298,6 +337,20 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
     [toolbarItem setMaxSize:CGSizeMake(32, 32)];
     break;
 
+  case "Animate":
+    animateButton = toolbarItem;
+
+    image = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32.png" size:CPSizeMake(32, 32)];
+    highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32_high.png" size:CPSizeMake(32, 32)];
+    [toolbarItem setLabel:"Animate"];
+
+    [toolbarItem setTarget:self];
+    [toolbarItem setAction:@selector(doAnimation:)];
+
+    [toolbarItem setMinSize:CGSizeMake(32, 32)];
+    [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+    break;
+
   case "StoreConfig":
     image = [[CPImage alloc] initWithContentsOfFile:"Resources/add.png" size:CPSizeMake(30, 25)];
     highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/addHigh.png" size:CPSizeMake(30, 25)];
@@ -329,7 +382,11 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   var pattern = [[key alloc] initWithConfig:[key defaultConfig]];
   [patternView setPattern:pattern];
   [patternView redisplay];
-  if ( propertiesController ) [propertiesController close];
+
+  if ( propertiesController ) {
+    [propertiesController close];
+    propertiesController = null;
+  }
 }
 
 @end
