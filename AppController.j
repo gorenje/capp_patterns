@@ -250,12 +250,25 @@ var allPatternClassesNoRecursion = [PatternOne,
   }
   [propertiesController showWindow:self];
 }
+
+- (void)setupToolbarItem:(CPToolbarItem)toolbarItem
+                selector:(SEL)selector
+                   label:(CPString)label
+{
+  [toolbarItem setLabel:label];
+  [toolbarItem setTarget:self];
+  [toolbarItem setAction:selector];
+  [toolbarItem setMinSize:CGSizeMake(32, 32)];
+  [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+}
+
 @end
 
 @implementation AppController (Actions)
 
 - (CPAction)dumpConfig:(id)sender
 {
+  alert([[patternView pattern] newPattern]);
   CPLogConsole("Config: " + [[patternView pattern] newPattern]);
 }
 
@@ -316,25 +329,17 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   case "AboutPatterns":
     image = [[CPImage alloc] initWithContentsOfFile:"Resources/help.png" size:CPSizeMake(32, 32)];
     highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/help_highlight.png" size:CPSizeMake(32, 32)];
-    [toolbarItem setLabel:"About"];
-
-    [toolbarItem setTarget:self];
-    [toolbarItem setAction:@selector(aboutPatterns:)];
-
-    [toolbarItem setMinSize:CGSizeMake(32, 32)];
-    [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+    [self setupToolbarItem:toolbarItem
+                  selector:@selector(aboutPatterns:)
+                     label:"About"];
     break;
 
   case "Properties":
     image = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32.png" size:CPSizeMake(32, 32)];
     highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32_high.png" size:CPSizeMake(32, 32)];
-    [toolbarItem setLabel:"Properties"];
-
-    [toolbarItem setTarget:self];
-    [toolbarItem setAction:@selector(showProperties:)];
-
-    [toolbarItem setMinSize:CGSizeMake(32, 32)];
-    [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+    [self setupToolbarItem:toolbarItem
+                  selector:@selector(showProperties:)
+                     label:"Properties"];
     break;
 
   case "Animate":
@@ -342,26 +347,18 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
 
     image = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32.png" size:CPSizeMake(32, 32)];
     highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32_high.png" size:CPSizeMake(32, 32)];
-    [toolbarItem setLabel:"Animate"];
-
-    [toolbarItem setTarget:self];
-    [toolbarItem setAction:@selector(doAnimation:)];
-
-    [toolbarItem setMinSize:CGSizeMake(32, 32)];
-    [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+    [self setupToolbarItem:toolbarItem
+                  selector:@selector(doAnimation:)
+                     label:"Animate"];
     break;
 
   case "StoreConfig":
     image = [[CPImage alloc] initWithContentsOfFile:"Resources/add.png" size:CPSizeMake(30, 25)];
     highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/addHigh.png" size:CPSizeMake(30, 25)];
 
-    [toolbarItem setLabel:"To Console"];
-
-    [toolbarItem setTarget:self];
-    [toolbarItem setAction:@selector(dumpConfig:)];
-
-    [toolbarItem setMinSize:CGSizeMake(32, 32)];
-    [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+    [self setupToolbarItem:toolbarItem
+                  selector:@selector(dumpConfig:)
+                     label:"Show Config"];
     break;
   }
 
@@ -452,7 +449,6 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   [CPTimer scheduledTimerWithTimeInterval:anInterval
                                invocation:loadPageInvoker
                                   repeats:NO];
-
 }
 
 + (CPAlert)popupAlert
@@ -461,7 +457,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
     alert = [[CPAlert alloc] init];
 
   [alert setMessageText:("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code and page hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011-2016 Gerrit Riessen")];
-  [alert setTitle:@"About Capp-Patterns"];
+  [alert setTitle:@"About Circle Patterns"];
   [alert setAlertStyle:CPInformationalAlertStyle];
   [alert setDelegate:delegate];
   [alert addButtonWithTitle:@"OK"];
@@ -474,7 +470,6 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
 
 -(void)alertDidEnd:(CPAlert)theAlert returnCode:(int)returnCode
 {
-  CPLogConsole( "Return Code was : " + returnCode );
   switch ( returnCode ) {
   case 1:
     window.open("https://github.com/gorenje/capp_patterns/blob/master/preview.md", "newwindow", '');
