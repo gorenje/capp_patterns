@@ -1,44 +1,30 @@
-;function SvgCgContext(width, height){
-  var lineCap = null;
-  var fillStyle = null;
-  var strokeStyle = null;
-  var svgDefinition = "";
-  var pathData = [];
+IgnoreCall = function(){ return null; };
+IgnoreSetter = function(val){};
 
-  this.width = width;
+function SvgCgContext(width, height){
+  var fillStyle     = null;
+  var strokeStyle   = null;
+  var svgDefinition = "";
+  var pathData      = [];
+  var rotate        = 0;
+
+  this.width  = width;
   this.height = height;
 
-  this.__defineSetter__('lineCap', function(val) {
-    console.log("settting linecap");
-    lineCap = val;
-  });
-  this.__defineGetter__('lineCap', function() {
-    console.log("gettting linecap");
-    return lineCap;
-  });
+  this.__defineSetter__('lineCap', IgnoreSetter);
+  this.__defineGetter__('lineCap', IgnoreCall);
 
-  this.__defineSetter__('lineJoin', function(val) {
-    console.log("settting linejoin");
-  });
-  this.__defineGetter__('lineJoin', function() {
-    console.log("gettting linejoin");
-    return null;
-  });
+  this.__defineSetter__('lineJoin', IgnoreSetter);
+  this.__defineGetter__('lineJoin', IgnoreCall);
 
-  this.__defineSetter__('lineWidth', function(val) {
-    console.log("settting linewidth");
-  });
-  this.__defineGetter__('lineWidth', function() {
-    console.log("gettting linewidth");
-    return null;
-  });
+  this.__defineSetter__('lineWidth', IgnoreSetter);
+  this.__defineGetter__('lineWidth', IgnoreCall);
 
-  this.__defineSetter__('miterLimit', function(val) {
-    console.log("settting miterLimit");
-  });
-  this.__defineGetter__('miterLimit', function() {
-    console.log("gettting miterLimit");
-    return null;
+  this.__defineSetter__('miterLimit', IgnoreSetter);
+  this.__defineGetter__('miterLimit',IgnoreCall);
+
+  this.__defineSetter__('rotate', function(val){
+    rotate = val;
   });
 
   this.__defineSetter__('fillStyle', function(val) {
@@ -63,13 +49,16 @@
   });
 
   this.__defineGetter__('svg', function() {
+    var cx = this.width / 2,
+      cy = this.height / 2;
     return ("<?xml version=\"1.0\"?>" +
             "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" " +
             "\"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">"+
             "<svg xmlns=\"http://www.w3.org/2000/svg\" "+
-            "width=\""+width+"\" height=\""+height+"\">" +
+            "width=\""+width+"\" height=\""+height+"\">\n<g transform=\"" +
+            "rotate(" + rotate + ", " + cx + ", " + cy + ")\">\n" +
             svgDefinition +
-            "</svg>");
+            "</g>\n</svg>");
   });
 }
 
@@ -77,8 +66,11 @@ SvgCgContext.prototype.beginPath = function(){
   this.pathData = [];
 };
 SvgCgContext.prototype.closePath = function(){
+  if ( this.pathData.length == 0 ) {
+    return;
+  }
   this.svgDefinition += ("<path d=\"" + this.pathData.join(" ") +
-                         " Z\" style=\"" + this.style() + "\"/>");
+                         " Z\" style=\"" + this.style() + "\"/>\n");
   this.pathData = [];
 };
 SvgCgContext.prototype.moveTo = function(x,y){
@@ -91,12 +83,6 @@ SvgCgContext.prototype.lineTo = function(x,y){
 SvgCgContext.prototype.bezierCurveTo = function(cp1x, cp1y, cp2x, cp2y, x, y){
   var pts = [cp1x, cp1y, cp2x, cp2y, x, y];
   this.pathData.push("C " + pts.join(" "));
-};
-
-SvgCgContext.prototype.stroke = function(){
-};
-
-SvgCgContext.prototype.fill = function(){
 };
 
 SvgCgContext.prototype.arc = function(x, y, radius, startAngle, endAngle, anticlockwise){
@@ -154,3 +140,9 @@ SvgCgContext.prototype.style = function() {
 
   return str;
 };
+
+/* this is done when the path is closed, so ignore this call */
+SvgCgContext.prototype.stroke = IgnoreCall;
+
+/* this is done when the path is closed, so ignore this call. */
+SvgCgContext.prototype.fill = IgnoreCall;
