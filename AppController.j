@@ -279,13 +279,18 @@ var allPatternClassesNoRecursion = [PatternOne,
     var ctxt = new SvgCgContext([patternView bounds].size.width,
                                 [patternView bounds].size.height);
 
-    ctxt.rotate = [[patternView pattern] rotation];
-    [[patternView pattern] draw:ctxt];
+    var pattern = [patternView pattern];
+
+    ctxt.rotate     = [pattern rotation];
+    ctxt.bgColor    = [pattern bgColor];
+    ctxt.bgColorDir = [pattern bgColorDirection];
+
+    [pattern draw:ctxt];
     // application/octet-stream ==> download link
     // image/svg+xml ==> view in browser
     uriContent =
       "data:application/octet-stream," + encodeURIComponent(ctxt.svg);
-    window.open(uriContent, [[patternView pattern] className] + ".svg");
+    window.open(uriContent, [pattern className] + ".svg");
   } catch ( e ) {
     console.log(e);
   }

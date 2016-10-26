@@ -6,7 +6,9 @@ function SvgCgContext(width, height){
   var strokeStyle   = null;
   var svgDefinition = "";
   var pathData      = [];
+  var gradientStops = [];
   var rotate        = 0;
+  var gradientSpecs = "";
 
   this.width  = width;
   this.height = height;
@@ -25,6 +27,34 @@ function SvgCgContext(width, height){
 
   this.__defineSetter__('rotate', function(val){
     rotate = val;
+  });
+
+  this.__defineSetter__('bgColor', function(val){
+    var factors = { 1: [100],
+                    2: [0,100],
+                    3: [0,50,100],
+                    4: [0,33,66,100],
+                    5: [0,25,50,75,100],
+                    6: [0,20,40,60,80,100]};
+    var clrs = null;
+
+    if ( [val gradientColors].length == 0 ) {
+      clrs = [val];
+    } else {
+      clrs = [val gradientColors];
+    }
+
+    for ( var idx = 0; idx < clrs.length; idx++){
+      gradientStops.push(this.stopSpecs(factors[clrs.length][idx], clrs[idx]));
+    }
+  });
+
+  this.__defineSetter__('bgColorDir', function(val){
+    if ( val == 1 ) {
+      gradientSpecs = "x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\"";
+    } else {
+      gradientSpecs = "x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\"";
+    }
   });
 
   this.__defineSetter__('fillStyle', function(val) {
@@ -55,7 +85,15 @@ function SvgCgContext(width, height){
             "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" " +
             "\"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">"+
             "<svg xmlns=\"http://www.w3.org/2000/svg\" "+
-            "width=\""+width+"\" height=\""+height+"\">\n<g transform=\"" +
+            "width=\""+width+"\" height=\""+height+"\">\n"+
+            "  <defs>"+
+            "    <linearGradient id=\"grad1\" "+gradientSpecs+">\n"+
+            gradientStops.join("\n") +
+            "    </linearGradient>\n"+
+            "  </defs>\n"+
+            "<rect id=\"background\" width=\"100%\" height=\"100%\" "+
+            "fill=\"url(#grad1)\"/>\n"+
+            "<g transform=\"" +
             "rotate(" + rotate + ", " + cx + ", " + cy + ")\">\n" +
             svgDefinition +
             "</g>\n</svg>");
@@ -139,6 +177,16 @@ SvgCgContext.prototype.style = function() {
   }
 
   return str;
+};
+
+SvgCgContext.prototype.stopColorStyle = function(clr) {
+  return ("stop-color:#"+[clr hexString]+";stop-opacity:"+
+          [clr alphaComponent]+";");
+};
+
+SvgCgContext.prototype.stopSpecs = function(percent, clr) {
+  return ("<stop offset=\""+percent+"%\" style=\""+
+          this.stopColorStyle(clr)+"\" />");
 };
 
 /* this is done when the path is closed, so ignore this call */
