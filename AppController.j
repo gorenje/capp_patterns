@@ -288,10 +288,9 @@ var allPatternClassesNoRecursion = [PatternOne,
     [pattern draw:ctxt];
     // application/octet-stream ==> download link
     // image/svg+xml ==> view in browser
-    // uriContent =
-    //   "data:application/octet-stream," + encodeURIComponent(ctxt.svg);
+    uriContent =
+      "data:application/octet-stream," + encodeURIComponent(ctxt.svg);
 
-    uriContent = "https://svg-edit.github.io/svgedit/releases/svg-edit-2.8.1/svg-editor.html?source=data:image/svg+xml;base64,"+ window.btoa(ctxt.svg);
     window.open(uriContent, [pattern className] + ".svg");
   } catch ( e ) {
     console.log(e);
