@@ -87,6 +87,7 @@ var allPatternClasses = [PatternOne,
                          PatternThirtyFour,
                          PatternFiftyTwo,
                          PatternFiftyThree,
+                         PatternSixtyOne,
                          PatternFiftyNine,
                          PatternFourtyFour];
 
