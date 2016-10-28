@@ -1,3 +1,21 @@
+/*
+ * Created by Gerrit Riessen
+ * Copyright 2010-2016, Gerrit Riessen
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 IgnoreCall = function(){ return null; };
 IgnoreSetter = function(val){};
 
@@ -38,10 +56,14 @@ function SvgCgContext(width, height){
                     6: [0,20,40,60,80,100]};
     var clrs = null;
 
-    if ( [val gradientColors].length == 0 ) {
-      clrs = [val];
+    if ( [val isKindOfClass:GRColor] ) {
+      if ( [val gradientColors].length == 0 ) {
+        clrs = [val];
+      } else {
+        clrs = [val gradientColors];
+      }
     } else {
-      clrs = [val gradientColors];
+      clrs = [val];
     }
 
     for ( var idx = 0; idx < clrs.length; idx++){
@@ -93,7 +115,7 @@ function SvgCgContext(width, height){
             "  </defs>\n"+
             "<rect id=\"background\" width=\"100%\" height=\"100%\" "+
             "fill=\"url(#grad1)\"/>\n"+
-            "<g transform=\"" +
+            "<g id=\"rotatelayer\" transform=\"" +
             "rotate(" + rotate + ", " + cx + ", " + cy + ")\">\n" +
             svgDefinition +
             "</g>\n</svg>");
