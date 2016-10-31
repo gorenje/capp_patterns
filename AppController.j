@@ -286,6 +286,10 @@ var allPatternClassesNoRecursion = [PatternOne,
     ctxt.bgColor    = [pattern bgColor];
     ctxt.bgColorDir = [pattern bgColorDirection];
 
+    ctxt.__cpt_of_image__ =
+      [GRPoint pointWithX:[patternView bounds].size.width/2
+                        Y:[patternView bounds].size.height/2];
+
     [pattern draw:ctxt];
     // application/octet-stream ==> download link
     // image/svg+xml ==> view in browser

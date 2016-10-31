@@ -81,6 +81,10 @@
     }
   }
 
+  aContext.__cpt_of_image__ =
+    [GRPoint pointWithX:[self bounds].size.width/2
+                      Y:[self bounds].size.height/2];
+
   try {
     [[self pattern] draw:aContext];
   } catch ( e ) {
