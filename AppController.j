@@ -74,7 +74,6 @@ var allPatternClasses = [PatternOne,
                          PatternThirtySeven,
                          PatternFourtySix,
                          PatternFifty,
-                         PatternFiftyOne,
                          PatternThirty,
                          PatternThirtyEight,
                          PatternThirtyTwo,
@@ -88,6 +87,7 @@ var allPatternClasses = [PatternOne,
                          PatternFiftyTwo,
                          PatternFiftyThree,
                          PatternSixtyOne,
+                         PatternFiftyOne,
                          PatternFiftyNine,
                          PatternFourtyFour];
 
@@ -143,11 +143,26 @@ var allPatternClassesNoRecursion = [PatternOne,
   contentView = [theWindow contentView];
   var bounds = [contentView bounds];
 
+
+  [[CPNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(resizeHandler:)
+                                               name:CPWindowDidResizeNotification
+                                             object:theWindow];
+
   if ( bounds.size.width > 500 && bounds.size.height > 500 ) {
     [self largeContentView:theWindow bounds:bounds];
   } else {
     [self smallContentView:theWindow bounds:bounds];
   }
+}
+
+- (void)resizeHandler:(NSNotification)note
+{
+  var helpButton = [m_toolBar items][5];
+
+  [helpButton setLabel:(([contentView bounds].size.width-200) + " x " +
+                        ([contentView bounds].size.height+1))];
+  [m_toolBar toolbarItemDidChange:helpButton];
 }
 
 @end
