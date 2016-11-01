@@ -24,6 +24,7 @@ function SvgCgContext(width, height){
   var strokeStyle   = null;
   var svgDefinition = "";
   var pathData      = [];
+  var circleData    = [];
   var gradientStops = [];
   var rotate        = 0;
   var gradientSpecs = "";
@@ -124,14 +125,21 @@ function SvgCgContext(width, height){
 
 SvgCgContext.prototype.beginPath = function(){
   this.pathData = [];
+  this.circleData = [];
 };
 SvgCgContext.prototype.closePath = function(){
-  if ( this.pathData.length == 0 ) {
+  if ( this.pathData.length == 0 && this.circleData.length == 0) {
     return;
   }
   this.svgDefinition += ("<path d=\"" + this.pathData.join(" ") +
                          " Z\" style=\"" + this.style() + "\"/>\n");
+
+  for ( var idx = 0; idx < this.circleData.length; idx++ ) {
+    this.svgDefinition += ("<circle " + this.circleData[idx] + " style=\"" +
+                           this.style() + "\"/>\n");
+  }
   this.pathData = [];
+  this.circleData = [];
 };
 SvgCgContext.prototype.moveTo = function(x,y){
   this.pathData.push("M " + x + " " + y);
@@ -159,31 +167,31 @@ SvgCgContext.prototype.arc = function(x, y, radius, startAngle, endAngle, anticl
   startAngle = startAngle % (2*Math.PI);
   endAngle = endAngle % (2*Math.PI);
   if(startAngle === endAngle) {
-    //circle time! subtract some of the angle so svg is happy (svg elliptical arc can't draw a full circle)
-    endAngle = ((endAngle + (2*Math.PI)) - 0.001 * (anticlockwise ? -1 : 1)) % (2*Math.PI);
-  }
-
-  var endX = x+radius*Math.cos(endAngle),
-  endY = y+radius*Math.sin(endAngle),
-  startX = x+radius*Math.cos(startAngle),
-  startY = y+radius*Math.sin(startAngle),
-  sweepFlag = anticlockwise ? 0 : 1,
-  largeArcFlag = 0,
-  diff = endAngle - startAngle;
-
-  // https://github.com/gliffy/canvas2svg/issues/4
-  if(diff < 0) {
-    diff += 2*Math.PI;
-  }
-
-  if(anticlockwise) {
-    largeArcFlag = diff > Math.PI ? 0 : 1;
+    this.circleData.push( "cx=\"" + x + "\" cy=\"" + y + "\" r=\"" +
+                          radius + "\"")
   } else {
-    largeArcFlag = diff > Math.PI ? 1 : 0;
-  }
+    var endX = x+radius*Math.cos(endAngle),
+    endY = y+radius*Math.sin(endAngle),
+    startX = x+radius*Math.cos(startAngle),
+    startY = y+radius*Math.sin(startAngle),
+    sweepFlag = anticlockwise ? 0 : 1,
+    largeArcFlag = 0,
+    diff = endAngle - startAngle;
 
-  var pts = [radius, radius, 0, largeArcFlag, sweepFlag, endX, endY];
-  this.pathData.push("A " + pts.join(" "));
+    // https://github.com/gliffy/canvas2svg/issues/4
+    if(diff < 0) {
+      diff += 2*Math.PI;
+    }
+
+    if(anticlockwise) {
+      largeArcFlag = diff > Math.PI ? 0 : 1;
+    } else {
+      largeArcFlag = diff > Math.PI ? 1 : 0;
+    }
+
+    var pts = [radius, radius, 0, largeArcFlag, sweepFlag, endX, endY];
+    this.pathData.push("A " + pts.join(" "));
+  }
 };
 
 SvgCgContext.prototype.style = function() {
