@@ -28,6 +28,8 @@ function SvgCgContext(width, height){
   var gradientStops = [];
   var rotate        = 0;
   var gradientSpecs = "";
+  var title         = "";
+  var description   = "";
 
   this.width  = width;
   this.height = height;
@@ -46,6 +48,12 @@ function SvgCgContext(width, height){
 
   this.__defineSetter__('rotate', function(val){
     rotate = val;
+  });
+  this.__defineSetter__('title', function(val){
+    title = val;
+  });
+  this.__defineSetter__('description', function(val){
+    description = val;
   });
 
   this.__defineSetter__('bgColor', function(val){
@@ -109,10 +117,12 @@ function SvgCgContext(width, height){
             "\"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">"+
             "<svg xmlns=\"http://www.w3.org/2000/svg\" "+
             "width=\""+width+"\" height=\""+height+"\">\n"+
-            "  <defs>"+
+            "<title>" + title + "</title>\n" +
+            "<desc>\n" + description + "\n</desc>\n" +
+            "  <defs>\n"+
             "    <linearGradient id=\"grad1\" "+gradientSpecs+">\n"+
             gradientStops.join("\n") +
-            "    </linearGradient>\n"+
+            "\n    </linearGradient>\n"+
             "  </defs>\n"+
             "<rect id=\"background\" width=\"100%\" height=\"100%\" "+
             "fill=\"url(#grad1)\"/>\n"+

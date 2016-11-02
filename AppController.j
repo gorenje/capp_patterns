@@ -56,6 +56,7 @@ var allPatternClasses = [PatternOne,
                          PatternFourty,
                          PatternTwelve,
                          PatternFourteen,
+                         PatternSixtyThree,
                          PatternThirteen,
                          PatternTwentySeven,
                          PatternFourtyOne,
@@ -298,9 +299,12 @@ var allPatternClassesNoRecursion = [PatternOne,
 
     var pattern = [patternView pattern];
 
-    ctxt.rotate     = [pattern rotation];
-    ctxt.bgColor    = [pattern bgColor];
-    ctxt.bgColorDir = [pattern bgColorDirection];
+    ctxt.rotate      = [pattern rotation];
+    ctxt.bgColor     = [pattern bgColor];
+    ctxt.bgColorDir  = [pattern bgColorDirection];
+    ctxt.title       = [pattern className];
+    ctxt.description = ("Generated using the following configuration:\n"+
+                        [pattern newPattern]);
 
     ctxt.__cpt_of_image__ =
       [GRPoint pointWithX:[patternView bounds].size.width/2
