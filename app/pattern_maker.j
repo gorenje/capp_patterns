@@ -105,6 +105,15 @@
   CGPathAddLineToPoint(m_path, nil, [aPoint x], [aPoint y]);
 }
 
+- (BOOL)pointEqual:(GRPoint)pt to:(GRPoint)pt2
+{
+  // [pt equals:pt2] doesn't work if there are rounding issues, i.e.
+  // 469.50000000000006, 469.50000000000006 does not equal 469.5, 469.5
+  // so use a distance computation instead.
+  return [pt distance:pt2] < 0.0001;
+}
+
+
 - (void)bezier:(GRBezier)bezier
 {
   var pts = [bezier points],

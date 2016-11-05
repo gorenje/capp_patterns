@@ -57,10 +57,10 @@
 
   var subs = [self sub_circles], idx = [subs count];
   while ( idx-- ) {
-    if ( ! [cpt equals:[subs[idx] cpt]]  ) {
-      [self drawShape:subs[idx] inContext:aContext index:1];
-    } else {
+    if ( [self pointEqual:cpt to:[subs[idx] cpt]] ) {
       [self drawShape:subs[idx] inContext:aContext index:4];
+    } else {
+      [self drawShape:subs[idx] inContext:aContext index:1];
     }
   }
 }
