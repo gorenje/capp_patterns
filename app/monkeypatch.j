@@ -61,3 +61,27 @@
 }
 
 @end
+
+@implementation CPColorPanel (AccessToSwatches)
+-(_CPColorPanelSwatches)swatchView
+{
+  return _swatchView;
+}
+@end
+
+@implementation _CPColorPanelSwatches (SupportAlphaChannel)
+
+- (void)mouseUp:(CPEvent)anEvent
+{
+  var point = [self convertPoint:[anEvent locationInWindow] fromView:nil],
+    bounds = [self bounds];
+
+  if (!CGRectContainsPoint(bounds, point) || point.x > [self bounds].size.width - 1 || point.x < 1)
+    return NO;
+
+  var clr = [[self colorAtIndex:FLOOR(point.x / 13)] colorWithAlphaComponent:[_colorPanel opacity]];
+
+  [_colorPanel setColor:clr  updatePicker: YES];
+}
+
+@end

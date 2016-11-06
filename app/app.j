@@ -23,6 +23,7 @@ NumberOfColors = 6;
 
 @import "pattern_config.j"
 @import "pattern_maker.j"
+@import "color_picker_aw.j"
 
 @import "patterns/one.j"
 @import "patterns/two.j"
