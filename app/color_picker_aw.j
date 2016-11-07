@@ -20,12 +20,12 @@
   var idx = 0;
 
   var labels = ["C00", "C01", "C02", "C10", "C11",
-                     "C12", "C20", "C21", "C22"];
+                     "C12", "C20", "C21", "C22", "Rand"];
 
   for ( var cols = 0; cols < 3 && idx < 9; cols++ ) {
     for ( var rows = 0; rows < 3; rows++ ) {
-      var rect = CGRectMake( 10 + (cols*((CPColorPickerViewWidth/3)+5)),
-                             (rows * 35) + 40, CPColorPickerViewWidth/3, 30);
+      var rect = CGRectMake( 10 + (cols*((CPColorPickerViewWidth/6)+5)),
+                             (rows * 35) + 40, CPColorPickerViewWidth/6, 25);
       var cpwell = [[CPButton alloc] initWithFrame:rect];
       [cpwell setTitle:labels[idx]];
       [cpwell setAutoresizingMask:CPViewNotSizable];
@@ -36,6 +36,16 @@
       if ( ++idx == 9 ) break;
     }
   }
+
+  var rect = CGRectMake( 10 + (0*((CPColorPickerViewWidth/6)+5)),
+                         (3 * 35) + 40, CPColorPickerViewWidth/3, 25);
+  var cpwell = [[CPButton alloc] initWithFrame:rect];
+  [cpwell setTitle:"Random"];
+  [cpwell setAutoresizingMask:CPViewNotSizable];
+  [cpwell setTag:9];
+  [cpwell setTarget:self];
+  [cpwell setAction:@selector(colorStopWasSet:)];
+  [m_pickerView addSubview:cpwell];
 }
 
 - (CPAction)colorStopWasSet:(id)sender
@@ -120,6 +130,15 @@
                    [CPColor colorWithHexString:"fbd0b2"],
                    [CPColor colorWithHexString:"fccf5c"],
                    [CPColor colorWithHexString:"cb5b6a"],
+                   ],
+                 [ [CPColor randomColor], /* Random */
+                   [CPColor randomColor],
+                   [CPColor randomColor],
+                   [CPColor clearColor],
+                   [CPColor randomColor],
+                   [CPColor randomColor],
+                   [CPColor randomColor],
+                   [CPColor randomColor],
                    ],
                  ];
 
