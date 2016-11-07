@@ -1,0 +1,126 @@
+<?xml version="1.0"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="950" height="950">
+<title>PatternTwentySeven</title>
+<desc>
+Generated using the following configuration:
+
+@implementation NewPattern : PatternTwentySeven
++ (CPDict) defaultConfig
+{
+ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:1],[CPColor colorWith8BitRed:39 green:19 blue:35 alpha:0.6454545454545455],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.16363636363636364]] baseColor:[CPColor colorWith8BitRed:255 green:255 blue:255 alpha:1]], "background_color", 1, "background_color_direction", 50, "number_of_points", 0, "rotation", 0, "recurse_depth", 0.98, "factor_larger", [GRPoint pointWithX:475 Y:475], "center_point", 152, "radius", NO, "show_shapes", [[CPColor colorWith8BitRed:174 green:174 blue:174 alpha:0],[CPColor colorWith8BitRed:0 green:255 blue:0 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:255 alpha:1],[CPColor colorWith8BitRed:83 green:255 blue:89 alpha:0.25],[CPColor colorWith8BitRed:255 green:2 blue:10 alpha:1],[CPColor colorWith8BitRed:255 green:23 blue:10 alpha:1]], "stroke_colors", [[CPColor colorWith8BitRed:0 green:255 blue:0 alpha:0.07727272727272727],[CPColor colorWith8BitRed:0 green:255 blue:0 alpha:0.07727272727272727],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0],[CPColor colorWith8BitRed:200 green:96 blue:175 alpha:0],[CPColor colorWith8BitRed:23 green:200 blue:10 alpha:0],[CPColor colorWith8BitRed:200 green:23 blue:10 alpha:0]], "fill_colors"];
+}
+@end
+
+</desc>
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+<stop offset="0%" style="stop-color:#000000;stop-opacity:1;" />
+<stop offset="50%" style="stop-color:#271323;stop-opacity:0.6454545454545455;" />
+<stop offset="100%" style="stop-color:#000000;stop-opacity:0.16363636363636364;" />
+    </linearGradient>
+  </defs>
+<rect id="background" width="100%" height="100%" fill="url(#grad1)"/>
+<g id="rotatelayer" transform="rotate(0, 475, 475)">
+<path d="M 627 474.99999999999994 Z" style="stroke:#AEAEAE; stroke-opacity: 0;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="475" cy="475" r="152" style="stroke:#AEAEAE; stroke-opacity: 0;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 775.96 475.00000000000006 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="623.96" cy="475.0000000000001" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 774.7854059078046 456.3303615282613 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="622.7854059078046" cy="456.33036152826134" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 771.280147681721 437.95515440792326 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="619.280147681721" cy="437.9551544079233" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 765.4995053379139 420.16416663209037 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="613.4995053379139" cy="420.1641666320904" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 757.5346430593339 403.23797270580843 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="605.5346430593339" cy="403.2379727058085" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 747.5111714820923 387.44350881851324 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="595.5111714820923" cy="387.4435088185133" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 735.5871667406935 373.02986310086254 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="583.5871667406935" cy="373.0298631008626" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 721.9506775129648 360.2243473561184 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="569.9506775129648" cy="360.22434735611847" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 706.8167593800713 349.2289122172198 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="554.8167593800713" cy="349.22891221721983" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 690.4240832715333 340.2169622646616 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="538.4240832715333" cy="340.2169622646617" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 673.0311714820922 333.33062133267384 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="521.0311714820922" cy="333.3306213326739" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 654.9123206206896 328.67849113145445 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="502.91232062068957" cy="328.6784911314545" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 636.3532757890866 326.33393853332456 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="484.3532757890866" cy="326.3339385333246" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 617.6467242109136 326.33393853332456 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="465.64672421091353" cy="326.3339385333246" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 599.0876793793104 328.67849113145445 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="447.08767937931043" cy="328.6784911314545" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 580.9688285179078 333.33062133267384 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="428.9688285179078" cy="333.3306213326739" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 563.5759167284668 340.2169622646616 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="411.57591672846684" cy="340.2169622646617" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 547.1832406199287 349.2289122172198 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="395.1832406199287" cy="349.22891221721983" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 532.0493224870352 360.22434735611836 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="380.04932248703517" cy="360.2243473561184" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 518.4128332593066 373.0298631008625 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="366.4128332593066" cy="373.02986310086254" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 506.4888285179079 387.4435088185131 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="354.4888285179079" cy="387.4435088185132" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 496.4653569406661 403.23797270580843 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="344.4653569406661" cy="403.2379727058085" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 488.50049466208606 420.16416663209026 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="336.50049466208606" cy="420.1641666320903" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 482.71985231827915 437.95515440792315 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="330.71985231827915" cy="437.9551544079232" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 479.2145940921954 456.33036152826116 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="327.2145940921954" cy="456.3303615282612" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 478.03999999999996 474.9999999999999 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="326.03999999999996" cy="474.99999999999994" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 479.2145940921954 493.66963847173866 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="327.2145940921954" cy="493.6696384717387" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 482.71985231827915 512.0448455920767 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="330.71985231827915" cy="512.0448455920767" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 488.50049466208606 529.8358333679096 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="336.50049466208606" cy="529.8358333679096" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 496.4653569406661 546.7620272941915 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="344.4653569406661" cy="546.7620272941915" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 506.4888285179078 562.5564911814868 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="354.4888285179078" cy="562.5564911814868" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 518.4128332593066 576.9701368991375 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="366.4128332593065" cy="576.9701368991375" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 532.0493224870352 589.7756526438816 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="380.04932248703517" cy="589.7756526438816" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 547.1832406199287 600.7710877827801 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="395.18324061992865" cy="600.7710877827801" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 563.5759167284667 609.7830377353383 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="411.5759167284667" cy="609.7830377353383" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 580.9688285179078 616.6693786673261 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="428.9688285179078" cy="616.6693786673261" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 599.0876793793104 621.3215088685455 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="447.08767937931043" cy="621.3215088685455" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 617.6467242109135 623.6660614666754 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="465.6467242109135" cy="623.6660614666754" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 636.3532757890865 623.6660614666754 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="484.3532757890865" cy="623.6660614666754" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 654.9123206206896 621.3215088685455 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="502.91232062068957" cy="621.3215088685455" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 673.0311714820922 616.6693786673261 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="521.0311714820922" cy="616.6693786673261" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 690.4240832715333 609.7830377353383 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="538.4240832715333" cy="609.7830377353383" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 706.8167593800713 600.7710877827801 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="554.8167593800713" cy="600.7710877827801" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 721.9506775129648 589.7756526438816 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="569.9506775129648" cy="589.7756526438816" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 735.5871667406934 576.9701368991375 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="583.5871667406934" cy="576.9701368991375" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 747.5111714820922 562.5564911814868 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="595.5111714820922" cy="562.5564911814868" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 757.5346430593339 546.7620272941915 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="605.5346430593339" cy="546.7620272941915" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 765.4995053379139 529.8358333679097 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="613.4995053379139" cy="529.8358333679097" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<path d="M 771.2801476817208 512.0448455920767 Z" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<circle cx="619.2801476817208" cy="512.0448455920767" r="152" style="stroke:#0000FF; stroke-opacity: 1;fill:#FFFF00; fill-opacity: 0;"/>
+<path d="M 774.7854059078046 493.6696384717387 Z" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+<circle cx="622.7854059078046" cy="493.6696384717388" r="152" style="stroke:#00FF00; stroke-opacity: 1;fill:#00FF00; fill-opacity: 0.07727272727272727;"/>
+</g>
+</svg>

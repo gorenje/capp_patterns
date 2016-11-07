@@ -1,0 +1,45 @@
+<?xml version="1.0"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="950" height="950">
+<title>PatternEighteen</title>
+<desc>
+Generated using the following configuration:
+
+@implementation NewPattern : PatternEighteen
++ (CPDict) defaultConfig
+{
+ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[] baseColor:[CPColor colorWith8BitRed:2 green:2 blue:2 alpha:1]], "background_color", 0, "background_color_direction", 3, "number_of_points", 0, "rotation", 0, "recurse_depth", 0.5, "factor_larger", [GRPoint pointWithX:475 Y:475], "center_point", 160, "radius", NO, "show_shapes", [[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.33636363636363636],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0.3],[CPColor colorWith8BitRed:85 green:85 blue:85 alpha:0.5909090909090909],[CPColor colorWith8BitRed:0 green:148 blue:0 alpha:1],[CPColor colorWith8BitRed:153 green:18 blue:88 alpha:1],[CPColor colorWith8BitRed:205 green:25 blue:118 alpha:1]], "stroke_colors", [[CPColor colorWith8BitRed:255 green:36 blue:49 alpha:0.13636363636363635],[CPColor colorWith8BitRed:42 green:38 blue:247 alpha:0.16363636363636364],[CPColor colorWith8BitRed:255 green:25 blue:49 alpha:0.18181818181818182],[CPColor colorWith8BitRed:240 green:31 blue:50 alpha:0],[CPColor colorWith8BitRed:35 green:39 blue:191 alpha:0],[CPColor colorWith8BitRed:200 green:23 blue:10 alpha:0]], "fill_colors"];
+}
+@end
+
+</desc>
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="100%" style="stop-color:#020202;stop-opacity:1;" />
+    </linearGradient>
+  </defs>
+<rect id="background" width="100%" height="100%" fill="url(#grad1)"/>
+<g id="rotatelayer" transform="rotate(0, 475, 475)">
+<path d="M 635 474.99999999999994 Z" style="stroke:#000000; stroke-opacity: 0.33636363636363636;fill:#FF2431; fill-opacity: 0.13636363636363635;"/>
+<circle cx="475" cy="475" r="160" style="stroke:#000000; stroke-opacity: 0.33636363636363636;fill:#FF2431; fill-opacity: 0.13636363636363635;"/>
+<path d="M 715 474.99999999999994 Z" style="stroke:#000000; stroke-opacity: 0.3;fill:#2A26F7; fill-opacity: 0.16363636363636364;"/>
+<circle cx="555" cy="475" r="160" style="stroke:#000000; stroke-opacity: 0.3;fill:#2A26F7; fill-opacity: 0.16363636363636364;"/>
+<path d="M 595 405.7179676972449 Z" style="stroke:#000000; stroke-opacity: 0.3;fill:#2A26F7; fill-opacity: 0.16363636363636364;"/>
+<circle cx="435" cy="405.71796769724494" r="160" style="stroke:#000000; stroke-opacity: 0.3;fill:#2A26F7; fill-opacity: 0.16363636363636364;"/>
+<path d="M 595 544.2820323027552 Z" style="stroke:#000000; stroke-opacity: 0.3;fill:#2A26F7; fill-opacity: 0.16363636363636364;"/>
+<circle cx="435" cy="544.2820323027552" r="160" style="stroke:#000000; stroke-opacity: 0.3;fill:#2A26F7; fill-opacity: 0.16363636363636364;"/>
+<path d="M 475 475 L 435 544.2820323027552 L 435 405.71796769724494 Z" style="stroke:#555555; stroke-opacity: 0.5909090909090909;fill:#FF1931; fill-opacity: 0.18181818181818182;"/>
+<path d="M 475 475 L 435 405.71796769724494 L 555 475 Z" style="stroke:#555555; stroke-opacity: 0.5909090909090909;fill:#FF1931; fill-opacity: 0.18181818181818182;"/>
+<path d="M 475 475 L 555 475 L 435 544.2820323027552 Z" style="stroke:#555555; stroke-opacity: 0.5909090909090909;fill:#FF1931; fill-opacity: 0.18181818181818182;"/>
+<path d="M 465 492.3205080756888 L 435 440.35898384862253 Z" style="stroke:#009400; stroke-opacity: 1;fill:#F01F32; fill-opacity: 0;"/>
+<path d="M 435 509.6410161513776 L 465 457.67949192431126 Z" style="stroke:#009400; stroke-opacity: 1;fill:#F01F32; fill-opacity: 0;"/>
+<path d="M 465 457.67949192431126 L 525 457.67949192431126 Z" style="stroke:#009400; stroke-opacity: 1;fill:#F01F32; fill-opacity: 0;"/>
+<path d="M 465 423.0384757729337 L 495 475 Z" style="stroke:#009400; stroke-opacity: 1;fill:#F01F32; fill-opacity: 0;"/>
+<path d="M 495 475 L 465 526.9615242270663 Z" style="stroke:#009400; stroke-opacity: 1;fill:#F01F32; fill-opacity: 0;"/>
+<path d="M 525 492.3205080756888 L 465 492.3205080756888 Z" style="stroke:#009400; stroke-opacity: 1;fill:#F01F32; fill-opacity: 0;"/>
+<path d="M 448.3333333333333 475 L 455 440.3589838486224 Z" style="stroke:#CD1976; stroke-opacity: 1;fill:#C8170A; fill-opacity: 0;"/>
+<path d="M 448.3333333333333 475 L 455 509.6410161513776 Z" style="stroke:#CD1976; stroke-opacity: 1;fill:#C8170A; fill-opacity: 0;"/>
+<path d="M 488.3333333333333 451.905989232415 L 515 475 Z" style="stroke:#CD1976; stroke-opacity: 1;fill:#C8170A; fill-opacity: 0;"/>
+<path d="M 488.3333333333333 451.905989232415 L 455.0000000000001 440.35898384862253 Z" style="stroke:#CD1976; stroke-opacity: 1;fill:#C8170A; fill-opacity: 0;"/>
+<path d="M 488.33333333333326 498.0940107675851 L 454.9999999999999 509.6410161513776 Z" style="stroke:#CD1976; stroke-opacity: 1;fill:#C8170A; fill-opacity: 0;"/>
+<path d="M 488.33333333333326 498.0940107675851 L 515 474.9999999999999 Z" style="stroke:#CD1976; stroke-opacity: 1;fill:#C8170A; fill-opacity: 0;"/>
+</g>
+</svg>

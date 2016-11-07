@@ -1,0 +1,48 @@
+<?xml version="1.0"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="950" height="950">
+<title>PatternFourtyFive</title>
+<desc>
+Generated using the following configuration:
+
+@implementation NewPattern : PatternFourtyFive
++ (CPDict) defaultConfig
+{
+ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[] baseColor:[CPColor colorWith8BitRed:64 green:153 blue:64 alpha:0.7454545454545455]], "background_color", 0, "background_color_direction", 4, "number_of_points", 270, "rotation", 0, "recurse_depth", 0.44, "factor_larger", [GRPoint pointWithX:475 Y:475], "center_point", 200, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:198 green:157 blue:165 alpha:0.2],[CPColor colorWith8BitRed:83 green:83 blue:83 alpha:0.16363636363636364],[CPColor colorWith8BitRed:83 green:83 blue:83 alpha:0.16363636363636364],[CPColor colorWith8BitRed:72 green:255 blue:0 alpha:0.44545454545454544],[CPColor colorWith8BitRed:255 green:255 blue:10 alpha:0.23636363636363636],[CPColor colorWith8BitRed:255 green:23 blue:10 alpha:0]], "stroke_colors", [[CPColor colorWith8BitRed:198 green:157 blue:165 alpha:0.2],[CPColor colorWith8BitRed:198 green:157 blue:165 alpha:0.2],[CPColor colorWith8BitRed:198 green:157 blue:165 alpha:0.2],[CPColor colorWith8BitRed:255 green:2 blue:8 alpha:0.08181818181818182],[CPColor colorWith8BitRed:87 green:12 blue:255 alpha:0.15454545454545454],[CPColor colorWith8BitRed:200 green:23 blue:10 alpha:0]], "fill_colors"];
+}
+@end
+
+</desc>
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="100%" style="stop-color:#409940;stop-opacity:0.7454545454545455;" />
+    </linearGradient>
+  </defs>
+<rect id="background" width="100%" height="100%" fill="url(#grad1)"/>
+<g id="rotatelayer" transform="rotate(270, 475, 475)">
+<path d="M 675 474.99999999999994 Z" style="stroke:#C69DA5; stroke-opacity: 0.2;fill:#C69DA5; fill-opacity: 0.2;"/>
+<circle cx="475" cy="475" r="200" style="stroke:#C69DA5; stroke-opacity: 0.2;fill:#C69DA5; fill-opacity: 0.2;"/>
+<path d="M 763 474.99999999999994 Z" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<circle cx="563" cy="475" r="200" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<path d="M 675 386.99999999999994 Z" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<circle cx="475" cy="387" r="200" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<path d="M 587 474.99999999999994 Z" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<circle cx="387" cy="475" r="200" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<path d="M 675 563 Z" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<circle cx="475" cy="563" r="200" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<path d="M 475 563 L 565.4023809312915 565.4023809312915 L 475 654.5995545651492 L 384.59761906870847 565.4023809312915 Z" style="stroke:#48FF00; stroke-opacity: 0.44545454545454544;fill:#FF0208; fill-opacity: 0.08181818181818182;"/>
+<path d="M 387 475 L 384.59761906870847 565.4023809312915 L 295.4004454348508 475 L 384.59761906870847 384.59761906870847 Z" style="stroke:#48FF00; stroke-opacity: 0.44545454545454544;fill:#FF0208; fill-opacity: 0.08181818181818182;"/>
+<path d="M 475 387 L 384.59761906870847 384.59761906870847 L 475 295.4004454348508 L 565.4023809312915 384.59761906870847 Z" style="stroke:#48FF00; stroke-opacity: 0.44545454545454544;fill:#FF0208; fill-opacity: 0.08181818181818182;"/>
+<path d="M 563 475 L 565.4023809312915 384.59761906870847 L 654.5995545651492 475 L 565.4023809312915 565.4023809312915 Z" style="stroke:#48FF00; stroke-opacity: 0.44545454545454544;fill:#FF0208; fill-opacity: 0.08181818181818182;"/>
+<path d="M 599.4507934888323 563 Z" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<circle cx="475" cy="563" r="124.45079348883236" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<path d="M 475 563 L 507.2102355330306 442.7897644669694 L 387 475 L 354.7897644669694 595.2102355330306 Z" style="stroke:#FFFF0A; stroke-opacity: 0.23636363636363636;fill:#570CFF; fill-opacity: 0.15454545454545454;"/>
+<path d="M 511.45079348883235 474.99999999999994 Z" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<circle cx="387" cy="475" r="124.45079348883236" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<path d="M 387 475 L 507.2102355330306 507.2102355330306 L 475 387 L 354.7897644669694 354.7897644669694 Z" style="stroke:#FFFF0A; stroke-opacity: 0.23636363636363636;fill:#570CFF; fill-opacity: 0.15454545454545454;"/>
+<path d="M 599.4507934888323 386.99999999999994 Z" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<circle cx="475" cy="387" r="124.45079348883236" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<path d="M 475 387 L 442.7897644669694 507.2102355330306 L 563 475 L 595.2102355330306 354.7897644669694 Z" style="stroke:#FFFF0A; stroke-opacity: 0.23636363636363636;fill:#570CFF; fill-opacity: 0.15454545454545454;"/>
+<path d="M 687.4507934888323 474.99999999999994 Z" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<circle cx="563" cy="475" r="124.45079348883236" style="stroke:#535353; stroke-opacity: 0.16363636363636364;fill:#C69DA5; fill-opacity: 0.2;"/>
+<path d="M 563 475 L 442.7897644669694 442.7897644669694 L 475 563 L 595.2102355330306 595.2102355330306 Z" style="stroke:#FFFF0A; stroke-opacity: 0.23636363636363636;fill:#570CFF; fill-opacity: 0.15454545454545454;"/>
+</g>
+</svg>
