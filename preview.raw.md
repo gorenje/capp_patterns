@@ -1,4 +1,5 @@
-<!-- Size: 1677x885, previews resized to 15% -->
+<!-- Images are svg exports (950x950), converted to png via gimp.
+     Previews are resized to 15% -->
 [![001](Resources/patterns/previews/001.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/001.png)
 [![002](Resources/patterns/previews/002.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/002.png)
 [![003](Resources/patterns/previews/003.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/003.png)
@@ -59,3 +60,9 @@
 [![058](Resources/patterns/previews/058.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/058.png)
 [![059](Resources/patterns/previews/059.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/059.png)
 [![060](Resources/patterns/previews/060.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/060.png)
+[![061](Resources/patterns/previews/061.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/061.png)
+[![062](Resources/patterns/previews/062.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/062.png)
+[![063](Resources/patterns/previews/063.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/063.png)
+[![064](Resources/patterns/previews/064.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/064.png)
+[![065](Resources/patterns/previews/065.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/065.png)
+[![066](Resources/patterns/previews/066.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/066.png)

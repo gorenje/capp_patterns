@@ -1,4 +1,5 @@
-<!-- Size: 1677x885, previews resized to 15% -->
+<!-- Images are svg exports (950x950), converted to png via gimp.
+     Previews are resized to 15% -->
 [![001](Resources/patterns/previews/001.png)](https://gorenje.github.io/capp_patterns/#One)
 [![002](Resources/patterns/previews/002.png)](https://gorenje.github.io/capp_patterns/#Two)
 [![003](Resources/patterns/previews/003.png)](https://gorenje.github.io/capp_patterns/#Three)
