@@ -399,8 +399,8 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   case "Animate":
     animateButton = toolbarItem;
 
-    image = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32.png" size:CPSizeMake(32, 32)];
-    highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/property_32_high.png" size:CPSizeMake(32, 32)];
+    image = [[CPImage alloc] initWithContentsOfFile:"Resources/animate.png" size:CPSizeMake(32, 32)];
+    highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/animate_high.png" size:CPSizeMake(32, 32)];
     [self setupToolbarItem:toolbarItem
                   selector:@selector(doAnimation:)
                      label:"Animate"];
@@ -416,8 +416,8 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
     break;
 
   case "SaveSvg":
-    image = [[CPImage alloc] initWithContentsOfFile:"Resources/add.png" size:CPSizeMake(30, 25)];
-    highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/addHigh.png" size:CPSizeMake(30, 25)];
+    image = [[CPImage alloc] initWithContentsOfFile:"Resources/export.png" size:CPSizeMake(32, 32)];
+    highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/export_high.png" size:CPSizeMake(32, 32)];
 
     [self setupToolbarItem:toolbarItem
                   selector:@selector(saveToSvg:)

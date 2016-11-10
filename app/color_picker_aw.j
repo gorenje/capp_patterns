@@ -166,12 +166,12 @@
 
 - (CPImage)provideNewButtonImage
 {
-  return [[CPImage alloc] initWithContentsOfFile:[[CPBundle bundleForClass:GRColorStopPicker] pathForResource:"property_32.png"] size:CGSizeMake(32, 32)];
+  return [[CPImage alloc] initWithContentsOfFile:"Resources/aw_cp.png" size:CGSizeMake(32, 32)];
 }
 
 - (CPImage)provideNewAlternateButtonImage
 {
-    return [[CPImage alloc] initWithContentsOfFile:[[CPBundle bundleForClass:GRColorStopPicker] pathForResource:"colorstep_button_h.png"] size:CGSizeMake(32, 32)];
+  return [[CPImage alloc] initWithContentsOfFile:"Resources/aw_cp_high.png" size:CGSizeMake(32, 32)];
 }
 
 - (void)colorPanelWillClose:(CPNotification)aNotification
