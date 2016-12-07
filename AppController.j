@@ -90,10 +90,14 @@ var allPatternClasses = [PatternOne,
                          PatternFiftyThree,
                          PatternSixtyOne,
                          PatternFiftyOne,
+                         PatternSeventy,
                          PatternSixtyTwo,
                          PatternFiftyNine,
-                         PatternSixtyFour,
                          PatternSixtyFive,
+                         PatternSixtyFour,
+                         PatternSixtySeven,
+                         PatternSixtyEight,
+                         PatternSixtyNine,
                          PatternFourtyFour];
 
 /*
