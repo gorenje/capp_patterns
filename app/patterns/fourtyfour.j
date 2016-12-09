@@ -27,7 +27,7 @@
   return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[[CPColor colorWith8BitRed:40 green:155 blue:218 alpha:1],[CPColor colorWith8BitRed:229 green:0 blue:117 alpha:1],[CPColor colorWith8BitRed:253 green:234 blue:22 alpha:1]] baseColor:[CPColor colorWith8BitRed:2 green:2 blue:2 alpha:1]], "background_color", 1, "background_color_direction", 50, "number_of_points", 0, "rotation", 0, "recurse_depth", 2, "factor_larger", [GRPoint pointWithX:475 Y:475], "center_point", 30, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:225 green:0 blue:122 alpha:0.7],[CPColor colorWith8BitRed:27 green:43 blue:131 alpha:0.7],[CPColor colorWith8BitRed:240 green:107 blue:32 alpha:0.7],[CPColor colorWith8BitRed:13 green:120 blue:92 alpha:0.7],[CPColor colorWith8BitRed:225 green:0 blue:122 alpha:0.7],[CPColor colorWith8BitRed:253 green:251 blue:226 alpha:0.7]], "stroke_colors", [[CPColor colorWith8BitRed:31 green:42 blue:124 alpha:0.7],[CPColor colorWith8BitRed:229 green:0 blue:31 alpha:0.7],[CPColor colorWith8BitRed:240 green:134 blue:182 alpha:0.7],[CPColor colorWith8BitRed:252 green:237 blue:24 alpha:0.7],[CPColor colorWith8BitRed:32 green:41 blue:134 alpha:0.7],[CPColor colorWith8BitRed:117 green:188 blue:50 alpha:0.7]], "fill_colors"];
 }
 
-- (CPArray)computeRectPoints:(GRPoint)pt inContext:(CGContext)aContext
+- (CPArray)computeRectPointsVertical:(GRPoint)pt inContext:(CGContext)aContext
 {
   var pts = [], width = [self radius],
     height = ([self factorLarger] * aContext.canvas.clientHeight);
@@ -41,15 +41,37 @@
   return pts;
 }
 
+- (CPArray)computeRectPointsHorizontal:(GRPoint)pt inContext:(CGContext)aContext
+{
+  var pts = [], height = [self radius],
+    width = ([self factorLarger] * aContext.canvas.clientWidth);
+
+  pts.push(pt);
+
+  pts.push([GRPoint pointWithX:[pt x] Y:([pt y] + height)]);
+  pts.push([GRPoint pointWithX:([pt x] + width) Y:([pt y] + height)]);
+  pts.push([GRPoint pointWithX:([pt x] + width) Y:[pt y]]);
+
+  return pts;
+}
+
 - (void)draw_frame_1:(CGContext)aContext
 {
-  var cpt = [GRPoint pointWithX:0.0 Y:0.0], pts = [];
+  var cptV = [GRPoint pointWithX:0.0 Y:0.0], ptsV = [],
+    cptH = [GRPoint pointWithX:0.0 Y:0.0], ptsH = [];
 
   for ( var idx = 0; idx < [self numPoints]; idx++ ) {
-    pts = [self computeRectPoints:cpt inContext:aContext];
-    [self drawShapeUsingStrokeAsFill:[GRRect rectWithPoints:pts]
+    ptsV = [self computeRectPointsVertical:cptV inContext:aContext];
+    [self drawShapeUsingStrokeAsFill:[GRRect rectWithPoints:ptsV]
                            inContext:aContext index:(idx%12)];
-    cpt = pts[1];
+    cptV = ptsV[1];
+
+    if ( [self showShapes] ) {
+      ptsH = [self computeRectPointsHorizontal:cptH inContext:aContext];
+      [self drawShapeUsingStrokeAsFill:[GRRect rectWithPoints:ptsH]
+                             inContext:aContext index:(idx%12)];
+      cptH = ptsH[1];
+    }
   }
 }
 

@@ -26,10 +26,7 @@
 
 + (CPDict)defaultConfig
 {
-
-return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[[CPColor colorWith8BitRed:255 green:0 blue:0 alpha:1],[CPColor colorWith8BitRed:138 green:10 blue:143 alpha:1]] baseColor:[CPColor colorWith8BitRed:138 green:10 blue:143 alpha:1]], "background_color", 0, "background_color_direction", 12, "number_of_points", 0, "rotation", 0, "recurse_depth", 1.84, "factor_larger", [GRPoint pointWithX:778 Y:432], "center_point", 152, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:0 green:255 blue:100 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:88 green:255 blue:67 alpha:0.32272727272727275],[CPColor colorWith8BitRed:255 green:2 blue:10 alpha:0],[CPColor colorWith8BitRed:255 green:23 blue:10 alpha:0]], "stroke_colors", [[CPColor colorWith8BitRed:255 green:247 blue:211 alpha:0],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0.16363636363636364],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0.16363636363636364],[CPColor colorWith8BitRed:88 green:255 blue:67 alpha:0.32272727272727275],[CPColor colorWith8BitRed:23 green:200 blue:10 alpha:0],[CPColor colorWith8BitRed:200 green:23 blue:10 alpha:0]], "fill_colors"];
-
-//  return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[] baseColor:[CPColor colorWith8BitRed:138 green:10 blue:143 alpha:1]], "background_color", 0, "background_color_direction", 12, "number_of_points", 0, "rotation", 0, "recurse_depth", 1.84, "factor_larger", [GRPoint pointWithX:778 Y:519.5], "center_point", 168, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:0 green:255 blue:100 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:88 green:255 blue:67 alpha:0.32272727272727275],[CPColor colorWith8BitRed:255 green:2 blue:10 alpha:0],[CPColor colorWith8BitRed:255 green:23 blue:10 alpha:0]], "stroke_colors", [[CPColor colorWith8BitRed:255 green:247 blue:211 alpha:0],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0.16363636363636364],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0.16363636363636364],[CPColor colorWith8BitRed:88 green:255 blue:67 alpha:0.32272727272727275],[CPColor colorWith8BitRed:23 green:200 blue:10 alpha:0],[CPColor colorWith8BitRed:200 green:23 blue:10 alpha:0]], "fill_colors"];
+  return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[[CPColor colorWith8BitRed:255 green:0 blue:0 alpha:1],[CPColor colorWith8BitRed:138 green:10 blue:143 alpha:1]] baseColor:[CPColor colorWith8BitRed:138 green:10 blue:143 alpha:1]], "background_color", 0, "background_color_direction", 18, "number_of_points", 0, "rotation", 0, "recurse_depth", 2.7, "factor_larger", [GRPoint pointWithX:740 Y:431.5], "center_point", 183, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:0 green:255 blue:100 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:0 green:0 blue:0 alpha:0],[CPColor colorWith8BitRed:88 green:255 blue:67 alpha:0.32272727272727275],[CPColor colorWith8BitRed:255 green:2 blue:10 alpha:0],[CPColor colorWith8BitRed:255 green:23 blue:10 alpha:0]], "stroke_colors", [[CPColor colorWith8BitRed:255 green:247 blue:211 alpha:0],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0.16363636363636364],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:0.16363636363636364],[CPColor colorWith8BitRed:88 green:255 blue:67 alpha:0.32272727272727275],[CPColor colorWith8BitRed:23 green:200 blue:10 alpha:0],[CPColor colorWith8BitRed:200 green:23 blue:10 alpha:0]], "fill_colors"];
 }
 
 /*
@@ -100,7 +97,7 @@ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradi
     more_points.push([[[self circle] cpt] closest:[rect points]]);
   }
 
-  for ( var repcnt = 2; repcnt < 8; repcnt += 2 ) {
+  for ( var repcnt = 2; repcnt < 20; repcnt += 2 ) {
     next_points = [];
     more_points.push(more_points[0]);
     for ( var idx = 0; idx < more_points.length-1; idx++) {

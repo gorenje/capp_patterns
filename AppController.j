@@ -312,7 +312,8 @@ var allPatternClassesNoRecursion = [PatternOne,
     ctxt.title       = [pattern className];
     ctxt.description = ("Generated using the following configuration:\n"+
                         [pattern newPattern]);
-    ctxt.canvas = { clientHeight: [patternView bounds].size.height };
+    ctxt.canvas = { clientHeight: [patternView bounds].size.height,
+                    clientWidth: [patternView bounds].size.width };
     ctxt.__cpt_of_image__ =
       [GRPoint pointWithX:[patternView bounds].size.width/2
                         Y:[patternView bounds].size.height/2];

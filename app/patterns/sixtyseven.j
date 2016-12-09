@@ -24,7 +24,7 @@
 
 + (CPDict)defaultConfig
 {
-  return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[] baseColor:[CPColor colorWith8BitRed:255 green:16 blue:29 alpha:1]], "background_color", 0, "background_color_direction", 14, "number_of_points", 0, "rotation", 0, "recurse_depth", 2.78, "factor_larger", [GRPoint pointWithX:683.5 Y:431.5], "center_point", 131, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:253 green:255 blue:234 alpha:1],[CPColor colorWith8BitRed:253 green:255 blue:234 alpha:1],[CPColor colorWith8BitRed:253 green:255 blue:234 alpha:1],[CPColor colorWith8BitRed:253 green:255 blue:234 alpha:1],[CPColor colorWith8BitRed:254 green:255 blue:235 alpha:1],[CPColor colorWith8BitRed:255 green:23 blue:10 alpha:0]], "stroke_colors", [[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:0]], "fill_colors"];
+  return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[] baseColor:[CPColor colorWith8BitRed:255 green:16 blue:29 alpha:1]], "background_color", 0, "background_color_direction", 18, "number_of_points", 0, "rotation", 0, "recurse_depth", 2.78, "factor_larger", [GRPoint pointWithX:740 Y:431.5], "center_point", 120, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:249 green:142 blue:21 alpha:1],[CPColor colorWith8BitRed:249 green:14 blue:191 alpha:1],[CPColor colorWith8BitRed:209 green:40 blue:128 alpha:1],[CPColor colorWith8BitRed:226 green:123 blue:20 alpha:1],[CPColor colorWith8BitRed:42 green:38 blue:247 alpha:1],[CPColor colorWith8BitRed:255 green:23 blue:10 alpha:1]], "stroke_colors", [[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1]], "fill_colors"];
 }
 
 /*
@@ -75,7 +75,7 @@
     more_points.push([[[self circle] cpt] closest:[rect points]]);
   }
 
-  for ( var repcnt = 2, cidx = 2; repcnt < 8; repcnt += 2, cidx += 1 ) {
+  for ( var repcnt = 2, cidx = 2; repcnt < 20; repcnt += 2, cidx += 1 ) {
     next_points = [];
     more_points.push(more_points[0]);
     for ( var idx = 0; idx < more_points.length-1; idx++) {

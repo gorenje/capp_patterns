@@ -17,10 +17,9 @@
  */
 @implementation PatternSixtyEight : PatternSixtySeven
 
-
 + (CPDict)defaultConfig
 {
- return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[] baseColor:[CPColor colorWith8BitRed:0 green:0 blue:182 alpha:1]], "background_color", 0, "background_color_direction", 14, "number_of_points", 0, "rotation", 0, "recurse_depth", 4, "factor_larger", [GRPoint pointWithX:683.5 Y:431.5], "center_point", 102, "radius", NO, "show_shapes", [[CPColor colorWith8BitRed:255 green:137 blue:0 alpha:1],[CPColor colorWith8BitRed:255 green:137 blue:0 alpha:1],[CPColor colorWith8BitRed:255 green:137 blue:0 alpha:1],[CPColor colorWith8BitRed:255 green:137 blue:0 alpha:1],[CPColor colorWith8BitRed:255 green:137 blue:0 alpha:1],[CPColor colorWith8BitRed:255 green:23 blue:10 alpha:0]], "stroke_colors", [[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:31 green:42 blue:124 alpha:1],[CPColor colorWith8BitRed:31 green:42 blue:124 alpha:1],[CPColor colorWith8BitRed:31 green:42 blue:124 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:0]], "fill_colors"];
+ return [CPDictionary dictionaryWithObjectsAndKeys:[CPColor colorWith8BitRed:0 green:0 blue:74 alpha:1], "background_color", 0, "background_color_direction", 14, "number_of_points", 0, "rotation", 0, "recurse_depth", 4, "factor_larger", [GRPoint pointWithX:740 Y:431.5], "center_point", 102, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:200 green:107 blue:0 alpha:1],[CPColor colorWith8BitRed:200 green:107 blue:0 alpha:1],[CPColor colorWith8BitRed:200 green:107 blue:0 alpha:1],[CPColor colorWith8BitRed:200 green:107 blue:0 alpha:1],[CPColor colorWith8BitRed:200 green:107 blue:0 alpha:1],[CPColor colorWith8BitRed:248 green:132 blue:0 alpha:0.7818181818181819]], "stroke_colors", [[CPColor colorWith8BitRed:0 green:0 blue:98 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1],[CPColor colorWith8BitRed:31 green:42 blue:124 alpha:1],[CPColor colorWith8BitRed:31 green:42 blue:124 alpha:1],[CPColor colorWith8BitRed:31 green:42 blue:124 alpha:1],[CPColor colorWith8BitRed:0 green:0 blue:127 alpha:1]], "fill_colors"];
 }
 
 /*
