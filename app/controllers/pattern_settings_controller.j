@@ -218,20 +218,24 @@
 {
   [self updateSlider:m_radiusSlider textField:m_radiusValue sender:sender];
   [self compareOld:[self pattern]
-           withNew:[[self pattern] setRadius:[m_radiusSlider intValue]]];
+           withNew:[[self pattern]
+                     setRadius:[[m_radiusValue stringValue] intValue]]];
 }
 
 - (CPAction)updateFactorValue:(id)sender
 {
   [self updateSlider:m_factorSlider textField:m_factorValue sender:sender];
+  var factorLarger = [[m_factorValue stringValue] intValue];
+  factorLarger = 2 *(factorLarger/100);
   [self compareOld:[self pattern]
-           withNew:[[self pattern] setFactorLarger:(2 * ([m_factorSlider intValue]/100))]];
+           withNew:[[self pattern] setFactorLarger:factorLarger]];
 }
 
 - (CPAction)updateSizeValue:(id)sender
 {
   [self compareOld:[self pattern]
-           withNew:[[self pattern] setRecurseDepth:[[sender selectedTag] intValue] - 1]];
+           withNew:[[self pattern]
+                     setRecurseDepth:[[sender selectedTag] intValue] - 1]];
 }
 
 //
