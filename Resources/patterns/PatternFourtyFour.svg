@@ -6,69 +6,119 @@ Generated using the following configuration:
 @implementation NewPattern : PatternFourtyFour
 + (CPDict) defaultConfig
 {
- return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[[CPColor colorWith8BitRed:255 green:0 blue:0 alpha:1],[CPColor colorWith8BitRed:255 green:255 blue:255 alpha:1],[CPColor colorWith8BitRed:42 green:38 blue:247 alpha:1]] baseColor:[CPColor colorWith8BitRed:2 green:2 blue:2 alpha:1]], "background_color", 1, "background_color_direction", 50, "number_of_points", 0, "rotation", 0, "recurse_depth", 2, "factor_larger", [GRPoint pointWithX:475 Y:475], "center_point", 30, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:25 green:16 blue:255 alpha:1],[CPColor colorWith8BitRed:0 green:255 blue:0 alpha:1],[CPColor colorWith8BitRed:42 green:38 blue:247 alpha:1],[CPColor colorWith8BitRed:85 green:85 blue:85 alpha:1],[CPColor colorWith8BitRed:170 green:170 blue:170 alpha:1],[CPColor colorWith8BitRed:255 green:255 blue:0 alpha:1]], "stroke_colors", [[CPColor colorWith8BitRed:0 green:0 blue:255 alpha:0.2727272727272727],[CPColor colorWith8BitRed:42 green:38 blue:247 alpha:0.5454545454545454],[CPColor colorWith8BitRed:255 green:25 blue:49 alpha:0.7363636363636363],[CPColor colorWith8BitRed:107 green:107 blue:255 alpha:1],[CPColor colorWith8BitRed:149 green:247 blue:140 alpha:1],[CPColor colorWith8BitRed:0 green:255 blue:0 alpha:1]], "fill_colors"];
+ return [CPDictionary dictionaryWithObjectsAndKeys:[[GRColor alloc] initWithGradientColors:[[CPColor colorWith8BitRed:40 green:155 blue:218 alpha:1],[CPColor colorWith8BitRed:229 green:0 blue:117 alpha:1],[CPColor colorWith8BitRed:253 green:234 blue:22 alpha:1]] baseColor:[CPColor colorWith8BitRed:2 green:2 blue:2 alpha:1]], "background_color", 1, "background_color_direction", 50, "number_of_points", 0, "rotation", 0, "recurse_depth", 2, "factor_larger", [GRPoint pointWithX:475 Y:475], "center_point", 30, "radius", YES, "show_shapes", [[CPColor colorWith8BitRed:225 green:0 blue:122 alpha:0.7],[CPColor colorWith8BitRed:27 green:43 blue:131 alpha:0.7],[CPColor colorWith8BitRed:240 green:107 blue:32 alpha:0.7],[CPColor colorWith8BitRed:13 green:120 blue:92 alpha:0.7],[CPColor colorWith8BitRed:225 green:0 blue:122 alpha:0.7],[CPColor colorWith8BitRed:253 green:251 blue:226 alpha:0.7]], "stroke_colors", [[CPColor colorWith8BitRed:31 green:42 blue:124 alpha:0.7],[CPColor colorWith8BitRed:229 green:0 blue:31 alpha:0.7],[CPColor colorWith8BitRed:240 green:134 blue:182 alpha:0.7],[CPColor colorWith8BitRed:252 green:237 blue:24 alpha:0.7],[CPColor colorWith8BitRed:32 green:41 blue:134 alpha:0.7],[CPColor colorWith8BitRed:117 green:188 blue:50 alpha:0.7]], "fill_colors"];
 }
 @end
 
 </desc>
   <defs>
     <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
-<stop offset="0%" style="stop-color:#FF0000;stop-opacity:1;" />
-<stop offset="50%" style="stop-color:#FFFFFF;stop-opacity:1;" />
-<stop offset="100%" style="stop-color:#2A26F7;stop-opacity:1;" />
+<stop offset="0%" style="stop-color:#289BDA;stop-opacity:1;" />
+<stop offset="50%" style="stop-color:#E50075;stop-opacity:1;" />
+<stop offset="100%" style="stop-color:#FDEA16;stop-opacity:1;" />
     </linearGradient>
   </defs>
 <rect id="background" width="100%" height="100%" fill="url(#grad1)"/>
 <g id="rotatelayer" transform="rotate(0, 475, 475)">
-<path d="M 0 0 L 30 0 L 30 1900 L 0 1900 Z" style="fill:#0000FF; fill-opacity: 0.2727272727272727;"/>
-<path d="M 30 0 L 60 0 L 60 1900 L 30 1900 Z" style="fill:#2A26F7; fill-opacity: 0.5454545454545454;"/>
-<path d="M 60 0 L 90 0 L 90 1900 L 60 1900 Z" style="fill:#FF1931; fill-opacity: 0.7363636363636363;"/>
-<path d="M 90 0 L 120 0 L 120 1900 L 90 1900 Z" style="fill:#6B6BFF; fill-opacity: 1;"/>
-<path d="M 120 0 L 150 0 L 150 1900 L 120 1900 Z" style="fill:#95F78C; fill-opacity: 1;"/>
-<path d="M 150 0 L 180 0 L 180 1900 L 150 1900 Z" style="fill:#00FF00; fill-opacity: 1;"/>
-<path d="M 180 0 L 210 0 L 210 1900 L 180 1900 Z" style="fill:#1910FF; fill-opacity: 1;"/>
-<path d="M 210 0 L 240 0 L 240 1900 L 210 1900 Z" style="fill:#00FF00; fill-opacity: 1;"/>
-<path d="M 240 0 L 270 0 L 270 1900 L 240 1900 Z" style="fill:#2A26F7; fill-opacity: 1;"/>
-<path d="M 270 0 L 300 0 L 300 1900 L 270 1900 Z" style="fill:#555555; fill-opacity: 1;"/>
-<path d="M 300 0 L 330 0 L 330 1900 L 300 1900 Z" style="fill:#AAAAAA; fill-opacity: 1;"/>
-<path d="M 330 0 L 360 0 L 360 1900 L 330 1900 Z" style="fill:#FFFF00; fill-opacity: 1;"/>
-<path d="M 360 0 L 390 0 L 390 1900 L 360 1900 Z" style="fill:#0000FF; fill-opacity: 0.2727272727272727;"/>
-<path d="M 390 0 L 420 0 L 420 1900 L 390 1900 Z" style="fill:#2A26F7; fill-opacity: 0.5454545454545454;"/>
-<path d="M 420 0 L 450 0 L 450 1900 L 420 1900 Z" style="fill:#FF1931; fill-opacity: 0.7363636363636363;"/>
-<path d="M 450 0 L 480 0 L 480 1900 L 450 1900 Z" style="fill:#6B6BFF; fill-opacity: 1;"/>
-<path d="M 480 0 L 510 0 L 510 1900 L 480 1900 Z" style="fill:#95F78C; fill-opacity: 1;"/>
-<path d="M 510 0 L 540 0 L 540 1900 L 510 1900 Z" style="fill:#00FF00; fill-opacity: 1;"/>
-<path d="M 540 0 L 570 0 L 570 1900 L 540 1900 Z" style="fill:#1910FF; fill-opacity: 1;"/>
-<path d="M 570 0 L 600 0 L 600 1900 L 570 1900 Z" style="fill:#00FF00; fill-opacity: 1;"/>
-<path d="M 600 0 L 630 0 L 630 1900 L 600 1900 Z" style="fill:#2A26F7; fill-opacity: 1;"/>
-<path d="M 630 0 L 660 0 L 660 1900 L 630 1900 Z" style="fill:#555555; fill-opacity: 1;"/>
-<path d="M 660 0 L 690 0 L 690 1900 L 660 1900 Z" style="fill:#AAAAAA; fill-opacity: 1;"/>
-<path d="M 690 0 L 720 0 L 720 1900 L 690 1900 Z" style="fill:#FFFF00; fill-opacity: 1;"/>
-<path d="M 720 0 L 750 0 L 750 1900 L 720 1900 Z" style="fill:#0000FF; fill-opacity: 0.2727272727272727;"/>
-<path d="M 750 0 L 780 0 L 780 1900 L 750 1900 Z" style="fill:#2A26F7; fill-opacity: 0.5454545454545454;"/>
-<path d="M 780 0 L 810 0 L 810 1900 L 780 1900 Z" style="fill:#FF1931; fill-opacity: 0.7363636363636363;"/>
-<path d="M 810 0 L 840 0 L 840 1900 L 810 1900 Z" style="fill:#6B6BFF; fill-opacity: 1;"/>
-<path d="M 840 0 L 870 0 L 870 1900 L 840 1900 Z" style="fill:#95F78C; fill-opacity: 1;"/>
-<path d="M 870 0 L 900 0 L 900 1900 L 870 1900 Z" style="fill:#00FF00; fill-opacity: 1;"/>
-<path d="M 900 0 L 930 0 L 930 1900 L 900 1900 Z" style="fill:#1910FF; fill-opacity: 1;"/>
-<path d="M 930 0 L 960 0 L 960 1900 L 930 1900 Z" style="fill:#00FF00; fill-opacity: 1;"/>
-<path d="M 960 0 L 990 0 L 990 1900 L 960 1900 Z" style="fill:#2A26F7; fill-opacity: 1;"/>
-<path d="M 990 0 L 1020 0 L 1020 1900 L 990 1900 Z" style="fill:#555555; fill-opacity: 1;"/>
-<path d="M 1020 0 L 1050 0 L 1050 1900 L 1020 1900 Z" style="fill:#AAAAAA; fill-opacity: 1;"/>
-<path d="M 1050 0 L 1080 0 L 1080 1900 L 1050 1900 Z" style="fill:#FFFF00; fill-opacity: 1;"/>
-<path d="M 1080 0 L 1110 0 L 1110 1900 L 1080 1900 Z" style="fill:#0000FF; fill-opacity: 0.2727272727272727;"/>
-<path d="M 1110 0 L 1140 0 L 1140 1900 L 1110 1900 Z" style="fill:#2A26F7; fill-opacity: 0.5454545454545454;"/>
-<path d="M 1140 0 L 1170 0 L 1170 1900 L 1140 1900 Z" style="fill:#FF1931; fill-opacity: 0.7363636363636363;"/>
-<path d="M 1170 0 L 1200 0 L 1200 1900 L 1170 1900 Z" style="fill:#6B6BFF; fill-opacity: 1;"/>
-<path d="M 1200 0 L 1230 0 L 1230 1900 L 1200 1900 Z" style="fill:#95F78C; fill-opacity: 1;"/>
-<path d="M 1230 0 L 1260 0 L 1260 1900 L 1230 1900 Z" style="fill:#00FF00; fill-opacity: 1;"/>
-<path d="M 1260 0 L 1290 0 L 1290 1900 L 1260 1900 Z" style="fill:#1910FF; fill-opacity: 1;"/>
-<path d="M 1290 0 L 1320 0 L 1320 1900 L 1290 1900 Z" style="fill:#00FF00; fill-opacity: 1;"/>
-<path d="M 1320 0 L 1350 0 L 1350 1900 L 1320 1900 Z" style="fill:#2A26F7; fill-opacity: 1;"/>
-<path d="M 1350 0 L 1380 0 L 1380 1900 L 1350 1900 Z" style="fill:#555555; fill-opacity: 1;"/>
-<path d="M 1380 0 L 1410 0 L 1410 1900 L 1380 1900 Z" style="fill:#AAAAAA; fill-opacity: 1;"/>
-<path d="M 1410 0 L 1440 0 L 1440 1900 L 1410 1900 Z" style="fill:#FFFF00; fill-opacity: 1;"/>
-<path d="M 1440 0 L 1470 0 L 1470 1900 L 1440 1900 Z" style="fill:#0000FF; fill-opacity: 0.2727272727272727;"/>
-<path d="M 1470 0 L 1500 0 L 1500 1900 L 1470 1900 Z" style="fill:#2A26F7; fill-opacity: 0.5454545454545454;"/>
+<path d="M 0 0 L 30 0 L 30 1900 L 0 1900 Z" style="fill:#1F2A7C; fill-opacity: 0.7;"/>
+<path d="M 0 0 L 0 30 L 1900 30 L 1900 0 Z" style="fill:#1F2A7C; fill-opacity: 0.7;"/>
+<path d="M 30 0 L 60 0 L 60 1900 L 30 1900 Z" style="fill:#E5001F; fill-opacity: 0.7;"/>
+<path d="M 0 30 L 0 60 L 1900 60 L 1900 30 Z" style="fill:#E5001F; fill-opacity: 0.7;"/>
+<path d="M 60 0 L 90 0 L 90 1900 L 60 1900 Z" style="fill:#F086B6; fill-opacity: 0.7;"/>
+<path d="M 0 60 L 0 90 L 1900 90 L 1900 60 Z" style="fill:#F086B6; fill-opacity: 0.7;"/>
+<path d="M 90 0 L 120 0 L 120 1900 L 90 1900 Z" style="fill:#FCED18; fill-opacity: 0.7;"/>
+<path d="M 0 90 L 0 120 L 1900 120 L 1900 90 Z" style="fill:#FCED18; fill-opacity: 0.7;"/>
+<path d="M 120 0 L 150 0 L 150 1900 L 120 1900 Z" style="fill:#202986; fill-opacity: 0.7;"/>
+<path d="M 0 120 L 0 150 L 1900 150 L 1900 120 Z" style="fill:#202986; fill-opacity: 0.7;"/>
+<path d="M 150 0 L 180 0 L 180 1900 L 150 1900 Z" style="fill:#75BC32; fill-opacity: 0.7;"/>
+<path d="M 0 150 L 0 180 L 1900 180 L 1900 150 Z" style="fill:#75BC32; fill-opacity: 0.7;"/>
+<path d="M 180 0 L 210 0 L 210 1900 L 180 1900 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 0 180 L 0 210 L 1900 210 L 1900 180 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 210 0 L 240 0 L 240 1900 L 210 1900 Z" style="fill:#1B2B83; fill-opacity: 0.7;"/>
+<path d="M 0 210 L 0 240 L 1900 240 L 1900 210 Z" style="fill:#1B2B83; fill-opacity: 0.7;"/>
+<path d="M 240 0 L 270 0 L 270 1900 L 240 1900 Z" style="fill:#F06B20; fill-opacity: 0.7;"/>
+<path d="M 0 240 L 0 270 L 1900 270 L 1900 240 Z" style="fill:#F06B20; fill-opacity: 0.7;"/>
+<path d="M 270 0 L 300 0 L 300 1900 L 270 1900 Z" style="fill:#0D785C; fill-opacity: 0.7;"/>
+<path d="M 0 270 L 0 300 L 1900 300 L 1900 270 Z" style="fill:#0D785C; fill-opacity: 0.7;"/>
+<path d="M 300 0 L 330 0 L 330 1900 L 300 1900 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 0 300 L 0 330 L 1900 330 L 1900 300 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 330 0 L 360 0 L 360 1900 L 330 1900 Z" style="fill:#FDFBE2; fill-opacity: 0.7;"/>
+<path d="M 0 330 L 0 360 L 1900 360 L 1900 330 Z" style="fill:#FDFBE2; fill-opacity: 0.7;"/>
+<path d="M 360 0 L 390 0 L 390 1900 L 360 1900 Z" style="fill:#1F2A7C; fill-opacity: 0.7;"/>
+<path d="M 0 360 L 0 390 L 1900 390 L 1900 360 Z" style="fill:#1F2A7C; fill-opacity: 0.7;"/>
+<path d="M 390 0 L 420 0 L 420 1900 L 390 1900 Z" style="fill:#E5001F; fill-opacity: 0.7;"/>
+<path d="M 0 390 L 0 420 L 1900 420 L 1900 390 Z" style="fill:#E5001F; fill-opacity: 0.7;"/>
+<path d="M 420 0 L 450 0 L 450 1900 L 420 1900 Z" style="fill:#F086B6; fill-opacity: 0.7;"/>
+<path d="M 0 420 L 0 450 L 1900 450 L 1900 420 Z" style="fill:#F086B6; fill-opacity: 0.7;"/>
+<path d="M 450 0 L 480 0 L 480 1900 L 450 1900 Z" style="fill:#FCED18; fill-opacity: 0.7;"/>
+<path d="M 0 450 L 0 480 L 1900 480 L 1900 450 Z" style="fill:#FCED18; fill-opacity: 0.7;"/>
+<path d="M 480 0 L 510 0 L 510 1900 L 480 1900 Z" style="fill:#202986; fill-opacity: 0.7;"/>
+<path d="M 0 480 L 0 510 L 1900 510 L 1900 480 Z" style="fill:#202986; fill-opacity: 0.7;"/>
+<path d="M 510 0 L 540 0 L 540 1900 L 510 1900 Z" style="fill:#75BC32; fill-opacity: 0.7;"/>
+<path d="M 0 510 L 0 540 L 1900 540 L 1900 510 Z" style="fill:#75BC32; fill-opacity: 0.7;"/>
+<path d="M 540 0 L 570 0 L 570 1900 L 540 1900 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 0 540 L 0 570 L 1900 570 L 1900 540 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 570 0 L 600 0 L 600 1900 L 570 1900 Z" style="fill:#1B2B83; fill-opacity: 0.7;"/>
+<path d="M 0 570 L 0 600 L 1900 600 L 1900 570 Z" style="fill:#1B2B83; fill-opacity: 0.7;"/>
+<path d="M 600 0 L 630 0 L 630 1900 L 600 1900 Z" style="fill:#F06B20; fill-opacity: 0.7;"/>
+<path d="M 0 600 L 0 630 L 1900 630 L 1900 600 Z" style="fill:#F06B20; fill-opacity: 0.7;"/>
+<path d="M 630 0 L 660 0 L 660 1900 L 630 1900 Z" style="fill:#0D785C; fill-opacity: 0.7;"/>
+<path d="M 0 630 L 0 660 L 1900 660 L 1900 630 Z" style="fill:#0D785C; fill-opacity: 0.7;"/>
+<path d="M 660 0 L 690 0 L 690 1900 L 660 1900 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 0 660 L 0 690 L 1900 690 L 1900 660 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 690 0 L 720 0 L 720 1900 L 690 1900 Z" style="fill:#FDFBE2; fill-opacity: 0.7;"/>
+<path d="M 0 690 L 0 720 L 1900 720 L 1900 690 Z" style="fill:#FDFBE2; fill-opacity: 0.7;"/>
+<path d="M 720 0 L 750 0 L 750 1900 L 720 1900 Z" style="fill:#1F2A7C; fill-opacity: 0.7;"/>
+<path d="M 0 720 L 0 750 L 1900 750 L 1900 720 Z" style="fill:#1F2A7C; fill-opacity: 0.7;"/>
+<path d="M 750 0 L 780 0 L 780 1900 L 750 1900 Z" style="fill:#E5001F; fill-opacity: 0.7;"/>
+<path d="M 0 750 L 0 780 L 1900 780 L 1900 750 Z" style="fill:#E5001F; fill-opacity: 0.7;"/>
+<path d="M 780 0 L 810 0 L 810 1900 L 780 1900 Z" style="fill:#F086B6; fill-opacity: 0.7;"/>
+<path d="M 0 780 L 0 810 L 1900 810 L 1900 780 Z" style="fill:#F086B6; fill-opacity: 0.7;"/>
+<path d="M 810 0 L 840 0 L 840 1900 L 810 1900 Z" style="fill:#FCED18; fill-opacity: 0.7;"/>
+<path d="M 0 810 L 0 840 L 1900 840 L 1900 810 Z" style="fill:#FCED18; fill-opacity: 0.7;"/>
+<path d="M 840 0 L 870 0 L 870 1900 L 840 1900 Z" style="fill:#202986; fill-opacity: 0.7;"/>
+<path d="M 0 840 L 0 870 L 1900 870 L 1900 840 Z" style="fill:#202986; fill-opacity: 0.7;"/>
+<path d="M 870 0 L 900 0 L 900 1900 L 870 1900 Z" style="fill:#75BC32; fill-opacity: 0.7;"/>
+<path d="M 0 870 L 0 900 L 1900 900 L 1900 870 Z" style="fill:#75BC32; fill-opacity: 0.7;"/>
+<path d="M 900 0 L 930 0 L 930 1900 L 900 1900 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 0 900 L 0 930 L 1900 930 L 1900 900 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 930 0 L 960 0 L 960 1900 L 930 1900 Z" style="fill:#1B2B83; fill-opacity: 0.7;"/>
+<path d="M 0 930 L 0 960 L 1900 960 L 1900 930 Z" style="fill:#1B2B83; fill-opacity: 0.7;"/>
+<path d="M 960 0 L 990 0 L 990 1900 L 960 1900 Z" style="fill:#F06B20; fill-opacity: 0.7;"/>
+<path d="M 0 960 L 0 990 L 1900 990 L 1900 960 Z" style="fill:#F06B20; fill-opacity: 0.7;"/>
+<path d="M 990 0 L 1020 0 L 1020 1900 L 990 1900 Z" style="fill:#0D785C; fill-opacity: 0.7;"/>
+<path d="M 0 990 L 0 1020 L 1900 1020 L 1900 990 Z" style="fill:#0D785C; fill-opacity: 0.7;"/>
+<path d="M 1020 0 L 1050 0 L 1050 1900 L 1020 1900 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 0 1020 L 0 1050 L 1900 1050 L 1900 1020 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 1050 0 L 1080 0 L 1080 1900 L 1050 1900 Z" style="fill:#FDFBE2; fill-opacity: 0.7;"/>
+<path d="M 0 1050 L 0 1080 L 1900 1080 L 1900 1050 Z" style="fill:#FDFBE2; fill-opacity: 0.7;"/>
+<path d="M 1080 0 L 1110 0 L 1110 1900 L 1080 1900 Z" style="fill:#1F2A7C; fill-opacity: 0.7;"/>
+<path d="M 0 1080 L 0 1110 L 1900 1110 L 1900 1080 Z" style="fill:#1F2A7C; fill-opacity: 0.7;"/>
+<path d="M 1110 0 L 1140 0 L 1140 1900 L 1110 1900 Z" style="fill:#E5001F; fill-opacity: 0.7;"/>
+<path d="M 0 1110 L 0 1140 L 1900 1140 L 1900 1110 Z" style="fill:#E5001F; fill-opacity: 0.7;"/>
+<path d="M 1140 0 L 1170 0 L 1170 1900 L 1140 1900 Z" style="fill:#F086B6; fill-opacity: 0.7;"/>
+<path d="M 0 1140 L 0 1170 L 1900 1170 L 1900 1140 Z" style="fill:#F086B6; fill-opacity: 0.7;"/>
+<path d="M 1170 0 L 1200 0 L 1200 1900 L 1170 1900 Z" style="fill:#FCED18; fill-opacity: 0.7;"/>
+<path d="M 0 1170 L 0 1200 L 1900 1200 L 1900 1170 Z" style="fill:#FCED18; fill-opacity: 0.7;"/>
+<path d="M 1200 0 L 1230 0 L 1230 1900 L 1200 1900 Z" style="fill:#202986; fill-opacity: 0.7;"/>
+<path d="M 0 1200 L 0 1230 L 1900 1230 L 1900 1200 Z" style="fill:#202986; fill-opacity: 0.7;"/>
+<path d="M 1230 0 L 1260 0 L 1260 1900 L 1230 1900 Z" style="fill:#75BC32; fill-opacity: 0.7;"/>
+<path d="M 0 1230 L 0 1260 L 1900 1260 L 1900 1230 Z" style="fill:#75BC32; fill-opacity: 0.7;"/>
+<path d="M 1260 0 L 1290 0 L 1290 1900 L 1260 1900 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 0 1260 L 0 1290 L 1900 1290 L 1900 1260 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 1290 0 L 1320 0 L 1320 1900 L 1290 1900 Z" style="fill:#1B2B83; fill-opacity: 0.7;"/>
+<path d="M 0 1290 L 0 1320 L 1900 1320 L 1900 1290 Z" style="fill:#1B2B83; fill-opacity: 0.7;"/>
+<path d="M 1320 0 L 1350 0 L 1350 1900 L 1320 1900 Z" style="fill:#F06B20; fill-opacity: 0.7;"/>
+<path d="M 0 1320 L 0 1350 L 1900 1350 L 1900 1320 Z" style="fill:#F06B20; fill-opacity: 0.7;"/>
+<path d="M 1350 0 L 1380 0 L 1380 1900 L 1350 1900 Z" style="fill:#0D785C; fill-opacity: 0.7;"/>
+<path d="M 0 1350 L 0 1380 L 1900 1380 L 1900 1350 Z" style="fill:#0D785C; fill-opacity: 0.7;"/>
+<path d="M 1380 0 L 1410 0 L 1410 1900 L 1380 1900 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 0 1380 L 0 1410 L 1900 1410 L 1900 1380 Z" style="fill:#E1007A; fill-opacity: 0.7;"/>
+<path d="M 1410 0 L 1440 0 L 1440 1900 L 1410 1900 Z" style="fill:#FDFBE2; fill-opacity: 0.7;"/>
+<path d="M 0 1410 L 0 1440 L 1900 1440 L 1900 1410 Z" style="fill:#FDFBE2; fill-opacity: 0.7;"/>
+<path d="M 1440 0 L 1470 0 L 1470 1900 L 1440 1900 Z" style="fill:#1F2A7C; fill-opacity: 0.7;"/>
+<path d="M 0 1440 L 0 1470 L 1900 1470 L 1900 1440 Z" style="fill:#1F2A7C; fill-opacity: 0.7;"/>
+<path d="M 1470 0 L 1500 0 L 1500 1900 L 1470 1900 Z" style="fill:#E5001F; fill-opacity: 0.7;"/>
+<path d="M 0 1470 L 0 1500 L 1900 1500 L 1900 1470 Z" style="fill:#E5001F; fill-opacity: 0.7;"/>
 </g>
 </svg>
