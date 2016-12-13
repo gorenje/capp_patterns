@@ -53,10 +53,10 @@
     next_points = [],
     more_points = [],
     rect = nil,
-    blue_factor = 20;
+    blue_factor = 10;
 
   if ( [self showShapes] ) {
-    blue_factor = -20;
+    blue_factor = -10;
   }
 
   for ( var idx = 0; idx < [self numPoints]; idx++ ) {
