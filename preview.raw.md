@@ -1,5 +1,7 @@
 <!-- Images are svg exports (950x950), converted to png via gimp.
-     Previews are resized to 15% -->
+     Previews are resized to 15%
+     ==> for n in `seq -f%03g 66 71` ; do convert -resize 15% ${n}.png previews/${n}.png ; done
+-->
 [![001](Resources/patterns/previews/001.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/001.png)
 [![002](Resources/patterns/previews/002.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/002.png)
 [![003](Resources/patterns/previews/003.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/003.png)
@@ -66,3 +68,8 @@
 [![064](Resources/patterns/previews/064.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/064.png)
 [![065](Resources/patterns/previews/065.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/065.png)
 [![066](Resources/patterns/previews/066.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/066.png)
+[![067](Resources/patterns/previews/067.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/067.png)
+[![068](Resources/patterns/previews/068.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/068.png)
+[![069](Resources/patterns/previews/069.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/069.png)
+[![070](Resources/patterns/previews/070.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/070.png)
+[![071](Resources/patterns/previews/071.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/071.png)
