@@ -42,6 +42,7 @@ allPatternClasses = [PatternOne,
                      PatternFourtyNine,
                      PatternFourtyFive,
                      PatternThree,
+                     PatternSeventyTwo,
                      PatternFour,
                      PatternFourtySeven,
                      PatternTwentyTwo,
@@ -49,6 +50,7 @@ allPatternClasses = [PatternOne,
                      PatternTwentyEight,
                      PatternSeven,
                      PatternNine,
+                     PatternSeventyFive,
                      PatternEleven,
                      PatternTwenty,
                      PatternSixtySix,
@@ -93,12 +95,14 @@ allPatternClasses = [PatternOne,
                      PatternSeventy,
                      PatternSixtyTwo,
                      PatternFiftyNine,
+                     PatternSeventyThree,
                      PatternSixtyFive,
                      PatternSixtyFour,
                      PatternSeventyOne,
                      PatternSixtySeven,
                      PatternSixtyEight,
                      PatternSixtyNine,
+                     PatternSeventyFour,
                      PatternFourtyFour];
 
 /*
@@ -293,6 +297,48 @@ var allPatternClassesNoRecursion = [PatternOne,
 
 @implementation AppController (Actions)
 
+- (CPAction)createRandom:(id)sender
+{
+  var shaObj = new jsSHA("SHA-512", "TEXT");
+  shaObj.update(""+Math.random());
+  var hexstr = shaObj.getHash("HEX");
+
+  var showPatternIdx =
+    parseInt(hexstr.substr(0,2),16) % allPatternClasses.length;
+  var patternClass = [patternListView content][showPatternIdx];
+
+  var cfg = [patternClass defaultConfig];
+  [cfg setObject:(parseInt(hexstr.substr(2,2),16)%200)+20 forKey:"radius"];
+
+  [cfg setObject:colorFromString(hexstr, 4) forKey:"background_color"];
+  [cfg setObject:[colorFromString(hexstr, 12),
+                  colorFromString(hexstr, 20),
+                  colorFromString(hexstr, 28),
+                  colorFromString(hexstr, 36),
+                  colorFromString(hexstr, 44),
+                  colorFromString(hexstr, 52)] forKey:"stroke_colors"];
+  [cfg setObject:[colorFromString(hexstr, 60),
+                  colorFromString(hexstr, 68),
+                  colorFromString(hexstr, 76),
+                  colorFromString(hexstr, 84),
+                  colorFromString(hexstr, 92),
+                  colorFromString(hexstr, 100)] forKey:"fill_colors"];
+
+  [cfg setObject:parseInt(hexstr.substr(108,3),16)%360 forKey:"rotation"];
+  [cfg setObject:parseInt(hexstr.substr(111,1),16)%2 forKey:"recurse_depth"];
+  [cfg setObject:(parseInt(hexstr.substr(112,2),16)%40)+1
+          forKey:"number_of_points"];
+  [cfg setObject:parseInt(hexstr.substr(114,2),16)/255.0
+          forKey:"factor_larger"];
+  [cfg setObject:parseInt(hexstr.substr(116,1),16)>8 forKey:"show_shapes"];
+
+  [patternListView
+    setSelectionIndexes:[CPIndexSet indexSetWithIndex:showPatternIdx]];
+
+  [patternView setNeedsDisplay:YES];
+  [patternView setPattern:[[patternClass alloc] initWithConfig:cfg]];
+}
+
 - (CPAction)dumpConfig:(id)sender
 {
   alert([[patternView pattern] newPattern]);
@@ -370,7 +416,7 @@ var allPatternClassesNoRecursion = [PatternOne,
 
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
-  return ["Properties", "Animate",
+  return ["Properties", "Animate", "Random",
           CPToolbarFlexibleSpaceItemIdentifier,
                       "SaveSvg", "StoreConfig", "AboutPatterns"];
 }
@@ -400,6 +446,14 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
     [self setupToolbarItem:toolbarItem
                   selector:@selector(showProperties:)
                      label:"Properties"];
+    break;
+
+  case "Random":
+    image = [[CPImage alloc] initWithContentsOfFile:"Resources/help.png" size:CPSizeMake(32, 32)];
+    highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/help_highlight.png" size:CPSizeMake(32, 32)];
+    [self setupToolbarItem:toolbarItem
+                  selector:@selector(createRandom:)
+                     label:"Random"];
     break;
 
   case "Animate":
