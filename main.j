@@ -19,7 +19,6 @@ function colorFromString(str, offset) {
 
 function main(args, namedArgs)
 {
-  console.log([namedArgs objectForKey:"email"]);
   if ( [namedArgs objectForKey:"email"] ) {
     var shaObj = new jsSHA("SHA-512", "TEXT");
     shaObj.update([namedArgs objectForKey:"email"]);
@@ -33,9 +32,8 @@ function main(args, namedArgs)
 
     var cpt = [GRPoint pointWithX:200 Y:200];
 
-    console.log(hexstr.length); // 128
     [cfg setObject:cpt forKey:"center_point"];
-    [cfg setObject:(parseInt(hexstr.substr(2,2),16)%120)+20 forKey:"radius"];
+    [cfg setObject:(parseInt(hexstr.substr(2,2),16)%200)+20 forKey:"radius"];
     [cfg setObject:colorFromString(hexstr, 4) forKey:"background_color"];
     [cfg setObject:[colorFromString(hexstr, 12),
                     colorFromString(hexstr, 20),
@@ -51,8 +49,8 @@ function main(args, namedArgs)
                     colorFromString(hexstr, 100)] forKey:"fill_colors"];
 
     [cfg setObject:parseInt(hexstr.substr(108,3),16)%360 forKey:"rotation"];
-    [cfg setObject:parseInt(hexstr.substr(111,1),16)%3 forKey:"recurse_depth"];
-    [cfg setObject:parseInt(hexstr.substr(112,2),16)%50 forKey:"number_of_points"];
+    [cfg setObject:parseInt(hexstr.substr(111,1),16)%2 forKey:"recurse_depth"];
+    [cfg setObject:(parseInt(hexstr.substr(112,2),16)%40)+1 forKey:"number_of_points"];
     [cfg setObject:parseInt(hexstr.substr(114,2),16)/255.0 forKey:"factor_larger"];
     [cfg setObject:parseInt(hexstr.substr(116,1),16)>8 forKey:"show_shapes"];
 
@@ -62,6 +60,8 @@ function main(args, namedArgs)
     ctxt.bgColor     = [pattern bgColor];
     ctxt.bgColorDir  = [pattern bgColorDirection];
     ctxt.title       = [pattern className];
+    ctxt.description = ("Generated using the following configuration:\n"+
+                        [pattern newPattern]);
     ctxt.__cpt_of_image__ = cpt;
 
     [pattern draw:ctxt];
