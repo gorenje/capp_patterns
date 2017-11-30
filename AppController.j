@@ -626,7 +626,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   var bounds = ("Image Size: " + [patternview bounds].size.width + " x " +
                 [patternview bounds].size.height);
 
-  [alert setMessageText:("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code and page hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011-2016 Gerrit Riessen\n\n" + bounds)];
+  [alert setMessageText:("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code and page hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011-2017 Gerrit Riessen\n\n" + bounds)];
   [alert setTitle:@"About Circle Patterns"];
   [alert setAlertStyle:CPInformationalAlertStyle];
   [alert setDelegate:delegate];
