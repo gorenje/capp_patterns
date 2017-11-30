@@ -380,6 +380,38 @@ var allPatternClassesNoRecursion = [PatternOne,
   }
 }
 
+- (CPAction)viewAsSvg:(id)sender
+{
+  try {
+    var ctxt = new SvgCgContext([patternView bounds].size.width,
+                                [patternView bounds].size.height);
+
+    var pattern = [patternView pattern];
+
+    ctxt.rotate      = [pattern rotation];
+    ctxt.bgColor     = [pattern bgColor];
+    ctxt.bgColorDir  = [pattern bgColorDirection];
+    ctxt.title       = [pattern className];
+    ctxt.description = ("Generated using the following configuration:\n"+
+                        [pattern newPattern]);
+    ctxt.canvas = { clientHeight: [patternView bounds].size.height,
+                    clientWidth: [patternView bounds].size.width };
+    ctxt.__cpt_of_image__ =
+      [GRPoint pointWithX:[patternView bounds].size.width/2
+                        Y:[patternView bounds].size.height/2];
+
+    [pattern draw:ctxt];
+    // application/octet-stream ==> download link
+    // image/svg+xml ==> view in browser
+    var uriContent =
+      "data:image/svg+xml," + encodeURIComponent(ctxt.svg);
+
+    window.open(uriContent, [pattern className] + ".svg");
+  } catch ( e ) {
+    console.log(e);
+  }
+}
+
 - (CPAction)aboutPatterns:(id)sender
 {
   [AboutPatternsDelegate popupAlert:patternView];
@@ -421,7 +453,7 @@ var allPatternClassesNoRecursion = [PatternOne,
 {
   return ["Properties", "Animate", "Random",
           CPToolbarFlexibleSpaceItemIdentifier,
-                      "SaveSvg", "StoreConfig", "AboutPatterns"];
+                      "ViewAsSvg","SaveSvg", "StoreConfig", "AboutPatterns"];
 }
 
 - (CPToolbarItem)toolbar:(CPToolbar)aToolbar
@@ -485,6 +517,15 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
     [self setupToolbarItem:toolbarItem
                   selector:@selector(saveToSvg:)
                      label:"SVG Export"];
+    break;
+
+  case "ViewAsSvg":
+    image = [[CPImage alloc] initWithContentsOfFile:"Resources/export.png" size:CPSizeMake(32, 32)];
+    highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/export_high.png" size:CPSizeMake(32, 32)];
+
+    [self setupToolbarItem:toolbarItem
+                  selector:@selector(viewAsSvg:)
+                     label:"View"];
     break;
   }
 

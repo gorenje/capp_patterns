@@ -66,7 +66,7 @@ function SvgCgContext(width, height){
     var clrs = null;
 
     if ( [val isKindOfClass:GRColor] ) {
-      if ( [val gradientColors].length == 0 ) {
+      if ( ![val gradientColors] || [val gradientColors].length == 0 ) {
         clrs = [val];
       } else {
         clrs = [val gradientColors];
@@ -116,7 +116,7 @@ function SvgCgContext(width, height){
             "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" " +
             "\"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">"+
             "<svg xmlns=\"http://www.w3.org/2000/svg\" "+
-            "width=\""+width+"\" height=\""+height+"\">\n"+
+            "width=\"" + width + "\" height=\"" + height + "\">\n"+
             "<title>" + title + "</title>\n" +
             "<desc>\n" + description + "\n</desc>\n" +
             "  <defs>\n"+
