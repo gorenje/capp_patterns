@@ -28,6 +28,7 @@
 GRMaxColorStop = 6;
 PatternDoLoopAnimationNotification = "PatternDoLoopAnimationNotification";
 PatternStopAnimationNotification = "PatternStopAnimationNotification";
+PatternDoStoreAnimationNotification = "PatternDoStoreAnimationNotification";
 
 allPatternClasses = [PatternOne,
                      PatternEight,
@@ -380,8 +381,15 @@ var allPatternClassesNoRecursion = [PatternOne,
   }
 }
 
-- (CPAction)viewAsSvg:(id)sender
+- (CPAction)animationSaveAsZip:(id)sender
 {
+  [self checkForPropertiesController];
+  [[CPNotificationCenter defaultCenter]
+         postNotificationName:PatternDoStoreAnimationNotification
+                      object:nil];
+}
+
+- (CPAction)viewAsSvg:(id)sender
   try {
     var ctxt = new SvgCgContext([patternView bounds].size.width,
                                 [patternView bounds].size.height);
@@ -453,7 +461,7 @@ var allPatternClassesNoRecursion = [PatternOne,
 {
   return ["Properties", "Animate", "Random",
           CPToolbarFlexibleSpaceItemIdentifier,
-                      "ViewAsSvg","SaveSvg", "StoreConfig", "AboutPatterns"];
+                      "AnimAsZip", "ViewAsSvg","SaveSvg", "StoreConfig", "AboutPatterns"];
 }
 
 - (CPToolbarItem)toolbar:(CPToolbar)aToolbar
@@ -525,7 +533,16 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
 
     [self setupToolbarItem:toolbarItem
                   selector:@selector(viewAsSvg:)
-                     label:"View"];
+                     label:"View Zip"];
+    break;
+
+  case "AnimAsZip":
+    image = [[CPImage alloc] initWithContentsOfFile:"Resources/export.png" size:CPSizeMake(32, 32)];
+    highlighted = [[CPImage alloc] initWithContentsOfFile:"Resources/export_high.png" size:CPSizeMake(32, 32)];
+
+    [self setupToolbarItem:toolbarItem
+                  selector:@selector(animationSaveAsZip:)
+                     label:"Anim As Zip"];
     break;
   }
 
@@ -626,7 +643,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
   var bounds = ("Image Size: " + [patternview bounds].size.width + " x " +
                 [patternview bounds].size.height);
 
-  [alert setMessageText:("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code and page hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011-2017 Gerrit Riessen\n\n" + bounds)];
+  [alert setMessageText:("Islamic Patterns and their generation using basic geometry.\n\nPattern property can be used to modify patterns but all changes are automagically reset. Property to console will send a copy of the properties to the console (developers only).\n\nCappuccino was used as UI framework. Code and page hosting provided by Github.\n\nNOTE: Depending on you browser, patterns may take some time to display.\n\nNOTE 2: IE will not work, IE only supports 1 bit alpha channel on colors and only rotations of 90,180 or 270 degrees are supported.\n\nCopyright (C) 2011-2018 Gerrit Riessen\n\n" + bounds)];
   [alert setTitle:@"About Circle Patterns"];
   [alert setAlertStyle:CPInformationalAlertStyle];
   [alert setDelegate:delegate];

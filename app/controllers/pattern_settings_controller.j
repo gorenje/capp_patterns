@@ -44,6 +44,7 @@
 
   PatternView m_pattern_view;
   BOOL m_stop_animation;
+  id m_zip_file;
 }
 
 //
@@ -146,6 +147,12 @@
       addObserver:self
          selector:@selector(doLoopAnimation:)
              name:PatternDoLoopAnimationNotification
+           object:nil];
+
+  [[CPNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(doStoreAnimation:)
+             name:PatternDoStoreAnimationNotification
            object:nil];
 
   [[CPNotificationCenter defaultCenter]
@@ -253,6 +260,13 @@
   [self animatePatternLoop:0 factor:1];
 }
 
+- (void)doStoreAnimation:(CPNotification)aNotification
+{
+  m_stop_animation = false;
+  m_zip_file = new JSZip();
+  [self animatePatternWithSvgLoop:0 factor:1];
+}
+
 - (void)updateBackgroundColorNotification:(CPNotification)aNotification
 {
   [[self pattern] setBgColor:[aNotification object]];
@@ -271,6 +285,63 @@
 //
 // Animation Helpers
 ////
+- (void)animatePatternWithSvgLoop:(int)frameNumber factor:(int)factor
+{
+  var newFactor = factor;
+
+  if ( frameNumber == 0 ) {
+    newFactor = 1;
+  }
+  if ( frameNumber > 199 ) {
+    m_stop_animation = true;
+  }
+
+  if ( m_stop_animation ) {
+    m_zip_file.generateAsync({type:"base64"})
+      .then(function(content) {
+          window.location = "data:application/zip;base64," + content;
+        });
+    return;
+  }
+
+  [self updateFrameNumberStoreToZip:frameNumber];
+
+  var animatorInvoker = [[CPInvocation alloc]
+                                initWithMethodSignature:nil];
+  [animatorInvoker setTarget:self];
+  [animatorInvoker setSelector:@selector(animatePatternWithSvgLoop:factor:)];
+  [animatorInvoker setArgument:(frameNumber+factor) atIndex:2];
+  [animatorInvoker setArgument:newFactor atIndex:3];
+
+  [CPTimer scheduledTimerWithTimeInterval:0
+                               invocation:animatorInvoker
+                                  repeats:NO];
+}
+
+- (void)updateFrameNumberStoreToZip:(int)aValue
+{
+  [self updateFrameNumber:aValue];
+
+  var ctxt = new SvgCgContext([m_pattern_view bounds].size.width,
+                              [m_pattern_view bounds].size.height);
+
+  var pattern = [m_pattern_view pattern];
+
+  ctxt.rotate      = [pattern rotation];
+  ctxt.bgColor     = [pattern bgColor];
+  ctxt.bgColorDir  = [pattern bgColorDirection];
+  ctxt.title       = [pattern className];
+  ctxt.canvas = { clientHeight: [m_pattern_view bounds].size.height,
+                  clientWidth: [m_pattern_view bounds].size.width };
+  ctxt.__cpt_of_image__ =
+    [GRPoint pointWithX:[m_pattern_view bounds].size.width/2
+                          Y:[m_pattern_view bounds].size.height/2];
+
+  [pattern draw:ctxt];
+
+  m_zip_file.file("frame" + aValue + ".svg", ctxt.svg);
+}
+
 - (void)animatePatternLoop:(int)frameNumber factor:(int)factor
 {
   var newFactor = factor;
