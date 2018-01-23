@@ -280,6 +280,21 @@
         removeObserver:self
                   name:GRColorStopWasSetNotification
                 object:[[self pattern] bgColor]];
+
+  [[CPNotificationCenter defaultCenter]
+      removeObserver:self
+                name:PatternDoLoopAnimationNotification
+              object:nil];
+
+  [[CPNotificationCenter defaultCenter]
+      removeObserver:self
+                name:PatternDoStoreAnimationNotification
+              object:nil];
+
+  [[CPNotificationCenter defaultCenter]
+      removeObserver:self
+                name:PatternStopAnimationNotification
+              object:nil];
 }
 
 //
