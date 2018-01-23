@@ -26,8 +26,9 @@
 @import "app/svg_cg_context.j"
 
 GRMaxColorStop = 6;
-PatternDoLoopAnimationNotification = "PatternDoLoopAnimationNotification";
-PatternStopAnimationNotification = "PatternStopAnimationNotification";
+
+PatternDoLoopAnimationNotification  = "PatternDoLoopAnimationNotification";
+PatternStopAnimationNotification    = "PatternStopAnimationNotification";
 PatternDoStoreAnimationNotification = "PatternDoStoreAnimationNotification";
 
 allPatternClasses = [PatternOne,
@@ -533,7 +534,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
 
     [self setupToolbarItem:toolbarItem
                   selector:@selector(viewAsSvg:)
-                     label:"View Zip"];
+                     label:"View SVG"];
     break;
 
   case "AnimAsZip":
@@ -542,7 +543,7 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
 
     [self setupToolbarItem:toolbarItem
                   selector:@selector(animationSaveAsZip:)
-                     label:"Anim As Zip"];
+                     label:"Anim. As Zip"];
     break;
   }
 
@@ -662,10 +663,10 @@ willBeInsertedIntoToolbar:(BOOL)aFlag
     window.open("https://github.com/gorenje/capp_patterns/blob/master/preview.md", "newwindow", '');
     break;
   case 2:
-    window.open("http://www.ribabookshops.com/item/islamic-patterns-an-analytical-and-cosmological-approach/929/",'book','');
+    window.open("https://www.ribabookshops.com/item/islamic-patterns-an-analytical-and-cosmological-approach/929/",'book','');
     break;
   case 3:
-    window.open("http://cappuccino.org",'capp','');
+    window.open("http://www.cappuccino-project.org",'capp','');
     break;
   }
 }

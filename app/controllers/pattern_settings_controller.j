@@ -321,25 +321,29 @@
 - (void)updateFrameNumberStoreToZip:(int)aValue
 {
   [self updateFrameNumber:aValue];
+  try {
+    var ctxt = new SvgCgContext([m_pattern_view bounds].size.width,
+                                [m_pattern_view bounds].size.height);
 
-  var ctxt = new SvgCgContext([m_pattern_view bounds].size.width,
-                              [m_pattern_view bounds].size.height);
+    var pattern = [m_pattern_view pattern];
 
-  var pattern = [m_pattern_view pattern];
+    ctxt.rotate      = [pattern rotation];
+    ctxt.bgColor     = [pattern bgColor];
+    ctxt.bgColorDir  = [pattern bgColorDirection];
+    ctxt.title       = [pattern className];
+    ctxt.canvas = { clientHeight: [m_pattern_view bounds].size.height,
+                    clientWidth: [m_pattern_view bounds].size.width };
+    ctxt.__cpt_of_image__ =
+      [GRPoint pointWithX:[m_pattern_view bounds].size.width/2
+                        Y:[m_pattern_view bounds].size.height/2];
 
-  ctxt.rotate      = [pattern rotation];
-  ctxt.bgColor     = [pattern bgColor];
-  ctxt.bgColorDir  = [pattern bgColorDirection];
-  ctxt.title       = [pattern className];
-  ctxt.canvas = { clientHeight: [m_pattern_view bounds].size.height,
-                  clientWidth: [m_pattern_view bounds].size.width };
-  ctxt.__cpt_of_image__ =
-    [GRPoint pointWithX:[m_pattern_view bounds].size.width/2
-                          Y:[m_pattern_view bounds].size.height/2];
+    [pattern draw:ctxt];
 
-  [pattern draw:ctxt];
-
-  m_zip_file.file("frame" + aValue + ".svg", ctxt.svg);
+    m_zip_file.file("frame" + aValue + ".svg", ctxt.svg);
+  } catch ( e ) {
+    console.log("Ignoring frame: " + aValue + " because of exception");
+    console.log(e)
+  }
 }
 
 - (void)animatePatternLoop:(int)frameNumber factor:(int)factor
