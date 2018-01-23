@@ -30,6 +30,7 @@ GRMaxColorStop = 6;
 PatternDoLoopAnimationNotification  = "PatternDoLoopAnimationNotification";
 PatternStopAnimationNotification    = "PatternStopAnimationNotification";
 PatternDoStoreAnimationNotification = "PatternDoStoreAnimationNotification";
+StoringZipFileNotification          = "StoringZipFileNotification"
 
 allPatternClasses = [PatternOne,
                      PatternEight,
@@ -382,14 +383,6 @@ var allPatternClassesNoRecursion = [PatternOne,
   }
 }
 
-- (CPAction)animationSaveAsZip:(id)sender
-{
-  [self checkForPropertiesController];
-  [[CPNotificationCenter defaultCenter]
-         postNotificationName:PatternDoStoreAnimationNotification
-                      object:nil];
-}
-
 - (CPAction)viewAsSvg:(id)sender
   try {
     var ctxt = new SvgCgContext([patternView bounds].size.width,
@@ -446,6 +439,32 @@ var allPatternClassesNoRecursion = [PatternOne,
 
   [[CPNotificationCenter defaultCenter]
          postNotificationName:PatternDoLoopAnimationNotification
+                      object:nil];
+}
+
+- (void)resetAnimateButton:(CPNotification)aNotification
+{
+  [self updateAnimateButton:@selector(doAnimation:) label:"Animate"];
+  [[CPNotificationCenter defaultCenter]
+        removeObserver:self
+                  name:StoringZipFileNotification
+                object:nil];
+
+}
+
+- (CPAction)animationSaveAsZip:(id)sender
+{
+  [self checkForPropertiesController];
+  [self updateAnimateButton:@selector(stopAnimation:) label:"Stop Animation"];
+
+  [[CPNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(resetAnimateButton:)
+             name:StoringZipFileNotification
+           object:nil];
+
+  [[CPNotificationCenter defaultCenter]
+         postNotificationName:PatternDoStoreAnimationNotification
                       object:nil];
 }
 

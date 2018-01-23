@@ -264,7 +264,7 @@
 {
   m_stop_animation = false;
   m_zip_file = new JSZip();
-  [self animatePatternWithSvgLoop:0 factor:1];
+  [self animatePatternWithSvgLoop:[m_framePosSlider intValue] factor:1];
 }
 
 - (void)updateBackgroundColorNotification:(CPNotification)aNotification
@@ -287,16 +287,11 @@
 ////
 - (void)animatePatternWithSvgLoop:(int)frameNumber factor:(int)factor
 {
-  var newFactor = factor;
+  if ( frameNumber > 199 || m_stop_animation ) {
+    [[CPNotificationCenter defaultCenter]
+        postNotificationName:StoringZipFileNotification
+                      object:nil];
 
-  if ( frameNumber == 0 ) {
-    newFactor = 1;
-  }
-  if ( frameNumber > 199 ) {
-    m_stop_animation = true;
-  }
-
-  if ( m_stop_animation ) {
     m_zip_file.generateAsync({type:"base64"})
       .then(function(content) {
           window.location = "data:application/zip;base64," + content;
@@ -310,6 +305,35 @@
                                 initWithMethodSignature:nil];
   [animatorInvoker setTarget:self];
   [animatorInvoker setSelector:@selector(animatePatternWithSvgLoop:factor:)];
+  [animatorInvoker setArgument:(frameNumber+factor) atIndex:2];
+  [animatorInvoker setArgument:factor atIndex:3];
+
+  [CPTimer scheduledTimerWithTimeInterval:0
+                               invocation:animatorInvoker
+                                  repeats:NO];
+}
+
+- (void)animatePatternLoop:(int)frameNumber factor:(int)factor
+{
+  var newFactor = factor;
+
+  if ( frameNumber == 0 ) {
+    newFactor = 1;
+  }
+  if ( frameNumber > 199 ) {
+    newFactor = -1;
+  }
+
+  if ( m_stop_animation ) {
+    return;
+  }
+
+  [self updateFrameNumber:frameNumber];
+
+  var animatorInvoker = [[CPInvocation alloc]
+                                initWithMethodSignature:nil];
+  [animatorInvoker setTarget:self];
+  [animatorInvoker setSelector:@selector(animatePatternLoop:factor:)];
   [animatorInvoker setArgument:(frameNumber+factor) atIndex:2];
   [animatorInvoker setArgument:newFactor atIndex:3];
 
@@ -344,35 +368,6 @@
     console.log("Ignoring frame: " + aValue + " because of exception");
     console.log(e)
   }
-}
-
-- (void)animatePatternLoop:(int)frameNumber factor:(int)factor
-{
-  var newFactor = factor;
-
-  if ( frameNumber == 0 ) {
-    newFactor = 1;
-  }
-  if ( frameNumber > 199 ) {
-    newFactor = -1;
-  }
-
-  if ( m_stop_animation ) {
-    return;
-  }
-
-  [self updateFrameNumber:frameNumber];
-
-  var animatorInvoker = [[CPInvocation alloc]
-                                initWithMethodSignature:nil];
-  [animatorInvoker setTarget:self];
-  [animatorInvoker setSelector:@selector(animatePatternLoop:factor:)];
-  [animatorInvoker setArgument:(frameNumber+factor) atIndex:2];
-  [animatorInvoker setArgument:newFactor atIndex:3];
-
-  [CPTimer scheduledTimerWithTimeInterval:0
-                               invocation:animatorInvoker
-                                  repeats:NO];
 }
 
 - (void)updateFrameNumber:(int)aValue
