@@ -384,6 +384,7 @@ var allPatternClassesNoRecursion = [PatternOne,
 }
 
 - (CPAction)viewAsSvg:(id)sender
+{
   try {
     var ctxt = new SvgCgContext([patternView bounds].size.width,
                                 [patternView bounds].size.height);
