@@ -375,13 +375,19 @@ var allPatternClassesNoRecursion = [PatternOne,
 
     var zip_file = new JSZip();
 
-    zip_file.file("pattern.svg", ctxt.svg);
-
-    zip_file.generateAsync({
+    var zip_generate_options = {
       type:"base64",
       compression: "DEFLATE",
       compressionOptions: { level: 9 }
-    }).then(function(content) {
+    }
+    // Safari has an issue with DEFLATE...
+    if ( navigator.userAgent.indexOf("Safari") > -1 ) {
+      zip_generate_options = { type:"base64" }
+    }
+
+    zip_file.file("pattern.svg", ctxt.svg);
+
+    zip_file.generateAsync(zip_generate_options).then(function(content) {
         window.open("data:application/zip;base64," + content,
                     [pattern className] + ".zip");
     });

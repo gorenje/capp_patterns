@@ -307,11 +307,17 @@
         postNotificationName:StoringZipFileNotification
                       object:nil];
 
-    m_zip_file.generateAsync({
+    var zip_generate_options = {
       type:"base64",
       compression: "DEFLATE",
       compressionOptions: { level: 9 }
-    }).then(function(content) {
+    }
+    // Safari has an issue with DEFLATE...
+    if ( navigator.userAgent.indexOf("Safari") > -1 ) {
+      zip_generate_options = { type:"base64" }
+    }
+
+    m_zip_file.generateAsync(zip_generate_options).then(function(content) {
         window.open("data:application/zip;base64," + content, "animation.zip");
     });
 
