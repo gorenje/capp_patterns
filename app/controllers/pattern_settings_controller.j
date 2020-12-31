@@ -313,12 +313,12 @@
       compressionOptions: { level: 9 }
     }
     // Safari has an issue with DEFLATE...
-    if ( navigator.userAgent.indexOf("Safari") > -1 ) {
-      zip_generate_options = { type:"base64" }
-    }
+    // if ( navigator.userAgent.indexOf("Safari") > -1 ) {
+    //   zip_generate_options = { type:"base64" }
+    // }
 
     m_zip_file.generateAsync(zip_generate_options).then(function(content) {
-        window.open("data:application/zip;base64," + content, "animation.zip");
+        window.location = "data:application/zip;base64," + content
     });
 
     return;
