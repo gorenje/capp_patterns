@@ -372,12 +372,19 @@ var allPatternClassesNoRecursion = [PatternOne,
                         Y:[patternView bounds].size.height/2];
 
     [pattern draw:ctxt];
-    // application/octet-stream ==> download link
-    // image/svg+xml ==> view in browser
-    var uriContent =
-      "data:application/octet-stream," + encodeURIComponent(ctxt.svg);
 
-    window.open(uriContent, [pattern className] + ".svg");
+    var zip_file = new JSZip();
+
+    zip_file.file("pattern.svg", ctxt.svg);
+
+    zip_file.generateAsync({
+      type:"base64",
+      compression: "DEFLATE",
+      compressionOptions: { level: 9 }
+    }).then(function(content) {
+        window.open("data:application/zip;base64," + content,
+                    [pattern className] + ".zip");
+    });
   } catch ( e ) {
     console.log(e);
   }

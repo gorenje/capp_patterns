@@ -302,15 +302,19 @@
 ////
 - (void)animatePatternWithSvgLoop:(int)frameNumber factor:(int)factor
 {
-  if ( frameNumber > 199 || m_stop_animation ) {
+  if ( frameNumber > 200 || m_stop_animation ) {
     [[CPNotificationCenter defaultCenter]
         postNotificationName:StoringZipFileNotification
                       object:nil];
 
-    m_zip_file.generateAsync({type:"base64"})
-      .then(function(content) {
-          window.location = "data:application/zip;base64," + content;
-        });
+    m_zip_file.generateAsync({
+      type:"base64",
+      compression: "DEFLATE",
+      compressionOptions: { level: 9 }
+    }).then(function(content) {
+        window.open("data:application/zip;base64," + content, "animation.zip");
+    });
+
     return;
   }
 
