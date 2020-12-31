@@ -380,10 +380,6 @@ var allPatternClassesNoRecursion = [PatternOne,
       compression: "DEFLATE",
       compressionOptions: { level: 9 }
     }
-    // Safari has an issue with DEFLATE...
-    // if ( navigator.userAgent.indexOf("Safari") > -1 ) {
-    //   zip_generate_options = { type:"base64" }
-    // }
 
     zip_file.file("pattern.svg", ctxt.svg);
 
