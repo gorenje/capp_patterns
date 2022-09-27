@@ -1,6 +1,6 @@
 /*
  * Created by Gerrit Riessen
- * Copyright 2010-2011, Gerrit Riessen
+ * Copyright 2010-2023, Gerrit Riessen
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
