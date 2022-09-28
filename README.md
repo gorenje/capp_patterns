@@ -45,6 +45,11 @@ You can view patterns but also edit their properties by using the
 dumped to the console window (i.e. FireBug or Web Inspector) but can only
 be integrated by cloning the project and adding as a new pattern class.
 
+Previews
+--------
+
+There is a [preview](/preview.md) with links to the demo, there is a [preview](/preview.raw.md) with links to larger pngs and there is a [preview](/preview.svg.md) with links to SVGs.
+
 Inspiration
 -----------
 
