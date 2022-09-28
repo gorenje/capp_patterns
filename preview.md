@@ -1,6 +1,6 @@
 <!-- Images are svg exports (950x950), converted to png via gimp.
      Previews are resized to 15%
-     ==> for n in `seq -f%03g 66 71` ; do convert -resize 15% ${n}.png previews/${n}.png ; done
+     ==> for n in `seq -f%03g 72 85` ; do convert -resize 15% ${n}.png previews/${n}.png ; done
 -->
 [![001](Resources/patterns/previews/001.png)](https://gorenje.github.io/capp_patterns/#One)
 [![002](Resources/patterns/previews/002.png)](https://gorenje.github.io/capp_patterns/#Two)
@@ -73,3 +73,17 @@
 [![069](Resources/patterns/previews/069.png)](https://gorenje.github.io/capp_patterns/#SixtyNine)
 [![070](Resources/patterns/previews/070.png)](https://gorenje.github.io/capp_patterns/#Seventy)
 [![071](Resources/patterns/previews/071.png)](https://gorenje.github.io/capp_patterns/#SeventyOne)
+[![072](Resources/patterns/previews/072.png)](https://gorenje.github.io/capp_patterns/#SeventyTwo)
+[![073](Resources/patterns/previews/073.png)](https://gorenje.github.io/capp_patterns/#SeventyThree)
+[![074](Resources/patterns/previews/074.png)](https://gorenje.github.io/capp_patterns/#SeventyFour)
+[![075](Resources/patterns/previews/075.png)](https://gorenje.github.io/capp_patterns/#SeventyFive)
+[![076](Resources/patterns/previews/076.png)](https://gorenje.github.io/capp_patterns/#SeventySix)
+[![077](Resources/patterns/previews/077.png)](https://gorenje.github.io/capp_patterns/#SeventySeven)
+[![078](Resources/patterns/previews/078.png)](https://gorenje.github.io/capp_patterns/#SeventyEight)
+[![079](Resources/patterns/previews/079.png)](https://gorenje.github.io/capp_patterns/#SeventyNine)
+[![080](Resources/patterns/previews/080.png)](https://gorenje.github.io/capp_patterns/#Eighty)
+[![081](Resources/patterns/previews/081.png)](https://gorenje.github.io/capp_patterns/#EightyOne)
+[![082](Resources/patterns/previews/082.png)](https://gorenje.github.io/capp_patterns/#EightyTwo)
+[![083](Resources/patterns/previews/083.png)](https://gorenje.github.io/capp_patterns/#EightyThree)
+[![084](Resources/patterns/previews/084.png)](https://gorenje.github.io/capp_patterns/#EightyFour)
+[![085](Resources/patterns/previews/085.png)](https://gorenje.github.io/capp_patterns/#EightyFive)

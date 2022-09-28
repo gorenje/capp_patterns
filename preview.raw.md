@@ -1,6 +1,6 @@
 <!-- Images are svg exports (950x950), converted to png via gimp.
      Previews are resized to 15%
-     ==> for n in `seq -f%03g 66 71` ; do convert -resize 15% ${n}.png previews/${n}.png ; done
+     ==> for n in `seq -f%03g 72 85` ; do convert -resize 15% ${n}.png previews/${n}.png ; done
 -->
 [![001](Resources/patterns/previews/001.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/001.png)
 [![002](Resources/patterns/previews/002.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/002.png)
@@ -73,3 +73,17 @@
 [![069](Resources/patterns/previews/069.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/069.png)
 [![070](Resources/patterns/previews/070.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/070.png)
 [![071](Resources/patterns/previews/071.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/071.png)
+[![072](Resources/patterns/previews/072.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/072.png)
+[![073](Resources/patterns/previews/073.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/073.png)
+[![074](Resources/patterns/previews/074.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/074.png)
+[![075](Resources/patterns/previews/075.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/075.png)
+[![076](Resources/patterns/previews/076.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/076.png)
+[![077](Resources/patterns/previews/077.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/077.png)
+[![078](Resources/patterns/previews/078.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/078.png)
+[![079](Resources/patterns/previews/079.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/079.png)
+[![080](Resources/patterns/previews/080.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/080.png)
+[![081](Resources/patterns/previews/081.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/081.png)
+[![082](Resources/patterns/previews/082.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/082.png)
+[![083](Resources/patterns/previews/083.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/083.png)
+[![084](Resources/patterns/previews/084.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/084.png)
+[![085](Resources/patterns/previews/085.png)](https://raw.githubusercontent.com/gorenje/capp_patterns/master/Resources/patterns/085.png)
